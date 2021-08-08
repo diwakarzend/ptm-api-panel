@@ -3,7 +3,11 @@ import "./Header.css";
 //const user3Img = require("../../../assets/images/bwser-6.png");
 import user3Img from "../../../assets/images/userimg.png";
 
-const Header = () => {
+const Header = (props) => {
+  const { location } = props;
+  if (location && location.pathname == "/") {
+    return "";
+  }
   return (
     <div className="header-bg">
       <header className="main-header">
@@ -143,7 +147,7 @@ const Header = () => {
                         {/* notification_End */} {/* Dropdown_User */}
                         <div className="dropdown dropdown-user">
                           <img
-                            //  className="img-circle pro_pic"
+                            className="img-circle pro_pic"
                             src={user3Img}
                             alt=""
                           />
@@ -155,9 +159,8 @@ const Header = () => {
                             data-close-others="true"
                             aria-expanded="true"
                           >
-                            11{" "}
                             <img
-                              //  className="img-circle pro_pic"
+                              className="img-circle pro_pic"
                               src={user3Img}
                               alt=""
                             />

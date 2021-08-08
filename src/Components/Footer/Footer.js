@@ -1,7 +1,11 @@
 import React from "react";
 import "./Footer.css";
 
-const Footer = () => {
+const Footer = (props) => {
+  const { location } = props;
+  if (location && location.pathname == "/") {
+    return "";
+  }
   return (
     <footer class="footer ptb-20">
       <div class="row">

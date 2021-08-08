@@ -1,7 +1,8 @@
 import React from "react";
+import Logout from "../Logout/Logout";
 import "./SideBar.css";
 
-const SideBar = () => {
+const SideBar = (props) => {
   return (
     <div class="side_bar scroll_auto">
       <div class="user-panel">
@@ -40,6 +41,11 @@ const SideBar = () => {
               <a href="#">Merchants</a>
             </li>
           </ul>
+        </li>
+        <li class="menu_sub">
+          <a href="javascript:void(0)">
+            <i class="icon-layers"></i> <Logout {...props} />
+          </a>
         </li>
       </ul>
     </div>

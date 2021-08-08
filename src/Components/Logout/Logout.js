@@ -2,7 +2,7 @@ import React from "react";
 import { clearAuthToken } from "../../utils/common";
 import { loginResetStore } from "../../actions/Login";
 
-const LogoutUser = React.memo((props) => {
+const Logout = React.memo((props) => {
   const { history, dispatch } = props;
   console.log("props", props);
   const logout = () => {
@@ -14,4 +14,4 @@ const LogoutUser = React.memo((props) => {
   return <div onClick={() => logout()}>Logout</div>;
 });
 
-export default LogoutUser;
+export default Logout;

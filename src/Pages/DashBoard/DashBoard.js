@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import LogOut from "../../Components/Logout/Logout";
 import SideBar from "../../Components/SideBar/SideBar";
+import "../../lib/Chart/Chart.min";
+
+const chartConfig = require("../../lib/Chart/Config");
 import "./DashBoard.css";
 
 const DashBoard = (props) => {
+  useEffect(() => {
+    console.log("config11", chartConfig);
+    var ctx = document.getElementById("myChart3-light").getContext("2d");
+    var myChart = new Chart(ctx, chartConfig);
+  }, []);
+
   return (
     <div>
-      <SideBar />
+      <SideBar {...props} />
       <div class="content_wrapper">
         <div class="container-fluid">
           {/* breadcrumb */}
@@ -276,7 +284,6 @@ const DashBoard = (props) => {
           {/* Section_End */}
         </div>
       </div>
-      <LogOut {...props} />
     </div>
   );
 };

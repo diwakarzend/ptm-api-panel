@@ -109,9 +109,9 @@ class App extends Component {
     return (
       <Fragment>
         <GlobalStyle />
-        <Header />
+        <Header {...this.props} />
         <Routes />
-        <Footer />
+        <Footer {...this.props} />
       </Fragment>
     );
   }

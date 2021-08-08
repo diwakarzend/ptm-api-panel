@@ -46,71 +46,58 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    let submitButton = (
-      <button type="submit" className="login-link">
-        LOGIN
-      </button>
-    );
-
-    if (this.props.isFormSubmitting) {
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>;
-    }
     return (
-      <div className="container-fluid">
-        <div className="row main-content bg-success text-center">
-          <div className="col-md-4 text-center company__info">
-            <span className="company__logo">
-              <h2>
-                <span className="fa fa-android"></span>
-              </h2>
-            </span>
-            <h4 className="company_title">Your Company Logo</h4>
-          </div>
-          <div className="col-md-8 col-xs-12 col-sm-12 login_form ">
-            <div className="container-fluid">
-              <div className="row">
-                <h2>Log In</h2>
+      <div class="container-fluid">
+        <div class="d-flex align-items-stretch row full-page">
+          <div class="col-md-7 align-self-center left-banner "></div>
+          <div class="d-flex col-md-5 form-wrapper">
+            <form
+              control=""
+              className="form-group"
+              onSubmit={this.onFormSubmit}
+            >
+              <div class="form-content-wrapper align-self-center">
+                <img
+                  src="assets/images/logo.png"
+                  alt="logo"
+                  class="logo-icon"
+                />
+                <div class="floating-label-group">
+                  <input
+                    id="email"
+                    className="form-control"
+                    autoFocus="autofocus"
+                    type="text"
+                    ref={(input) => {
+                      this.username = input;
+                    }}
+                    autoComplete="off"
+                    placeholder="Enter Username or Mobile No"
+                    onFocus={this.removeErrorMsg}
+                    required
+                  />
+
+                  <label class="floating-label">Email</label>
+                </div>
+                <div class="floating-label-group">
+                  <input
+                    id="password"
+                    className="form-control"
+                    type="password"
+                    ref={(input) => {
+                      this.password = input;
+                    }}
+                    placeholder="Enter Password"
+                    onFocus={this.removeErrorMsg}
+                    autocomplete="off"
+                    required
+                  />
+
+                  <label class="floating-label">Password</label>
+                </div>
+                <input type="submit" value="Submit" className="btn" />
               </div>
-              <div className="row">
-                <form
-                  control=""
-                  className="form-group"
-                  onSubmit={this.onFormSubmit}
-                >
-                  <div className="row">
-                    <input
-                      className="form__input"
-                      autoFocus="autofocus"
-                      type="text"
-                      ref={(input) => {
-                        this.username = input;
-                      }}
-                      autoComplete="off"
-                      placeholder="Enter Username or Mobile No"
-                      onFocus={this.removeErrorMsg}
-                    />
-                  </div>
-                  <div className="row">
-                    <input
-                      className="form__input"
-                      type="password"
-                      ref={(input) => {
-                        this.password = input;
-                      }}
-                      placeholder="Enter Password"
-                      onFocus={this.removeErrorMsg}
-                    />
-                  </div>
-                  <div className="row">
-                    <input type="submit" value="Submit" className="btn" />
-                  </div>
-                </form>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
