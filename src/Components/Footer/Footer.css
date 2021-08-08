@@ -1,0 +1,37 @@
+.footer {
+  background: #fff;
+  padding-left: 0px;
+}
+.nav_small .footer {
+  padding-left: 70px;
+}
+@media (max-width: 767px) {
+  .nav_small .footer,
+  .footer {
+    padding-left: 0;
+  }
+}
+.copy_right p {
+  margin: 0px;
+  color: #53505f;
+  font-size: 14px;
+}
+.copy_right p a {
+  color: #36a2f5;
+}
+#back-to-top {
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: block;
+  display: none;
+  background: #2a3142;
+  color: #fff;
+  font-size: 15px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
