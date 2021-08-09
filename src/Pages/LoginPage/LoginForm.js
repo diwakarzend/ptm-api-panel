@@ -1,6 +1,6 @@
 import React from "react";
 import { isEmpty } from "../../utils/common";
-
+import "./Login.css";
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -51,11 +51,7 @@ class LoginForm extends React.Component {
         <div class="d-flex align-items-stretch row full-page">
           <div class="col-md-7 align-self-center left-banner "></div>
           <div class="d-flex col-md-5 form-wrapper">
-            <form
-              control=""
-              className="form-group"
-              onSubmit={this.onFormSubmit}
-            >
+            <form className="form-group" onSubmit={this.onFormSubmit}>
               <div class="form-content-wrapper align-self-center">
                 <img
                   src="assets/images/logo.png"

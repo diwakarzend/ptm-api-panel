@@ -1,5 +1,6 @@
 import React from "react";
 import Logout from "../Logout/Logout";
+import AnchorLink from "../AnchorLink/AnchorLink";
 import "./SideBar.css";
 
 const SideBar = (props) => {
@@ -23,29 +24,26 @@ const SideBar = (props) => {
 
       <ul id="dc_accordion" class="sidebar-menu tree">
         <li>
-          <a href="index.html">
-            <i class="ti-home"></i> <span>Dashboard</span>
-          </a>
+          <AnchorLink href="/dashboard">
+            <span>Dashboard</span>
+          </AnchorLink>
         </li>
 
         <li class="menu_sub">
-          <a href="#">
-            <i class="icon-layers"></i> <span>Manage Compnay</span>
-            <span class="icon-arrow-down styleicon"></span>
-          </a>
-          <ul class="down_menu">
+          <AnchorLink href="/company">
+            <span>Manage Compnay</span>
+          </AnchorLink>
+          {/* <ul class="down_menu">
             <li>
               <a href="no-of-users.html">No. Of Uesers</a>
             </li>
             <li>
               <a href="#">Merchants</a>
             </li>
-          </ul>
+          </ul> */}
         </li>
-        <li class="menu_sub">
-          <a href="javascript:void(0)">
-            <i class="icon-layers"></i> <Logout {...props} />
-          </a>
+        <li class="menu_sub logout">
+          <Logout {...props} />
         </li>
       </ul>
     </div>

@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import "../../lib/Chart/Chart.min";
-
 const chartConfig = require("../../lib/Chart/Config");
 import "./DashBoard.css";
 
 const DashBoard = (props) => {
   useEffect(() => {
-    console.log("config11", chartConfig);
+    // console.log("config11", chartConfig);
+    // use refs here
     var ctx = document.getElementById("myChart3-light").getContext("2d");
     var myChart = new Chart(ctx, chartConfig);
   }, []);

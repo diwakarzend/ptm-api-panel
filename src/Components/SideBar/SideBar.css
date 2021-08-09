@@ -90,7 +90,8 @@
   margin-top: 0px;
 }
 
-.sidebar-menu li a {
+.sidebar-menu li a,
+.sidebar-menu li.logout {
   margin: 0 0px 4px 0px;
   text-decoration: none;
   color: #575962;
@@ -100,6 +101,7 @@
   font-size: 15px;
   position: relative;
   transition: all 0.5s;
+  cursor: pointer;
 }
 .sidebar-menu li a:hover {
   background: rgba(199, 199, 199, 0.2);
