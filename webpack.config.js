@@ -17,35 +17,32 @@ module.exports = {
     clean: true,
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: ["babel-loader"],
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-        ]
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
       {
-        test: /\.(png|jpg|gif)$/i,
-        use: [{ loader: 'url-loader' }]
+        test: /\.(png|jpg|gif)$/,
+        use: [{ loader: "url-loader" }],
       },
       {
         test: /\.(eot|ttf|otf|woff2|woff|svg|gif|png|jpg)$/,
-        use: [{ loader: 'file-loader' }],
+        use: [{ loader: "file-loader" }],
       },
       {
         test: /\.svg$/,
-        use: ["@svgr/webpack"]
+        use: ["@svgr/webpack"],
       },
-    ]
+    ],
   },
   optimization: {
     minimize: false,
@@ -55,8 +52,8 @@ module.exports = {
         parallel: true,
         terserOptions: {
           // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
-        }
-      })
+        },
+      }),
     ],
     splitChunks: {
       chunks: "all",
@@ -74,10 +71,10 @@ module.exports = {
 
             // npm package names are URL-safe, but some servers don't like @ symbols
             return `npm.${packageName.replace("@", "")}`;
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   },
   devServer: {
     contentBase: "./public",
@@ -93,16 +90,16 @@ module.exports = {
     host: HOST,
     disableHostCheck: true,
     proxy: [
-        {
-            context: ["/api/**"],
-          //  target:
-            target: "192.168.1.102:8081",
-            secure: false,
-            changeOrigin: true
-          }
-    ]
+      {
+        context: ["/api/**"],
+        //  target:
+        target: "192.168.1.102:8081",
+        secure: false,
+        changeOrigin: true,
+      },
+    ],
   },
-  
+
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -110,6 +107,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
       inject: "body",
-    })
-  ]
+    }),
+  ],
 };

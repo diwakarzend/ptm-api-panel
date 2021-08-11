@@ -7,17 +7,17 @@ const Footer = (props) => {
     return "";
   }
   return (
-    <footer class="footer ptb-20">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <div class="copy_right">
+    <footer className="footer ptb-20">
+      <div className="row">
+        <div className="col-md-12 text-center">
+          <div className="copy_right">
             <p>
               2019 © Dashboard Theme By
               <a href="#">Pay2Mobile</a>
             </p>
           </div>
           <a id="back-to-top" href="#">
-            <i class="ion-android-arrow-up"></i>
+            <i className="ion-android-arrow-up"></i>
           </a>
         </div>
       </div>

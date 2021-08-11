@@ -1,6 +1,7 @@
 import React from "react";
 import { isEmpty } from "../../utils/common";
 import "./Login.css";
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -47,18 +48,18 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div class="container-fluid">
-        <div class="d-flex align-items-stretch row full-page">
-          <div class="col-md-7 align-self-center left-banner "></div>
-          <div class="d-flex col-md-5 form-wrapper">
-            <form className="form-group" onSubmit={this.onFormSubmit}>
-              <div class="form-content-wrapper align-self-center">
+      <div className="container-fluid">
+        <div className="d-flex align-items-stretch row full-page">
+          <div className="col-md-7 align-self-center left-banner "></div>
+          <div className="d-flex col-md-5 form-wrapper">
+            <div className="form-content-wrapper align-self-center">
+              <form className="form-group" onSubmit={this.onFormSubmit}>
                 <img
-                  src="assets/images/logo.png"
+                  src="http://0.0.0.0:3008/images/logo.png"
                   alt="logo"
-                  class="logo-icon"
+                  className="logo-icon"
                 />
-                <div class="floating-label-group">
+                <div className="floating-label-group">
                   <input
                     id="email"
                     className="form-control"
@@ -68,14 +69,13 @@ class LoginForm extends React.Component {
                       this.username = input;
                     }}
                     autoComplete="off"
-                    placeholder="Enter Username or Mobile No"
                     onFocus={this.removeErrorMsg}
                     required
                   />
 
-                  <label class="floating-label">Email</label>
+                  <label className="floating-label">Email</label>
                 </div>
-                <div class="floating-label-group">
+                <div className="floating-label-group">
                   <input
                     id="password"
                     className="form-control"
@@ -83,17 +83,16 @@ class LoginForm extends React.Component {
                     ref={(input) => {
                       this.password = input;
                     }}
-                    placeholder="Enter Password"
                     onFocus={this.removeErrorMsg}
-                    autocomplete="off"
+                    autoComplete="off"
                     required
                   />
 
-                  <label class="floating-label">Password</label>
+                  <label className="floating-label">Password</label>
                 </div>
-                <input type="submit" value="Submit" className="btn" />
-              </div>
-            </form>
+                <input type="submit" value="Submit" className="submit-btn" />
+              </form>
+            </div>
           </div>
         </div>
       </div>

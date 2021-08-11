@@ -5,35 +5,35 @@ import "./SideBar.css";
 
 const SideBar = (props) => {
   return (
-    <div class="side_bar scroll_auto">
-      <div class="user-panel">
-        <div class="user_image">
+    <div className="side_bar scroll_auto">
+      <div className="user-panel">
+        <div className="user_image">
           <img
-            src="assets/images/about-1.jpg"
-            class="img-circle mCS_img_loaded"
+            src="http://0.0.0.0:3008/images/about-1.jpg"
+            className="img-circle mCS_img_loaded"
             alt="User Image"
           />
         </div>
-        <div class="info">
+        <div className="info">
           <p>James Vince</p>
           <a href="#">
-            <i class="fa fa-circle text-success"></i> Online
+            <i className="fa fa-circle text-success"></i> Online
           </a>
         </div>
       </div>
 
-      <ul id="dc_accordion" class="sidebar-menu tree">
+      <ul id="dc_accordion" className="sidebar-menu tree">
         <li>
           <AnchorLink href="/dashboard">
             <span>Dashboard</span>
           </AnchorLink>
         </li>
 
-        <li class="menu_sub">
+        <li className="menu_sub">
           <AnchorLink href="/company">
             <span>Manage Compnay</span>
           </AnchorLink>
-          {/* <ul class="down_menu">
+          {/* <ul className="down_menu">
             <li>
               <a href="no-of-users.html">No. Of Uesers</a>
             </li>
@@ -42,7 +42,7 @@ const SideBar = (props) => {
             </li>
           </ul> */}
         </li>
-        <li class="menu_sub logout">
+        <li className="menu_sub logout">
           <Logout {...props} />
         </li>
       </ul>

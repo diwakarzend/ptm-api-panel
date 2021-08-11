@@ -16,27 +16,27 @@ const DashBoard = (props) => {
   return (
     <div>
       <SideBar {...props} />
-      <div class="content_wrapper">
-        <div class="container-fluid">
+      <div className="content_wrapper">
+        <div className="container-fluid">
           {/* breadcrumb */}
-          <div class="page-heading">
-            <div class="row d-flex align-items-center">
-              <div class="col-md-6">
-                <div class="page-breadcrumb">
+          <div className="page-heading">
+            <div className="row d-flex align-items-center">
+              <div className="col-md-6">
+                <div className="page-breadcrumb">
                   <h1>Dashboard</h1>
                 </div>
               </div>
-              <div class="col-md-6 justify-content-md-end d-md-flex">
-                <div class="breadcrumb_nav">
-                  <ol class="breadcrumb">
+              <div className="col-md-6 justify-content-md-end d-md-flex">
+                <div className="breadcrumb_nav">
+                  <ol className="breadcrumb">
                     <li>
-                      <i class="fa fa-home"></i>
-                      <a class="parent-item" href="index.html">
+                      <i className="fa fa-home"></i>
+                      <a className="parent-item" href="index.html">
                         Home
                       </a>
-                      <i class="fa fa-angle-right"></i>
+                      <i className="fa fa-angle-right"></i>
                     </li>
-                    <li class="active">Dashboard</li>
+                    <li className="active">Dashboard</li>
                   </ol>
                 </div>
               </div>
@@ -45,65 +45,65 @@ const DashBoard = (props) => {
           {/* breadcrumb_End */}
 
           {/* Section */}
-          <section class="chart_section">
-            <div class="row">
-              <div class="col-xl-3 col-sm-6 mb-4">
-                <div class="card bg-primary border-0 text-light pt-3 pb-3 h-100">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-3">
-                        <i class="icon-people f30"></i>
+          <section className="chart_section">
+            <div className="row">
+              <div className="col-xl-3 col-sm-6 mb-4">
+                <div className="card bg-primary border-0 text-light pt-3 pb-3 h-100">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-3">
+                        <i className="icon-people f30"></i>
                       </div>
-                      <div class="col-9">
-                        <h6 class="m-0 text-light">New Users</h6>
-                        <p class="f12 mb-0">32 New Users</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 mb-4">
-                <div class="card bg-info border-0 text-light pt-3 pb-3 h-100">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-3">
-                        <i class="icon-basket-loaded f30"></i>
-                      </div>
-                      <div class="col-9">
-                        <h6 class="m-0 text-light">Order Placed</h6>
-                        <p class="f12 mb-0">123 New Order Placed</p>
+                      <div className="col-9">
+                        <h6 className="m-0 text-light">New Users</h6>
+                        <p className="f12 mb-0">32 New Users</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-sm-6 mb-4">
-                <div class="card bg-warning border-0 text-light pt-3 pb-3 h-100">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-3">
-                        <i class="icon-handbag f30"></i>
+              <div className="col-xl-3 col-sm-6 mb-4">
+                <div className="card bg-info border-0 text-light pt-3 pb-3 h-100">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-3">
+                        <i className="icon-basket-loaded f30"></i>
                       </div>
-                      <div class="col-9">
-                        <h6 class="m-0 text-light">Delivery</h6>
-                        <p class="f12 mb-0">54 New Delivery</p>
+                      <div className="col-9">
+                        <h6 className="m-0 text-light">Order Placed</h6>
+                        <p className="f12 mb-0">123 New Order Placed</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-sm-6 mb-4">
-                <div class="card bg-danger border-0 text-light pt-3 pb-3 h-100">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-3">
-                        <i class="icon-badge f30"></i>
+              <div className="col-xl-3 col-sm-6 mb-4">
+                <div className="card bg-warning border-0 text-light pt-3 pb-3 h-100">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-3">
+                        <i className="icon-handbag f30"></i>
                       </div>
-                      <div class="col-9">
-                        <h6 class="m-0 text-light">Monthly Profits</h6>
-                        <p class="f12 mb-0">
+                      <div className="col-9">
+                        <h6 className="m-0 text-light">Delivery</h6>
+                        <p className="f12 mb-0">54 New Delivery</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-3 col-sm-6 mb-4">
+                <div className="card bg-danger border-0 text-light pt-3 pb-3 h-100">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-3">
+                        <i className="icon-badge f30"></i>
+                      </div>
+                      <div className="col-9">
+                        <h6 className="m-0 text-light">Monthly Profits</h6>
+                        <p className="f12 mb-0">
                           9887 This Month Profit
-                          <span class="float-right text-success"> </span>
+                          <span className="float-right text-success"> </span>
                         </p>
                       </div>
                     </div>
@@ -112,24 +112,24 @@ const DashBoard = (props) => {
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-xl-6 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-12">
-                        <h2 class="mb-4">
+            <div className="row">
+              <div className="col-xl-6 mb-4">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-12">
+                        <h2 className="mb-4">
                           Total income &amp; spend statistics
                         </h2>
                       </div>
                     </div>
 
-                    <div class="row py-3">
-                      <div class="col-xl-12 col-md-12">
-                        <div class="px-4">
+                    <div className="row py-3">
+                      <div className="col-xl-12 col-md-12">
+                        <div className="px-4">
                           <canvas
                             id="myChart3-light"
-                            class="height_box"
+                            className="height_box"
                           ></canvas>
                         </div>
                       </div>
@@ -138,42 +138,42 @@ const DashBoard = (props) => {
                 </div>
               </div>
 
-              <div class="col-xl-6 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-12">
-                        <h2 class="mb-1">Overall statistics</h2>
-                        <p class="mb-4">
+              <div className="col-xl-6 mb-4">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-12">
+                        <h2 className="mb-1">Overall statistics</h2>
+                        <p className="mb-4">
                           Daily information about statistics in system
                         </p>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-sm-4 mb-xs-30">
-                        <div class="ep_1" data-percent="96">
+                    <div className="row">
+                      <div className="col-sm-4 mb-xs-30">
+                        <div className="ep_1" data-percent="96">
                           <span>96</span>%
                         </div>
-                        <div class="user_data">
-                          <span class="fw-bold mt-3 mb-0">Success</span>
+                        <div className="user_data">
+                          <span className="fw-bold mt-3 mb-0">Success</span>
                         </div>
                       </div>
 
-                      <div class="col-sm-4 mb-xs-30">
-                        <div class="ep_1" data-percent="3">
+                      <div className="col-sm-4 mb-xs-30">
+                        <div className="ep_1" data-percent="3">
                           <span>3</span>%
                         </div>
-                        <div class="user_data">
-                          <span class="fw-bold mt-3 mb-0">Failed</span>
+                        <div className="user_data">
+                          <span className="fw-bold mt-3 mb-0">Failed</span>
                         </div>
                       </div>
 
-                      <div class="col-sm-4">
-                        <div class="ep_1" data-percent="1">
+                      <div className="col-sm-4">
+                        <div className="ep_1" data-percent="1">
                           <span>1</span>%
                         </div>
-                        <div class="user_data">
-                          <span class="fw-bold mt-3 mb-0">Pending</span>
+                        <div className="user_data">
+                          <span className="fw-bold mt-3 mb-0">Pending</span>
                         </div>
                       </div>
                     </div>
@@ -182,24 +182,27 @@ const DashBoard = (props) => {
               </div>
             </div>
 
-            <div class="card-group mb-4">
+            <div className="card-group mb-4">
               {/* Column */}
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="float-right">
-                        <i class="f30 opacity-3 icon-pie-chart"></i>
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="float-right">
+                        <i className="f30 opacity-3 icon-pie-chart"></i>
                       </div>
-                      <h3 class="text-danger"> 123423 </h3>
-                      <p class="card-subtitle text-muted fw-500">
+                      <h3 className="text-danger"> 123423 </h3>
+                      <p className="card-subtitle text-muted fw-500">
                         Total Reveneue
                       </p>
                     </div>
-                    <div class="col-12">
-                      <div class="progress mt-3 mb-1" style={{ height: "6px" }}>
+                    <div className="col-12">
+                      <div
+                        className="progress mt-3 mb-1"
+                        style={{ height: "6px" }}
+                      >
                         <div
-                          class="progress-bar bg-danger"
+                          className="progress-bar bg-danger"
                           role="progressbar"
                           style={{ width: "77%" }}
                           aria-valuenow="25"
@@ -207,9 +210,9 @@ const DashBoard = (props) => {
                           aria-valuemax="100"
                         ></div>
                       </div>
-                      <div class="text-muted f12">
+                      <div className="text-muted f12">
                         <span>Progress</span>
-                        <span class="float-right">77%</span>
+                        <span className="float-right">77%</span>
                       </div>
                     </div>
                   </div>
@@ -217,20 +220,25 @@ const DashBoard = (props) => {
               </div>
               {/* Column */}
 
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="float-right">
-                        <i class="f30 opacity-3 icon-briefcase"></i>
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="float-right">
+                        <i className="f30 opacity-3 icon-briefcase"></i>
                       </div>
-                      <h3 class="text-primary"> 3423 </h3>
-                      <p class="card-subtitle text-muted fw-500">Total Cost</p>
+                      <h3 className="text-primary"> 3423 </h3>
+                      <p className="card-subtitle text-muted fw-500">
+                        Total Cost
+                      </p>
                     </div>
-                    <div class="col-12">
-                      <div class="progress mt-3 mb-1" style={{ height: "6px" }}>
+                    <div className="col-12">
+                      <div
+                        className="progress mt-3 mb-1"
+                        style={{ height: "6px" }}
+                      >
                         <div
-                          class="progress-bar bg-primary"
+                          className="progress-bar bg-primary"
                           role="progressbar"
                           style={{ width: "63%" }}
                           aria-valuenow="25"
@@ -238,9 +246,9 @@ const DashBoard = (props) => {
                           aria-valuemax="100"
                         ></div>
                       </div>
-                      <div class="text-muted f12">
+                      <div className="text-muted f12">
                         <span>Progress</span>
-                        <span class="float-right">63%</span>
+                        <span className="float-right">63%</span>
                       </div>
                     </div>
                   </div>
@@ -248,22 +256,25 @@ const DashBoard = (props) => {
               </div>
 
               {/* Column */}
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="float-right">
-                        <i class="f30 opacity-3 icon-symbol-male"></i>
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="float-right">
+                        <i className="f30 opacity-3 icon-symbol-male"></i>
                       </div>
-                      <h3 class="text-info"> 355323 </h3>
-                      <p class="card-subtitle text-muted fw-500">
+                      <h3 className="text-info"> 355323 </h3>
+                      <p className="card-subtitle text-muted fw-500">
                         Total Profits
                       </p>
                     </div>
-                    <div class="col-12">
-                      <div class="progress mt-3 mb-1" style={{ height: "6px" }}>
+                    <div className="col-12">
+                      <div
+                        className="progress mt-3 mb-1"
+                        style={{ height: "6px" }}
+                      >
                         <div
-                          class="progress-bar bg-info"
+                          className="progress-bar bg-info"
                           role="progressbar"
                           style={{ width: "56%" }}
                           aria-valuenow="25"
@@ -271,9 +282,9 @@ const DashBoard = (props) => {
                           aria-valuemax="100"
                         ></div>
                       </div>
-                      <div class="text-muted f12">
+                      <div className="text-muted f12">
                         <span>Progress</span>
-                        <span class="float-right">56%</span>
+                        <span className="float-right">56%</span>
                       </div>
                     </div>
                   </div>

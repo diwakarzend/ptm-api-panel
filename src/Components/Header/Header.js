@@ -1,13 +1,15 @@
 import React from "react";
 import "./Header.css";
-//const user3Img = require("../../../assets/images/bwser-6.png");
-import user3Img from "../../../assets/images/userimg.png";
+const user3Img = require("../../../public/images/userimg.png");
+//import user3Img from "../../../public/images/userimg.png";
 
 const Header = (props) => {
   const { location } = props;
   if (location && location.pathname == "/") {
     return "";
   }
+
+  console.log("sss", user3Img);
   return (
     <div className="header-bg">
       <header className="main-header">
@@ -17,10 +19,13 @@ const Header = (props) => {
               <div className="logo d-flex align-items-center">
                 <a href="#">
                   <strong className="logo_icon">
-                    <img src="assets/images/small-logo.png" alt="" />
+                    <img
+                      src="http://0.0.0.0:3008/images/small-logo.png"
+                      alt=""
+                    />
                   </strong>
                   <span className="logo-default">
-                    <img src="assets/images/logo.png" alt="" />
+                    <img src="http://0.0.0.0:3008/images/logo.png" alt="" />
                   </span>
                 </a>
                 <div className="icon_menu">
@@ -148,8 +153,9 @@ const Header = (props) => {
                         <div className="dropdown dropdown-user">
                           <img
                             className="img-circle pro_pic"
-                            src={user3Img}
+                            src="http://0.0.0.0:3008/images/small-circle.png"
                             alt=""
+                            width="50"
                           />
                           <a
                             href="javascript:;"
@@ -161,8 +167,9 @@ const Header = (props) => {
                           >
                             <img
                               className="img-circle pro_pic"
-                              src={user3Img}
+                              src="http://0.0.0.0:3008/images/userimg.png"
                               alt=""
+                              width="50"
                             />
                           </a>
                           <ul className="dropdown-menu dropdown-menu-default">
