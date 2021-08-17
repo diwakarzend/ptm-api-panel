@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../../public/css/style.css";
 import "./Header.css";
 const user3Img = require("../../../public/images/userimg.png");
@@ -6,11 +6,33 @@ const user3Img = require("../../../public/images/userimg.png");
 
 const Header = (props) => {
   const { location } = props;
+  const [statusQRICon, toggleQRIcon] = useState(false);
+  const [statusNotICon, toggleNotificationIcon] = useState(false);
+
   if (location && location.pathname == "/") {
     return "";
   }
 
+  function clickHambergerHandler() {
+    if (document.body.classList.value != "nav_small") {
+      document.body.classList.add("nav_small");
+    } else {
+      document.body.classList.remove("nav_small");
+    }
+  }
+
+  // function toggleQRIcon() {
+  //   document.querySelector("#popup-qrcode").classList.add("show");
+  //   document.querySelector("#popup-qrcode ul").classList.add("show");
+  // }
+
+  // function toggleNotificationIcon() {
+  //   document.querySelector("#popup-qrcode").classList.add("show");
+  //   document.querySelector("#popup-qrcode ul").classList.add("show");
+  // }
+
   console.log("sss", user3Img);
+
   return (
     <div className="header-bg">
       <header className="main-header">
@@ -29,8 +51,11 @@ const Header = (props) => {
                     <img src="http://0.0.0.0:3008/images/logo.png" alt="" />
                   </span>
                 </a>
-                <div className="icon_menu">
-                  <a href="#" className="menu-toggler sidebar-toggler"></a>
+                <div className="icon_menu" onClick={clickHambergerHandler}>
+                  <a
+                    href="javascript:void(0);"
+                    className="menu-toggler sidebar-toggler"
+                  ></a>
                 </div>
               </div>
 
@@ -47,7 +72,12 @@ const Header = (props) => {
                       <div className="align_end">
                         {/* notification_Start */}
 
-                        <div className="dropdown dropdown-notification">
+                        <div
+                          className={`dropdown dropdown-notification${
+                            statusQRICon ? " show" : ""
+                          }`}
+                          id="popup-qrcode"
+                        >
                           <a
                             href="javascript:;"
                             className="dropdown-toggle"
@@ -55,10 +85,19 @@ const Header = (props) => {
                             data-hover="dropdown"
                             data-close-others="true"
                             aria-expanded="false"
+                            onClick={() => {
+                              toggleQRIcon(!statusQRICon);
+                              toggleNotificationIcon(false);
+                            }}
                           >
+                            QR
                             <i className="fa fa-qrcode" aria-hidden="true"></i>
                           </a>
-                          <ul className="dropdown-menu scroll_auto height_fixed mCustomScrollbar _mCS_1 mCS_no_scrollbar">
+                          <ul
+                            className={`dropdown-menu scroll_auto height_fixed mCustomScrollbar _mCS_1 mCS_no_scrollbar${
+                              statusQRICon ? " show" : ""
+                            }`}
+                          >
                             <div
                               id="mCSB_1"
                               className="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside"
@@ -116,7 +155,12 @@ const Header = (props) => {
                           </ul>
                         </div>
 
-                        <div className="dropdown dropdown-notification">
+                        <div
+                          className={`dropdown dropdown-notification${
+                            statusNotICon ? " show" : ""
+                          }`}
+                          id="popup-notification"
+                        >
                           <a
                             href="javascript:;"
                             className="dropdown-toggle"
@@ -124,11 +168,19 @@ const Header = (props) => {
                             data-hover="dropdown"
                             data-close-others="true"
                             aria-expanded="false"
+                            onClick={() => {
+                              toggleNotificationIcon(!statusNotICon);
+                              toggleQRIcon(false);
+                            }}
                           >
                             <i className="fa fa-bell-o"></i>
                             <span className="badge_coun badge-danger"> 6 </span>
                           </a>
-                          <ul className="dropdown-menu scroll_auto height_fixed mCustomScrollbar _mCS_2">
+                          <ul
+                            className={`dropdown-menu scroll_auto height_fixed mCustomScrollbar _mCS_2${
+                              statusNotICon ? " show" : ""
+                            }`}
+                          >
                             <div
                               id="mCSB_2"
                               className="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside"
