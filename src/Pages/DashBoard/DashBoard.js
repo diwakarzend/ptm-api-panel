@@ -18,8 +18,9 @@ const DashBoard = (props) => {
     <div className="container_full">
       <SideBar {...props} />
       <div className="content_wrapper">
+      <div className="container-fluid">
         <BreadCrumb heading="Dashboard" value="Dashboard" />
-        <div className="container-fluid">
+        
           {/* Section */}
           <section className="chart_section">
             <div className="row">

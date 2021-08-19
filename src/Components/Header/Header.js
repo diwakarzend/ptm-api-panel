@@ -90,7 +90,6 @@ const Header = (props) => {
                               toggleNotificationIcon(false);
                             }}
                           >
-                            QR
                             <i className="fa fa-qrcode" aria-hidden="true"></i>
                           </a>
                           <ul
