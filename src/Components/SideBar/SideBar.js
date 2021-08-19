@@ -77,6 +77,9 @@ const SideBar = (props) => {
               <li>
                 <AnchorLink href="/add/money">Add Money</AnchorLink>
               </li>
+              <li>
+                <AnchorLink href="/fund/request">Fund Request</AnchorLink>
+              </li>
             </ul>
           )}
         </li>
