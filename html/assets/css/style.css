@@ -1152,10 +1152,21 @@ body {
     min-width: 200px;
     border-radius: 20px;
 }
+.fund-modal{
+	position: relative;
+}
+.fund-btn{
+	position: absolute;
+	right:15px;
+	top:13px;
+}
 
 .payment-method{
 	list-style-type: none;
 	padding: 0;
+}
+.modal .themebtn{
+	min-width: 125px;
 }
 .payment-method li{
 	display: flex;
