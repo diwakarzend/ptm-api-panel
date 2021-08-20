@@ -381,3 +381,7 @@ export function loadScript(src) {
     document.head.append(script);
   });
 }
+
+export function printUserName(userData) {
+  return (userData && userData.firstName + " " + userData.lastName) || "";
+}

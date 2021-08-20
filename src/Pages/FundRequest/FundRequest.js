@@ -6,7 +6,7 @@ import "./FundRequest.css";
 const FundRequest = (props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
 
-  const fundRequestClickHandler = () => {
+  const openPopupHandler = () => {
     document.body.classList.add("modal-open");
     handlePopUp(true);
   };
@@ -14,6 +14,11 @@ const FundRequest = (props) => {
   const closePopUpHandler = () => {
     document.body.classList.remove("modal-open");
     handlePopUp(false);
+  };
+
+  const submitPopupHandler = () => {
+    document.body.classList.add("modal-open");
+    handlePopUp(true);
   };
 
   return (
@@ -31,7 +36,7 @@ const FundRequest = (props) => {
                   className="btn btn-secondary fund-btn"
                   data-toggle="modal"
                   data-target="#exampleModal"
-                  onClick={fundRequestClickHandler}
+                  onClick={openPopupHandler}
                 >
                   Fund Request
                 </button>

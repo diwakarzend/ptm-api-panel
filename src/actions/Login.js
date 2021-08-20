@@ -12,6 +12,8 @@ export const actionTypes = {
   LOGIN_OTP_VALIDATION_SUCCESS: "LOGIN_OTP_VALIDATION_SUCCESS",
   LOGIN_OTP_RESEND_INIT: "LOGIN_OTP_RESEND_INIT",
   LOGIN_OTP_RESEND_SUCCESS: "LOGIN_OTP_RESEND_SUCCESS",
+  FETCH_USER_DETAILS_SUCCESS: "FETCH_USER_DETAILS_SUCCESS",
+  FETCH_USER_WALLET_SUCCESS: "FETCH_USER_WALLET_SUCCESS",
 };
 
 export function loginResetStore() {
@@ -148,5 +150,79 @@ export function loginOtpResendRequest(params) {
 export function logoutUser() {
   return {
     type: actionTypes.LOGOUT_REQUEST,
+  };
+}
+
+function fetchUserDetailsSuccess(response) {
+  return {
+    type: actionTypes.FETCH_USER_DETAILS_SUCCESS,
+    response: response,
+  };
+}
+
+function fetchUserDetails(token) {
+  return (dispatch) => {
+    const successFn = (response) => {
+      dispatch(fetchUserDetailsSuccess(response));
+    };
+    const errorFn = (error) => {};
+    const api = new Request(dispatch, successFn, errorFn);
+    // const params = { headers: { Authorization: token } };
+    return api.get(urls.login.BASE_URL + urls.login.GET_PROFILE);
+  };
+}
+
+function shouldFetchUserDetails(state) {
+  console.log("shouldFetchUserDetails", state);
+  const { loginUser } = state;
+  if (loginUser && !loginUser.userData) {
+    return true;
+  }
+  return false;
+}
+
+function fetchUserWalletSuccess(response) {
+  return {
+    type: actionTypes.FETCH_USER_WALLET_SUCCESS,
+    response: response,
+  };
+}
+
+function fetchUserWallet() {
+  return (dispatch) => {
+    const successFn = (response) => {
+      dispatch(fetchUserWalletSuccess(response));
+    };
+    const errorFn = (error) => {};
+    const api = new Request(dispatch, successFn, errorFn);
+    // const params = { headers: { Authorization: token } };
+    return api.get(urls.login.BASE_URL + urls.login.GET_WALLET);
+  };
+}
+
+function shouldFetchWalletData(state) {
+  console.log("shouldFetchWalletData", state);
+  const { loginUser } = state;
+  if (loginUser && !loginUser.userWallet) {
+    return true;
+  }
+  return false;
+}
+
+export function fetchUserWalletIfNeeded() {
+  return (dispatch, getState) => {
+    if (shouldFetchWalletData(getState())) {
+      return dispatch(fetchUserWallet());
+    }
+    return Promise.resolve([]);
+  };
+}
+
+export function fetchUserDetailsIfNeeded() {
+  return (dispatch, getState) => {
+    if (shouldFetchUserDetails(getState())) {
+      return dispatch(fetchUserDetails());
+    }
+    return Promise.resolve([]);
   };
 }

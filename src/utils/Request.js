@@ -22,7 +22,7 @@ class Request {
   instance() {
     const headers = {};
 
-    if (this.authorize) headers.token = getAuthToken();
+    if (this.authorize) headers.Authorization = getAuthToken();
 
     const instance = axios.create({
       baseURL: Request.baseUrl,
@@ -33,10 +33,10 @@ class Request {
     // Response Interceptor
     instance.interceptors.response.use(undefined, (error) => {
       const status = getObjectValue(error, "response.status", null);
-      if (status === httpStatusCodes.UNAUTHORIZED) {
-        // Unauthorized User
-        this.dispatch(logoutUser());
-      }
+      // if (status === httpStatusCodes.UNAUTHORIZED) {
+      //   // Unauthorized User
+      //   this.dispatch(logoutUser());
+      // }
 
       return Promise.reject(error);
     });

@@ -4,14 +4,17 @@ import { loginResetStore } from "../../actions/Login";
 
 const Logout = React.memo((props) => {
   const { history, dispatch } = props;
-  console.log("props", props);
   const logout = () => {
     clearAuthToken();
     dispatch(loginResetStore());
     history.push("/");
   };
 
-  return <div onClick={() => logout()}>Logout</div>;
+  return (
+    <a href="javascript:;" onClick={() => logout()}>
+      <i className="icon-logout"></i> Log Out
+    </a>
+  );
 });
 
 export default Logout;

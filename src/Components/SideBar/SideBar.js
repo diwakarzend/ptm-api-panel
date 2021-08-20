@@ -1,15 +1,27 @@
-import React, { useState } from "react";
-import Logout from "../Logout/Logout";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import AnchorLink from "../AnchorLink/AnchorLink";
+import {
+  fetchUserDetailsIfNeeded,
+  fetchUserWalletIfNeeded,
+} from "../../actions/Login";
+import { printUserName } from "../../utils/common";
+
 import "./SideBar.css";
 
 const SideBar = (props) => {
   const [toggleCompany, setToggleCompany] = useState(false);
   const [togglePayment, setTogglePayment] = useState(false);
 
-  // companyClickHandler();
+  useEffect(() => {
+    const { dispatch } = props;
+    dispatch(fetchUserDetailsIfNeeded());
+    dispatch(fetchUserWalletIfNeeded());
+  }, []);
 
-  console.log("toggle", toggleCompany, togglePayment);
+  const { loginUser } = props;
+  const userData = loginUser && loginUser.userData;
+
   return (
     <div className="side_bar scroll_auto">
       <div className="user-panel">
@@ -21,7 +33,7 @@ const SideBar = (props) => {
           />
         </div>
         <div className="info">
-          <p>James Vince</p>
+          <p>{printUserName(userData)}</p>
           <a href="#">
             <i className="fa fa-circle text-success"></i> Online
           </a>
@@ -88,4 +100,8 @@ const SideBar = (props) => {
   );
 };
 
-export default SideBar;
+function mapStateToProps(state) {
+  return { ...state };
+}
+
+export default connect(mapStateToProps)(SideBar);

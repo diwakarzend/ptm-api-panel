@@ -18,12 +18,27 @@ const initialState = {
   isAuthenticated: isAuthenticated(),
   isFetchingUserProfile: false,
   isFetchedUserProfile: false,
+  authToken: "",
   userData: null,
+  userWallet: null,
 };
 
 export default (state = initialState, action = {}) => {
   let changes = {};
   switch (action.type) {
+    case actionTypes.FETCH_USER_DETAILS_SUCCESS:
+      if (action.response.success == true && action.response.data) {
+        changes.userData = action.response.data;
+      }
+      break;
+
+    case actionTypes.FETCH_USER_WALLET_SUCCESS:
+      console.log("FETCH_USER_WALLET_SUCCESS", action, state);
+      if (action.response.success == true && action.response.data) {
+        changes.userWallet = action.response.data;
+      }
+      break;
+
     case actionTypes.LOGIN_RESET_STORE:
       changes = { ...initialState, isAuthenticated: isAuthenticated() };
       break;
@@ -70,6 +85,7 @@ export default (state = initialState, action = {}) => {
             "payload.data.success",
             false
           ),
+          authToken: authToken,
           userData,
         };
       }
@@ -150,6 +166,7 @@ export default (state = initialState, action = {}) => {
       clearAuthToken();
       changes = {
         isAuthenticated: false,
+        userData: null,
       };
       break;
 

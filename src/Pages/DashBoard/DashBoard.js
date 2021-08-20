@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
+import { fetchUserDetails } from "../../actions/Login";
 import "../../lib/Chart/Chart.min";
 const chartConfig = require("../../lib/Chart/Config");
 import "./DashBoard.css";
 
 const DashBoard = (props) => {
   useEffect(() => {
-    // console.log("config11", chartConfig);
-    // use refs here
+    const { dispatch } = props;
     var ctx = document.getElementById("myChart3-light").getContext("2d");
     var myChart = new Chart(ctx, chartConfig);
   }, []);
@@ -18,10 +18,8 @@ const DashBoard = (props) => {
     <div className="container_full">
       <SideBar {...props} />
       <div className="content_wrapper">
-      <div className="container-fluid">
-        <BreadCrumb heading="Dashboard" value="Dashboard" />
-        
-          {/* Section */}
+        <div className="container-fluid">
+          <BreadCrumb heading="Dashboard" value="Dashboard" />
           <section className="chart_section">
             <div className="row">
               <div className="col-xl-3 col-sm-6 mb-4">
@@ -466,8 +464,6 @@ const DashBoard = (props) => {
               </div>
             </div>
           </section>
-
-          {/* Section_End */}
         </div>
       </div>
     </div>
