@@ -7,8 +7,9 @@ const Users = (props) => {
     <div className="container_full">
       <SideBar {...props} />
       <div className="content_wrapper">
+      <div class="container-fluid">
         <BreadCrumb heading="Users" value="Users" />
-        <div class="container-fluid">
+        
           <div class="row">
             <div class=" col-sm-12">
               <div class="card card-shadow mb-4">
