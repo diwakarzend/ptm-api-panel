@@ -639,6 +639,9 @@ background:#5c35fc !important;
 	margin-top: 0px;
 	width: 40px;
 }
+.resposive-table{
+	overflow-x: auto;
+}
 
 @media (min-width: 768px) and (max-width: 991px) {
 	.up-80 {
@@ -4834,3 +4837,4 @@ body:not(.nav_small) .nav.nav-pills.nav-stacked.labels-info p{
 		max-width:245px;
 	}
 }
+
