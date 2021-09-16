@@ -55,16 +55,16 @@ const SideBar = (props) => {
               setTogglePayment(false);
             }}
           >
-            <i className="icon-layers"></i> <span>Manage Compnay</span>
+            <i className="icon-layers"></i> <span>Manage Users</span>
             <span className="icon-arrow-down styleicon"></span>
           </a>
           {toggleCompany && (
             <ul className="down_menu">
               <li>
-                <AnchorLink href="/users">No. Of Users</AnchorLink>
+                <AnchorLink href="/add/user">Add Users</AnchorLink>
               </li>
               <li>
-                <AnchorLink href="#">Merchants</AnchorLink>
+                <AnchorLink href="/users">All Users</AnchorLink>
               </li>
             </ul>
           )}

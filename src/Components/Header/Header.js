@@ -147,7 +147,7 @@ const NotificationPopup = ({
           <div
             id="mCSB_1"
             className="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside"
-            style={{ "max-height": "none" }}
+            style={{ maxHeight: "none" }}
             tabindex="0"
           >
             <div
@@ -230,7 +230,7 @@ const NotificationPopup = ({
             id="mCSB_2"
             className="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside"
             tabindex="0"
-            style={{ "max-height": "none" }}
+            style={{ maxHeight: "none" }}
           >
             <div
               id="mCSB_2_container"
@@ -333,7 +333,7 @@ const NotificationPopup = ({
                     "min-height": "30px",
                     display: "block",
                     height: "231px",
-                    "max-height": "283px",
+                    maxHeight: "283px",
                     top: "0px",
                   }}
                 >

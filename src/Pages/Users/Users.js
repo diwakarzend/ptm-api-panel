@@ -7,41 +7,41 @@ const Users = (props) => {
     <div className="container_full">
       <SideBar {...props} />
       <div className="content_wrapper">
-      <div class="container-fluid">
-        <BreadCrumb heading="Users" value="Users" />
-        
-          <div class="row">
-            <div class=" col-sm-12">
-              <div class="card card-shadow mb-4">
-                <div class="card-header">
-                  <div class="card-title">
+        <div className="container-fluid">
+          <BreadCrumb heading="Users" value="Users" />
+
+          <div className="row">
+            <div className=" col-sm-12">
+              <div className="card card-shadow mb-4">
+                <div className="card-header">
+                  <div className="card-title">
                     <div
-                      class="btn-group"
+                      className="btn-group"
                       role="group"
                       aria-label="Basic example"
                     >
-                      <button type="button" class="btn btn-secondary">
+                      <button type="button" className="btn btn-secondary">
                         Copy
                       </button>
-                      <button type="button" class="btn btn-secondary">
+                      <button type="button" className="btn btn-secondary">
                         CSV
                       </button>
-                      <button type="button" class="btn btn-secondary">
+                      <button type="button" className="btn btn-secondary">
                         Excel
                       </button>
-                      <button type="button" class="btn btn-secondary">
+                      <button type="button" className="btn btn-secondary">
                         PDF
                       </button>
-                      <button type="button" class="btn btn-secondary">
+                      <button type="button" className="btn btn-secondary">
                         Print
                       </button>
                     </div>
                   </div>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
                   <table
                     id="bs4-table"
-                    class="table table-bordered table-striped"
+                    className="table table-bordered table-striped"
                   >
                     <thead>
                       <tr>

@@ -1,4 +1,5 @@
 import React from "react";
+import AnchorLink from "../AnchorLink/AnchorLink";
 
 import "./BreadCrumb.css";
 
@@ -16,9 +17,10 @@ const BreadCrumb = ({ heading, value }) => {
             <ol className="breadcrumb">
               <li>
                 <i className="fa fa-home"></i>
-                <a className="parent-item" href="index.html">
+                <AnchorLink href="/" className="parent-item">
                   Home
-                </a>
+                </AnchorLink>
+
                 <i className="fa fa-angle-right"></i>
               </li>
               <li className="active">{value}</li>
