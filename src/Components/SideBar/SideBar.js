@@ -21,8 +21,9 @@ const SideBar = (props) => {
 
   const { loginUser } = props;
   const userData = loginUser && loginUser.userData;
+  const userWallet = loginUser && loginUser.userWallet;
 
-  console.log("ssssssss", toggleCompany, togglePayment);
+  // console.log("ssssssss", toggleCompany, togglePayment);
 
   return (
     <div className="side_bar scroll_auto">
@@ -30,7 +31,8 @@ const SideBar = (props) => {
         <div className="balance-wrapper">
           <span className="balance-title">Current Balance</span>
           <span className="balance-amount">
-            <i className="fa fa-inr" aria-hidden="true"></i> 11111.11
+            <i className="fa fa-inr" aria-hidden="true"></i>
+            {userWallet && userWallet.MAIN_WALLET}
             <i className="fa fa-refresh" aria-hidden="true"></i>
           </span>
         </div>
@@ -45,7 +47,8 @@ const SideBar = (props) => {
             <li>
               <a href="javascript:void(0)">
                 <span>
-                  <i className="fa fa-inr" aria-hidden="true"></i>11111.11
+                  <i className="fa fa-inr" aria-hidden="true"></i>
+                  {userWallet && userWallet.MAIN_WALLET}
                 </span>
               </a>
             </li>
