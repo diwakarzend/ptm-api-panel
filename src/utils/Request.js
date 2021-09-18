@@ -22,7 +22,9 @@ class Request {
   instance() {
     const headers = {};
 
-    if (this.authorize) headers.Authorization = getAuthToken();
+    if (this.authorize) {
+      // headers.Authorization = getAuthToken();
+    }
 
     const instance = axios.create({
       baseURL: Request.baseUrl,
@@ -54,8 +56,14 @@ class Request {
       return this.errorFn([], {}, httpStatusCodes.BAD_REQUEST);
     }
 
-    return this.instance()
-      .get(url, { params })
+    const options = {
+      headers: {
+        Authorization: getAuthToken(),
+      },
+    };
+
+    return axios
+      .get(url, options)
       .then((response) => {
         const data = getObjectValue(response, "data", null);
         const headers = getObjectValue(response, "headers", null);
@@ -80,8 +88,14 @@ class Request {
       return this.errorFn([], {}, httpStatusCodes.BAD_REQUEST);
     }
 
-    return this.instance()
-      .post(url, params)
+    // this.instance.defaults.headers["Authorization"] = "sssssssssssssssss";
+    const options = {
+      headers: {
+        Authorization: getAuthToken(),
+      },
+    };
+    return axios
+      .post(url, params, options)
       .then((response) => {
         const data = getObjectValue(response, "data", null);
         const headers = getObjectValue(response, "headers", null);

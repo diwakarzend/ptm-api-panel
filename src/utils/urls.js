@@ -5,15 +5,17 @@ export default {
     OTP_VALIDATION: "/agent/otp/validation",
     LOGIN_OTP_RESEND: "/agent/otp/resend",
     FETCH_USER_PROFILE: "/user/getUserProfile",
-    REGISTRATION_USER: "/api/user/register",
     GET_PROFILE: "/api/user/account",
     GET_WALLET: "/api/wallet",
+    GET_API_USERS: "/api/users?pageSize=100",
   },
 
-  UserList: {
+  User: {
     USER_LIST: "/api/users",
-    UPDATE_USER: "/api/users/update",
+    CREATE_NEW_USER: "/api/users",
+    UPDATE_USER: "/api/update-users",
     DELETE_USER: "/api/delete-users/",
+    EDIT_USER: "/api/users/search/{userId}",
   },
 
   OperatorList: {

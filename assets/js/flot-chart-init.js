@@ -409,6 +409,40 @@ $(function() {
         }
     };
     $.plot($("#pie-chart #pie-chart-container"), data, options);
+
+    var data = [{
+        label: "Airtel",
+        data: 44
+    }, {
+        label: "Vodafone",
+        data: 12
+    }, {
+        label: "Bsnl",
+        data: 8
+    }, {
+        label: "Idea",
+        data: 36
+    }];
+    var options = {
+        series: {
+            pie: {
+                show: true
+            }
+        },
+        legend: {
+            show: false
+        },
+        grid: {
+            hoverable: true,
+            clickable: true
+        },
+        colors: ["#A768F3", "#FF518A", "#36a2f5", "#112f84"],
+        tooltip: true,
+        tooltipOpts: {
+            defaultTheme: false
+        }
+    };
+    $.plot($("#pie-chart #pie-chart-container2"), data, options);
 });
 
 // donut chart

@@ -61,9 +61,6 @@ const SideBar = (props) => {
           {toggleCompany && (
             <ul className="down_menu">
               <li>
-                <AnchorLink href="/add/user">Add Users</AnchorLink>
-              </li>
-              <li>
                 <AnchorLink href="/users">All Users</AnchorLink>
               </li>
             </ul>

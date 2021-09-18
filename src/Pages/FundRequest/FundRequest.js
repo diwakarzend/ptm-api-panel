@@ -177,121 +177,107 @@ const FundRequestPopUp = ({ isPopupVisible, closePopUpHandler }) => {
 
   return (
     <div
-      className={`modal fade${isPopupVisible ? " show" : ""}`}
+      className={`modal right fade${isPopupVisible ? " show" : ""}`}
       id="exampleModal"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-      style={style}
+      aria-labelledby="myModalLabel2"
     >
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
               Fund Request
             </h5>
             <button
               type="button"
-              className="close"
+              class="close"
               data-dismiss="modal"
               aria-label="Close"
-              onClick={closePopUpHandler}
             >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className="modal-body">
-            <form className="">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
+          <div class="modal-body">
+            <form class="">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="exampleFormControlSelect1">Choose Bank</label>
-                    <select
-                      className="form-control"
-                      id="exampleFormControlSelect1"
-                    >
+                    <select class="form-control" id="exampleFormControlSelect1">
                       <option>ICICI</option>
                       <option>SBI</option>
                       <option>HDFC</option>
                     </select>
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <div className="form-group">
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Deposit Account</label>
                     <input
                       type="text"
-                      className="form-control"
+                      class="form-control"
                       id="depositAccount"
                       aria-describedby="Deposit Account"
                       placeholder="Deposit Account"
                     />
                   </div>
                 </div>
-                <div className="col-md-12">
-                  <div className="form-group">
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="exampleFormControlSelect1">
                       Choose Payment Mode
                     </label>
-                    <select
-                      className="form-control"
-                      id="exampleFormControlSelect1"
-                    >
+                    <select class="form-control" id="exampleFormControlSelect1">
                       <option>Online</option>
                       <option>Offline</option>
                     </select>
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <div className="form-group">
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Requested Amount</label>
                     <input
                       type="text"
-                      className="form-control"
+                      class="form-control"
                       id="requestedAmount"
                       aria-describedby="requestedAmount"
                       placeholder="Requested Amount"
                     />
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <div className="form-group">
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="exampleFormControlSelect1">Wallet Type</label>
-                    <select className="form-control" id="walletType">
+                    <select class="form-control" id="walletType">
                       <option>Prepaid</option>
                       <option>Postpaid</option>
                     </select>
                   </div>
                 </div>
-                <div className="col-md-12">
-                  <div className="form-group">
+                <div class="col-md-12">
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Upload Image</label>
-                    <label className="custom-file">
-                      <input
-                        type="file"
-                        id="file2"
-                        className="custom-file-input"
-                      />
-                      <span className="custom-file-control"></span>
+                    <label class="custom-file">
+                      <input type="file" id="file2" class="custom-file-input" />
+                      <span class="custom-file-control"></span>
                     </label>
                   </div>
                 </div>
               </div>
             </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-primary themebtn"
-              data-dismiss="modal"
-              onClick={closePopUpHandler}
-            >
-              Close
-            </button>
-            <button type="submit" className="btn btn-primary themebtn">
-              Submit
-            </button>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary themebtn transparent"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary themebtn">
+                Submit
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,3 +1,6 @@
+body{
+	overflow-x: hidden;
+}
 .main-header {
 	z-index: 1030;
 	width: 100%;
@@ -5,7 +8,7 @@
 	border: 0;
 	padding: 0;
 	filter: none;
-	background: #1269db;
+	background: #1e437b;
 	position: fixed;
 	right: 0px;
 	left: 0px;
@@ -29,9 +32,10 @@
 	height: 70px;
 	padding: 10px 22px;
 	line-height: 1.7 !important;
-	background: #1572e8;
+	background: #1e437b;
 	position: relative;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+	border-right: 1px solid rgba(0, 0, 0, 0.11);
 }
 .logo img{
 	max-width: 150px;
@@ -133,7 +137,40 @@
 	display: inline-block;
 	vertical-align: middle;
 }
-
+.dropdown-notification{
+	margin: 5px 0px 0px 5px;
+}
+.dropdown-user{
+	margin-top:0;
+}
+.qr-code{
+	padding:25px;
+}
+.qr-code img{
+	display: block;
+    width: 100%;
+	max-width: 189px;
+	margin:0 auto;
+}
+.wallet-icon{
+	color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+	padding: 0 5px;
+	position: relative;
+}
+.wallet-icon:before{
+	position: absolute;
+    content: "";
+    height: 100%;
+    width: 1px;
+    background: #ffffff;
+    left: 25px;
+}
+.wallet-icon i{
+	color: #ffffff;
+    padding: 0 7px 0 0;
+}
 @media (max-width: 991px) {
 	.language-switch, .dropdown-notification, .dropdown-inbox, .dropdown-user {
 		margin: 0 0px 0px 24px;
@@ -235,7 +272,7 @@
 	text-align: center;
 }
 .dropdown-notification .dropdown-toggle {
-	line-height: 52px;
+	line-height: 40px;
 }
 .dropdown-notification .dropdown-toggle:hover, .dropdown-inbox .dropdown-toggle:hover, .dropdown-user .dropdown-toggle:hover {
 	background-color: rgba(0, 0, 0, 0.05);
@@ -313,7 +350,7 @@
 	font-size: 14px;
 	color: #fff;
 	text-align: center;
-	top: 5px;
+	top: 0px;
 	right: 3px;
 	width: 20px;
 	height: 20px;
@@ -828,7 +865,7 @@
 		width: calc(100% - 90px);
 	}
 	.language-switch, .dropdown-notification, .dropdown-inbox, .dropdown-user {
-		margin: 0 0px 0px 10px;
+		margin: 0 0px 0px 5px;
 	}
 	.search .search-form {
 		right: 0px;
