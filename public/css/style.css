@@ -3247,7 +3247,7 @@ select.form-control-square {
   background: #fcfcfc;
 }
 
-.social-button {
+/* .social-button {
   padding: 0 30px;
 
   .facebook {
@@ -3267,7 +3267,7 @@ select.form-control-square {
       background: #0099d4;
     }
   }
-}
+} */
 
 .social-button i {
   padding: 0 19px;
