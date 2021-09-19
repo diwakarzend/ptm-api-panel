@@ -9,23 +9,35 @@ import "./FundRequest.css";
 import FundRequestForm from "./FundRequestForm";
 
 const FundRequest = memo((props) => {
+  const { dispatch, loginUser, userwallet } = props;
+
+  const fundRequestItems = userwallet.fundRequest.data;
+  const userRole = loginUser && loginUser.userData && loginUser.userData.role;
+
   const [isPopupVisible, handlePopUp] = useState(false);
   const [statusMessage, setStatus] = useState("");
 
-  const { dispatch } = props;
-
-  const fundRequests = () => {
-    dispatch(fetchFundRequests());
+  const fundRequests = (userRole) => {
+    dispatch(fetchFundRequests(userRole));
   };
 
+  //componentDidUpdate
+
   useEffect(() => {
-    fundRequests();
-  }, []);
+    if (userRole) {
+      fundRequests(userRole);
+    }
+  }, [userRole]);
+
+  const changeHandler = (event) => {
+    dispatch(fetchFundRequests(userRole, event.target.value));
+  };
 
   const closePopUpHandler = () => {
     document.body.classList.remove("modal-open");
     handlePopUp(false);
   };
+
   const openPopupHandler = () => {
     document.body.classList.add("modal-open");
     handlePopUp(true);
@@ -55,9 +67,6 @@ const FundRequest = memo((props) => {
   };
 
   console.log("FundRequest", props);
-
-  const { userwallet } = props;
-  const fundRequestItems = userwallet.fundRequest.data;
 
   /*   userwallet:
 fundRequest:
@@ -97,12 +106,28 @@ requestUserName: "9718063555"
                   <FundRequestForm
                     isPopupVisible={isPopupVisible}
                     closePopUpHandler={closePopUpHandler}
+                    userRole={userRole}
                   />
                 )}
               </div>
               <div style={{ textAlign: "center", marginTop: "15px" }}>
                 {statusMessage}
               </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <select
+                    class="form-control"
+                    id="exampleFormControlSelect1"
+                    onChange={changeHandler}
+                  >
+                    <option value="">Search Payment Status</option>
+                    <option value="INITIATED">INITIATED</option>
+                    <option value="DONE">Completed</option>
+                  </select>
+                </div>
+              </div>
+
               <div className="card-body">
                 <table className="table table-bordered">
                   <thead>
@@ -118,39 +143,62 @@ requestUserName: "9718063555"
                     </tr>
                   </thead>
                   <tbody>
-                    {fundRequestItems && Array.isArray(fundRequestItems)
-                      ? fundRequestItems.map((item, index) => {
-                          return (
-                            <tr key={item.reqstDate}>
-                              <th scope="row">{index + 1}</th>
-                              <td>{item.fromBank}</td>
-                              <td>{item.toBank}</td>
-                              <td>{item.requestAmount}</td>
-                              <td>{item.payementMode}</td>
-                              <td>{item.reqstDate}</td>
-                              <td>{item.approveStatus}</td>
-                              <td>
-                                <button
-                                  onClick={() =>
-                                    handleApprove(item.reqstfundUuid)
-                                  }
-                                  style={{ fontSize: "9px", marginLeft: "2px" }}
-                                >
-                                  Approve
-                                </button>
-                                <button
-                                  onClick={() =>
-                                    handleReject(item.reqstfundUuid)
-                                  }
-                                  style={{ fontSize: "9px", marginLeft: "2px" }}
-                                >
-                                  Reject
-                                </button>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      : ""}
+                    {fundRequestItems &&
+                    Array.isArray(fundRequestItems) &&
+                    fundRequestItems.length > 0 ? (
+                      fundRequestItems.map((item, index) => {
+                        return (
+                          <tr key={item.reqstDate}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{item.fromBank}</td>
+                            <td>{item.toBank}</td>
+                            <td>{item.requestAmount}</td>
+                            <td>{item.payementMode}</td>
+                            <td>{item.reqstDate}</td>
+                            <td className={item.approveStatus.toLowerCase()}>
+                              {item.approveStatus}
+                            </td>
+                            <td>
+                              {item.approveStatus != "DONE" &&
+                              userRole !== "PTM_VENDOR" ? (
+                                <React.Fragment>
+                                  <button
+                                    onClick={() =>
+                                      handleApprove(item.reqstfundUuid)
+                                    }
+                                    style={{
+                                      fontSize: "9px",
+                                      marginLeft: "2px",
+                                    }}
+                                  >
+                                    Approve
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      handleReject(item.reqstfundUuid)
+                                    }
+                                    style={{
+                                      fontSize: "9px",
+                                      marginLeft: "2px",
+                                    }}
+                                  >
+                                    Reject
+                                  </button>
+                                </React.Fragment>
+                              ) : (
+                                "NA"
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan="8" style={{ textAlign: "center" }}>
+                          No Data Found
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -163,6 +211,6 @@ requestUserName: "9718063555"
 });
 
 const mapStateToProps = (state) => {
-  return { userwallet: state.userwallet };
+  return { loginUser: state.loginUser, userwallet: state.userwallet };
 };
 export default connect(mapStateToProps)(FundRequest);

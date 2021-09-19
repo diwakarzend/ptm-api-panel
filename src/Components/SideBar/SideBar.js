@@ -22,8 +22,7 @@ const SideBar = (props) => {
   const userData = loginUser && loginUser.userData;
   const userWallet = loginUser && loginUser.userWallet;
 
-  // console.log("ssssssss", toggleCompany, togglePayment);
-
+  console.log("userDatauserData", userData);
   return (
     <div className="side_bar scroll_auto">
       <div className="user-panel">
@@ -59,26 +58,28 @@ const SideBar = (props) => {
             <i className="ti-home"></i> <span>Dashboard</span>
           </AnchorLink>
         </li>
+        {userData && userData.role !== "PTM_VENDOR" ? (
+          <li className="menu_sub">
+            <a
+              href="javascript:void(0)"
+              onClick={() => {
+                setToggleCompany(!toggleCompany);
+                setTogglePayment(false);
+              }}
+            >
+              <i className="icon-layers"></i> <span>Manage Company</span>
+              <span className="icon-arrow-down styleicon"></span>
+            </a>
 
-        <li className="menu_sub">
-          <a
-            href="javascript:void(0)"
-            onClick={() => {
-              setToggleCompany(!toggleCompany);
-              setTogglePayment(false);
-            }}
-          >
-            <i className="icon-layers"></i> <span>Manage Company</span>
-            <span className="icon-arrow-down styleicon"></span>
-          </a>
-          
-            <ul className={toggleCompany ? "down_menu open" : "down_menu"} >
+            <ul className={toggleCompany ? "down_menu open" : "down_menu"}>
               <li>
                 <AnchorLink href="/users">Vendors</AnchorLink>
               </li>
             </ul>
-          
-        </li>
+          </li>
+        ) : (
+          ""
+        )}
 
         <li className="menu_sub">
           <a
@@ -92,18 +93,17 @@ const SideBar = (props) => {
             <span className="icon-arrow-down styleicon"></span>
           </a>
 
-            <ul className={togglePayment ? "down_menu open" : "down_menu"} >
-              <li>
-                <AnchorLink href="/upi">UPI</AnchorLink>
-              </li>
-              <li>
-                <AnchorLink href="/add/money">Add Money</AnchorLink>
-              </li>
-              <li>
-                <AnchorLink href="/fund/request">Fund Request</AnchorLink>
-              </li>
-            </ul>
-          
+          <ul className={togglePayment ? "down_menu open" : "down_menu"}>
+            <li>
+              <AnchorLink href="/upi">UPI</AnchorLink>
+            </li>
+            <li>
+              <AnchorLink href="/add/money">Add Money</AnchorLink>
+            </li>
+            <li>
+              <AnchorLink href="/fund/request">Fund Request</AnchorLink>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

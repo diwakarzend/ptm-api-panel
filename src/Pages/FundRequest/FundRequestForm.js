@@ -1,4 +1,5 @@
 import React, { useState, memo } from "react";
+import { fetchFundRequests } from "../../actions/userwallet";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
@@ -13,7 +14,7 @@ const initialFormData = Object.freeze({
   transationRefNo: "",
 });
 
-const FundRequestForm = memo(({ closePopUpHandler }) => {
+const FundRequestForm = memo(({ closePopUpHandler, userRole }) => {
   const [isPopupVisible, handlePopUp] = useState(false);
   const [formData, updateFormData] = useState(initialFormData);
   const [errors, setErrors] = useState([]);
@@ -56,6 +57,7 @@ const FundRequestForm = memo(({ closePopUpHandler }) => {
         setSuccess(response.msg);
         closePopUpHandler();
         removeOverlay();
+        dispatch(fetchFundRequests(userRole));
         //fetchUsersData();
       }
     };
