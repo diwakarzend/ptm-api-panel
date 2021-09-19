@@ -17,7 +17,7 @@ const FundRequest = memo((props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
   const [statusMessage, setStatus] = useState("");
 
-  const fundRequests = (userRole) => {
+  const getFundRequest = (userRole) => {
     dispatch(fetchFundRequests(userRole));
   };
 
@@ -25,7 +25,7 @@ const FundRequest = memo((props) => {
 
   useEffect(() => {
     if (userRole) {
-      fundRequests(userRole);
+      getFundRequest(userRole);
     }
   }, [userRole]);
 
@@ -46,6 +46,7 @@ const FundRequest = memo((props) => {
   const successHandler = (response) => {
     console.log("response", response);
     setStatus(response.msg);
+    getFundRequest(userRole);
   };
   const errorHandler = (response) => {
     console.log("errorHandler", response);
@@ -92,21 +93,26 @@ requestUserName: "9718063555"
           <section className="chart_section">
             <div className="card card-shadow mb-4">
               <div className="card-header fund-modal">
-                <div className="card-title">Fund Request</div>
-                <button
-                  type="button"
-                  className="btn btn-secondary fund-btn"
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  onClick={openPopupHandler}
-                >
-                  Fund Request
-                </button>
+                <div className="card-title">All fund requests</div>
+                {userRole !== "PTM_ADMIN" && (
+                  <button
+                    // type="button"
+                    //  className="btn btn-secondary fund-btn"
+                    //data-toggle="modal"
+                    data-target="#exampleModal"
+                    onClick={openPopupHandler}
+                  >
+                    Fund Request
+                  </button>
+                )}
+
                 {isPopupVisible && (
                   <FundRequestForm
                     isPopupVisible={isPopupVisible}
                     closePopUpHandler={closePopUpHandler}
                     userRole={userRole}
+                    getFundRequest={getFundRequest}
+                    setStatus={setStatus}
                   />
                 )}
               </div>
