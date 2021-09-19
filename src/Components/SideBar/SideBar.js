@@ -71,13 +71,13 @@ const SideBar = (props) => {
             <i className="icon-layers"></i> <span>Manage Company</span>
             <span className="icon-arrow-down styleicon"></span>
           </a>
-          {toggleCompany && (
-            <ul className="down_menu" style={{ display: "block" }}>
+          
+            <ul className={toggleCompany ? "down_menu open" : "down_menu"} >
               <li>
                 <AnchorLink href="/users">Vendors</AnchorLink>
               </li>
             </ul>
-          )}
+          
         </li>
 
         <li className="menu_sub">
@@ -91,8 +91,8 @@ const SideBar = (props) => {
             <i className="icon-wallet"></i> <span>Payment</span>
             <span className="icon-arrow-down styleicon"></span>
           </a>
-          {togglePayment && (
-            <ul className="down_menu" style={{ display: "block" }}>
+
+            <ul className={togglePayment ? "down_menu open" : "down_menu"} >
               <li>
                 <AnchorLink href="/upi">UPI</AnchorLink>
               </li>
@@ -103,7 +103,7 @@ const SideBar = (props) => {
                 <AnchorLink href="/fund/request">Fund Request</AnchorLink>
               </li>
             </ul>
-          )}
+          
         </li>
       </ul>
     </div>

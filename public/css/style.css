@@ -1209,7 +1209,7 @@ body {
   min-width: 160px;
 }
 .modal .themebtn.transparent {
-  background: transparent !important;
+  background: #ffffff !important;
   color: #1e437b !important;
 }
 .payment-method li {

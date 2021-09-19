@@ -152,10 +152,16 @@
  content: "\f365"
  } */
 .down_menu {
-  display: none;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
   list-style: none;
   padding: 0px;
   margin: 0;
+}
+.down_menu.open{
+  max-height: 500px;
+  transition: max-height 0.4s ease-in;
 }
 .sidebar-menu .down_menu li a {
   padding: 10px 12px 10px 32px;
