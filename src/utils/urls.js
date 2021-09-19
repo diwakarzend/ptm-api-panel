@@ -30,6 +30,7 @@ export default {
     WALLET_SUMMARY: "/api/admin/retailerWalletDetail",
     ADD_CREDIT: "/api/wallet/deposit",
     DEDUCT_CREDIT: "/api/wallet/debit",
+    FUND_REQUEST: "/api/wallet/fund-request",
   },
 
   userCommission: {

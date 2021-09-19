@@ -5,7 +5,6 @@ import {
   fetchUserDetailsIfNeeded,
   fetchUserWalletIfNeeded,
 } from "../../actions/Login";
-import { printUserName } from "../../utils/common";
 
 import "./SideBar.css";
 
@@ -73,7 +72,7 @@ const SideBar = (props) => {
             <span className="icon-arrow-down styleicon"></span>
           </a>
           {toggleCompany && (
-            <ul className="down_menu">
+            <ul className="down_menu" style={{ display: "block" }}>
               <li>
                 <AnchorLink href="/users">Vendors</AnchorLink>
               </li>
@@ -93,7 +92,7 @@ const SideBar = (props) => {
             <span className="icon-arrow-down styleicon"></span>
           </a>
           {togglePayment && (
-            <ul className="down_menu">
+            <ul className="down_menu" style={{ display: "block" }}>
               <li>
                 <AnchorLink href="/upi">UPI</AnchorLink>
               </li>
