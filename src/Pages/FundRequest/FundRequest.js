@@ -116,15 +116,19 @@ requestUserName: "9718063555"
 
               <div class="col-md-12">
                 <div class="form-group">
-                  <select
-                    class="form-control"
-                    id="exampleFormControlSelect1"
-                    onChange={changeHandler}
-                  >
-                    <option value="">Search Payment Status</option>
-                    <option value="INITIATED">INITIATED</option>
-                    <option value="DONE">Completed</option>
-                  </select>
+                  {userRole != "PTM_ADMIN" ? (
+                    <select
+                      class="form-control"
+                      id="exampleFormControlSelect1"
+                      onChange={changeHandler}
+                    >
+                      <option value="">Search Payment Status</option>
+                      <option value="INITIATED">INITIATED</option>
+                      <option value="DONE">Completed</option>
+                    </select>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
 
