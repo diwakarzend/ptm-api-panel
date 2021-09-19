@@ -18,8 +18,6 @@ const FundRequestForm = memo(({ closePopUpHandler }) => {
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState("");
 
-  /////////////
-
   // useEffect(() => {
   //   if (editUserData) {
   //     updateFormData({
@@ -179,7 +177,9 @@ const FundRequestForm = memo(({ closePopUpHandler }) => {
                       id="exampleFormControlSelect1"
                       name="payementMode"
                       onChange={handleChange}
+                      required
                     >
+                      <option value=""> Choose Payment Mode</option>
                       <option value="UPI">UPI</option>
                       <option value="NEFT_IMPS">NEFT/IMPS</option>
                     </select>
@@ -207,6 +207,19 @@ const FundRequestForm = memo(({ closePopUpHandler }) => {
                       className="form-control"
                       placeholder="Reference No"
                       name="transationRefNo"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-12">
+                  <div className="form-group">
+                    <label for="exampleInputEmail1">Remarks</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Remark"
+                      name="remark"
                       onChange={handleChange}
                     />
                   </div>

@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, memo, useState } from "react";
+import { fetchFundRequests } from "../../actions/userwallet";
+import { connect } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import "./FundRequest.css";
 import FundRequestForm from "./FundRequestForm";
 
-const FundRequest = (props) => {
+const FundRequest = memo((props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
+  const { dispatch } = props;
+
+  const fundRequests = () => {
+    dispatch(fetchFundRequests("INITIATED"));
+  };
+
+  useEffect(() => {
+    fundRequests();
+  }, []);
+
   const closePopUpHandler = () => {
     document.body.classList.remove("modal-open");
     handlePopUp(false);
@@ -14,6 +26,27 @@ const FundRequest = (props) => {
     document.body.classList.add("modal-open");
     handlePopUp(true);
   };
+
+  console.log("FundRequest", props);
+
+  const { userwallet } = props;
+  const fundRequestItems = userwallet.fundRequest.data;
+
+  /*   userwallet:
+fundRequest:
+code: "INFO000"
+data: Array(1)
+0:
+approveStatus: "INITIATED"
+: "HDFC"
+payementMode: "NET_BANKING"
+proofUpdaodStatus: null
+reqstDate: "2021-09-19T09:40:38"
+reqstfundUuid: "65ff9fb4-7e82-44fc-af76-39f22efe613f"
+: 1000
+requestUserName: "9718063555"
+  */
+
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -45,114 +78,30 @@ const FundRequest = (props) => {
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Bank Name</th>
-                      <th scope="col">Branch Name</th>
-                      <th scope="col">AccountHolder</th>
-                      <th scope="col">AccountNumber</th>
-                      <th scope="col">ifsc code</th>
-                      <th scope="col">Billing Info</th>
-                      <th scope="col">Cash Deposit Charges</th>
-                      <th scope="col">QR logo</th>
-                      <th scope="col">Bank logo</th>{" "}
+                      <th scope="col">From Bank Name</th>
+                      <th scope="col">To Bank Name</th>
+                      <th scope="col">Requested Amount</th>
+                      <th scope="col">Payment Mode</th>
+                      <th scope="col">Requested Date</th>
+                      <th scope="col">Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>ICICI Bank</td>
-                      <td>Gomtinagar</td>
-                      <td>Roundpay Techno Media Pvt Ltd</td>
-                      <td>35712509497</td>
-                      <td>ICICIC0000104</td>
-                      <td>Auto Billing 24*7</td>
-                      <td>150.0</td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>ICICI Bank</td>
-                      <td>Gomtinagar</td>
-                      <td>Roundpay Techno Media Pvt Ltd</td>
-                      <td>35712509497</td>
-                      <td>ICICIC0000104</td>
-                      <td>Auto Billing 24*7</td>
-                      <td>150.0</td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>ICICI Bank</td>
-                      <td>Gomtinagar</td>
-                      <td>Roundpay Techno Media Pvt Ltd</td>
-                      <td>35712509497</td>
-                      <td>ICICIC0000104</td>
-                      <td>Auto Billing 24*7</td>
-                      <td>150.0</td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>ICICI Bank</td>
-                      <td>Gomtinagar</td>
-                      <td>Roundpay Techno Media Pvt Ltd</td>
-                      <td>35712509497</td>
-                      <td>ICICIC0000104</td>
-                      <td>Auto Billing 24*7</td>
-                      <td>150.0</td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                    </tr>
+                    {fundRequestItems && Array.isArray(fundRequestItems)
+                      ? fundRequestItems.map((item, index) => {
+                          return (
+                            <tr key={item.reqstDate}>
+                              <th scope="row">{index + 1}</th>
+                              <td>{item.fromBank}</td>
+                              <td>{item.toBank}</td>
+                              <td>{item.requestAmount}</td>
+                              <td>{item.payementMode}</td>
+                              <td>{item.reqstDate}</td>
+                              <td>{item.approveStatus}</td>
+                            </tr>
+                          );
+                        })
+                      : ""}
                   </tbody>
                 </table>
               </div>
@@ -162,6 +111,9 @@ const FundRequest = (props) => {
       </div>
     </div>
   );
-};
+});
 
-export default FundRequest;
+const mapStateToProps = (state) => {
+  return { userwallet: state.userwallet };
+};
+export default connect(mapStateToProps)(FundRequest);
