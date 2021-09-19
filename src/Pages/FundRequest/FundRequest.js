@@ -1,5 +1,7 @@
 import React, { useEffect, memo, useState } from "react";
 import { fetchFundRequests } from "../../actions/userwallet";
+import Request from "../../utils/Request";
+import urls from "../../utils/urls";
 import { connect } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
@@ -8,10 +10,12 @@ import FundRequestForm from "./FundRequestForm";
 
 const FundRequest = memo((props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
+  const [statusMessage, setStatus] = useState("");
+
   const { dispatch } = props;
 
   const fundRequests = () => {
-    dispatch(fetchFundRequests("INITIATED"));
+    dispatch(fetchFundRequests());
   };
 
   useEffect(() => {
@@ -25,6 +29,29 @@ const FundRequest = memo((props) => {
   const openPopupHandler = () => {
     document.body.classList.add("modal-open");
     handlePopUp(true);
+  };
+
+  const successHandler = (response) => {
+    console.log("response", response);
+    setStatus(response.msg);
+  };
+  const errorHandler = (response) => {
+    console.log("errorHandler", response);
+    setStatus(response.msg);
+  };
+
+  const handleApprove = (requestId) => {
+    // reqstfunduuid
+    const api = new Request("", successHandler, errorHandler, false);
+    return api.get(
+      urls.login.BASE_URL + urls.Wallet.FUND_REQUEST_APPROVE + requestId
+    );
+  };
+  const handleReject = (requestId) => {
+    const api = new Request("", successHandler, errorHandler, false);
+    return api.get(
+      urls.login.BASE_URL + urls.Wallet.FUND_REQUEST_REJECT + requestId
+    );
   };
 
   console.log("FundRequest", props);
@@ -73,6 +100,9 @@ requestUserName: "9718063555"
                   />
                 )}
               </div>
+              <div style={{ textAlign: "center", marginTop: "15px" }}>
+                {statusMessage}
+              </div>
               <div className="card-body">
                 <table className="table table-bordered">
                   <thead>
@@ -84,6 +114,7 @@ requestUserName: "9718063555"
                       <th scope="col">Payment Mode</th>
                       <th scope="col">Requested Date</th>
                       <th scope="col">Status</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -98,6 +129,24 @@ requestUserName: "9718063555"
                               <td>{item.payementMode}</td>
                               <td>{item.reqstDate}</td>
                               <td>{item.approveStatus}</td>
+                              <td>
+                                <button
+                                  onClick={() =>
+                                    handleApprove(item.reqstfundUuid)
+                                  }
+                                  style={{ fontSize: "9px", marginLeft: "2px" }}
+                                >
+                                  Approve
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleReject(item.reqstfundUuid)
+                                  }
+                                  style={{ fontSize: "9px", marginLeft: "2px" }}
+                                >
+                                  Reject
+                                </button>
+                              </td>
                             </tr>
                           );
                         })

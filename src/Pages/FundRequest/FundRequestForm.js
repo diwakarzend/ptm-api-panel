@@ -1,6 +1,7 @@
 import React, { useState, memo } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
+import { removeOverlay } from "../../utils/common";
 import "./FundRequest.css";
 
 const initialFormData = Object.freeze({
@@ -17,14 +18,6 @@ const FundRequestForm = memo(({ closePopUpHandler }) => {
   const [formData, updateFormData] = useState(initialFormData);
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState("");
-
-  // useEffect(() => {
-  //   if (editUserData) {
-  //     updateFormData({
-  //       ...editUserData,
-  //     });
-  //   }
-  // }, [editUserData]);
 
   const handleChange = (event) => {
     updateFormData({
@@ -62,6 +55,7 @@ const FundRequestForm = memo(({ closePopUpHandler }) => {
         setErrors([]);
         setSuccess(response.msg);
         closePopUpHandler();
+        removeOverlay();
         //fetchUsersData();
       }
     };

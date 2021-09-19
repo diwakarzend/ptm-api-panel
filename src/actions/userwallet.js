@@ -19,7 +19,8 @@ export function fetchFundRequestsFailure(error) {
   };
 }
 
-export function fetchFundRequests(requestType) {
+export function fetchFundRequests() {
+  // const queryStr = requestType ? `?status=${requestType}` : "";
   return (dispatch) => {
     const successFn = (data, headers) => {
       dispatch(fetchFundRequestsSuccess(data));
@@ -30,8 +31,6 @@ export function fetchFundRequests(requestType) {
     };
 
     const api = new Request(dispatch, successFn, errorFn, false);
-    return api.get(
-      `${urls.login.BASE_URL}${urls.Wallet.FUND_REQUEST}?status=${requestType}`
-    );
+    return api.get(`${urls.login.BASE_URL}${urls.Wallet.FETCH_FUND_REQUEST}`);
   };
 }

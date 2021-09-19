@@ -14,6 +14,8 @@ const DashBoard = (props) => {
     var myChart = new Chart(ctx, chartConfig);
   }, []);
 
+  console.log("DB", props);
+
   return (
     <div className="container_full">
       <SideBar {...props} />
