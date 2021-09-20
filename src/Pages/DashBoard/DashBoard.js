@@ -6,12 +6,25 @@ import { fetchUserDetails } from "../../actions/Login";
 import "../../lib/Chart/Chart.min";
 const chartConfig = require("../../lib/Chart/Config");
 import "./DashBoard.css";
+import { chartData, transactionStatus } from "./mockJson";
+import moment from "moment";
+import { dynamicDataWithXY } from "../../lib/Chart/common";
+import CircularProgressBar from "../../Components/CircularProgressBar";
+
 
 const DashBoard = (props) => {
+  const { data: { totalTransaction, totalSuccess, totalFailed, totalPending} } = transactionStatus;
+  const chartXData = chartData && chartData.data.map(item => {
+    const month = moment(`${item.month}`, 'M').format('MMMM');
+    return `${month} ${item.year}`
+  })
+  const chartYData = chartData && chartData.data.map(item => item.totalRevenue);
+  const chartObj = dynamicDataWithXY(chartXData, chartYData, "Revenue Chart" ,"Month of the year", "Revenue in Rs");
+  console.log("chartObj", chartObj);
   useEffect(() => {
     const { dispatch } = props;
     var ctx = document.getElementById("myChart3-light").getContext("2d");
-    var myChart = new Chart(ctx, chartConfig);
+    var myChart = new Chart(ctx, chartObj);
   }, []);
 
   return (
@@ -88,7 +101,7 @@ const DashBoard = (props) => {
             </div>
 
             <div className="row">
-              <div className="col-xl-6 mb-4">
+              <div className="col-xl-8 mb-4">
                 <div className="card">
                   <div className="card-body">
                     <div className="row">
@@ -113,7 +126,7 @@ const DashBoard = (props) => {
                 </div>
               </div>
 
-              <div className="col-xl-6 mb-4">
+              <div className="col-xl-4 mb-4">
                 <div className="card">
                   <div className="card-body">
                     <div className="row">
@@ -125,27 +138,27 @@ const DashBoard = (props) => {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-sm-4 mb-xs-30">
-                        <div className="ep_1 " data-percent="96">
-                          <span>96</span>%
+                      <div className="col-sm-12 mb-xs-30">
+                        <div className="ep_1 ">
+                          <CircularProgressBar percentage={totalSuccess*100/totalTransaction} strokeWidth={7} strokeColor="#000a1a" sqSize={100} />
                         </div>
                         <div className="user_data">
                           <span className="fw-bold mt-3 mb-0">Success</span>
                         </div>
                       </div>
 
-                      <div className="col-sm-4 mb-xs-30">
-                        <div className="ep_1 " data-percent="3">
-                          <span>3</span>%
+                      <div className="col-sm-6 mb-xs-30">
+                        <div className="ep_1 ">
+                          <CircularProgressBar percentage={totalFailed*100/totalTransaction} strokeWidth={7} strokeColor="#000a1a" sqSize={100} />
                         </div>
                         <div className="user_data">
                           <span className="fw-bold mt-3 mb-0">Failed</span>
                         </div>
                       </div>
 
-                      <div className="col-sm-4">
+                      <div className="col-sm-6">
                         <div className="ep_1" data-percent="1">
-                          <span>1</span>%
+                          <CircularProgressBar percentage={totalPending*100/totalTransaction} strokeWidth={7} strokeColor="#000a1a" sqSize={100} />
                         </div>
                         <div className="user_data">
                           <span className="fw-bold mt-3 mb-0">Pending</span>

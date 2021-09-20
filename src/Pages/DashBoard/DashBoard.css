@@ -161,6 +161,9 @@
   -o-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
 }
+.ep_1 {
+  text-align: center;
+}
 .social-btns {
   float: right;
   list-style: none outside none;
