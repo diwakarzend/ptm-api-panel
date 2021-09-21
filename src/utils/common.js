@@ -66,13 +66,15 @@ export function diffDays(startDate, endDate) {
   return end.diff(start, "days");
 }
 
-export function saveAuthToken(token) {
-  localStorage.setItem("pricingToken", token);
-  setAuthorizationToken(token);
+export function saveAuthToken(item, value) {
+  localStorage.setItem(item, `Bearer ${value}`);
+  setAuthorizationToken(value);
 }
 
-export function getAuthToken() {
-  return localStorage.getItem("pricingToken");
+export function getAuthToken(type) {
+  return type
+    ? localStorage.getItem(type)
+    : localStorage.getItem("Authorization");
 }
 
 export function saveUserData(userData) {
@@ -86,13 +88,28 @@ export function getUserData() {
 }
 
 export function clearAuthToken() {
-  localStorage.removeItem("pricingToken");
+  localStorage.removeItem("Authorization");
+  localStorage.removeItem("api-Authorization");
   setAuthorizationToken(false);
 }
 
-export function isAuthenticated() {
-  const isAuthenticated = !isEmpty(getAuthToken());
-  return isAuthenticated;
+export function isAuthenticated(response) {
+  if (response && response.data) {
+    if (response.data.id_token) {
+      saveAuthToken("Authorization", response.data.id_token);
+    }
+
+    if (response.data.api_token) {
+      saveAuthToken("api-Authorization", response.data.api_token);
+    }
+
+    return true;
+  } else if (!isEmpty(getAuthToken())) {
+    return true;
+  }
+
+  // const isAuthenticated = !isEmpty(getAuthToken());
+  // return isAuthenticated;
 }
 
 export function setAuthorizationToken(token) {

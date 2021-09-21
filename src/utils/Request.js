@@ -59,6 +59,7 @@ class Request {
     const options = {
       headers: {
         Authorization: getAuthToken(),
+        "api-Authorization": getAuthToken("api-Authorization"),
       },
     };
 
@@ -92,6 +93,7 @@ class Request {
     const options = {
       headers: {
         Authorization: getAuthToken(),
+        "api-Authorization": getAuthToken("api-Authorization"),
       },
     };
     return axios

@@ -7,11 +7,7 @@ import {
 } from "../utils/common";
 
 const initialState = {
-  /*
-   * TODO- isAuthenticated and user data need to be fetched from local storage
-   */
   isLoggingIn: false,
-  isLoggedIn: false,
   isOtpValidating: false,
   isOtpValidated: false,
   invalidOtpCount: 0,
@@ -19,6 +15,8 @@ const initialState = {
   isFetchingUserProfile: false,
   isFetchedUserProfile: false,
   authToken: "",
+  isLoggedIn: false,
+  loginInfo: "",
   userData: null,
   userWallet: null,
 };
@@ -40,55 +38,57 @@ export default (state = initialState, action = {}) => {
       break;
 
     case actionTypes.LOGIN_RESET_STORE:
-      changes = { ...initialState, isAuthenticated: isAuthenticated() };
+      //  console.log("isAuthenticated", typeof isAuthenticated);
+      changes = { isAuthenticated: isAuthenticated() };
       break;
 
     case actionTypes.LOGIN_REQUEST_INIT:
       changes = {
-        isLoggingIn: true,
         isLoggedIn: false,
-        isOtpValidating: false,
-        isOtpValidated: false,
-        invalidOtpCount: 0,
-        isAuthenticated: false,
+
         userData: null,
       };
       break;
 
     case actionTypes.LOGIN_REQUEST_SUCCESS:
-      {
-        const userData = getObjectValueIfEmpty(
-          action,
-          "payload.data.id_token",
-          {}
-        );
-        const isSingleFactor = !getObjectValueIfEmpty(
-          userData,
-          "mfaEnabled",
-          0
-        );
-        const authToken = isSingleFactor
-          ? getObjectValueIfEmpty(action, "payload.headers.authorization", null)
-          : null;
-        const isAuthenticated =
-          isSingleFactor && !isEmpty(userData) && !isEmpty(authToken);
+      const { payload } = action;
+      // const userData = getObjectValueIfEmpty(
+      //   action,
+      //   "payload.data.id_token",
+      //   {}
+      // );
+      //
+      // const isSingleFactor = !getObjectValueIfEmpty(userData, "mfaEnabled", 0);
+      // // const authToken = isSingleFactor
+      // //   ? getObjectValueIfEmpty(action, "payload.headers.authorization", null)
+      // //   : null;
+      // const authToken = isSingleFactor
+      //   ? getObjectValueIfEmpty(action, "payload.headers.authorization", null)
+      //   : null;
 
-        if (isAuthenticated) saveAuthToken(authToken);
+      // const isAuthenticated =
+      //   isSingleFactor && !isEmpty(userData) && !isEmpty(authToken);
 
-        changes = {
-          isLoggingIn: false,
-          isOtpValidated: false,
-          invalidOtpCount: 0,
-          isAuthenticated,
-          isLoggedIn: getObjectValueIfEmpty(
-            action,
-            "payload.data.success",
-            false
-          ),
-          authToken: authToken,
-          userData,
-        };
-      }
+      // if (isAuthenticated) saveAuthToken(authToken);
+
+      // changes = {
+      //   isLoggingIn: false,
+      //   isOtpValidated: false,
+      //   invalidOtpCount: 0,
+
+      //   isAuthenticated,
+
+      //   authToken: authToken,
+      //   // userData,
+      // };
+
+      console.log("Action", payload);
+
+      changes = {
+        loginInfo: payload,
+        isLoggedIn: isAuthenticated(payload),
+      };
+
       break;
 
     case actionTypes.LOGIN_REQUEST_FAILED:

@@ -21,14 +21,14 @@ class LoginPage extends React.Component {
   }
 
   componentWillMount() {
-    const { isAuthenticated, history } = this.props;
-    if (isAuthenticated) {
+    const { isLoggedIn, history } = this.props;
+    if (isLoggedIn) {
       history.push("/dashboard");
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isAuthenticated) {
+    if (nextProps.isLoggedIn) {
       const { loginResetStore, history } = this.props;
       loginResetStore();
       history.push("/dashboard");
