@@ -40,7 +40,6 @@ const Header = (props) => {
   }
   const { loginUser } = props;
   const userData = loginUser && loginUser.userData;
-  const userWallet = loginUser && loginUser.userWallet;
 
   return (
     <div className="header-bg">
@@ -72,12 +71,7 @@ const Header = (props) => {
                 <div className="row full_width">
                   <div className="col-xl-12 col-12 d-flex justify-content-end">
                     <div className="right_bar_top d-flex align-items-center justify-content-md-between justify-content-end">
-                      <div className="search">
-                        <div className="wallet-icon">
-                          <i className="icon-wallet"></i> ₹
-                          {userWallet && userWallet.MAIN_WALLET}
-                        </div>
-                      </div>
+                      <div className="search"></div>
 
                       <div className="align_end">
                         <NotificationPopup

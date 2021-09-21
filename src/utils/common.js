@@ -385,3 +385,9 @@ export function loadScript(src) {
 export function printUserName(userData) {
   return (userData && userData.firstName + " " + userData.lastName) || "";
 }
+
+export function removeOverlay() {
+  if (document.querySelector(".modal-backdrop.fade.show")) {
+    document.querySelector(".modal-backdrop.fade.show").remove();
+  }
+}

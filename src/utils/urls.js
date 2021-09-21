@@ -30,6 +30,10 @@ export default {
     WALLET_SUMMARY: "/api/admin/retailerWalletDetail",
     ADD_CREDIT: "/api/wallet/deposit",
     DEDUCT_CREDIT: "/api/wallet/debit",
+    FUND_REQUEST: "/api/wallet/fund-request",
+    FETCH_FUND_REQUEST: "/api/wallet/fund-request-list?pageNo=0&pageSize=100",
+    FUND_REQUEST_APPROVE: "/api/wallet/fund-approve?reqstfunduuid=",
+    FUND_REQUEST_REJECT: "/api/wallet/reject-fund-request?reqstfunduuid=",
   },
 
   userCommission: {

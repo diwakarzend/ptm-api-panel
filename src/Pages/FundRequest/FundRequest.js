@@ -1,14 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, memo, useState } from "react";
+import { fetchFundRequests } from "../../actions/userwallet";
+import Request from "../../utils/Request";
+import urls from "../../utils/urls";
+import { connect } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import "./FundRequest.css";
+import FundRequestForm from "./FundRequestForm";
 
-const FundRequest = (props) => {
+const FundRequest = memo((props) => {
+  const { dispatch, loginUser, userwallet } = props;
+
+  const fundRequestItems = userwallet.fundRequest.data;
+  const userRole = loginUser && loginUser.userData && loginUser.userData.role;
+
   const [isPopupVisible, handlePopUp] = useState(false);
+  const [statusMessage, setStatus] = useState("");
 
-  const openPopupHandler = () => {
-    document.body.classList.add("modal-open");
-    handlePopUp(true);
+  const getFundRequest = (userRole) => {
+    dispatch(fetchFundRequests(userRole));
+  };
+
+  //componentDidUpdate
+
+  useEffect(() => {
+    if (userRole) {
+      getFundRequest(userRole);
+    }
+  }, [userRole]);
+
+  const changeHandler = (event) => {
+    dispatch(fetchFundRequests(userRole, event.target.value));
   };
 
   const closePopUpHandler = () => {
@@ -16,10 +38,51 @@ const FundRequest = (props) => {
     handlePopUp(false);
   };
 
-  const submitPopupHandler = () => {
+  const openPopupHandler = () => {
     document.body.classList.add("modal-open");
     handlePopUp(true);
   };
+
+  const successHandler = (response) => {
+    console.log("response", response);
+    setStatus(response.msg);
+    getFundRequest(userRole);
+  };
+  const errorHandler = (response) => {
+    console.log("errorHandler", response);
+    setStatus(response.msg);
+  };
+
+  const handleApprove = (requestId) => {
+    // reqstfunduuid
+    const api = new Request("", successHandler, errorHandler, false);
+    return api.get(
+      urls.login.BASE_URL + urls.Wallet.FUND_REQUEST_APPROVE + requestId
+    );
+  };
+  const handleReject = (requestId) => {
+    const api = new Request("", successHandler, errorHandler, false);
+    return api.get(
+      urls.login.BASE_URL + urls.Wallet.FUND_REQUEST_REJECT + requestId
+    );
+  };
+
+  console.log("FundRequest", props);
+
+  /*   userwallet:
+fundRequest:
+code: "INFO000"
+data: Array(1)
+0:
+approveStatus: "INITIATED"
+: "HDFC"
+payementMode: "NET_BANKING"
+proofUpdaodStatus: null
+reqstDate: "2021-09-19T09:40:38"
+reqstfundUuid: "65ff9fb4-7e82-44fc-af76-39f22efe613f"
+: 1000
+requestUserName: "9718063555"
+  */
 
   return (
     <div className="container_full">
@@ -30,135 +93,122 @@ const FundRequest = (props) => {
           <section className="chart_section">
             <div className="card card-shadow mb-4">
               <div className="card-header fund-modal">
-                <div className="card-title">Fund Request</div>
-                <button
-                  type="button"
-                  className="btn btn-secondary fund-btn"
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  onClick={openPopupHandler}
-                >
-                  Fund Request
-                </button>
+                <div className="card-title">All fund requests</div>
+                {userRole !== "PTM_ADMIN" && (
+                  <button
+                    // type="button"
+                    //  className="btn btn-secondary fund-btn"
+                    //data-toggle="modal"
+                    data-target="#exampleModal"
+                    onClick={openPopupHandler}
+                  >
+                    Fund Request
+                  </button>
+                )}
 
-                <FundRequestPopUp
-                  isPopupVisible={isPopupVisible}
-                  closePopUpHandler={closePopUpHandler}
-                />
+                {isPopupVisible && (
+                  <FundRequestForm
+                    isPopupVisible={isPopupVisible}
+                    closePopUpHandler={closePopUpHandler}
+                    userRole={userRole}
+                    getFundRequest={getFundRequest}
+                    setStatus={setStatus}
+                  />
+                )}
               </div>
+              <div style={{ textAlign: "center", marginTop: "15px" }}>
+                {statusMessage}
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  {userRole != "PTM_ADMIN" ? (
+                    <select
+                      class="form-control"
+                      id="exampleFormControlSelect1"
+                      onChange={changeHandler}
+                    >
+                      <option value="">Search Payment Status</option>
+                      <option value="INITIATED">INITIATED</option>
+                      <option value="DONE">Completed</option>
+                    </select>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+
               <div className="card-body">
                 <table className="table table-bordered">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Bank Name</th>
-                      <th scope="col">Branch Name</th>
-                      <th scope="col">AccountHolder</th>
-                      <th scope="col">AccountNumber</th>
-                      <th scope="col">ifsc code</th>
-                      <th scope="col">Billing Info</th>
-                      <th scope="col">Cash Deposit Charges</th>
-                      <th scope="col">QR logo</th>
-                      <th scope="col">Bank logo</th>{" "}
+                      <th scope="col">From Bank Name</th>
+                      <th scope="col">To Bank Name</th>
+                      <th scope="col">Requested Amount</th>
+                      <th scope="col">Payment Mode</th>
+                      <th scope="col">Requested Date</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>ICICI Bank</td>
-                      <td>Gomtinagar</td>
-                      <td>Roundpay Techno Media Pvt Ltd</td>
-                      <td>35712509497</td>
-                      <td>ICICIC0000104</td>
-                      <td>Auto Billing 24*7</td>
-                      <td>150.0</td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>ICICI Bank</td>
-                      <td>Gomtinagar</td>
-                      <td>Roundpay Techno Media Pvt Ltd</td>
-                      <td>35712509497</td>
-                      <td>ICICIC0000104</td>
-                      <td>Auto Billing 24*7</td>
-                      <td>150.0</td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>ICICI Bank</td>
-                      <td>Gomtinagar</td>
-                      <td>Roundpay Techno Media Pvt Ltd</td>
-                      <td>35712509497</td>
-                      <td>ICICIC0000104</td>
-                      <td>Auto Billing 24*7</td>
-                      <td>150.0</td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>ICICI Bank</td>
-                      <td>Gomtinagar</td>
-                      <td>Roundpay Techno Media Pvt Ltd</td>
-                      <td>35712509497</td>
-                      <td>ICICIC0000104</td>
-                      <td>Auto Billing 24*7</td>
-                      <td>150.0</td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                      <td>
-                        <img
-                          src="http://0.0.0.0:3008/images/img2.jpg"
-                          className="img-circle mCS_img_loaded"
-                          alt="User Image"
-                        />
-                      </td>
-                    </tr>
+                    {fundRequestItems &&
+                    Array.isArray(fundRequestItems) &&
+                    fundRequestItems.length > 0 ? (
+                      fundRequestItems.map((item, index) => {
+                        return (
+                          <tr key={item.reqstDate}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{item.fromBank}</td>
+                            <td>{item.toBank}</td>
+                            <td>{item.requestAmount}</td>
+                            <td>{item.payementMode}</td>
+                            <td>{item.reqstDate}</td>
+                            <td className={item.approveStatus.toLowerCase()}>
+                              {item.approveStatus}
+                            </td>
+                            <td>
+                              {item.approveStatus != "DONE" &&
+                              userRole !== "PTM_VENDOR" ? (
+                                <React.Fragment>
+                                  <button
+                                    onClick={() =>
+                                      handleApprove(item.reqstfundUuid)
+                                    }
+                                    style={{
+                                      fontSize: "9px",
+                                      marginLeft: "2px",
+                                    }}
+                                  >
+                                    Approve
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      handleReject(item.reqstfundUuid)
+                                    }
+                                    style={{
+                                      fontSize: "9px",
+                                      marginLeft: "2px",
+                                    }}
+                                  >
+                                    Reject
+                                  </button>
+                                </React.Fragment>
+                              ) : (
+                                "NA"
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan="8" style={{ textAlign: "center" }}>
+                          No Data Found
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -168,119 +218,9 @@ const FundRequest = (props) => {
       </div>
     </div>
   );
+});
+
+const mapStateToProps = (state) => {
+  return { loginUser: state.loginUser, userwallet: state.userwallet };
 };
-
-export default FundRequest;
-
-const FundRequestPopUp = ({ isPopupVisible, closePopUpHandler }) => {
-  const style = isPopupVisible ? { display: "block" } : { display: "none" };
-
-  return (
-    <div
-      className={`modal right fade${isPopupVisible ? " show" : ""}`}
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Fund Request
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form class="">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">Choose Bank</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>ICICI</option>
-                      <option>SBI</option>
-                      <option>HDFC</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Deposit Account</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="depositAccount"
-                      aria-describedby="Deposit Account"
-                      placeholder="Deposit Account"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">
-                      Choose Payment Mode
-                    </label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>Online</option>
-                      <option>Offline</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Requested Amount</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="requestedAmount"
-                      aria-describedby="requestedAmount"
-                      placeholder="Requested Amount"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">Wallet Type</label>
-                    <select class="form-control" id="walletType">
-                      <option>Prepaid</option>
-                      <option>Postpaid</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Upload Image</label>
-                    <label class="custom-file">
-                      <input type="file" id="file2" class="custom-file-input" />
-                      <span class="custom-file-control"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-primary themebtn transparent"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="submit" class="btn btn-primary themebtn">
-                Submit
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+export default connect(mapStateToProps)(FundRequest);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
+import { removeOverlay } from "../../utils/common";
 const initialFormData = Object.freeze({
   address1: "",
   address2: "",
@@ -79,6 +80,7 @@ const AddUserForm = (props) => {
       updateError([]);
       updateSuccess(data.msg);
       closePopUpHandler();
+      removeOverlay();
       fetchUsersData();
     }
   };

@@ -24,10 +24,9 @@
 .user-panel {
   position: relative;
   width: 100%;
-  padding: 20px;
+  padding: 15px 20px;
   white-space: nowrap;
   overflow: hidden;
-  text-align: center;
   margin-bottom: 15px;
   border-bottom: 1px solid #f1f1f1;
 }
@@ -46,7 +45,6 @@
   line-height: 1;
   display: inline-block;
   vertical-align: middle;
-  margin-top: 10px;
   text-align: left;
 }
 .user-panel > .info > p {
@@ -154,9 +152,16 @@
  content: "\f365"
  } */
 .down_menu {
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
   list-style: none;
   padding: 0px;
   margin: 0;
+}
+.down_menu.open{
+  max-height: 500px;
+  transition: max-height 0.4s ease-in;
 }
 .sidebar-menu .down_menu li a {
   padding: 10px 12px 10px 32px;
@@ -219,7 +224,6 @@
   position: relative;
   z-index: 10000;
   display: block;
-  padding-right: 10px;
 }
 .nav_small .sidebar-menu li a {
   padding: 12px 10px;
@@ -287,9 +291,21 @@
     margin-left: -270px;
     transition: all 0.3s;
     height: calc(100vh - 61px);
-    padding-top: 33px;
   }
   .mobile_nav .side_bar {
     margin-left: 0;
   }
+}
+.sidebar-menu > li:first-child {
+  display: none;
+}
+.nav_small .sidebar-menu li,
+.nav_small .sidebar-menu li ul li {
+  list-style-type: none;
+}
+.nav_small .sidebar-menu > li:first-child {
+  display: block;
+}
+.nav_small .sidebar-menu li .down_menu li a:before {
+  display: none;
 }
