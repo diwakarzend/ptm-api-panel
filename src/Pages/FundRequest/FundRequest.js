@@ -3,6 +3,8 @@ import { fetchFundRequests } from "../../actions/userwallet";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { connect } from "react-redux";
+import { addOverlay, removeOverlay } from "../../utils/common";
+
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import "./FundRequest.css";
@@ -34,12 +36,12 @@ const FundRequest = memo((props) => {
   };
 
   const closePopUpHandler = () => {
-    document.body.classList.remove("modal-open");
+    removeOverlay();
     handlePopUp(false);
   };
 
   const openPopupHandler = () => {
-    document.body.classList.add("modal-open");
+    addOverlay();
     handlePopUp(true);
   };
 

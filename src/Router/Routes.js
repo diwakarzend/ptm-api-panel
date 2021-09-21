@@ -8,6 +8,7 @@ import Users from "../Pages/Users/Users";
 import UPI from "../Pages/UPI/UPI";
 import AddMoney from "../Pages/AddMoney/AddMoney";
 import FundRequest from "../Pages/FundRequest/FundRequest";
+import Benificiary from "../Pages/Benificiary/Benificiary";
 
 const Routes = (props) => {
   return (
@@ -20,6 +21,7 @@ const Routes = (props) => {
         <PrivateRoute path="/add/money" component={AddMoney} exact />
         <PrivateRoute path="/users" component={Users} exact />
         <PrivateRoute path="/fund/request" component={FundRequest} exact />
+        <PrivateRoute path="/beneficiary" component={Benificiary} exact />
       </Switch>
     </div>
   );

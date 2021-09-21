@@ -16,6 +16,8 @@ export default {
     UPDATE_USER: "/api/update-users",
     DELETE_USER: "/api/delete-users/",
     EDIT_USER: "/api/users/search/{userId}",
+    ADD_BENEFICIARY: "/api/add-beneficiary",
+    GET_BENEFICIARY: "/api/beneficiary?pageNo=1&pageSize=100",
   },
 
   OperatorList: {

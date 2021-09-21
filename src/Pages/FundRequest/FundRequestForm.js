@@ -1,5 +1,4 @@
 import React, { useState, memo, useEffect, useRef } from "react";
-import { fetchFundRequests } from "../../actions/userwallet";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";

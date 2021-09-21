@@ -406,5 +406,13 @@ export function printUserName(userData) {
 export function removeOverlay() {
   if (document.querySelector(".modal-backdrop.fade.show")) {
     document.querySelector(".modal-backdrop.fade.show").remove();
+    document.body.classList.remove("modal-open");
   }
+}
+
+export function addOverlay() {
+  let elemDiv = document.createElement("div");
+  elemDiv.setAttribute("class", "modal-backdrop fade show");
+  document.body.appendChild(elemDiv);
+  document.body.classList.add("modal-open");
 }
