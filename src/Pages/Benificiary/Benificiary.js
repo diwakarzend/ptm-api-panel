@@ -16,8 +16,12 @@ const Benificiary = memo((props) => {
   const [statusMessage, setStatus] = useState("");
 
   useEffect(() => {
-    dispatch(fetchBeneficiary());
+    getBeneficiary();
   }, []);
+
+  const getBeneficiary = () => {
+    dispatch(fetchBeneficiary());
+  };
 
   const closePopUpHandler = () => {
     removeOverlay();
