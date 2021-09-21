@@ -15,21 +15,9 @@ const Benificiary = memo((props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
   const [statusMessage, setStatus] = useState("");
 
-  const getBeneficiary = (userRole) => {
-    dispatch(fetchBeneficiary(userRole));
-  };
-
-  //componentDidUpdate
-
   useEffect(() => {
-    if (userRole) {
-      getBeneficiary(userRole);
-    }
-  }, [userRole]);
-
-  const changeHandler = (event) => {
-    dispatch(fetchFundRequests(userRole, event.target.value));
-  };
+    dispatch(fetchBeneficiary());
+  }, []);
 
   const closePopUpHandler = () => {
     removeOverlay();
@@ -39,30 +27,6 @@ const Benificiary = memo((props) => {
   const openPopupHandler = () => {
     addOverlay();
     handlePopUp(true);
-  };
-
-  const successHandler = (response) => {
-    console.log("response", response);
-    setStatus(response.msg);
-    getBeneficiary(userRole);
-  };
-  const errorHandler = (response) => {
-    console.log("errorHandler", response);
-    setStatus(response.msg);
-  };
-
-  const handleApprove = (requestId) => {
-    // reqstfunduuid
-    const api = new Request("", successHandler, errorHandler, false);
-    return api.get(
-      urls.login.BASE_URL + urls.Wallet.FUND_REQUEST_APPROVE + requestId
-    );
-  };
-  const handleReject = (requestId) => {
-    const api = new Request("", successHandler, errorHandler, false);
-    return api.get(
-      urls.login.BASE_URL + urls.Wallet.FUND_REQUEST_REJECT + requestId
-    );
   };
 
   console.log("benificiary", props);
@@ -103,24 +67,6 @@ const Benificiary = memo((props) => {
               </div>
               <div style={{ textAlign: "center", marginTop: "15px" }}>
                 {statusMessage}
-              </div>
-
-              <div class="col-md-12">
-                <div class="form-group">
-                  {userRole != "PTM_ADMIN" ? (
-                    <select
-                      class="form-control"
-                      id="exampleFormControlSelect1"
-                      onChange={changeHandler}
-                    >
-                      <option value="">Search Payment Status</option>
-                      <option value="INITIATED">INITIATED</option>
-                      <option value="DONE">Completed</option>
-                    </select>
-                  ) : (
-                    ""
-                  )}
-                </div>
               </div>
 
               <div className="card-body">
