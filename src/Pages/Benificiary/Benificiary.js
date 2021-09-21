@@ -10,11 +10,8 @@ import BenificiaryForm from "./BenificiaryForm";
 import { addOverlay, removeOverlay } from "../../utils/common";
 
 const Benificiary = memo((props) => {
-  const { dispatch, loginUser, userwallet } = props;
-
-  const fundRequestItems = userwallet.fundRequest.data;
+  const { dispatch, loginUser, beneficiary } = props;
   const userRole = loginUser && loginUser.userData && loginUser.userData.role;
-
   const [isPopupVisible, handlePopUp] = useState(false);
   const [statusMessage, setStatus] = useState("");
 
@@ -68,7 +65,9 @@ const Benificiary = memo((props) => {
     );
   };
 
-  console.log("FundRequest", props);
+  console.log("benificiary", props);
+  const benificiaryItems =
+    beneficiary && beneficiary.items && beneficiary.items.data;
 
   return (
     <div className="container_full">
@@ -129,61 +128,31 @@ const Benificiary = memo((props) => {
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">From Bank Name</th>
-                      <th scope="col">To Bank Name</th>
-                      <th scope="col">Requested Amount</th>
-                      <th scope="col">Payment Mode</th>
-                      <th scope="col">Requested Date</th>
+                      <th scope="col">First Name</th>
+                      <th scope="col">Last Name</th>
+                      <th scope="col">Mobile No</th>
+                      <th scope="col">Bank Name</th>
+                      <th scope="col">Account No</th>
+                      <th scope="col">IFSC</th>
                       <th scope="col">Status</th>
-                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {fundRequestItems &&
-                    Array.isArray(fundRequestItems) &&
-                    fundRequestItems.length > 0 ? (
-                      fundRequestItems.map((item, index) => {
+                    {benificiaryItems &&
+                    Array.isArray(benificiaryItems) &&
+                    benificiaryItems.length > 0 ? (
+                      benificiaryItems.map((item, index) => {
                         return (
                           <tr key={item.reqstDate}>
                             <th scope="row">{index + 1}</th>
-                            <td>{item.fromBank}</td>
-                            <td>{item.toBank}</td>
-                            <td>{item.requestAmount}</td>
-                            <td>{item.payementMode}</td>
-                            <td>{item.reqstDate}</td>
-                            <td className={item.approveStatus.toLowerCase()}>
-                              {item.approveStatus}
-                            </td>
-                            <td>
-                              {item.approveStatus != "DONE" &&
-                              userRole !== "PTM_VENDOR" ? (
-                                <React.Fragment>
-                                  <button
-                                    onClick={() =>
-                                      handleApprove(item.reqstfundUuid)
-                                    }
-                                    style={{
-                                      fontSize: "9px",
-                                      marginLeft: "2px",
-                                    }}
-                                  >
-                                    Approve
-                                  </button>
-                                  <button
-                                    onClick={() =>
-                                      handleReject(item.reqstfundUuid)
-                                    }
-                                    style={{
-                                      fontSize: "9px",
-                                      marginLeft: "2px",
-                                    }}
-                                  >
-                                    Reject
-                                  </button>
-                                </React.Fragment>
-                              ) : (
-                                "NA"
-                              )}
+                            <td>{item.firstName}</td>
+                            <td>{item.lastName}</td>
+                            <td>{item.mobile}</td>
+                            <td>{item.bankName}</td>
+                            <td>{item.accountNumber}</td>
+                            <td>{item.ifscCode}</td>
+                            <td className={item.status.toLowerCase()}>
+                              {item.status}
                             </td>
                           </tr>
                         );

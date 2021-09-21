@@ -2,7 +2,7 @@ import { actionTypes } from "../actions/beneficiary";
 import { clone } from "../utils/common";
 
 const initialState = {
-  benfeciary: "",
+  items: "",
 };
 
 export default (state = initialState, action = {}) => {
@@ -11,14 +11,14 @@ export default (state = initialState, action = {}) => {
     case actionTypes.FETCH_BENEFICIARY_SUCCESS:
       changes = {
         ...state,
-        fundRequest: action.payload,
+        items: action.payload,
       };
       break;
 
     case actionTypes.FETCH_BENEFICIARY_FAILURE:
       changes = {
         ...state,
-        fundRequest: action.payload,
+        items: action.payload,
       };
       break;
 
