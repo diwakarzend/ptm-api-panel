@@ -9,6 +9,9 @@ import UPI from "../Pages/UPI/UPI";
 import AddMoney from "../Pages/AddMoney/AddMoney";
 import FundRequest from "../Pages/FundRequest/FundRequest";
 import Benificiary from "../Pages/Benificiary/Benificiary";
+// const Benificiary = React.lazy(() =>
+//   import("../Pages/Benificiary/Benificiary")
+// );
 
 const Routes = (props) => {
   return (
