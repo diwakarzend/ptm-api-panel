@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect, useRef } from "react";
+import React, { useState, memo } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
@@ -26,10 +26,6 @@ const BenificiaryForm = memo(
         [event.target.name]: event.target.value.trim(),
       });
     };
-
-    // useEffect(() => {
-    //   dispatch(getBeneficiary(userRole));
-    // }, [userRole]);
 
     const submitFormHandler = (event) => {
       event.preventDefault();
