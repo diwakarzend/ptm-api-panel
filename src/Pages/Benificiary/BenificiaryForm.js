@@ -211,6 +211,7 @@ const BenificiaryForm = memo(
                     type="button"
                     className="btn btn-primary themebtn transparent"
                     data-dismiss="modal"
+                    onClick={closePopUpHandler}
                   >
                     Close
                   </button>
