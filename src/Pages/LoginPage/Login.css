@@ -81,6 +81,6 @@ input:not(:focus):valid ~ .floating-label {
 .left-banner img {
   display: block;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 1027px;
+  margin: 92px auto;
 }
