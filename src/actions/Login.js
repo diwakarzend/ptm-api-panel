@@ -188,7 +188,7 @@ function fetchUserWalletSuccess(response) {
   };
 }
 
-function fetchUserWallet() {
+export function fetchUserWallet() {
   return (dispatch) => {
     const successFn = (response) => {
       dispatch(fetchUserWalletSuccess(response));

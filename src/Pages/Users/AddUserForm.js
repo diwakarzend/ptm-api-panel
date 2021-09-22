@@ -130,15 +130,15 @@ const AddUserForm = (props) => {
       aria-labelledby="myModalLabel2"
       style={{ display: "block", paddingRight: "15px" }}
     >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">
               Add User
             </h5>
             <button
               type="button"
-              class="close"
+              className="close"
               data-dismiss="modal"
               aria-label="Close"
               onClick={closePopUpHandler}
@@ -316,16 +316,16 @@ const AddUserForm = (props) => {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-primary themebtn transparent"
+                  className="btn btn-primary themebtn transparent"
                   data-dismiss="modal"
                   onClick={closePopUpHandler}
                 >
                   Close
                 </button>
-                <button type="submit" class="btn btn-primary themebtn">
+                <button type="submit" className="btn btn-primary themebtn">
                   {editUserData ? "Update User" : "Save User"}
                 </button>
               </div>

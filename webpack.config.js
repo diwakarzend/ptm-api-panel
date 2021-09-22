@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
-const HOST = process.env.HOST || "0.0.0.0";
+const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || "3008";
 
 module.exports = {
@@ -60,19 +60,29 @@ module.exports = {
       maxInitialRequests: Infinity,
       minSize: 0,
       cacheGroups: {
+        main: {
+          name: 'main',
+          chunks: 'initial',
+          minChunks: 2,
+        },
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            // get the name. E.g. node_modules/packageName/not/this/part.js
-            // or node_modules/packageName
-            const packageName = module.context.match(
-              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-            )[1];
-
-            // npm package names are URL-safe, but some servers don't like @ symbols
-            return `npm.${packageName.replace("@", "")}`;
-          },
+          name: 'vendor',
+          chunks: 'all',
         },
+        // vendor: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   name(module) {
+        //     // get the name. E.g. node_modules/packageName/not/this/part.js
+        //     // or node_modules/packageName
+        //     const packageName = module.context.match(
+        //       /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+        //     )[1];
+
+        //     // npm package names are URL-safe, but some servers don't like @ symbols
+        //     return `npm.${packageName.replace("@", "")}`;
+        //   },
+        // },
       },
     },
   },
