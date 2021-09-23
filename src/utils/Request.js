@@ -111,6 +111,26 @@ class Request {
         this.errorFn(data, headers, status);
       });
   }
+
+  put(url, params) {
+    const options = {
+      headers: {
+        Authorization: getAuthToken(),
+        "api-Authorization": getAuthToken("api-Authorization"),
+      },
+    };
+    return axios
+      .put(url, params, options)
+      .then((response) => {
+        const data = getObjectValue(response, "data", null);
+        this.successFn(data);
+      })
+      .catch((error) => {
+        const data = getObjectValue(response, "data", null);
+
+        this.errorFn(data);
+      });
+  }
 }
 
 export default Request;

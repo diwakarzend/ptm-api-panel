@@ -7,6 +7,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import "./Benificiary.css";
 import BenificiaryForm from "./BenificiaryForm";
+import QuickPaymentForm from "../Benificiary/QuickPaymentForm";
 import { addOverlay, removeOverlay } from "../../utils/common";
 
 const Benificiary = memo((props) => {
@@ -14,6 +15,11 @@ const Benificiary = memo((props) => {
   const userRole = loginUser && loginUser.userData && loginUser.userData.role;
   const [isPopupVisible, handlePopUp] = useState(false);
   const [statusMessage, setStatus] = useState("");
+  const [isQuickPopupVisible, handleQuickPopUp] = useState(false);
+  const [payeeInfo, setPayeeInfo] = useState("");
+
+  const benificiaryItems =
+    beneficiary && beneficiary.items && beneficiary.items.data;
 
   useEffect(() => {
     getBeneficiary();
@@ -33,9 +39,30 @@ const Benificiary = memo((props) => {
     handlePopUp(true);
   };
 
-  console.log("benificiary", props);
-  const benificiaryItems =
-    beneficiary && beneficiary.items && beneficiary.items.data;
+  const closeQuickPopUpHandler = () => {
+    removeOverlay();
+    handleQuickPopUp(false);
+  };
+
+  const openQuickPopupHandler = (beneficiaryId) => {
+    addOverlay();
+    handleQuickPopUp(true);
+    let payeeData = "";
+    if (
+      benificiaryItems &&
+      Array.isArray(benificiaryItems) &&
+      benificiaryItems.length > 0
+    ) {
+      payeeData = benificiaryItems.filter(
+        (item) => item.beneficiaryId == beneficiaryId
+      );
+      if (payeeData.length > 0) {
+        setPayeeInfo(payeeData[0]);
+      }
+    }
+  };
+
+  console.log("benificiary", props, payeeInfo);
 
   return (
     <div className="container_full">
@@ -68,6 +95,14 @@ const Benificiary = memo((props) => {
                     setStatus={setStatus}
                   />
                 )}
+
+                {isQuickPopupVisible && (
+                  <QuickPaymentForm
+                    isQuickPopupVisible={isQuickPopupVisible}
+                    closeQuickPopUpHandler={closeQuickPopUpHandler}
+                    benificiaryData={payeeInfo}
+                  />
+                )}
               </div>
               <div style={{ textAlign: "center", marginTop: "15px" }}>
                 {statusMessage}
@@ -85,6 +120,7 @@ const Benificiary = memo((props) => {
                       <th scope="col">Account No</th>
                       <th scope="col">IFSC</th>
                       <th scope="col">Status</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -103,6 +139,16 @@ const Benificiary = memo((props) => {
                             <td>{item.ifscCode}</td>
                             <td className={item.status.toLowerCase()}>
                               {item.status}
+                            </td>
+                            <td>
+                              <button
+                                onClick={() =>
+                                  openQuickPopupHandler(item.beneficiaryId)
+                                }
+                                className="quick-payment-btn"
+                              >
+                                Quick Payment
+                              </button>
                             </td>
                           </tr>
                         );

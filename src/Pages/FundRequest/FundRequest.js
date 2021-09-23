@@ -9,7 +9,6 @@ import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import "./FundRequest.css";
 import FundRequestForm from "./FundRequestForm";
-import QuickPaymentForm from  "./QuickPaymentForm";
 
 const FundRequest = memo((props) => {
   const { dispatch, loginUser, userwallet } = props;
@@ -19,7 +18,6 @@ const FundRequest = memo((props) => {
 
   const [isPopupVisible, handlePopUp] = useState(false);
   const [statusMessage, setStatus] = useState("");
-  const [isQuickPopupVisible, handleQuickPopUp] = useState(false);
 
   const getFundRequest = (userRole) => {
     dispatch(fetchFundRequests(userRole));
@@ -46,17 +44,6 @@ const FundRequest = memo((props) => {
     addOverlay();
     handlePopUp(true);
   };
-
-  const closeQuickPopUpHandler = () => {
-    removeOverlay();
-    handleQuickPopUp(false);
-  };
-
-  const openQuickPopupHandler = () => {
-    addOverlay();
-    handleQuickPopUp(true);
-  };
-
 
   const successHandler = (response) => {
     console.log("response", response);
@@ -121,12 +108,6 @@ requestUserName: "9718063555"
                   </button>
                 )}
 
-                  <button
-                    onClick={openQuickPopupHandler}
-                    className="quick-payment-btn"
-                  >
-                    Quick Payment
-                  </button> 
                 {isPopupVisible && (
                   <FundRequestForm
                     isPopupVisible={isPopupVisible}
@@ -134,13 +115,6 @@ requestUserName: "9718063555"
                     userRole={userRole}
                     getFundRequest={getFundRequest}
                     setStatus={setStatus}
-                  />
-                )}
-
-              {isQuickPopupVisible && (
-                  <QuickPaymentForm
-                   isQuickPopupVisible={isQuickPopupVisible}
-                   closeQuickPopUpHandler={closeQuickPopUpHandler}
                   />
                 )}
               </div>
@@ -152,7 +126,7 @@ requestUserName: "9718063555"
                 <div className="form-group">
                   {userRole != "PTM_ADMIN" ? (
                     <select
-                    className="form-control"
+                      className="form-control"
                       id="exampleFormControlSelect1"
                       onChange={changeHandler}
                     >

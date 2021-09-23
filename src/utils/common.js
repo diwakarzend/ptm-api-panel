@@ -12,7 +12,7 @@ export function timeout(func, time, dispatch) {
   );
 }
 
-export function getCurrentDate() {
+export function getCurrentDate(formate) {
   var date = new Date();
   var day = date.getDate();
   var month = date.getMonth() + 1;
@@ -24,6 +24,10 @@ export function getCurrentDate() {
 
   if (month < 10) {
     month = "0" + month;
+  }
+
+  if (formate == "dmy") {
+    return `${day}-${month}-${year}`;
   }
 
   return year + "-" + month + "-" + day;

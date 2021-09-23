@@ -1,0 +1,301 @@
+import React, { useState, memo, useEffect, useRef } from "react";
+import Request from "../../utils/Request";
+import urls from "../../utils/urls";
+import Step2Form from "./Step2Form";
+import "./QuickPayment.css";
+import PayoutThanks from "./PayoutThanks";
+
+const initialFormData = Object.freeze({
+  beneficiaryName: "",
+  accountNumber: "",
+  ifscCode: "",
+  mobileNumber: "",
+  remittanceAmount: "",
+  route: "",
+  type: "",
+  clientId: "", //
+});
+
+const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
+  const [formData, updateFormData] = useState(initialFormData);
+  const [otpData, setotpData] = useState({
+    otp1: "",
+    otp2: "",
+    otp3: "",
+    otp4: "",
+    otp5: "",
+    otp6: "",
+  });
+  const [otpStatus, setotpStatus] = useState({
+    error: false,
+    success: false,
+  });
+  const [paymentStatus, updatePaymentStatus] = useState({
+    step1: false,
+    step2: false,
+    step3: false,
+  });
+
+  const [payoutSuccessData, setPayoutSuccess] = useState("");
+  const [errormsg, setErrors] = useState("");
+
+  const { firstName, lastName, mobile, accountNumber, ifscCode, bankName } =
+    benificiaryData;
+
+  const step2SubmitHandler = (event) => {
+    event.preventDefault();
+    const otp = Object.values(otpData).join("");
+    const successHandler = (response) => {
+      console.log("response step2", response);
+      if (response.success == true) {
+        setotpStatus({
+          ...otpStatus,
+          success: true,
+          error: false,
+        });
+        setPayoutSuccess(response);
+      } else {
+        setotpStatus({
+          ...otpStatus,
+          error: true,
+        });
+      }
+    };
+    const errorHandler = (response) => {
+      console.log("error step2", response);
+    };
+
+    const api = new Request("", successHandler, errorHandler, false);
+    return api.put(
+      `${urls.login.BASE_URL}${urls.payout.ADD_PAYOUT}?payOutOtp=${otp}`
+    );
+  };
+
+  /*   {"code":"ERR0029","msg":"payout fail from merchant !","errorCodeList":["Invalid IFSC"],"success":false}
+   */
+
+  const submitFormHandler = (event) => {
+    event.preventDefault();
+    formData.type = formData.route;
+    console.log("formDataasd", formData);
+
+    const errorHandler = (response) => {
+      console.log("response", response);
+      const errors = [];
+      if (response && response.status == 400) {
+        if (response.fieldErrors && response.fieldErrors instanceof Array) {
+          setErrors(response.fieldErrors[0]);
+        }
+        if (errors.length > 0) {
+          setErrors(errors);
+          window.scrollTo(100, 100);
+        }
+      } else if (response && response.status == 401) {
+        setErrors([response.error]);
+        window.scrollTo(100, 100);
+      }
+    };
+
+    const successHandler = (response) => {
+      console.log("success111", response);
+      if (response.success) {
+        updatePaymentStatus({
+          ...paymentStatus,
+          step1: true,
+        });
+        setErrors(response.msg);
+      } else {
+        setErrors(response.msg);
+
+        //removeOverlay();
+        // getBeneficiary(userRole);
+        //  setStatus("Beneficary added successfully");
+        //fetchUsersData();
+      }
+    };
+
+    const api = new Request("", successHandler, errorHandler, false);
+    return api.post(urls.login.BASE_URL + urls.payout.ADD_PAYOUT, formData);
+  };
+
+  const changeHandler = (event) => {
+    updateFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const otpChangeHandler = (event) => {
+    setotpData({
+      ...otpData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  useEffect(() => {
+    //      : "12345678"
+    //  : "HDFC"
+    //  : "Ram"
+    //  : "hdfc123"
+    // : "Lakhan"
+    //  : "9718063555"
+    // status: "ACTIVE"
+    const updatedData = {
+      beneficiaryName: `${firstName} ${lastName}`,
+      accountNumber: accountNumber,
+      ifscCode: ifscCode,
+      mobileNumber: mobile,
+    };
+
+    updateFormData({
+      ...formData,
+      ...updatedData,
+    });
+  }, []);
+
+  console.log("otpdata", otpStatus, paymentStatus);
+  console.log("payoutSuccessData", payoutSuccessData);
+
+  return (
+    <div
+      className="modal right fade show"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel2"
+      style={{ display: "block" }}
+    >
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">
+              Quick Payment
+            </h5>
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onClick={closeQuickPopUpHandler}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div style={{ textAlign: "center" }}>{errormsg || ""}</div>
+          {otpStatus.success ? (
+            <PayoutThanks payoutSuccessData={payoutSuccessData} />
+          ) : paymentStatus.step1 == false ? (
+            <Step1Form
+              submitFormHandler={submitFormHandler}
+              bankName={bankName}
+              ifscCode={ifscCode}
+              firstName={firstName}
+              lastName={lastName}
+              accountNumber={accountNumber}
+              changeHandler={changeHandler}
+              closeQuickPopUpHandler={closeQuickPopUpHandler}
+            />
+          ) : (
+            <Step2Form
+              step2SubmitHandler={step2SubmitHandler}
+              otpChangeHandler={otpChangeHandler}
+              formData={formData}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+});
+
+export default QuickPaymentForm;
+
+const Step1Form = ({
+  submitFormHandler,
+  bankName,
+  ifscCode,
+  firstName,
+  lastName,
+  accountNumber,
+  changeHandler,
+  closeQuickPopUpHandler,
+}) => {
+  return (
+    <React.Fragment>
+      <form onSubmit={submitFormHandler}>
+        <div className="modal-body">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="form-group beneficiary-selection">
+                <span className="bank-name"> {bankName} </span>
+                <span className="ifsc-name"> ({ifscCode}) </span>
+                <span className="beneficiary-name">
+                  {`${firstName} ${lastName}`} <br />
+                  {accountNumber}
+                </span>
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <div className="form-group">
+                <label for="exampleInputEmail1">Amount</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Amount"
+                  name="remittanceAmount"
+                  onChange={changeHandler}
+                  required
+                />
+              </div>
+            </div>
+
+            {/* <div className="col-md-12">
+                  <div className="form-group">
+                    <label for="exampleInputEmail1">Remarks</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Add for free"
+                      name="remark"
+                    />
+                  </div>
+                </div> */}
+
+            <div className="col-md-12">
+              <div className="form-group">
+                <label for="exampleFormControlSelect1">TRANSFER MODE</label>
+                <select
+                  className="form-control"
+                  id="exampleFormControlSelect1"
+                  name="route"
+                  required
+                  onChange={changeHandler}
+                >
+                  <option value=""> Choose Mode </option>
+                  <option value="NEFT"> NEFT </option>
+                  <option value="IMPS">IMPS</option>
+                  <option value="RTGS">RTGS</option>
+                  <option value="NB">Net Banking</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div className="modal-footer">
+            <button
+              type="button"
+              className="btn btn-primary themebtn transparent"
+              data-dismiss="modal"
+              onClick={closeQuickPopUpHandler}
+            >
+              Close
+            </button>
+            <button type="submit" className="btn btn-primary themebtn">
+              Next
+            </button>
+          </div>
+        </div>
+      </form>
+    </React.Fragment>
+  );
+};

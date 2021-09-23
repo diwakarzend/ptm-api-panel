@@ -37,7 +37,10 @@ export default {
     FUND_REQUEST_APPROVE: "/api/wallet/fund-approve?reqstfunduuid=",
     FUND_REQUEST_REJECT: "/api/wallet/reject-fund-request?reqstfunduuid=",
   },
-
+  payout: {
+    ADD_PAYOUT: "/api/user/payout",
+    TRANSACTION_REPORT: "/api/payout/transaction-report?pageNo=0&pageSize=100",
+  },
   userCommission: {
     GET_USERCOMMISSION: "/api/user/comission",
     UPDATE_USERCOMMISSION: "/api/user/comission/update",

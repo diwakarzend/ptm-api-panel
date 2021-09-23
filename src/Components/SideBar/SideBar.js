@@ -4,7 +4,7 @@ import AnchorLink from "../AnchorLink/AnchorLink";
 import {
   fetchUserDetailsIfNeeded,
   fetchUserWalletIfNeeded,
-  fetchUserWallet
+  fetchUserWallet,
 } from "../../actions/Login";
 
 import "./SideBar.css";
@@ -22,7 +22,7 @@ const SideBar = (props) => {
   const handleClick = () => {
     const { dispatch } = props;
     dispatch(fetchUserWallet());
-  }
+  };
 
   const { loginUser } = props;
   const userData = loginUser && loginUser.userData;
@@ -37,7 +37,11 @@ const SideBar = (props) => {
           <span className="balance-amount">
             <i className="fa fa-inr" aria-hidden="true"></i>
             {userWallet && userWallet.MAIN_WALLET}
-            <i className="fa fa-refresh" aria-hidden="true"  onClick={handleClick}></i>
+            <i
+              className="fa fa-refresh"
+              aria-hidden="true"
+              onClick={handleClick}
+            ></i>
           </span>
         </div>
       </div>
@@ -113,6 +117,11 @@ const SideBar = (props) => {
               <AnchorLink href="/beneficiary">Beneficiary</AnchorLink>
             </li>
           </ul>
+        </li>
+        <li className="menu_sub">
+          <AnchorLink href="/payout/reports">
+            <i className="icon-wallet"></i> <span>Reports</span>
+          </AnchorLink>
         </li>
       </ul>
     </div>
