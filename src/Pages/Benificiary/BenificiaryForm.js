@@ -77,14 +77,16 @@ const BenificiaryForm = memo(
       errorHTML = errors.map((val) => <li key={val}>{val}</li>);
       errorStyles = {
         color: "red",
-        fontSize: "14px",
+        fontSize: "12px",
         marginTop: "26px",
+        fontFamily: "monospace",
       };
     } else {
       successStyles = {
         color: "green",
         fontSize: "14px",
         marginTop: "26px",
+        fontFamily: "monospace",
       };
     }
     return (
