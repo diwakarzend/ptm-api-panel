@@ -71,14 +71,14 @@ export function diffDays(startDate, endDate) {
 }
 
 export function saveAuthToken(item, value) {
-  localStorage.setItem(item, `Bearer ${value}`);
+  sessionStorage.setItem(item, `Bearer ${value}`);
   setAuthorizationToken(value);
 }
 
 export function getAuthToken(type) {
   return type
-    ? localStorage.getItem(type)
-    : localStorage.getItem("Authorization");
+    ? sessionStorage.getItem(type)
+    : sessionStorage.getItem("Authorization");
 }
 
 export function saveUserData(userData) {
@@ -92,8 +92,8 @@ export function getUserData() {
 }
 
 export function clearAuthToken() {
-  localStorage.removeItem("Authorization");
-  localStorage.removeItem("api-Authorization");
+  sessionStorage.removeItem("Authorization");
+  sessionStorage.removeItem("api-Authorization");
   setAuthorizationToken(false);
 }
 

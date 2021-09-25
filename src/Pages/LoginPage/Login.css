@@ -78,11 +78,23 @@ input:not(:focus):valid ~ .floating-label {
   margin: 0 auto;
   top: -122px;
 }
- .left-banner{
-    display: block;
-    background: url(https://storage.googleapis.com/ptm-assets-prod/banner/pay2mobilebanne-trans.png);
-    background-size: contain;
-    background-position: center;
-    height: 70%;
-    background-repeat: no-repeat;
-} 
+.left-banner img {
+  display: block;
+  width: 100%;
+  max-width: 1027px;
+  margin: 92px auto;
+}
+.login-error {
+  color: red;
+  margin: 12px 10px;
+  display: block;
+  text-align: center;
+}
+.left-banner {
+  display: block;
+  background: url(https://storage.googleapis.com/ptm-assets-prod/banner/pay2mobilebanne-trans.png);
+  background-size: contain;
+  background-position: center;
+  height: 70%;
+  background-repeat: no-repeat;
+}

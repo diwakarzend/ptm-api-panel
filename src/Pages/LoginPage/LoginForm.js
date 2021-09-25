@@ -47,13 +47,14 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    const { errorMsg } = this.props;
     return (
       <div className="container-fluid">
         <div className="d-flex align-items-stretch row full-page">
-          <div className="col-md-7 align-self-center left-banner ">
-          </div>
+          <div className="col-md-7 align-self-center left-banner "></div>
           <div className="d-flex col-md-5 form-wrapper">
             <div className="form-content-wrapper align-self-center">
+              <span className="login-error">{errorMsg}</span>
               <form className="form-group" onSubmit={this.onFormSubmit}>
                 <img
                   src="https://storage.googleapis.com/ptm-assets-prod/banner/imageonline-co-roundcorner.png"

@@ -9,7 +9,7 @@ const PORT = process.env.PORT || "3008";
 
 module.exports = {
   entry: ["./src/index.js"],
-  devtool: process.env.WEBPACK_DEVTOOL || "eval",
+  devtool: process.env.WEBPACK_DEVTOOL || "eval-source-map",
   output: {
     path: path.resolve(__dirname, "public/build"),
     filename: "[name]-[fullhash].js",
@@ -64,14 +64,14 @@ module.exports = {
       minSize: 0,
       cacheGroups: {
         main: {
-          name: 'main',
-          chunks: 'initial',
+          name: "main",
+          chunks: "initial",
           minChunks: 2,
         },
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
+          name: "vendor",
+          chunks: "all",
         },
         // vendor: {
         //   test: /[\\/]node_modules[\\/]/,

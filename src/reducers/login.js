@@ -7,14 +7,6 @@ import {
 } from "../utils/common";
 
 const initialState = {
-  isLoggingIn: false,
-  isOtpValidating: false,
-  isOtpValidated: false,
-  invalidOtpCount: 0,
-  isAuthenticated: isAuthenticated(),
-  isFetchingUserProfile: false,
-  isFetchedUserProfile: false,
-  authToken: "",
   isLoggedIn: false,
   loginInfo: "",
   userData: null,
@@ -86,6 +78,7 @@ export default (state = initialState, action = {}) => {
 
       changes = {
         loginInfo: payload,
+        // isLoggedIn:
         isLoggedIn: isAuthenticated(payload),
       };
 
@@ -93,73 +86,8 @@ export default (state = initialState, action = {}) => {
 
     case actionTypes.LOGIN_REQUEST_FAILED:
       changes = {
-        isLoggingIn: false,
-        isLoggedIn: false,
-        isOtpValidated: false,
-        invalidOtpCount: 0,
-        isAuthenticated: false,
-        userData: null,
+        loginInfo: action.payload,
       };
-      break;
-
-    case actionTypes.LOGIN_OTP_VALIDATION_INIT:
-      changes = {
-        isLoggingIn: false,
-        isOtpValidating: true,
-        isOtpValidated: false,
-        isAuthenticated: false,
-      };
-      break;
-
-    case actionTypes.LOGIN_OTP_VALIDATION_SUCCESS:
-      {
-        const isOtpValidated = getObjectValueIfEmpty(
-          action,
-          "payload.data.success",
-          false
-        );
-        const userData = isOtpValidated
-          ? getObjectValueIfEmpty(action, "payload.data.data", {})
-          : state.userData;
-        const invalidOtpCount = isOtpValidated ? 0 : state.invalidOtpCount + 1;
-        const authToken = getObjectValueIfEmpty(
-          action,
-          "payload.headers.token",
-          null
-        );
-        const isAuthenticated =
-          isOtpValidated && !isEmpty(userData) && !isEmpty(authToken);
-        if (isAuthenticated) saveAuthToken(authToken);
-
-        changes = {
-          isOtpValidating: false,
-          isAuthenticated,
-          isOtpValidated,
-          invalidOtpCount,
-          userData,
-        };
-      }
-      break;
-
-    case actionTypes.LOGIN_OTP_VALIDATION_FAILED:
-      changes = {
-        isOtpValidating: false,
-        isOtpValidated: false,
-        invalidOtpCount: state.invalidOtpCount + 1,
-        isAuthenticated: false,
-      };
-      break;
-
-    case actionTypes.LOGIN_OTP_RESEND_INIT:
-      changes = {};
-      break;
-
-    case actionTypes.LOGIN_OTP_RESEND_SUCCESS:
-      changes = {};
-      break;
-
-    case actionTypes.LOGIN_OTP_RESEND_FAILED:
-      changes = {};
       break;
 
     case actionTypes.LOGOUT_REQUEST:
