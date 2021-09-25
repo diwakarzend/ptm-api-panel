@@ -76,7 +76,7 @@ input:not(:focus):valid ~ .floating-label {
   left: 0;
   right: 0;
   margin: 0 auto;
-  top: -33px;
+  top: -122px;
 }
 .left-banner img {
   display: block;

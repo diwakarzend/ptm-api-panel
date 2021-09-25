@@ -95,7 +95,7 @@ requestUserName: "9718063555"
           <section className="chart_section">
             <div className="card card-shadow mb-4">
               <div className="card-header fund-modal">
-                <div className="card-title">All fund requests</div>
+                <div className="card-title">All Fund Requests</div>
                 {userRole !== "PTM_ADMIN" && (
                   <button
                     // type="button"
@@ -122,7 +122,7 @@ requestUserName: "9718063555"
                 {statusMessage}
               </div>
 
-              <div className="col-md-12">
+              <div className="col-md-3">
                 <div className="form-group">
                   {userRole != "PTM_ADMIN" ? (
                     <select
