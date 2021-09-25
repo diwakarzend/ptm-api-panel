@@ -79,6 +79,7 @@ class LoginForm extends React.Component {
               {forgotPasswordClicked ? (
                 <ForGotPassword
                   cancelForgotPassword={this.cancelForgotPassword}
+                  resetSuccess={this.resetSuccess}
                 />
               ) : (
                 <Fragment>
