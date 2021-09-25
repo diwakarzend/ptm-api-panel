@@ -38,8 +38,8 @@ const Header = (props) => {
       document.body.classList.remove("nav_small");
     }
   }
-  const { loginUser } = props;
-  const userData = loginUser && loginUser.userData;
+  const { login } = props;
+  const userData = login && login.userData;
 
   return (
     <div className="header-bg">

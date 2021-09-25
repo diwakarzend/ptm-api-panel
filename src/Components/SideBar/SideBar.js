@@ -24,9 +24,9 @@ const SideBar = (props) => {
     dispatch(fetchUserWallet());
   };
 
-  const { loginUser } = props;
-  const userData = loginUser && loginUser.userData;
-  const userWallet = loginUser && loginUser.userWallet;
+  const { login } = props;
+  const userData = login && login.userData;
+  const userWallet = login && login.userWallet;
 
   console.log("userDatauserData", userData);
   return (
