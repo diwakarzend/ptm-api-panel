@@ -84,3 +84,9 @@ input:not(:focus):valid ~ .floating-label {
   max-width: 1027px;
   margin: 92px auto;
 }
+.login-error {
+  color: red;
+  margin: 12px 10px;
+  display: block;
+  text-align: center;
+}

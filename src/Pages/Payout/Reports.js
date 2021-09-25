@@ -8,33 +8,34 @@ const Reports = memo((props) => {
   const [filterItems, updateItems] = useState({});
   const { dispatch, payout } = props;
   useEffect(() => {
-    dispatch(
-      fetchTransactionReport({
-        status: "DONE",
-      })
-    );
+    dispatch(fetchTransactionReport({}));
   }, []);
 
   const handleChange = (event) => {
     event.preventDefault();
+    const itemName = event.target.name;
+    const itemVal = event.target.value;
     const params = {};
-    updateItems({
-      ...filterItems,
-      [event.target.name]: event.target.value,
-    });
+    if (itemVal.trim()) {
+      updateItems({
+        ...filterItems,
+        [itemName]: itemVal,
+      });
+    } else {
+      delete filterItems[itemName];
+      updateItems({
+        ...filterItems,
+      });
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // for testing only, remove post api issues are fixed
-    if (!filterItems.status) {
-      filterItems.status = "DONE";
-    }
     dispatch(fetchTransactionReport(filterItems));
   };
 
   const reportsItems = payout && payout.reports && payout.reports.data;
-  console.log("filterItems", filterItems);
+  console.log("filterItems", filterItems, props);
   //   accountNumber: "7812106401"
   // approvalRequired: "N"
   // beneficiaryName: "Piyush Singh"
@@ -103,13 +104,20 @@ const Reports = memo((props) => {
                         />
                       </th>
                       <th scope="col">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Status"
-                          name="status"
-                          onChange={handleChange}
-                        />
+                        <div className="col-md-12">
+                          <select
+                            className="form-control"
+                            id="exampleFormControlSelect1"
+                            name="status"
+                            onChange={handleChange}
+                          >
+                            <option value="">Status</option>
+                            <option value="DONE">DONE</option>
+                            <option value="INITIATED">INITIATED</option>
+                            <option value="REJECTED">REJECTED</option>
+                            <option value="FAIL">FAIL</option>
+                          </select>
+                        </div>
                       </th>
                       <th scope="col">
                         <input
@@ -167,7 +175,7 @@ const Reports = memo((props) => {
                     ) : (
                       <tr>
                         <td colSpan="8" style={{ textAlign: "center" }}>
-                          No Data Found
+                          No Transaction Found
                         </td>
                       </tr>
                     )}

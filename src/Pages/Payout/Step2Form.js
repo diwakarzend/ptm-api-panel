@@ -4,9 +4,15 @@ import { getCurrentDate } from "../../utils/common";
 import "./QuickPayment.css";
 
 const Step2Form = memo(
-  ({ step2SubmitHandler, otpChangeHandler, loginUser, formData }) => {
+  ({
+    step2SubmitHandler,
+    otpChangeHandler,
+    loginUser,
+    formData,
+    step1Response,
+  }) => {
     const userData = loginUser && loginUser.userData && loginUser.userData;
-    console.log("formData.accountNumber", formData);
+    console.log("formData.accountNumber", formData, step1Response);
 
     return (
       <div className="modal-body">
@@ -77,7 +83,7 @@ const Step2Form = memo(
                   type="text"
                   className="otp-input"
                   onChange={otpChangeHandler}
-                  name="otp1"
+                  name="otp-1"
                   maxlength="1"
                   required
                 />
@@ -85,7 +91,7 @@ const Step2Form = memo(
                   type="text"
                   className="otp-input"
                   onChange={otpChangeHandler}
-                  name="otp2"
+                  name="otp-2"
                   maxlength="1"
                   required
                 />
@@ -93,7 +99,7 @@ const Step2Form = memo(
                   type="text"
                   className="otp-input"
                   onChange={otpChangeHandler}
-                  name="otp3"
+                  name="otp-3"
                   maxlength="1"
                   required
                 />
@@ -101,7 +107,7 @@ const Step2Form = memo(
                   type="text"
                   className="otp-input"
                   onChange={otpChangeHandler}
-                  name="otp4"
+                  name="otp-4"
                   maxlength="1"
                   required
                 />
@@ -109,7 +115,7 @@ const Step2Form = memo(
                   type="text"
                   className="otp-input"
                   onChange={otpChangeHandler}
-                  name="otp5"
+                  name="otp-5"
                   maxlength="1"
                   required
                 />
@@ -117,7 +123,8 @@ const Step2Form = memo(
                   type="text"
                   className="otp-input"
                   onChange={otpChangeHandler}
-                  name="otp6"
+                  name="otp-6"
+                  maxlength="1"
                   required
                 />
               </div>

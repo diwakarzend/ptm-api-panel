@@ -30,11 +30,7 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
     error: false,
     success: false,
   });
-  const [paymentStatus, updatePaymentStatus] = useState({
-    step1: false,
-    step2: false,
-    step3: false,
-  });
+  const [step1Response, updatestep1Response] = useState({});
 
   const [payoutSuccessData, setPayoutSuccess] = useState("");
   const [errormsg, setErrors] = useState("");
@@ -60,14 +56,21 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
           error: true,
         });
       }
+
+      let errorCode = "";
+      if (response.errorCodeList) {
+        errorCode = response.errorCodeList[0];
+      }
+      setErrors(response.msg + errorCode);
     };
     const errorHandler = (response) => {
       console.log("error step2", response);
     };
 
+    const tranSactionId = step1Response.data.tnxId;
     const api = new Request("", successHandler, errorHandler, false);
     return api.put(
-      `${urls.login.BASE_URL}${urls.payout.ADD_PAYOUT}?payOutOtp=${otp}`
+      `${urls.login.BASE_URL}${urls.payout.ADD_PAYOUT}?payOutOtp=${otp}&txnId=${tranSactionId}`
     );
   };
 
@@ -99,10 +102,7 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
     const successHandler = (response) => {
       console.log("success111", response);
       if (response.success) {
-        updatePaymentStatus({
-          ...paymentStatus,
-          step1: true,
-        });
+        updatestep1Response(response);
         setErrors(response.msg);
       } else {
         setErrors(response.msg);
@@ -126,9 +126,21 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
   };
 
   const otpChangeHandler = (event) => {
+    const { maxLength, value, name } = event.target;
+    const [fieldName, fieldIndex] = name.split("-");
+    let fieldIntIndex = parseInt(fieldIndex);
+    if (value.length == maxLength) {
+      const nextfield = document.querySelector(
+        `input[name=otp-${fieldIntIndex + 1}]`
+      );
+      if (nextfield !== null) {
+        nextfield.focus();
+      }
+    }
+
     setotpData({
       ...otpData,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
   };
 
@@ -153,7 +165,7 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
     });
   }, []);
 
-  console.log("otpdata", otpStatus, paymentStatus);
+  console.log("otpdata", otpStatus, step1Response);
   console.log("payoutSuccessData", payoutSuccessData);
 
   return (
@@ -184,7 +196,7 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
           <div style={{ textAlign: "center" }}>{errormsg || ""}</div>
           {otpStatus.success ? (
             <PayoutThanks payoutSuccessData={payoutSuccessData} />
-          ) : paymentStatus.step1 == false ? (
+          ) : !step1Response.success ? (
             <Step1Form
               submitFormHandler={submitFormHandler}
               bankName={bankName}

@@ -7,7 +7,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import "./Benificiary.css";
 import BenificiaryForm from "./BenificiaryForm";
-import QuickPaymentForm from "../Benificiary/QuickPaymentForm";
+import QuickPaymentForm from "../Payout/QuickPaymentForm";
 import { addOverlay, removeOverlay } from "../../utils/common";
 
 const Benificiary = memo((props) => {

@@ -1,41 +1,30 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import {
-  loginRequest,
-  loginOtpValidationRequest,
-  loginOtpResendRequest,
-  loginResetStore,
-} from "../../actions/Login";
-import LoginRoot from "./LoginRoot";
-import StyleWrapper from "./LoginPage.style";
+import { loginRequest, loginResetStore } from "../../actions/Login";
+import LoginForm from "./LoginForm";
 
-class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onLoginSubmit = this.onLoginSubmit.bind(this);
-    this.onLoginOtpSubmit = this.onLoginOtpSubmit.bind(this);
-    this.onLoginOtpResend = this.onLoginOtpResend.bind(this);
-    this.onLoginOtpCancel = this.onLoginOtpCancel.bind(this);
-    this.onOtpLimitExceeded = this.onOtpLimitExceeded.bind(this);
-    //this.props.loginResetStore();
-  }
+import "./Login.css";
 
-  componentWillMount() {
-    const { isLoggedIn, history } = this.props;
-    if (isLoggedIn) {
-      history.push("/dashboard");
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isLoggedIn) {
-      const { loginResetStore, history } = this.props;
+class LoginPage extends PureComponent {
+  componentDidUpdate(preProps, prevState) {
+    const { login, history } = this.props;
+    if (login && preProps.login.isLoggedIn !== login.isLoggedIn) {
       loginResetStore();
       history.push("/dashboard");
     }
+    console.log("preProps, prevState", preProps, prevState);
   }
 
-  onLoginSubmit(data) {
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.login && nextProps.login.isLoggedIn) {
+  //     const { history } = this.props;
+  //     // loginResetStore();
+  //     history.push("/dashboard");
+  //   }
+  // }
+
+  onLoginSubmit = (data) => {
+    const { dispatch } = this.props;
     const params = {
       username: data.username,
       password: data.password,
@@ -43,10 +32,10 @@ class LoginPage extends React.Component {
       //   userType: "EXECUTIVE"
     };
 
-    this.props.loginRequest(params);
-  }
+    dispatch(loginRequest(params));
+  };
 
-  onLoginOtpSubmit(data) {
+  /*  onLoginOtpSubmit(data) {
     const params = {
       username: this.props.userData.username,
       otp: data.otp,
@@ -69,47 +58,69 @@ class LoginPage extends React.Component {
       userType: "EXECUTIVE",
     };
     this.props.loginOtpResendRequest(params);
-  }
 
   shouldShowOTPForm() {
     return this.props.isLoggedIn && !this.props.isOtpValidated;
-  }
+  } */
 
   render() {
+    console.log("this.ptopss", this.props);
+    const { login } = this.props;
+    let errorMsg = "";
+    if (
+      login &&
+      login.loginInfo &&
+      login.loginInfo.data &&
+      login.loginInfo.data.success == false
+    ) {
+      errorMsg = login.loginInfo.data.msg;
+    }
+
     return (
-      <StyleWrapper className="login-wrapper">
-        <LoginRoot
-          showOtpForm={this.shouldShowOTPForm()}
-          invalidOtpCount={this.props.invalidOtpCount}
-          isLoginFormSubmitting={this.props.isLoginFormSubmitting}
-          isOTPFormSubmitting={this.props.isOTPFormSubmitting}
-          onLoginSubmit={this.onLoginSubmit}
-          onLoginOtpSubmit={this.onLoginOtpSubmit}
-          onLoginOtpResend={this.onLoginOtpResend}
-          onLoginOtpCancel={this.onLoginOtpCancel}
-          onOtpLimitExceeded={this.onOtpLimitExceeded}
-        />
-      </StyleWrapper>
+      <LoginForm
+        isFormSubmitting={this.props.isLoginFormSubmitting}
+        onLoginSubmit={this.onLoginSubmit}
+        errorMsg={errorMsg}
+      />
     );
+
+    // show the otp form (one of Login or OTP form will be shown at a time)
+    // if (this.props.showOtpForm) {
+    //   loginComponent = (
+    //     <LoginOtpForm
+    //       invalidOtpCount={this.props.invalidOtpCount}
+    //       isFormSubmitting={this.props.isOTPFormSubmitting}
+    //       onLoginOtpSubmit={this.props.onLoginOtpSubmit}
+    //       onLoginOtpResend={this.props.onLoginOtpResend}
+    //       onLoginOtpCancel={this.props.onLoginOtpCancel}
+    //       onOtpLimitExceeded={this.props.onOtpLimitExceeded}
+    //     />
+    //   );
+    // }
+
+    // return this.props.showOtpForm == true ? (
+    //   <LoginOtpForm
+    //     invalidOtpCount={this.props.invalidOtpCount}
+    //     isFormSubmitting={this.props.isOTPFormSubmitting}
+    //     onLoginOtpSubmit={this.props.onLoginOtpSubmit}
+    //     onLoginOtpResend={this.props.onLoginOtpResend}
+    //     onLoginOtpCancel={this.props.onLoginOtpCancel}
+    //     onOtpLimitExceeded={this.props.onOtpLimitExceeded}
+    //   />
+    // ) : (
+    //   <LoginForm
+    //     isFormSubmitting={this.props.isLoginFormSubmitting}
+    //     onLoginSubmit={this.props.onLoginSubmit}
+    //   />
+    // );
   }
 }
 
 function mapStateToProps(state) {
   const { loginUser } = state;
   return {
-    isLoginFormSubmitting: loginUser.isLoggingIn,
-    isOTPFormSubmitting: loginUser.isOtpValidating,
-    isLoggedIn: loginUser.isLoggedIn,
-    isOtpValidated: loginUser.isOtpValidated,
-    invalidOtpCount: loginUser.invalidOtpCount,
-    isAuthenticated: loginUser.isAuthenticated,
-    userData: loginUser.userData,
+    ...state,
   };
 }
 
-export default connect(mapStateToProps, {
-  loginRequest,
-  loginOtpValidationRequest,
-  loginOtpResendRequest,
-  loginResetStore,
-})(LoginPage);
+export default connect(mapStateToProps)(LoginPage);
