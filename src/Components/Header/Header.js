@@ -48,17 +48,15 @@ const Header = (props) => {
           <div className="row">
             <div className="col-md-12">
               <div className="logo d-flex align-items-center">
-                <a href="#">
                   <strong className="logo_icon">
                     <img
-                      src="http://0.0.0.0:3008/images/small-logo.png"
+                      src="http://localhost:3008/images/small-logo.png"
                       alt=""
                     />
                   </strong>
                   <span className="logo-default">
-                    <img src="http://0.0.0.0:3008/images/logo.png" alt="" />
+                    <img src="http://localhost:3008/images/logo.png" alt="" />
                   </span>
-                </a>
                 <div className="icon_menu" onClick={clickHambergerHandler}>
                   <a
                     href="javascript:void(0);"
@@ -113,7 +111,7 @@ const NotificationPopup = ({
 }) => {
   return (
     <Fragment>
-      <div
+      {/* <div
         className={`dropdown dropdown-notification${
           statusQRICon ? " show" : ""
         }`}
@@ -161,7 +159,7 @@ const NotificationPopup = ({
               </li>
               <li className="qr-code">
                 <img
-                  src="http://0.0.0.0:3008/images/qr-code.png"
+                  src="http://localhost:3008/images/qr-code.png"
                   alt="qr-code"
                   className="mCS_img_loaded"
                 />
@@ -193,7 +191,7 @@ const NotificationPopup = ({
             </div>
           </div>
         </ul>
-      </div>
+      </div> */}
       <div
         className={`dropdown dropdown-notification${
           statusNotICon ? " show" : ""
@@ -365,7 +363,7 @@ const UserInfoPopUp = ({
       >
         <img
           className="img-circle pro_pic"
-          src="http://0.0.0.0:3008/images/user3.png"
+          src="http://localhost:3008/images/user3.png"
           alt=""
         />
       </a>
@@ -378,7 +376,7 @@ const UserInfoPopUp = ({
           <div className="user-panel">
             <div className="user_image">
               <img
-                src="http://0.0.0.0:3008/images/user3.png"
+                src="http://localhost:3008/images/user3.png"
                 className="img-circle mCS_img_loaded"
                 alt="User Image"
               />

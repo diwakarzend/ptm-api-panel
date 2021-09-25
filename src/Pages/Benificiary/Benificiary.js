@@ -73,11 +73,11 @@ const Benificiary = memo((props) => {
           <section className="chart_section">
             <div className="card card-shadow mb-4">
               <div className="card-header fund-modal">
-                <div className="card-title">Beneficiary</div>
+                <label className="card-title">Beneficiary</label>
                 {userRole !== "PTM_ADMIN" && (
                   <button
                     // type="button"
-                    //  className="btn btn-secondary fund-btn"
+                    className="btn-common"
                     //data-toggle="modal"
                     data-target="#exampleModal"
                     onClick={openPopupHandler}
@@ -145,7 +145,7 @@ const Benificiary = memo((props) => {
                                 onClick={() =>
                                   openQuickPopupHandler(item.beneficiaryId)
                                 }
-                                className="quick-payment-btn"
+                                className="quick-payment-btn btn-common"
                               >
                                 Quick Payment
                               </button>

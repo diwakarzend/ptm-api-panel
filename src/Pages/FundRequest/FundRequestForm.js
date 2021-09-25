@@ -113,15 +113,6 @@ const FundRequestForm = memo(
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div>
-              {errorHTML && errorStyles ? (
-                <ul style={errorStyles}>{errorHTML}</ul>
-              ) : success && successStyles ? (
-                <div style={successStyles}>{success}</div>
-              ) : (
-                ""
-              )}
-            </div>
             <form onSubmit={submitFormHandler}>
               <div className="modal-body">
                 <div className="row">
@@ -159,7 +150,7 @@ const FundRequestForm = memo(
                     <div className="form-group">
                       <label for="exampleInputEmail1">To Bank</label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         id="depositAccount"
                         aria-describedby="Bank Name"
@@ -192,7 +183,7 @@ const FundRequestForm = memo(
                     <div className="form-group">
                       <label for="exampleInputEmail1">Requested Amount</label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         id="requestedAmount"
                         aria-describedby="requestedAmount"
@@ -255,6 +246,15 @@ const FundRequestForm = memo(
                   <button type="submit" className="btn btn-primary themebtn">
                     Submit
                   </button>
+                  <div>
+                  {errorHTML && errorStyles ? (
+                    <ul style={errorStyles}>{errorHTML}</ul>
+                  ) : success && successStyles ? (
+                    <div style={successStyles}>{success}</div>
+                  ) : (
+                    ""
+                  )}
+                </div>
                 </div>
               </div>
             </form>

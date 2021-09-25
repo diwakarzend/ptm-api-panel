@@ -114,15 +114,6 @@ const BenificiaryForm = memo(
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div>
-              {errorHTML && errorStyles ? (
-                <ul style={errorStyles}>{errorHTML}</ul>
-              ) : success && successStyles ? (
-                <div style={successStyles}>{success}</div>
-              ) : (
-                ""
-              )}
-            </div>
             <form onSubmit={submitFormHandler}>
               <div className="modal-body">
                 <div className="row">
@@ -159,7 +150,7 @@ const BenificiaryForm = memo(
                     <div className="form-group">
                       <label for="exampleInputEmail1">Mobile No</label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         aria-describedby="requestedAmount"
                         placeholder="Mobile No"
@@ -185,7 +176,7 @@ const BenificiaryForm = memo(
                     <div className="form-group">
                       <label for="exampleInputEmail1">Account Number</label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         placeholder="Account Number"
                         name="accountNumber"
@@ -220,6 +211,15 @@ const BenificiaryForm = memo(
                   <button type="submit" className="btn btn-primary themebtn">
                     Submit
                   </button>
+                  <div>
+                  {errorHTML && errorStyles ? (
+                    <ul style={errorStyles}>{errorHTML}</ul>
+                  ) : success && successStyles ? (
+                    <div style={successStyles}>{success}</div>
+                  ) : (
+                    ""
+                  )}
+                </div>
                 </div>
               </div>
             </form>

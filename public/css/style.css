@@ -107,6 +107,21 @@ body {
   font-size: 14px;
 }
 
+.btn-common {
+  border-radius: 6px;
+  background: #1e437b;
+  color: #fff;
+  border: 0;
+  display: inline-block;
+  padding: 5px 10px;
+  transition: all 0.4s;
+  position: relative;
+  margin-left: 5px;
+}
+.btn-common:hover {
+  background: #063884;
+  top: 1px;
+}
 .bg-gold {
   background: #c1993f !important;
 }
@@ -1964,9 +1979,10 @@ a:hover {
   padding: 1rem;
   border-bottom: 1px solid #e5e9ec;
   background: #fff;
+  display: flex;
+	justify-content: space-between;
 }
 .badge-primary,
-.bg-primary,
 .nav.nav-pills.nav-pills-primary .nav-link.active {
   background-color: #f39a3e !important;
 }
@@ -1974,24 +1990,23 @@ a:hover {
   border-color: #eac459 !important;
 }
 .badge-info,
-.bg-info,
 .nav.nav-pills.nav-pills-info .nav-link.active {
   background-color: #f39a3e !important;
 }
 .badge-danger,
-.bg-danger,
 .nav.nav-pills.nav-pills-danger .nav-link.active {
   background-color: #f39a3e !important;
 }
 .badge-warning,
-.bg-warning,
 .nav.nav-pills.nav-pills-warning .nav-link.active {
   background-color: #f39a3e !important;
 }
 .badge-inverse,
-.bg-inverse,
 .nav.nav-pills.nav-pills-inverse .nav-link.active {
   background-color: #292b2c !important;
+}
+.card.bg-info,.card.bg-primary,.card.bg-danger,.card.bg-warning,.card.bg-inverse {
+  background: #1e437b !important;
 }
 .portlets-scroll {
   min-height: 101%;

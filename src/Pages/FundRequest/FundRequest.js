@@ -95,11 +95,11 @@ requestUserName: "9718063555"
           <section className="chart_section">
             <div className="card card-shadow mb-4">
               <div className="card-header fund-modal">
-                <div className="card-title">All fund requests</div>
+                <div className="card-title">All Fund Requests</div>
                 {userRole !== "PTM_ADMIN" && (
                   <button
                     // type="button"
-                    //  className="btn btn-secondary fund-btn"
+                    className="btn-common"
                     //data-toggle="modal"
                     data-target="#exampleModal"
                     onClick={openPopupHandler}
@@ -122,7 +122,7 @@ requestUserName: "9718063555"
                 {statusMessage}
               </div>
 
-              <div className="col-md-12">
+              <div className="col-md-3">
                 <div className="form-group">
                   {userRole != "PTM_ADMIN" ? (
                     <select
@@ -171,6 +171,7 @@ requestUserName: "9718063555"
                               {item.approveStatus}
                             </td>
                             <td>
+                              
                               {item.approveStatus != "DONE" &&
                               userRole !== "PTM_VENDOR" ? (
                                 <React.Fragment>
@@ -178,10 +179,7 @@ requestUserName: "9718063555"
                                     onClick={() =>
                                       handleApprove(item.reqstfundUuid)
                                     }
-                                    style={{
-                                      fontSize: "9px",
-                                      marginLeft: "2px",
-                                    }}
+                                    class="btn-common"
                                   >
                                     Approve
                                   </button>
@@ -189,10 +187,7 @@ requestUserName: "9718063555"
                                     onClick={() =>
                                       handleReject(item.reqstfundUuid)
                                     }
-                                    style={{
-                                      fontSize: "9px",
-                                      marginLeft: "2px",
-                                    }}
+                                   class="btn-common badge-warning"
                                   >
                                     Reject
                                   </button>
