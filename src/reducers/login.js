@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   isLoggedIn: false,
+  isAuthenticated: false,
   loginInfo: "",
   userData: null,
   userWallet: null,
@@ -31,7 +32,10 @@ export default (state = initialState, action = {}) => {
 
     case actionTypes.LOGIN_RESET_STORE:
       //  console.log("isAuthenticated", typeof isAuthenticated);
-      changes = { isAuthenticated: isAuthenticated() };
+      changes = {
+        ...initialState,
+        // isAuthenticated: isAuthenticated(),
+      };
       break;
 
     case actionTypes.LOGIN_REQUEST_INIT:
@@ -74,12 +78,12 @@ export default (state = initialState, action = {}) => {
       //   // userData,
       // };
 
-      console.log("Action", payload);
+      console.log("Action111", payload);
 
       changes = {
         loginInfo: payload,
-        // isLoggedIn:
         isLoggedIn: isAuthenticated(payload),
+        isAuthenticated: isAuthenticated(payload),
       };
 
       break;

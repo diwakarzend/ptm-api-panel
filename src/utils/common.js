@@ -99,15 +99,12 @@ export function clearAuthToken() {
 
 export function isAuthenticated(response) {
   if (response && response.data) {
-    if (response.data.id_token) {
+    if (response.data.id_token && response.data.api_token) {
       saveAuthToken("Authorization", response.data.id_token);
-    }
-
-    if (response.data.api_token) {
       saveAuthToken("api-Authorization", response.data.api_token);
+      return true;
     }
-
-    return true;
+    return false;
   } else if (!isEmpty(getAuthToken())) {
     return true;
   }

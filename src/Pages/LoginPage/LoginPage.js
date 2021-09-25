@@ -8,20 +8,16 @@ import "./Login.css";
 class LoginPage extends PureComponent {
   componentDidUpdate(preProps, prevState) {
     const { login, history } = this.props;
-    if (login && preProps.login.isLoggedIn !== login.isLoggedIn) {
-      loginResetStore();
+    if (
+      login &&
+      login.isLoggedIn &&
+      preProps.login.isLoggedIn !== login.isLoggedIn
+    ) {
+      //  loginResetStore();
       history.push("/dashboard");
     }
     console.log("preProps, prevState", preProps, prevState);
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.login && nextProps.login.isLoggedIn) {
-  //     const { history } = this.props;
-  //     // loginResetStore();
-  //     history.push("/dashboard");
-  //   }
-  // }
 
   onLoginSubmit = (data) => {
     const { dispatch } = this.props;
