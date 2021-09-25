@@ -122,7 +122,7 @@ const Reports = memo((props) => {
                       <th scope="col">
                         <input
                           type="submit"
-                          className="form-control"
+                          className="btn-common"
                           value="Search"
                         />
                       </th>
@@ -166,7 +166,7 @@ const Reports = memo((props) => {
                                 onClick={() =>
                                   openQuickPopupHandler(item.beneficiaryId)
                                 }
-                                className="quick-payment-btn"
+                                className="quick-payment-btn "
                               ></button>
                             </td>
                           </tr>

@@ -99,7 +99,7 @@ requestUserName: "9718063555"
                 {userRole !== "PTM_ADMIN" && (
                   <button
                     // type="button"
-                    //  className="btn btn-secondary fund-btn"
+                    className="btn-common"
                     //data-toggle="modal"
                     data-target="#exampleModal"
                     onClick={openPopupHandler}
@@ -171,6 +171,7 @@ requestUserName: "9718063555"
                               {item.approveStatus}
                             </td>
                             <td>
+                              
                               {item.approveStatus != "DONE" &&
                               userRole !== "PTM_VENDOR" ? (
                                 <React.Fragment>
@@ -178,10 +179,7 @@ requestUserName: "9718063555"
                                     onClick={() =>
                                       handleApprove(item.reqstfundUuid)
                                     }
-                                    style={{
-                                      fontSize: "9px",
-                                      marginLeft: "2px",
-                                    }}
+                                    class="btn-common"
                                   >
                                     Approve
                                   </button>
@@ -189,10 +187,7 @@ requestUserName: "9718063555"
                                     onClick={() =>
                                       handleReject(item.reqstfundUuid)
                                     }
-                                    style={{
-                                      fontSize: "9px",
-                                      marginLeft: "2px",
-                                    }}
+                                   class="btn-common badge-warning"
                                   >
                                     Reject
                                   </button>
