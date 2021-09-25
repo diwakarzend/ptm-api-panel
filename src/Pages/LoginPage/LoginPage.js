@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { loginRequest, loginResetStore } from "../../actions/Login";
 import LoginForm from "./LoginForm";
+import ForGotPassword from "./ForGotPassword";
 
 import "./Login.css";
 
@@ -61,6 +62,7 @@ class LoginPage extends PureComponent {
 
   render() {
     console.log("this.ptopss", this.props);
+    const { handleForgotPassword } = this.props;
     const { login } = this.props;
     let errorMsg = "";
     if (
@@ -77,6 +79,7 @@ class LoginPage extends PureComponent {
         isFormSubmitting={this.props.isLoginFormSubmitting}
         onLoginSubmit={this.onLoginSubmit}
         errorMsg={errorMsg}
+        handleForgotPassword={this.handleForgotPassword}
       />
     );
 
