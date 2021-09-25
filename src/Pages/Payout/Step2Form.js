@@ -128,6 +128,7 @@ const Step2Form = memo(
                   required
                 />
               </div>
+
               <div className="otp-message">
                 <p>
                   You Need a One-Time Password (OTP) to authenticate this

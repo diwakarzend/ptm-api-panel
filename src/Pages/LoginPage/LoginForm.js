@@ -1,5 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { isEmpty } from "../../utils/common";
+import ForGotPassword from "./ForGotPassword";
+import urls from "../../utils/urls";
+import Request from "../../utils/Request";
 import "./Login.css";
 
 class LoginForm extends React.Component {
@@ -11,6 +14,8 @@ class LoginForm extends React.Component {
         password: null,
         tenantId: 0,
       },
+      forgotPasswordClicked: false,
+      successmsg: "",
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.removeErrorMsg = this.removeErrorMsg.bind(this);
@@ -46,54 +51,89 @@ class LoginForm extends React.Component {
     this.setState({ errors: { username: null, password: null } });
   }
 
+  handleForgotPassword = () => {
+    this.setState({ forgotPasswordClicked: true });
+  };
+
+  cancelForgotPassword = () => {
+    this.setState({ forgotPasswordClicked: false });
+  };
+
+  resetSuccess = () => {
+    this.setState({
+      forgotPasswordClicked: false,
+      successmsg: "Password reset successfully",
+    });
+  };
+
   render() {
     const { errorMsg } = this.props;
+    const { forgotPasswordClicked, successmsg } = this.state;
+
     return (
       <div className="container-fluid">
         <div className="d-flex align-items-stretch row full-page">
           <div className="col-md-7 align-self-center left-banner "></div>
           <div className="d-flex col-md-5 form-wrapper">
             <div className="form-content-wrapper align-self-center">
-              <span className="login-error">{errorMsg}</span>
-              <form className="form-group" onSubmit={this.onFormSubmit}>
-                <img
-                  src="https://storage.googleapis.com/ptm-assets-prod/banner/imageonline-co-roundcorner.png"
-                  alt="logo"
-                  className="logo-icon"
+              {forgotPasswordClicked ? (
+                <ForGotPassword
+                  cancelForgotPassword={this.cancelForgotPassword}
                 />
-                <div className="floating-label-group">
-                  <input
-                    id="email"
-                    className="form-control"
-                    autoFocus="autofocus"
-                    type="text"
-                    ref={(input) => {
-                      this.username = input;
-                    }}
-                    autoComplete="off"
-                    onFocus={this.removeErrorMsg}
-                    required
-                  />
+              ) : (
+                <Fragment>
+                  <form className="form-group" onSubmit={this.onFormSubmit}>
+                    <span className="login-error">
+                      {errorMsg || successmsg}
+                    </span>
 
-                  <label className="floating-label">Email</label>
-                </div>
-                <div className="floating-label-group">
-                  <input
-                    id="password"
-                    className="form-control"
-                    type="password"
-                    ref={(input) => {
-                      this.password = input;
-                    }}
-                    onFocus={this.removeErrorMsg}
-                    autoComplete="off"
-                    required
-                  />
-
-                  <label className="floating-label">Password</label>
-                </div>
-                <input type="submit" value="Submit" className="submit-btn" />
-              </form>
+                    <img
+                      src="https://storage.googleapis.com/ptm-assets-prod/banner/imageonline-co-roundcorner.png"
+                      alt="logo"
+                      className="logo-icon"
+                    />
+                    <div className="floating-label-group">
+                      <input
+                        placeholder="Mobile No"
+                        className="form-control"
+                        autoFocus="autofocus"
+                        type="text"
+                        ref={(input) => {
+                          this.username = input;
+                        }}
+                        autoComplete="off"
+                        onFocus={this.removeErrorMsg}
+                        required
+                      />
+                    </div>
+                    <div className="floating-label-group">
+                      <input
+                        placeholder="Password"
+                        id="password"
+                        className="form-control"
+                        type="password"
+                        ref={(input) => {
+                          this.password = input;
+                        }}
+                        onFocus={this.removeErrorMsg}
+                        autoComplete="off"
+                        required
+                      />
+                    </div>
+                    <input
+                      type="submit"
+                      value="Submit"
+                      className="submit-btn"
+                    />
+                  </form>
+                  <div
+                    className="reset-password"
+                    onClick={this.handleForgotPassword}
+                  >
+                    Forgot password
+                  </div>
+                </Fragment>
+              )}
             </div>
           </div>
         </div>

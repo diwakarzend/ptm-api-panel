@@ -417,3 +417,17 @@ export function addOverlay() {
   document.body.appendChild(elemDiv);
   document.body.classList.add("modal-open");
 }
+
+export function autoFocusOTPForm(event) {
+  const { maxLength, value, name } = event.target;
+  const [fieldName, fieldIndex] = name.split("-");
+  let fieldIntIndex = parseInt(fieldIndex);
+  if (value.length == maxLength) {
+    const nextfield = document.querySelector(
+      `input[name=otp-${fieldIntIndex + 1}]`
+    );
+    if (nextfield !== null) {
+      nextfield.focus();
+    }
+  }
+}

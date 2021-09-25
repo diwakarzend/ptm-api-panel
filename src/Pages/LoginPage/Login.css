@@ -90,6 +90,15 @@ input:not(:focus):valid ~ .floating-label {
   display: block;
   text-align: center;
 }
+
+.reset-password {
+  float: right;
+  color: #1e437b;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
 .left-banner {
   display: block;
   background: url(https://storage.googleapis.com/ptm-assets-prod/banner/pay2M-login-banner.png);

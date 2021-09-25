@@ -8,6 +8,8 @@ export default {
     GET_PROFILE: "/api/user/account",
     GET_WALLET: "/api/wallet",
     GET_API_USERS: "/api/users?pageSize=100",
+    RESET_PASSWORD: "/api/user/account/reset-password/init",
+    UPDATE_PASSWORD: "/api/user/account/reset-password/finish",
   },
 
   User: {
