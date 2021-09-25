@@ -51,14 +51,12 @@ class LoginForm extends React.Component {
       <div className="container-fluid">
         <div className="d-flex align-items-stretch row full-page">
           <div className="col-md-7 align-self-center left-banner ">
-            <img src="http://0.0.0.0:3008/images/banner.png"  alt="banner"
-                   />
           </div>
           <div className="d-flex col-md-5 form-wrapper">
             <div className="form-content-wrapper align-self-center">
               <form className="form-group" onSubmit={this.onFormSubmit}>
                 <img
-                  src="http://0.0.0.0:3008/images/logo.png"
+                  src="https://storage.googleapis.com/ptm-assets-prod/banner/imageonline-co-roundcorner.png"
                   alt="logo"
                   className="logo-icon"
                 />
