@@ -62,9 +62,7 @@ export function loginRequest(params) {
   };
 }
 
-/**
- * Validate Otp Actions
- */
+/*
 export function loginOtpValidationInit() {
   return {
     type: actionTypes.LOGIN_OTP_VALIDATION_INIT,
@@ -105,10 +103,8 @@ export function loginOtpValidationRequest(params) {
   };
 }
 
-/**
- * Resend Otp Actions
- */
-export function loginOtpResendInit() {
+ 
+ export function loginOtpResendInit() {
   return {
     type: actionTypes.LOGIN_OTP_RESEND_INIT,
   };
@@ -145,7 +141,7 @@ export function loginOtpResendRequest(params) {
     const api = new Request(dispatch, successFn, errorFn, false);
     return api.post(urls.login.BASE_URL + urls.login.LOGIN_OTP_RESEND, params);
   };
-}
+} */
 
 export function logoutUser() {
   return {
