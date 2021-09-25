@@ -92,7 +92,7 @@ input:not(:focus):valid ~ .floating-label {
 }
 .left-banner {
   display: block;
-  background: url(https://storage.googleapis.com/ptm-assets-prod/banner/pay2mobilebanne-trans.png);
+  background: url(https://storage.googleapis.com/ptm-assets-prod/banner/pay2M-login-banner.png);
   background-size: contain;
   background-position: center;
   height: 70%;
