@@ -151,17 +151,18 @@ const Step2Form = memo(
               </div> */}
           </div>
           <div className="modal-footer">
-            <button type="submit" className="btn btn-primary submit">
-              Proceed To Pay
-            </button>
-            <button
+          <button
               type="button"
-              className="btn btn-primary cancel"
+              className="btn btn-primary themebtn transparent"
               data-dismiss="modal"
               // onClick={closeQuickPopUpHandler}
             >
               Cancel
             </button>
+            <button type="submit" className="btn btn-primary themebtn">
+              Proceed To Pay
+            </button>
+           
           </div>
         </form>
       </div>
