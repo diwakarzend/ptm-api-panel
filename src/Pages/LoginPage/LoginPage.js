@@ -117,7 +117,6 @@ class LoginPage extends PureComponent {
 }
 
 function mapStateToProps(state) {
-  const { loginUser } = state;
   return {
     ...state,
   };

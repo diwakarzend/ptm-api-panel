@@ -11,10 +11,10 @@ import "./FundRequest.css";
 import FundRequestForm from "./FundRequestForm";
 
 const FundRequest = memo((props) => {
-  const { dispatch, loginUser, userwallet } = props;
+  const { dispatch, login, userwallet } = props;
 
   const fundRequestItems = userwallet.fundRequest.data;
-  const userRole = loginUser && loginUser.userData && loginUser.userData.role;
+  const userRole = login && login.userData && login.userData.role;
 
   const [isPopupVisible, handlePopUp] = useState(false);
   const [statusMessage, setStatus] = useState("");
@@ -223,6 +223,6 @@ requestUserName: "9718063555"
 });
 
 const mapStateToProps = (state) => {
-  return { loginUser: state.loginUser, userwallet: state.userwallet };
+  return { login: state.login, userwallet: state.userwallet };
 };
 export default connect(mapStateToProps)(FundRequest);

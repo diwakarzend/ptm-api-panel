@@ -11,8 +11,8 @@ import QuickPaymentForm from "../Payout/QuickPaymentForm";
 import { addOverlay, removeOverlay } from "../../utils/common";
 
 const Benificiary = memo((props) => {
-  const { dispatch, loginUser, beneficiary } = props;
-  const userRole = loginUser && loginUser.userData && loginUser.userData.role;
+  const { dispatch, login, beneficiary } = props;
+  const userRole = login && login.userData && login.userData.role;
   const [isPopupVisible, handlePopUp] = useState(false);
   const [statusMessage, setStatus] = useState("");
   const [isQuickPopupVisible, handleQuickPopUp] = useState(false);

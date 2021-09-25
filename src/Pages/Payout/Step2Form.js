@@ -7,11 +7,11 @@ const Step2Form = memo(
   ({
     step2SubmitHandler,
     otpChangeHandler,
-    loginUser,
+    login,
     formData,
     step1Response,
   }) => {
-    const userData = loginUser && loginUser.userData && loginUser.userData;
+    const userData = login && login.userData && login.userData;
     console.log("formData.accountNumber", formData, step1Response);
 
     return (
