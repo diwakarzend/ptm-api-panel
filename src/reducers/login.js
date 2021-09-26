@@ -12,6 +12,7 @@ const initialState = {
   loginInfo: "",
   userData: null,
   userWallet: null,
+  isWalletLoading: false
 };
 
 export default (state = initialState, action = {}) => {
@@ -24,10 +25,8 @@ export default (state = initialState, action = {}) => {
       break;
 
     case actionTypes.FETCH_USER_WALLET_SUCCESS:
-      console.log("FETCH_USER_WALLET_SUCCESS", action, state);
       if (action.response.success == true && action.response.data) {
-        changes.userWallet = action.response.data;
-      }
+        changes.userWallet = action.response.data;      }
       break;
 
     case actionTypes.LOGIN_RESET_STORE:
@@ -45,6 +44,18 @@ export default (state = initialState, action = {}) => {
         userData: null,
       };
       break;
+
+    case actionTypes.FETCHING_WALLET:
+      changes = {
+        isWalletLoading: true
+      };
+      break;  
+
+    case actionTypes.FETCHED_WALLET:
+        changes = {
+          isWalletLoading: false
+        };
+        break;   
 
     case actionTypes.LOGIN_REQUEST_SUCCESS:
       const { payload } = action;
@@ -78,7 +89,6 @@ export default (state = initialState, action = {}) => {
       //   // userData,
       // };
 
-      console.log("Action111", payload);
 
       changes = {
         loginInfo: payload,

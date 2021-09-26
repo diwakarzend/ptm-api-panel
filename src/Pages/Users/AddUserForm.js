@@ -22,7 +22,6 @@ const initialFormData = Object.freeze({
 });
 
 const AddUserForm = (props) => {
-  // console.log("propss", props);
   const { editUserData, userToBeEdit, closePopUpHandler, fetchUsersData } =
     props;
   const [formData, updateFormData] = useState(initialFormData);
@@ -46,7 +45,6 @@ const AddUserForm = (props) => {
   };
 
   const updateUser = () => {
-    console.log("update User", userToBeEdit, formData);
 
     const api = new Request("", successHandler, errorHandler, false);
     return api.post(`${urls.login.BASE_URL}${urls.User.UPDATE_USER}`, formData);
@@ -54,7 +52,6 @@ const AddUserForm = (props) => {
 
   const errorHandler = (error) => {
     // {"timestamp":"2021-09-18T06:25:35.505+00:00","status":401,"error":"Unauthorized","message":"","path":"/api/users"}
-    console.log("error", error);
     const errors = [];
     if (error && error.status == 400) {
       if (error.fieldErrors && error.fieldErrors instanceof Array) {
@@ -73,7 +70,6 @@ const AddUserForm = (props) => {
   };
 
   const successHandler = (data) => {
-    console.log("success", data);
     if (!data.success) {
       updateError([data.msg]);
     } else {
@@ -93,7 +89,6 @@ const AddUserForm = (props) => {
     }
 
     formData.userName = formData.phoneNumber;
-    console.log("formData", formData);
 
     // pricingToken;
 
@@ -118,8 +113,6 @@ const AddUserForm = (props) => {
       marginTop: "26px",
     };
   }
-
-  console.log("editFormData", formData);
 
   return (
     <div

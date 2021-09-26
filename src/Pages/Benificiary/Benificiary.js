@@ -62,8 +62,6 @@ const Benificiary = memo((props) => {
     }
   };
 
-  console.log("benificiary", props, payeeInfo);
-
   return (
     <div className="container_full">
       <SideBar {...props} />

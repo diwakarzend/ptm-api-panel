@@ -30,7 +30,6 @@ const BenificiaryForm = memo(
     const submitFormHandler = (event) => {
       event.preventDefault();
       const errorHandler = (response) => {
-        console.log("response", response);
         const errors = [];
         if (response && response.status == 400) {
           if (response.fieldErrors && response.fieldErrors instanceof Array) {
@@ -49,7 +48,6 @@ const BenificiaryForm = memo(
       };
 
       const successHandler = (response) => {
-        console.log("success", response);
         if (!response.success) {
           setErrors([response.msg]);
         } else {

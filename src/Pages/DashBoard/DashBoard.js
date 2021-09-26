@@ -20,14 +20,11 @@ const DashBoard = (props) => {
   })
   const chartYData = chartData && chartData.data.map(item => item.totalRevenue);
   const chartObj = dynamicDataWithXY(chartXData, chartYData, "Revenue Chart" ,"Month of the year", "Revenue in Rs");
-  console.log("chartObj", chartObj);
   useEffect(() => {
     const { dispatch } = props;
     var ctx = document.getElementById("myChart3-light").getContext("2d");
     var myChart = new Chart(ctx, chartObj);
   }, []);
-
-  console.log("DB", props);
 
   return (
     <div className="container_full">

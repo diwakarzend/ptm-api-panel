@@ -287,9 +287,6 @@
 }
 @media (max-width: 767px) {
   .side_bar {
-    top: 60px;
-    margin-left: -270px;
-    transition: all 0.3s;
     height: calc(100vh - 61px);
   }
   .mobile_nav .side_bar {

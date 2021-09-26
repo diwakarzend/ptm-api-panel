@@ -58,10 +58,7 @@ const Header = (props) => {
                     <img src="http://localhost:3008/images/logo.png" alt="" />
                   </span>
                 <div className="icon_menu" onClick={clickHambergerHandler}>
-                  <a
-                    href="javascript:void(0);"
-                    className="menu-toggler sidebar-toggler"
-                  ></a>
+                  <a className="menu-toggler sidebar-toggler"></a>
                 </div>
               </div>
 
@@ -199,7 +196,6 @@ const NotificationPopup = ({
         id="popup-notification"
       >
         <a
-          href="javascript:;"
           className="dropdown-toggle"
           data-toggle="dropdown"
           data-hover="dropdown"
@@ -221,7 +217,7 @@ const NotificationPopup = ({
           <div
             id="mCSB_2"
             className="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside"
-            tabindex="0"
+            tabIndex="0"
             style={{ maxHeight: "none" }}
           >
             <div
@@ -243,7 +239,7 @@ const NotificationPopup = ({
               <li>
                 <ul className="dropdown-menu-list">
                   <li>
-                    <a href="javascript:;">
+                    <a>
                       <span className="time">just now</span>
                       <span className="details">
                         <span className="notification-icon deepPink-bgcolor">
@@ -254,7 +250,7 @@ const NotificationPopup = ({
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:;">
+                    <a>
                       <span className="time">3 mins</span>
                       <span className="details">
                         <span className="notification-icon purple-bgcolor">
@@ -265,7 +261,7 @@ const NotificationPopup = ({
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:;">
+                    <a>
                       <span className="time">7 mins</span>
                       <span className="details">
                         <span className="notification-icon blue-bgcolor">
@@ -276,7 +272,7 @@ const NotificationPopup = ({
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:;">
+                    <a>
                       <span className="time">12 mins</span>
                       <span className="details">
                         <span className="notification-icon pink">
@@ -287,7 +283,7 @@ const NotificationPopup = ({
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:;">
+                    <a>
                       <span className="time">15 mins</span>
                       <span className="details">
                         <span className="notification-icon yellow">
@@ -298,7 +294,7 @@ const NotificationPopup = ({
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:;">
+                    <a>
                       <span className="time">10 hrs</span>
                       <span className="details">
                         <span className="notification-icon red">
@@ -322,7 +318,7 @@ const NotificationPopup = ({
                   className="mCSB_dragger"
                   style={{
                     position: "absolute",
-                    "min-height": "30px",
+                    "minHeight": "30px",
                     display: "block",
                     height: "231px",
                     maxHeight: "283px",
@@ -331,7 +327,7 @@ const NotificationPopup = ({
                 >
                   <div
                     className="mCSB_dragger_bar"
-                    style={{ "line-height": "30px" }}
+                    style={{ "lineHeight": "30px" }}
                   ></div>
                 </div>
                 <div className="mCSB_draggerRail"></div>
@@ -353,7 +349,6 @@ const UserInfoPopUp = ({
   return (
     <div className={`dropdown dropdown-user${userPopUpVisible ? " show" : ""}`}>
       <a
-        href="javascript:;"
         className="dropdown-toggle"
         data-toggle="dropdown"
         data-hover="dropdown"
@@ -383,22 +378,22 @@ const UserInfoPopUp = ({
             </div>
             <div className="info">
               <p>{printUserName(userData)}</p>
-              <a href="#"> {userData && userData.email}</a>
+              <a> {userData && userData.email}</a>
             </div>
           </div>
         </li>
         <li>
-          <a href="#">
+          <a>
             <i className="icon-user"></i> Profile
           </a>
         </li>
         <li>
-          <a href="#">
+          <a>
             <i className="icon-settings"></i> Settings
           </a>
         </li>
         <li>
-          <a href="#">
+          <a>
             <i className="icon-directions"></i> Help
           </a>
         </li>

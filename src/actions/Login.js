@@ -14,6 +14,8 @@ export const actionTypes = {
   LOGIN_OTP_RESEND_SUCCESS: "LOGIN_OTP_RESEND_SUCCESS",
   FETCH_USER_DETAILS_SUCCESS: "FETCH_USER_DETAILS_SUCCESS",
   FETCH_USER_WALLET_SUCCESS: "FETCH_USER_WALLET_SUCCESS",
+  FETCHING_WALLET: "FETCHING_WALLET",
+  FETCHED_WALLET: "FETCHED_WALLET"
 };
 
 export function loginResetStore() {
@@ -169,7 +171,6 @@ function fetchUserDetails(token) {
 }
 
 function shouldFetchUserDetails(state) {
-  console.log("shouldFetchUserDetails", state);
   const { login } = state;
   if (login && !login.userData) {
     return true;
@@ -184,12 +185,29 @@ function fetchUserWalletSuccess(response) {
   };
 }
 
+export function fetchingUserWallet() {
+  return {
+    type: actionTypes.FETCHING_WALLET,
+  };
+}
+
+export function fetchedUserWallet() {
+  return {
+    type: actionTypes.FETCHED_WALLET,
+  };
+}
+
+
 export function fetchUserWallet() {
   return (dispatch) => {
     const successFn = (response) => {
       dispatch(fetchUserWalletSuccess(response));
+      setTimeout(() => {
+         dispatch(fetchedUserWallet());
+      }, 1000)
     };
     const errorFn = (error) => {};
+    dispatch(fetchingUserWallet());
     const api = new Request(dispatch, successFn, errorFn);
     // const params = { headers: { Authorization: token } };
     return api.get(urls.login.BASE_URL + urls.login.GET_WALLET);
@@ -197,7 +215,6 @@ export function fetchUserWallet() {
 }
 
 function shouldFetchWalletData(state) {
-  console.log("shouldFetchWalletData", state);
   const { login } = state;
   if (login && !login.userWallet) {
     return true;

@@ -27,8 +27,7 @@ const SideBar = (props) => {
   const { login } = props;
   const userData = login && login.userData;
   const userWallet = login && login.userWallet;
-
-  console.log("userDatauserData", userData);
+  const isWalletLoading = login && login.isWalletLoading;
   return (
     <div className="side_bar scroll_auto">
       <div className="user-panel">
@@ -38,7 +37,7 @@ const SideBar = (props) => {
             <i className="fa fa-inr" aria-hidden="true"></i>
             {userWallet && userWallet.MAIN_WALLET}
             <i
-              className="fa fa-refresh"
+              className={"fa fa-refresh " + (isWalletLoading ? 'fa-spin':'')}
               aria-hidden="true"
               onClick={handleClick}
             ></i>
@@ -48,12 +47,12 @@ const SideBar = (props) => {
 
       <ul id="dc_accordion" className="sidebar-menu tree">
         <li className="menu_sub">
-          <a href="javascript:void(0)">
+          <a>
             <i className="fa fa-inr" aria-hidden="true"></i>
           </a>
           <ul className="down_menu">
             <li>
-              <a href="javascript:void(0)">
+              <a>
                 <span>
                   <i className="fa fa-inr" aria-hidden="true"></i>
                   {userWallet && userWallet.MAIN_WALLET}
@@ -93,7 +92,6 @@ const SideBar = (props) => {
 
         <li className="menu_sub">
           <a
-            href="javascript:void(0)"
             onClick={() => {
               setTogglePayment(!togglePayment);
               setToggleCompany(false);

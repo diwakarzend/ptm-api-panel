@@ -42,7 +42,6 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
     event.preventDefault();
     const otp = Object.values(otpData).join("");
     const successHandler = (response) => {
-      console.log("response step2", response);
       if (response.success == true) {
         setotpStatus({
           ...otpStatus,
@@ -64,7 +63,6 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
       setErrors(response.msg + errorCode);
     };
     const errorHandler = (response) => {
-      console.log("error step2", response);
     };
 
     const tranSactionId = step1Response.data.tnxId;
@@ -80,10 +78,8 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
     formData.type = formData.route;
-    console.log("formDataasd", formData);
 
     const errorHandler = (response) => {
-      console.log("response", response);
       const errors = [];
       if (response && response.status == 400) {
         if (response.fieldErrors && response.fieldErrors instanceof Array) {
@@ -100,7 +96,6 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
     };
 
     const successHandler = (response) => {
-      console.log("success111", response);
       if (response.success) {
         updatestep1Response(response);
         setErrors(response.msg);
@@ -164,9 +159,6 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
       ...updatedData,
     });
   }, []);
-
-  console.log("otpdata", otpStatus, step1Response);
-  console.log("payoutSuccessData", payoutSuccessData);
 
   return (
     <div

@@ -25,14 +25,12 @@ const Users = (props) => {
     handlePopUp(true);
     setUserId(userId);
     const successHandler = (response, headers) => {
-      console.log("success", response);
       if (response.success == true) {
         setEditUserData(response.data);
       }
     };
 
     const errorHandler = (error) => {
-      console.log("errorerror", error);
     };
 
     const request = new Request("", successHandler, errorHandler, false);
@@ -51,8 +49,6 @@ const Users = (props) => {
     document.body.classList.remove("modal-open");
     handlePopUp(false);
   };
-
-  console.log("props111", props, editUserData);
 
   const { users } = props;
 

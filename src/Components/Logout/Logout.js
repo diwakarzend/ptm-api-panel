@@ -11,7 +11,7 @@ const Logout = React.memo((props) => {
   };
 
   return (
-    <a href="javascript:;" onClick={() => logout()}>
+    <a onClick={() => logout()}>
       <i className="icon-logout"></i> Log Out
     </a>
   );
