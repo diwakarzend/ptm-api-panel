@@ -42,6 +42,8 @@ export default {
   payout: {
     ADD_PAYOUT: "/api/user/payout",
     TRANSACTION_REPORT: "/api/payout/transaction-report?pageNo=0&pageSize=100",
+    MONTHLY_REPORT: "/api/payout/dashboard/monthly-report",
+    STATUS_REPORT: "/api/payout/dashboard/status-report",
   },
   userCommission: {
     GET_USERCOMMISSION: "/api/user/comission",

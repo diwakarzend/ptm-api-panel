@@ -15,7 +15,7 @@ const FundRequest = memo((props) => {
   const { dispatch, login, userwallet } = props;
 
   const fundRequestItems = userwallet.fundRequest.data;
-  const fundRequestLoading =  userwallet.fundRequestLoading;
+  const fundRequestLoading = userwallet.fundRequestLoading;
   const userRole = login && login.userData && login.userData.role;
 
   const [isPopupVisible, handlePopUp] = useState(false);
@@ -83,7 +83,7 @@ reqstfundUuid: "65ff9fb4-7e82-44fc-af76-39f22efe613f"
 : 1000
 requestUserName: "9718063555"
   */
-console.log('fundRequestLoading', fundRequestLoading);
+  console.log("fundRequestLoading", fundRequestLoading);
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -139,78 +139,77 @@ console.log('fundRequestLoading', fundRequestLoading);
               </div>
 
               <div className="card-body">
-                { fundRequestLoading ?
-                <FullPageLoader />
-                :
-                <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">From Bank Name</th>
-                      <th scope="col">To Bank Name</th>
-                      <th scope="col">Requested Amount</th>
-                      <th scope="col">Payment Mode</th>
-                      <th scope="col">Requested Date</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {fundRequestItems &&
-                    Array.isArray(fundRequestItems) &&
-                    fundRequestItems.length > 0 ? (
-                      fundRequestItems.map((item, index) => {
-                        return (
-                          <tr key={item.reqstDate}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{item.fromBank}</td>
-                            <td>{item.toBank}</td>
-                            <td>{item.requestAmount}</td>
-                            <td>{item.payementMode}</td>
-                            <td>{item.reqstDate}</td>
-                            <td className={item.approveStatus.toLowerCase()}>
-                              {item.approveStatus}
-                            </td>
-                            <td>
-                              
-                              {item.approveStatus != "DONE" &&
-                              userRole !== "PTM_VENDOR" ? (
-                                <React.Fragment>
-                                  <button
-                                    onClick={() =>
-                                      handleApprove(item.reqstfundUuid)
-                                    }
-                                    class="btn-common"
-                                  >
-                                    Approve
-                                  </button>
-                                  <button
-                                    onClick={() =>
-                                      handleReject(item.reqstfundUuid)
-                                    }
-                                   class="btn-common badge-warning"
-                                  >
-                                    Reject
-                                  </button>
-                                </React.Fragment>
-                              ) : (
-                                "NA"
-                              )}
-                            </td>
-                          </tr>
-                        );
-                      })
-                    ) : (
+                {fundRequestLoading ? (
+                  <FullPageLoader />
+                ) : (
+                  <table className="table table-bordered">
+                    <thead>
                       <tr>
-                        <td colSpan="8" style={{ textAlign: "center" }}>
-                          No Data Found
-                        </td>
+                        <th scope="col">#</th>
+                        <th scope="col">From Bank Name</th>
+                        <th scope="col">To Bank Name</th>
+                        <th scope="col">Requested Amount</th>
+                        <th scope="col">Payment Mode</th>
+                        <th scope="col">Requested Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
-                }
-             </div>
+                    </thead>
+                    <tbody>
+                      {fundRequestItems &&
+                      Array.isArray(fundRequestItems) &&
+                      fundRequestItems.length > 0 ? (
+                        fundRequestItems.map((item, index) => {
+                          return (
+                            <tr key={item.reqstDate}>
+                              <th scope="row">{index + 1}</th>
+                              <td>{item.fromBank}</td>
+                              <td>{item.toBank}</td>
+                              <td>{item.requestAmount}</td>
+                              <td>{item.payementMode}</td>
+                              <td>{item.reqstDate}</td>
+                              <td className={item.approveStatus.toLowerCase()}>
+                                {item.approveStatus}
+                              </td>
+                              <td>
+                                {item.approveStatus != "DONE" &&
+                                userRole !== "PTM_VENDOR" ? (
+                                  <React.Fragment>
+                                    <button
+                                      onClick={() =>
+                                        handleApprove(item.reqstfundUuid)
+                                      }
+                                      class="btn-common"
+                                    >
+                                      Approve
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        handleReject(item.reqstfundUuid)
+                                      }
+                                      class="btn-common badge-warning"
+                                    >
+                                      Reject
+                                    </button>
+                                  </React.Fragment>
+                                ) : (
+                                  "NA"
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <tr>
+                          <td colSpan="8" style={{ textAlign: "center" }}>
+                            No Data Found
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                )}
+              </div>
             </div>
           </section>
         </div>

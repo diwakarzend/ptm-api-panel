@@ -2,13 +2,13 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { loginRequest, loginResetStore } from "../../actions/Login";
 import LoginForm from "./LoginForm";
-
 import "./Login.css";
 
 class LoginPage extends PureComponent {
   componentDidUpdate(preProps, prevState) {
     const { login, history } = this.props;
     if (
+      history &&
       login &&
       login.isLoggedIn &&
       preProps.login.isLoggedIn !== login.isLoggedIn
