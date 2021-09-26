@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
-import { fetchUserDetails } from "../../actions/Login";
+import { fetchMonthlyReports } from "../../actions/payout";
 import "../../lib/Chart/Chart.min";
 const chartConfig = require("../../lib/Chart/Config");
 import "./DashBoard.css";
@@ -12,9 +12,9 @@ import { dynamicDataWithXY } from "../../lib/Chart/common";
 import CircularProgressBar from "../../Components/CircularProgressBar";
 
 const DashBoard = (props) => {
-  const {
-    data: { totalTransaction, totalSuccess, totalFailed, totalPending },
-  } = transactionStatus;
+  // const {
+  //   data: { totalTransaction, totalSuccess, totalFailed, totalPending },
+  // } = transactionStatus;
   const chartXData =
     chartData &&
     chartData.data.map((item) => {
@@ -33,11 +33,24 @@ const DashBoard = (props) => {
   useEffect(() => {
     const { dispatch } = props;
 
-    // dispatch(fetchTransactionReport({}));
+    dispatch(fetchMonthlyReports());
 
     var ctx = document.getElementById("myChart3-light").getContext("2d");
     var myChart = new Chart(ctx, chartObj);
   }, []);
+
+  console.log("dashboard", props);
+
+  const { payout } = props;
+  const monthlyReport = payout && payout.monthlyReport;
+  const statusReport =
+    (payout && payout.statusReport && payout.statusReport.data) || "";
+
+  const totalTransaction = statusReport
+    ? parseInt(statusReport.DONE) +
+      parseInt(statusReport.FAIL) +
+      parseInt(statusReport.REJECTED)
+    : "";
 
   return (
     <div className="container_full">
@@ -137,64 +150,73 @@ const DashBoard = (props) => {
                   </div>
                 </div>
               </div>
-
-              <div className="col-xl-4 mb-4">
-                <div className="card">
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-12">
-                        <h2 className="mb-1">Overall statistics</h2>
-                        <p className="mb-4">
-                          Daily information about statistics in system
-                        </p>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12 mb-xs-30">
-                        <div className="ep_1 ">
-                          <CircularProgressBar
-                            percentage={(totalSuccess * 100) / totalTransaction}
-                            strokeWidth={7}
-                            strokeColor="#000a1a"
-                            sqSize={100}
-                          />
-                        </div>
-                        <div className="user_data">
-                          <span className="fw-bold mt-3 mb-0">Success</span>
+              {statusReport ? (
+                <div className="col-xl-4 mb-4">
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col-12">
+                          <h2 className="mb-1">Overall statistics</h2>
+                          <p className="mb-4">
+                            Daily information about statistics in system
+                          </p>
                         </div>
                       </div>
+                      <div className="row">
+                        <div className="col-sm-12 mb-xs-30">
+                          <div className="ep_1 ">
+                            <CircularProgressBar
+                              percentage={Math.floor(
+                                (statusReport.DONE * 100) / totalTransaction
+                              )}
+                              strokeWidth={7}
+                              strokeColor="#097643"
+                              sqSize={100}
+                            />
+                          </div>
+                          <div className="user_data">
+                            <span className="fw-bold mt-3 mb-0">Success</span>
+                          </div>
+                        </div>
 
-                      <div className="col-sm-6 mb-xs-30">
-                        <div className="ep_1 ">
-                          <CircularProgressBar
-                            percentage={(totalFailed * 100) / totalTransaction}
-                            strokeWidth={7}
-                            strokeColor="#000a1a"
-                            sqSize={100}
-                          />
+                        <div className="col-sm-6 mb-xs-30">
+                          <div className="ep_1 ">
+                            <CircularProgressBar
+                              percentage={Math.floor(
+                                (statusReport.FAIL * 100) / totalTransaction
+                              )}
+                              strokeWidth={7}
+                              strokeColor="#FF333C"
+                              sqSize={100}
+                            />
+                          </div>
+                          <div className="user_data">
+                            <span className="fw-bold mt-3 mb-0">Failed</span>
+                          </div>
                         </div>
-                        <div className="user_data">
-                          <span className="fw-bold mt-3 mb-0">Failed</span>
-                        </div>
-                      </div>
 
-                      <div className="col-sm-6">
-                        <div className="ep_1" data-percent="1">
-                          <CircularProgressBar
-                            percentage={(totalPending * 100) / totalTransaction}
-                            strokeWidth={7}
-                            strokeColor="#000a1a"
-                            sqSize={100}
-                          />
-                        </div>
-                        <div className="user_data">
-                          <span className="fw-bold mt-3 mb-0">Pending</span>
+                        <div className="col-sm-6">
+                          <div className="ep_1" data-percent="1">
+                            <CircularProgressBar
+                              percentage={Math.floor(
+                                (statusReport.REJECTED * 100) / totalTransaction
+                              )}
+                              strokeWidth={7}
+                              strokeColor="#FF33B8"
+                              sqSize={100}
+                            />
+                          </div>
+                          <div className="user_data">
+                            <span className="fw-bold mt-3 mb-0">REJECTED</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                ""
+              )}
             </div>
 
             <div className="card-group mb-4">
