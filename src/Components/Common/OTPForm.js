@@ -5,7 +5,7 @@ const OTPForm = memo(({ otpChangeHandler }) => {
   for (let i = 1; i <= 6; i++) {
     form.push(
       <input
-        type="text"
+        type="number"
         className="otp-input"
         onChange={otpChangeHandler}
         name={`otp-${i}`}
@@ -15,7 +15,7 @@ const OTPForm = memo(({ otpChangeHandler }) => {
       />
     );
   }
-  return <div>{form}</div>;
+  return <div className="otp-section">{form}</div>;
 });
 
 export default OTPForm;

@@ -67,19 +67,6 @@
     background-color: red;
     border: 0;
   }
-  .otp-section {
-      display: flex;
-    justify-content: center;
-  }
-
-  .otp-section .otp-input {
-    border-radius: 3px;
-    border: 1px solid #ededed;
-    width: 40px;
-    height: 40px;
-    margin-right: 6px;
-    padding: 3px;
-  }
 
   .otp-message {
     padding: 6px;

@@ -122,6 +122,13 @@ body {
   background: #063884;
   top: 1px;
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
 .bg-gold {
   background: #c1993f !important;
 }
@@ -4717,6 +4724,21 @@ ul.inbox-pagination li {
   top: 2px;
   left: 6px;
 }
+
+.otp-section {
+  display: flex;
+  justify-content: center;
+}
+
+.otp-section .otp-input {
+  border-radius: 3px;
+  border: 1px solid #ededed;
+  width: 40px;
+  height: 40px;
+  margin-right: 6px;
+  padding: 3px;
+}
+
 @media (max-width: 531px) {
   .m-view {
     display: none;

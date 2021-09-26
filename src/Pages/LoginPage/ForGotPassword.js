@@ -139,7 +139,7 @@ const ForGotPassword = memo(
               <input
                 className="form-control"
                 autoFocus="autofocus"
-                type="text"
+                type="number"
                 autoComplete="off"
                 placeholder="Mobile No"
                 required
@@ -160,26 +160,27 @@ const ForGotPassword = memo(
                 placeholder="New Password"
               />
             </div>
-            <OTPForm otpChangeHandler={otpChangeHandler} />
-
+            <div className="floating-label-group">
+             <OTPForm otpChangeHandler={otpChangeHandler} />
+            </div>
             <input
               type="submit"
               value="Submit"
-              className="submit-btn"
+              className="btn-common"
               style={btnStyle}
               onClick={(event) => submitHandlerForgotPassword(event, "submit")}
             />
             <input
               type="submit"
               value="Cancel"
-              className="submit-btn"
+              className="btn-common"
               style={btnStyle}
               onClick={(event) => submitHandlerForgotPassword(event, "cancel")}
             />
           </form>
         ) : (
-          <div className="floating-label-group">
             <form onSubmit={handleOtpRequest}>
+            <div className="floating-label-group">
               <input
                 className="form-control"
                 autoFocus="autofocus"
@@ -190,14 +191,15 @@ const ForGotPassword = memo(
                 name="mobile"
                 onChange={changeHandler}
               />
+                </div>
               <input
                 type="submit"
-                value="send"
+                value="Send"
                 className="submit-btn"
                 style={btnStyle}
               />
             </form>
-          </div>
+        
         )}
       </div>
     );

@@ -98,7 +98,7 @@ class LoginForm extends React.Component {
                         placeholder="Mobile No"
                         className="form-control"
                         autoFocus="autofocus"
-                        type="text"
+                        type="number"
                         ref={(input) => {
                           this.username = input;
                         }}
