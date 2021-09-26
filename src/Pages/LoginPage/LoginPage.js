@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { loginRequest, loginResetStore } from "../../actions/Login";
 import LoginForm from "./LoginForm";
-import ForGotPassword from "./ForGotPassword";
 
 import "./Login.css";
 
