@@ -84,13 +84,19 @@ input:not(:focus):valid ~ .floating-label {
   max-width: 1027px;
   margin: 92px auto;
 }
-.login-error {
-  color: red;
+.error-msg {
+  color: #ff0000;
   margin: 12px 10px;
   display: block;
   text-align: center;
 }
 
+.success-msg {
+  color: #3c5e28;
+  margin: 12px 10px;
+  display: block;
+  text-align: center;
+}
 .reset-password {
   float: right;
   color: #1e437b;

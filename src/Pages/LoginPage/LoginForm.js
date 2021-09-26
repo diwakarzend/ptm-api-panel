@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
 import { isEmpty } from "../../utils/common";
-import ForGotPassword from "./ForGotPassword";
-import urls from "../../utils/urls";
-import Request from "../../utils/Request";
+import ResetPassword from "../../Components/ResetPassword/ResetPassword";
 import "./Login.css";
 
 class LoginForm extends React.Component {
@@ -15,7 +13,7 @@ class LoginForm extends React.Component {
         tenantId: 0,
       },
       forgotPasswordClicked: false,
-      successmsg: "",
+      successMsg: "",
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.removeErrorMsg = this.removeErrorMsg.bind(this);
@@ -62,14 +60,14 @@ class LoginForm extends React.Component {
   resetSuccess = () => {
     this.setState({
       forgotPasswordClicked: false,
-      successmsg: "Password reset successfully",
+      successMsg: "Password reset successfully",
     });
   };
 
   render() {
     const { errorMsg } = this.props;
-    const { forgotPasswordClicked, successmsg } = this.state;
-
+    const { forgotPasswordClicked, successMsg } = this.state;
+    const cssClass = successMsg ? "success-msg" : "error-msg";
     return (
       <div className="container-fluid">
         <div className="d-flex align-items-stretch row full-page">
@@ -77,16 +75,14 @@ class LoginForm extends React.Component {
           <div className="d-flex col-md-5 form-wrapper">
             <div className="form-content-wrapper align-self-center">
               {forgotPasswordClicked ? (
-                <ForGotPassword
-                  cancelForgotPassword={this.cancelForgotPassword}
+                <ResetPassword
+                  handleCancel={this.cancelForgotPassword}
                   resetSuccess={this.resetSuccess}
                 />
               ) : (
                 <Fragment>
                   <form className="form-group" onSubmit={this.onFormSubmit}>
-                    <span className="login-error">
-                      {errorMsg || successmsg}
-                    </span>
+                    <span className={cssClass}>{errorMsg || successMsg}</span>
 
                     <img
                       src="https://storage.googleapis.com/ptm-assets-prod/banner/imageonline-co-roundcorner.png"
