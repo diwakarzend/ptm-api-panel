@@ -26,7 +26,6 @@ class LoginForm extends React.Component {
       password: this.password.value,
       tenantId: 1,
     };
-    console.log("formData", formData);
     if (this.validateInput(formData)) {
       this.props.onLoginSubmit(formData);
     }

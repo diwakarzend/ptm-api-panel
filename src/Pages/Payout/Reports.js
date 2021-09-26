@@ -35,7 +35,6 @@ const Reports = memo((props) => {
   };
 
   const reportsItems = payout && payout.reports && payout.reports.data;
-  console.log("filterItems", filterItems, props);
   //   accountNumber: "7812106401"
   // approvalRequired: "N"
   // beneficiaryName: "Piyush Singh"

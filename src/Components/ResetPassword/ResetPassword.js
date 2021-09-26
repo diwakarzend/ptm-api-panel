@@ -22,7 +22,6 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
   const sendOTPHandler = (event) => {
     event.preventDefault();
     const successHandler = (response) => {
-      console.log("fpass", response);
       if (response.success == true) {
         updateFormData({
           ...formData,
@@ -39,7 +38,6 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
       }
     };
     const errorHandler = (response) => {
-      console.log("fpasserror", response);
     };
 
     const api = new Request("", successHandler, errorHandler, false);
@@ -69,7 +67,6 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
   const submitForgotPassword = (event) => {
     event.preventDefault();
     const successHandler = (response) => {
-      console.log("submitForgotPasswordp", response);
       if (response.success) {
         resetSuccess();
       } else {
@@ -81,7 +78,6 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
       }
     };
     const errorHandler = (response) => {
-      // console.log("submitForgotPassword1", response);
       updateFormData({
         ...formData,
         errorMsg: response.msg,
@@ -102,8 +98,6 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
       params
     );
   };
-
-  console.log("statestate", formData);
 
   const cssClass = formData.successMsg ? "success-msg" : "error-msg";
   return (

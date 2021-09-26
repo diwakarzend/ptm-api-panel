@@ -12,7 +12,6 @@ const Step2Form = memo(
     step1Response,
   }) => {
     const userData = login && login.userData && login.userData;
-    console.log("formData.accountNumber", formData, step1Response);
 
     return (
       <div className="modal-body">

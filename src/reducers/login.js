@@ -78,7 +78,6 @@ export default (state = initialState, action = {}) => {
       //   // userData,
       // };
 
-      console.log("Action111", payload);
 
       changes = {
         loginInfo: payload,

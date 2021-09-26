@@ -46,12 +46,10 @@ const FundRequest = memo((props) => {
   };
 
   const successHandler = (response) => {
-    console.log("response", response);
     setStatus(response.msg);
     getFundRequest(userRole);
   };
   const errorHandler = (response) => {
-    console.log("errorHandler", response);
     setStatus(response.msg);
   };
 
@@ -68,8 +66,6 @@ const FundRequest = memo((props) => {
       urls.login.BASE_URL + urls.Wallet.FUND_REQUEST_REJECT + requestId
     );
   };
-
-  console.log("FundRequest", props);
 
   /*   userwallet:
 fundRequest:

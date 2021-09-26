@@ -169,7 +169,6 @@ function fetchUserDetails(token) {
 }
 
 function shouldFetchUserDetails(state) {
-  console.log("shouldFetchUserDetails", state);
   const { login } = state;
   if (login && !login.userData) {
     return true;
@@ -197,7 +196,6 @@ export function fetchUserWallet() {
 }
 
 function shouldFetchWalletData(state) {
-  console.log("shouldFetchWalletData", state);
   const { login } = state;
   if (login && !login.userWallet) {
     return true;

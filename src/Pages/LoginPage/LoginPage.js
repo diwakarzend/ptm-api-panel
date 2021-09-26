@@ -16,7 +16,6 @@ class LoginPage extends PureComponent {
       //  loginResetStore();
       history.push("/dashboard");
     }
-    console.log("preProps, prevState", preProps, prevState);
   }
 
   onLoginSubmit = (data) => {
@@ -60,7 +59,6 @@ class LoginPage extends PureComponent {
   } */
 
   render() {
-    console.log("this.ptopss", this.props);
     const { handleForgotPassword } = this.props;
     const { login } = this.props;
     let errorMsg = "";
