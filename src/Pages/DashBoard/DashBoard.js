@@ -11,17 +11,30 @@ import moment from "moment";
 import { dynamicDataWithXY } from "../../lib/Chart/common";
 import CircularProgressBar from "../../Components/CircularProgressBar";
 
-
 const DashBoard = (props) => {
-  const { data: { totalTransaction, totalSuccess, totalFailed, totalPending} } = transactionStatus;
-  const chartXData = chartData && chartData.data.map(item => {
-    const month = moment(`${item.month}`, 'M').format('MMMM');
-    return `${month} ${item.year}`
-  })
-  const chartYData = chartData && chartData.data.map(item => item.totalRevenue);
-  const chartObj = dynamicDataWithXY(chartXData, chartYData, "Revenue Chart" ,"Month of the year", "Revenue in Rs");
+  const {
+    data: { totalTransaction, totalSuccess, totalFailed, totalPending },
+  } = transactionStatus;
+  const chartXData =
+    chartData &&
+    chartData.data.map((item) => {
+      const month = moment(`${item.month}`, "M").format("MMMM");
+      return `${month} ${item.year}`;
+    });
+  const chartYData =
+    chartData && chartData.data.map((item) => item.totalRevenue);
+  const chartObj = dynamicDataWithXY(
+    chartXData,
+    chartYData,
+    "Revenue Chart",
+    "Month of the year",
+    "Revenue in Rs"
+  );
   useEffect(() => {
     const { dispatch } = props;
+
+    // dispatch(fetchTransactionReport({}));
+
     var ctx = document.getElementById("myChart3-light").getContext("2d");
     var myChart = new Chart(ctx, chartObj);
   }, []);
@@ -139,7 +152,12 @@ const DashBoard = (props) => {
                     <div className="row">
                       <div className="col-sm-12 mb-xs-30">
                         <div className="ep_1 ">
-                          <CircularProgressBar percentage={totalSuccess*100/totalTransaction} strokeWidth={7} strokeColor="#000a1a" sqSize={100} />
+                          <CircularProgressBar
+                            percentage={(totalSuccess * 100) / totalTransaction}
+                            strokeWidth={7}
+                            strokeColor="#000a1a"
+                            sqSize={100}
+                          />
                         </div>
                         <div className="user_data">
                           <span className="fw-bold mt-3 mb-0">Success</span>
@@ -148,7 +166,12 @@ const DashBoard = (props) => {
 
                       <div className="col-sm-6 mb-xs-30">
                         <div className="ep_1 ">
-                          <CircularProgressBar percentage={totalFailed*100/totalTransaction} strokeWidth={7} strokeColor="#000a1a" sqSize={100} />
+                          <CircularProgressBar
+                            percentage={(totalFailed * 100) / totalTransaction}
+                            strokeWidth={7}
+                            strokeColor="#000a1a"
+                            sqSize={100}
+                          />
                         </div>
                         <div className="user_data">
                           <span className="fw-bold mt-3 mb-0">Failed</span>
@@ -157,7 +180,12 @@ const DashBoard = (props) => {
 
                       <div className="col-sm-6">
                         <div className="ep_1" data-percent="1">
-                          <CircularProgressBar percentage={totalPending*100/totalTransaction} strokeWidth={7} strokeColor="#000a1a" sqSize={100} />
+                          <CircularProgressBar
+                            percentage={(totalPending * 100) / totalTransaction}
+                            strokeWidth={7}
+                            strokeColor="#000a1a"
+                            sqSize={100}
+                          />
                         </div>
                         <div className="user_data">
                           <span className="fw-bold mt-3 mb-0">Pending</span>
@@ -319,7 +347,7 @@ const DashBoard = (props) => {
                         <i
                           className="fa fa-shopping-basket"
                           aria-hidden="true"
-                        ></i>{" "}
+                        ></i>
                         Today's Sales <span>65k</span>
                       </h2>
                       <div className="progress mb-5" style={{ height: "5px" }}>
@@ -339,7 +367,7 @@ const DashBoard = (props) => {
                         <i
                           className="fa fa-shopping-cart"
                           aria-hidden="true"
-                        ></i>{" "}
+                        ></i>
                         Today's Purchase <span>35k</span>
                       </h2>
                       <div className="progress mb-5" style={{ height: "5px" }}>
@@ -400,7 +428,7 @@ const DashBoard = (props) => {
 
                     <form className="filter-table">
                       <div className="form-group">
-                        <label for="exampleFormControlSelect1">Type</label>
+                        <label>Type</label>
                         <select
                           className="form-control"
                           id="exampleFormControlSelect1"
@@ -411,7 +439,7 @@ const DashBoard = (props) => {
                       </div>
 
                       <div className="form-group">
-                        <label for="exampleInputEmail1">Date</label>
+                        <label>Date</label>
                         <input
                           type="date"
                           className="form-control"
