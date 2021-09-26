@@ -9,11 +9,13 @@ import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import "./FundRequest.css";
 import FundRequestForm from "./FundRequestForm";
+import FullPageLoader from "../../Components/FullPageLoader";
 
 const FundRequest = memo((props) => {
   const { dispatch, login, userwallet } = props;
 
   const fundRequestItems = userwallet.fundRequest.data;
+  const fundRequestLoading =  userwallet.fundRequestLoading;
   const userRole = login && login.userData && login.userData.role;
 
   const [isPopupVisible, handlePopUp] = useState(false);
@@ -81,7 +83,7 @@ reqstfundUuid: "65ff9fb4-7e82-44fc-af76-39f22efe613f"
 : 1000
 requestUserName: "9718063555"
   */
-
+console.log('fundRequestLoading', fundRequestLoading);
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -137,6 +139,9 @@ requestUserName: "9718063555"
               </div>
 
               <div className="card-body">
+                { fundRequestLoading ?
+                <FullPageLoader />
+                :
                 <table className="table table-bordered">
                   <thead>
                     <tr>
@@ -204,7 +209,8 @@ requestUserName: "9718063555"
                     )}
                   </tbody>
                 </table>
-              </div>
+                }
+             </div>
             </div>
           </section>
         </div>

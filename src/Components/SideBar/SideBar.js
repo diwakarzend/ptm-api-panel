@@ -27,7 +27,7 @@ const SideBar = (props) => {
   const { login } = props;
   const userData = login && login.userData;
   const userWallet = login && login.userWallet;
-
+  const isWalletLoading = login && login.isWalletLoading;
   return (
     <div className="side_bar scroll_auto">
       <div className="user-panel">
@@ -37,7 +37,7 @@ const SideBar = (props) => {
             <i className="fa fa-inr" aria-hidden="true"></i>
             {userWallet && userWallet.MAIN_WALLET}
             <i
-              className="fa fa-refresh"
+              className={"fa fa-refresh " + (isWalletLoading ? 'fa-spin':'')}
               aria-hidden="true"
               onClick={handleClick}
             ></i>
