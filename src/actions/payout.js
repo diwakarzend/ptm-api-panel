@@ -41,14 +41,12 @@ export function fetchMonthlyReports(params) {
       },
     };
 
-    const promise1 = axios.get(
-      `${urls.login.BASE_URL}${urls.payout.MONTHLY_REPORT}`,
-      options
-    );
-    const promise2 = axios.get(
-      `${urls.login.BASE_URL}${urls.payout.STATUS_REPORT}`,
-      options
-    );
+    const promise1 = axios
+      .get(`${urls.login.BASE_URL}${urls.payout.MONTHLY_REPORT}`, options)
+      .catch(() => "");
+    const promise2 = axios
+      .get(`${urls.login.BASE_URL}${urls.payout.STATUS_REPORT}`, options)
+      .catch(() => "");
 
     axios
       .all([promise1, promise2])
