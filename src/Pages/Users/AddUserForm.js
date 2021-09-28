@@ -139,15 +139,6 @@ const AddUserForm = (props) => {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div>
-            {errorHTML && errorStyles ? (
-              <ul style={errorStyles}>{errorHTML}</ul>
-            ) : success && successStyles ? (
-              <div style={successStyles}>{success}</div>
-            ) : (
-              ""
-            )}
-          </div>
 
           <div className="modal-body">
             <form onSubmit={submitFormHandler}>
@@ -225,7 +216,7 @@ const AddUserForm = (props) => {
                   <div className="form-group">
                     <label for="exampleInputEmail1">Pin Code</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       placeholder="Pin Code"
                       name="pincode"
@@ -269,7 +260,7 @@ const AddUserForm = (props) => {
                   <div className="form-group">
                     <label for="exampleInputEmail1">Mobile</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       placeholder="Mobile"
                       name="phoneNumber"
@@ -321,6 +312,15 @@ const AddUserForm = (props) => {
                 <button type="submit" className="btn btn-primary themebtn">
                   {editUserData ? "Update User" : "Save User"}
                 </button>
+              </div>
+              <div>
+                {errorHTML && errorStyles ? (
+                  <ul style={errorStyles}>{errorHTML}</ul>
+                ) : success && successStyles ? (
+                  <div style={successStyles}>{success}</div>
+                ) : (
+                  ""
+                )}
               </div>
             </form>
           </div>

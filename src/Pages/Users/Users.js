@@ -67,7 +67,7 @@ const Users = (props) => {
                   <div className="card-title">Add User </div>
                   <button
                     type="button"
-                    className="btn btn-secondary fund-btn"
+                    className="btn-common"
                     data-toggle="modal"
                     data-target="#exampleModal"
                     onClick={openPopupHandler}
@@ -93,19 +93,19 @@ const Users = (props) => {
                       role="group"
                       aria-label="Basic example"
                     >
-                      <button type="button" className="btn btn-secondary">
+                      <button type="button" className="btn-common">
                         Copy
                       </button>
-                      <button type="button" className="btn btn-secondary">
+                      <button type="button" className="btn-common">
                         CSV
                       </button>
-                      <button type="button" className="btn btn-secondary">
+                      <button type="button" className="btn-common">
                         Excel
                       </button>
-                      <button type="button" className="btn btn-secondary">
+                      <button type="button" className="btn-common">
                         PDF
                       </button>
-                      <button type="button" className="btn btn-secondary">
+                      <button type="button" className="btn-common">
                         Print
                       </button>
                     </div>
