@@ -12,6 +12,7 @@ import "./SideBar.css";
 const SideBar = (props) => {
   const [toggleCompany, setToggleCompany] = useState(false);
   const [togglePayment, setTogglePayment] = useState(false);
+  const [toggleAPI, setToggleAPI] = useState(false);
 
   useEffect(() => {
     const { dispatch } = props;
@@ -28,6 +29,9 @@ const SideBar = (props) => {
   const userData = login && login.userData;
   const userWallet = login && login.userWallet;
   const isWalletLoading = login && login.isWalletLoading;
+
+  console.log("toggleAPI", toggleAPI);
+
   return (
     <div className="side_bar scroll_auto">
       <div className="user-panel">
@@ -37,7 +41,7 @@ const SideBar = (props) => {
             <i className="fa fa-inr" aria-hidden="true"></i>
             {userWallet && userWallet.MAIN_WALLET}
             <i
-              className={"fa fa-refresh " + (isWalletLoading ? 'fa-spin':'')}
+              className={"fa fa-refresh " + (isWalletLoading ? "fa-spin" : "")}
               aria-hidden="true"
               onClick={handleClick}
             ></i>
@@ -120,6 +124,23 @@ const SideBar = (props) => {
           <AnchorLink href="/payout/reports">
             <i className="icon-wallet"></i> <span>Reports</span>
           </AnchorLink>
+        </li>
+
+        <li className="menu_sub">
+          <a
+            onClick={() => {
+              setToggleAPI(!toggleAPI);
+            }}
+          >
+            <i className="icon-wallet"></i> <span>API Document</span>
+            <span className="icon-arrow-down styleicon"></span>
+          </a>
+
+          <ul className={toggleAPI ? "down_menu open" : "down_menu"}>
+            <li>
+              <AnchorLink href="/userapi/document">Document</AnchorLink>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

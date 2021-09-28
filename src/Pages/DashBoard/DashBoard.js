@@ -15,14 +15,48 @@ const DashBoard = (props) => {
   // const {
   //   data: { totalTransaction, totalSuccess, totalFailed, totalPending },
   // } = transactionStatus;
+
+  useEffect(() => {
+    const { dispatch, payout } = props;
+    dispatch(fetchMonthlyReports());
+  }, []);
+
+  console.log("dashboard", props);
+
+  const { payout } = props;
+  const statusReport =
+    (payout && payout.statusReport && payout.statusReport.data) || "";
+  const monthlyReport = (payout && payout.monthlyReport) || "";
+
+  let transactionReport = "";
+  if (
+    payout &&
+    payout.statusTranscReport &&
+    payout.statusTranscReport.data &&
+    Array.isArray(payout.statusTranscReport.data)
+  ) {
+    transactionReport = payout.statusTranscReport.data.filter(
+      (item) => item.status.toLowerCase() == "done"
+    );
+    transactionReport = transactionReport[0];
+  }
+
+  const totalTransaction = statusReport
+    ? parseInt(statusReport.DONE) +
+      parseInt(statusReport.FAIL) +
+      parseInt(statusReport.REJECTED)
+    : "";
+
   const chartXData =
-    chartData &&
-    chartData.data.map((item) => {
-      const month = moment(`${item.month}`, "M").format("MMMM");
-      return `${month} ${item.year}`;
+    monthlyReport &&
+    monthlyReport.data &&
+    monthlyReport.data.map((item) => {
+      return `${item.month} ${item.year}`;
     });
   const chartYData =
-    chartData && chartData.data.map((item) => item.totalRevenue);
+    monthlyReport &&
+    monthlyReport.data &&
+    monthlyReport.data.map((item) => item.totalRevenue);
   const chartObj = dynamicDataWithXY(
     chartXData,
     chartYData,
@@ -30,27 +64,10 @@ const DashBoard = (props) => {
     "Month of the year",
     "Revenue in Rs"
   );
-  useEffect(() => {
-    const { dispatch } = props;
-
-    dispatch(fetchMonthlyReports());
-
+  if (monthlyReport && document.getElementById("myChart3-light")) {
     var ctx = document.getElementById("myChart3-light").getContext("2d");
     var myChart = new Chart(ctx, chartObj);
-  }, []);
-
-  console.log("dashboard", props);
-
-  const { payout } = props;
-  const monthlyReport = payout && payout.monthlyReport;
-  const statusReport =
-    (payout && payout.statusReport && payout.statusReport.data) || "";
-
-  const totalTransaction = statusReport
-    ? parseInt(statusReport.DONE) +
-      parseInt(statusReport.FAIL) +
-      parseInt(statusReport.REJECTED)
-    : "";
+  }
 
   return (
     <div className="container_full">
@@ -64,12 +81,12 @@ const DashBoard = (props) => {
                 <div className="card bg-primary border-0 text-light pt-3 pb-3 h-100">
                   <div className="card-body ">
                     <div className="row">
-                      <div className=" col-3">
+                      {/* <div className=" col-3">
                         <i className="icon-people f30"></i>
-                      </div>
+                      </div> */}
                       <div className=" col-9">
-                        <h6 className="m-0 text-light">New Users</h6>
-                        <p className="f12 mb-0">32 New Users</p>
+                        <h6 className="m-0 text-light">Total Transactions</h6>
+                        <p className="f12 mb-0">{transactionReport.count}</p>
                       </div>
                     </div>
                   </div>
@@ -79,12 +96,14 @@ const DashBoard = (props) => {
                 <div className="card bg-info border-0 text-light pt-3 pb-3 h-100">
                   <div className="card-body">
                     <div className="row">
-                      <div className=" col-3">
+                      {/* <div className=" col-3">
                         <i className="icon-basket-loaded f30"></i>
-                      </div>
+                      </div> */}
                       <div className=" col-9">
-                        <h6 className="m-0 text-light">Order Placed</h6>
-                        <p className="f12 mb-0">123 New Order Placed</p>
+                        <h6 className="m-0 text-light">Total Amount</h6>
+                        <p className="f12 mb-0">
+                          {transactionReport.totalTransaction}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -94,12 +113,12 @@ const DashBoard = (props) => {
                 <div className="card bg-warning border-0 text-light pt-3 pb-3 h-100">
                   <div className="card-body">
                     <div className="row">
-                      <div className=" col-3">
+                      {/* <div className=" col-3">
                         <i className=" icon-handbag f30"></i>
-                      </div>
+                      </div> */}
                       <div className=" col-9">
-                        <h6 className="m-0 text-light">Delivery </h6>
-                        <p className="f12 mb-0">54 New Delivery</p>
+                        <h6 className="m-0 text-light">Refunded Transaction</h6>
+                        <p className="f12 mb-0">0</p>
                       </div>
                     </div>
                   </div>
@@ -109,14 +128,15 @@ const DashBoard = (props) => {
                 <div className="card bg-danger border-0 text-light pt-3 pb-3 h-100">
                   <div className="card-body">
                     <div className="row">
-                      <div className=" col-3">
+                      {/* <div className=" col-3">
                         <i className=" icon-badge f30"></i>
-                      </div>
+                      </div> */}
                       <div className=" col-9">
-                        <h6 className="m-0 text-light">Monthly Profits</h6>
+                        <h6 className="m-0 text-light">
+                          Cancelled Transaction
+                        </h6>
                         <p className="f12 mb-0">
-                          $9887 This Month Profit{" "}
-                          <span className="float-right text-success"></span>
+                          0<span className="float-right text-success"></span>
                         </p>
                       </div>
                     </div>
@@ -202,7 +222,7 @@ const DashBoard = (props) => {
                                 (statusReport.REJECTED * 100) / totalTransaction
                               )}
                               strokeWidth={7}
-                              strokeColor="#FF33B8"
+                              strokeColor="#0000ff"
                               sqSize={100}
                             />
                           </div>

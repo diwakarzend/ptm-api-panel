@@ -17,21 +17,18 @@ export default (state = initialState, action = {}) => {
 
     case actionTypes.FETCH_REPORTS_FAILURE:
       changes = {
-        ...state,
         reports: action.payload,
       };
       break;
 
-    case actionTypes.FETCH_MONTHLY_REPORTS_SUCCESS:
+    case actionTypes.FETCH_DASHBOARD_REPORTS_SUCCESS:
       changes = {
-        ...state,
         ...action.payload,
       };
       break;
 
-    case actionTypes.FETCH_MONTHLY_REPORTS_FAILURE:
+    case actionTypes.FETCH_DASHBOARD_REPORTS_FAILURE:
       changes = {
-        ...state,
         ...action.payload,
       };
       break;
