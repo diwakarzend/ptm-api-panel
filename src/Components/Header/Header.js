@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "../../../public/css/style.css";
 import "./Header.css";
 import Logout from "../Logout/Logout";
-import { printUserName } from "../../utils/common";
+import { printUserName, printUserNameShort } from "../../utils/common";
 
 const Header = (props) => {
   const { location } = props;
@@ -55,7 +55,7 @@ const Header = (props) => {
                     />
                   </strong>
                   <span className="logo-default">
-                    <img src="http://localhost:3008/images/logo.png" alt="" />
+                    <img src="https://storage.googleapis.com/ptm-assets-prod/banner/pay2mobile-logo.png" alt="" />
                   </span>
                 <div className="icon_menu" onClick={clickHambergerHandler}>
                   <a className="menu-toggler sidebar-toggler"></a>
@@ -356,11 +356,7 @@ const UserInfoPopUp = ({
         aria-expanded="true"
         onClick={() => toggleUserImage(!userPopUpVisible)}
       >
-        <img
-          className="img-circle pro_pic"
-          src="http://localhost:3008/images/user3.png"
-          alt=""
-        />
+       {printUserNameShort(userData)}
       </a>
       <ul
         className={`dropdown-menu dropdown-menu-default${

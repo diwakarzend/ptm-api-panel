@@ -106,6 +106,11 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
       <span className={cssClass}>
         {formData.successMsg || formData.errorMsg}
       </span>
+      <img
+            src="https://storage.googleapis.com/ptm-assets-prod/banner/imageonline-co-roundcorner.png"
+            alt="logo"
+            className="logo-icon"
+          />
       {formData.otpSend ? (
         <ResetPasswordForm
           submitFormHandler={submitForgotPassword}

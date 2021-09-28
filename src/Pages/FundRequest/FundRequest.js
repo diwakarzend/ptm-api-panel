@@ -121,7 +121,6 @@ requestUserName: "9718063555"
               </div>
 
               <div className="col-md-3">
-                <div className="form-group">
                   {userRole != "PTM_ADMIN" ? (
                     <select
                       className="form-control"
@@ -135,7 +134,6 @@ requestUserName: "9718063555"
                   ) : (
                     ""
                   )}
-                </div>
               </div>
 
               <div className="card-body">

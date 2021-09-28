@@ -102,12 +102,12 @@ const SideBar = (props) => {
           </a>
 
           <ul className={togglePayment ? "down_menu open" : "down_menu"}>
-            <li>
+            {/* <li>
               <AnchorLink href="/upi">UPI</AnchorLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <AnchorLink href="/add/money">Add Money</AnchorLink>
-            </li>
+            </li> */}
             <li>
               <AnchorLink href="/fund/request">Fund Request</AnchorLink>
             </li>

@@ -404,6 +404,10 @@ export function printUserName(userData) {
   return (userData && userData.firstName + " " + userData.lastName) || "";
 }
 
+export function printUserNameShort(userData) {
+  return (userData && userData.firstName[0] + "" + userData.lastName[0]) || "";
+}
+
 export function removeOverlay() {
   if (document.querySelector(".modal-backdrop.fade.show")) {
     document.querySelector(".modal-backdrop.fade.show").remove();
