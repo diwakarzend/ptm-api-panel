@@ -365,25 +365,25 @@ const UserInfoPopUp = ({
       >
         <li>
           <div className="user-panel">
-            <div className="user_image">
+            {/* <div className="user_image">
               <img
                 src="http://localhost:3008/images/user3.png"
                 className="img-circle mCS_img_loaded"
                 alt="User Image"
               />
-            </div>
+            </div> */}
             <div className="info">
               <p>{printUserName(userData)}</p>
               <a> {userData && userData.email}</a>
             </div>
           </div>
         </li>
-        <li>
+         <li>
           <a>
             <i className="icon-user"></i> Profile
           </a>
         </li>
-        <li>
+        {/*<li>
           <a>
             <i className="icon-settings"></i> Settings
           </a>
@@ -398,7 +398,7 @@ const UserInfoPopUp = ({
           <a href="lock_screen.html">
             <i className="icon-lock"></i> Lock
           </a>
-        </li>
+        </li> */}
         <li>
           <Logout {...props} />
         </li>
