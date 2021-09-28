@@ -27,7 +27,6 @@ const SideBar = (props) => {
   };
 
   const handleNavClick = (event, pathName) => {
-    event.preventDefault();
     if (pathName && pathName.split("/")) {
       const value = pathName.split("/").pop();
       setActiveSection(value);
