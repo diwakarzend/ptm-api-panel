@@ -4,6 +4,7 @@ import "../../../public/css/style.css";
 import "./Header.css";
 import Logout from "../Logout/Logout";
 import { printUserName, printUserNameShort } from "../../utils/common";
+import AnchorLink from "../AnchorLink/AnchorLink";
 
 const Header = (props) => {
   const { location } = props;
@@ -55,7 +56,9 @@ const Header = (props) => {
                     />
                   </strong>
                   <span className="logo-default">
-                    <img src="https://storage.googleapis.com/ptm-assets-prod/banner/pay2mobile-logo.png" alt="" />
+                  <AnchorLink href="/dashboard">
+                  <img src="https://storage.googleapis.com/ptm-assets-prod/banner/pay2mobile-logo.png" alt="" />
+                 </AnchorLink>
                   </span>
                 <div className="icon_menu" onClick={clickHambergerHandler}>
                   <a className="menu-toggler sidebar-toggler"></a>
