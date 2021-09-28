@@ -69,6 +69,11 @@ const DashBoard = (props) => {
     var myChart = new Chart(ctx, chartObj);
   }
 
+  const fontCss = {
+    fontSize: "20px",
+    textAlign: "center",
+    fontWeight: "bold",
+  };
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -86,7 +91,9 @@ const DashBoard = (props) => {
                       </div> */}
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Total Transactions</h6>
-                        <p className="f12 mb-0">{transactionReport.count}</p>
+                        <p className="f12 mb-0" style={fontCss}>
+                          {transactionReport.count}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -101,7 +108,7 @@ const DashBoard = (props) => {
                       </div> */}
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Total Amount</h6>
-                        <p className="f12 mb-0">
+                        <p className="f12 mb-0" style={fontCss}>
                           {transactionReport.totalTransaction}
                         </p>
                       </div>
@@ -118,7 +125,9 @@ const DashBoard = (props) => {
                       </div> */}
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Refunded Transaction</h6>
-                        <p className="f12 mb-0">0</p>
+                        <p className="f12 mb-0" style={fontCss}>
+                          0
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -135,8 +144,8 @@ const DashBoard = (props) => {
                         <h6 className="m-0 text-light">
                           Cancelled Transaction
                         </h6>
-                        <p className="f12 mb-0">
-                          0<span className="float-right text-success"></span>
+                        <p className="f12 mb-0" style={fontCss}>
+                          0
                         </p>
                       </div>
                     </div>
@@ -227,7 +236,7 @@ const DashBoard = (props) => {
                             />
                           </div>
                           <div className="user_data">
-                            <span className="fw-bold mt-3 mb-0">REJECTED</span>
+                            <span className="fw-bold mt-3 mb-0">Rejected</span>
                           </div>
                         </div>
                       </div>
