@@ -35,24 +35,23 @@ const Reports = memo((props) => {
   };
 
   const reportsItems = payout && payout.reports && payout.reports.data;
-  //   accountNumber: "7812106401"
+  //   accountNumber: "50100017129260"
   // approvalRequired: "N"
-  // beneficiaryName: "Piyush Singh"
-  // clientId: "510d1fe8-dc27-43fe-b9d3-7dfb22ff20e2"
-  // closingBalance: null
-  // createdDate: "2021-09-23T17:02:46"
-  // ifscCode: "KTB12345"
-  // lastModifiedDate: null
-  // merchantTxnId: null
+  // beneficiaryName: "Ranjeet Singh Paliwal"
+  // closingBalance: 10825
+  // createdDate: "2021-09-26T17:11:32"
+  // ifscCode: "HDFC0001236"
+  // lastModifiedDate: "2021-09-26T17:12:21"
+  // merchantTxnId: "126922915833"
   // mobileNumber: null
-  // openingBalance: null
-  // payoutChanrge: null
+  // openingBalance: 10830
+  // payoutChanrge: 5
   // remark: null
-  // remittanceAmount: 100
+  // remittanceAmount: 9
   // route: "IMPS"
-  // status: "INITIATED"
+  // status: "DONE"
+  // txnId: "8f903076-f4f2-444d-9c6a-57a6fd0817e6"
   // type: null
-  // userId: null
 
   /*   {
     "accountNumber": "string",
@@ -63,6 +62,8 @@ const Reports = memo((props) => {
     "txnId": "string",
     "vendorId": "string"
   } */
+
+  console.log("filterItems", filterItems);
 
   return (
     <div className="container_full">
@@ -137,9 +138,16 @@ const Reports = memo((props) => {
                       <th scope="col">#</th>
                       <th scope="col">DateTime</th>
                       <th scope="col">Payment Mode</th>
+                      <th scope="col">Transaction Details</th>
                       <th scope="col">Amount</th>
-                      <th scope="col">Account No</th>
-                      <th scope="col">beneficiaryName</th>
+                      <th scope="col">Beneficiary</th>
+                      {filterItems &&
+                        filterItems.status &&
+                        filterItems.status.toLowerCase() == "done" && (
+                          <th scope="col">Wallet Balance</th>
+                        )}
+                      <th scope="col">Service Charges</th>
+
                       <th scope="col">Status</th>
                       <th>Action</th>
                     </tr>
@@ -149,22 +157,55 @@ const Reports = memo((props) => {
                     Array.isArray(reportsItems) &&
                     reportsItems.length > 0 ? (
                       reportsItems.map((item, index) => {
+                        let gst = "";
+                        if (item.payoutChanrge) {
+                          gst = (item.payoutChanrge * 18) / 100;
+                          gst = gst.toFixed(2);
+                        }
                         return (
                           <tr key={item.reqstDate}>
                             <th scope="row">{index + 1}</th>
                             <td>{item.createdDate}</td>
                             <td>{item.route}</td>
+                            <td>
+                              <strong> TxnId:</strong> {item.txnId} <br />
+                              {item.merchantTxnId
+                                ? `TxnId:${item.merchantTxnId}`
+                                : ""}
+                            </td>
                             <td>{item.remittanceAmount}</td>
-                            <td>{item.accountNumber}</td>
-                            <td>{item.beneficiaryName}</td>
+
+                            <td>
+                              {item.beneficiaryName}, <br />
+                              {item.accountNumber}, <br />
+                              {item.ifscCode}
+                            </td>
+
+                            {filterItems &&
+                              filterItems.status &&
+                              filterItems.status.toLowerCase() == "done" && (
+                                <td>
+                                  <strong> OB:</strong> {item.openingBalance}{" "}
+                                  <br />
+                                  <strong> CB:</strong> {item.closingBalance}{" "}
+                                  <br />
+                                </td>
+                              )}
+
+                            <td>
+                              <strong>Charge : </strong>
+                              {item.payoutChanrge}
+                              <br />
+                              <strong> GST : </strong>
+                              {gst}
+                            </td>
+
                             <td className={item.status.toLowerCase()}>
                               {item.status}
                             </td>
                             <td>
                               <button
-                                onClick={() =>
-                                  openQuickPopupHandler(item.beneficiaryId)
-                                }
+                                onClick={() => {}}
                                 className="quick-payment-btn "
                               ></button>
                             </td>
