@@ -177,8 +177,8 @@ const Reports = memo((props) => {
                           colSpan="8"
                           style={{ textAlign: "center", color: "green" }}
                         >
-                          There is no transaction of current date, You can use
-                          filter option to get all required transactions.
+                          No transaction Found, You can use filter option to get
+                          all required transactions.
                         </td>
                       </tr>
                     )}

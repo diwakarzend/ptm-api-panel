@@ -9,6 +9,7 @@ import AddMoneyLoadable from "../Pages/AddMoney/AddMoneyLoadable";
 import FundRequestLoadable from "../Pages/FundRequest/FundRequestLoadable";
 import BeneficiaryLoadable from "../Pages/Benificiary/BeneficiaryLoadable";
 import ReportsLoadable from "../Pages/Payout/ReportsLoadable";
+import APIDocumentsLodable from "../Pages/APIDocuments/APIDocumentsLodable";
 
 const Routes = (props) => {
   return (
@@ -32,6 +33,11 @@ const Routes = (props) => {
         <PrivateRoute
           path="/payout/reports"
           component={ReportsLoadable}
+          exact
+        />
+        <PrivateRoute
+          path="/userapi/document"
+          component={APIDocumentsLodable}
           exact
         />
       </Switch>

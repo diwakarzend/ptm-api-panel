@@ -6,20 +6,20 @@ import { getAuthToken, isAuthenticated } from "../utils/common";
 export const actionTypes = {
   FETCH_REPORTS_SUCCESS: "FETCH_REPORTS_SUCCESS",
   FETCH_REPORTS_FAILURE: "FETCH_REPORTS_FAILURE",
-  FETCH_MONTHLY_REPORTS_SUCCESS: "FETCH_MONTHLY_REPORTS_SUCCESS",
-  FETCH_MONTHLY_REPORTS_FAILURE: "FETCH_MONTHLY_REPORTS_FAILURE",
+  FETCH_DASHBOARD_REPORTS_SUCCESS: "FETCH_DASHBOARD_REPORTS_SUCCESS",
+  FETCH_DASHBOARD_REPORTS_FAILURE: "FETCH_DASHBOARD_REPORTS_FAILURE",
 };
 
 export function fetchMonthlyReportsSuccess(data) {
   return {
-    type: actionTypes.FETCH_MONTHLY_REPORTS_SUCCESS,
+    type: actionTypes.FETCH_DASHBOARD_REPORTS_SUCCESS,
     payload: data,
   };
 }
 
 export function fetchMonthlyReportsFailure(error) {
   return {
-    type: actionTypes.FETCH_MONTHLY_REPORTS_FAILURE,
+    type: actionTypes.FETCH_DASHBOARD_REPORTS_FAILURE,
   };
 }
 
@@ -47,16 +47,25 @@ export function fetchMonthlyReports(params) {
     const promise2 = axios
       .get(`${urls.login.BASE_URL}${urls.payout.STATUS_REPORT}`, options)
       .catch(() => "");
+    const promise3 = axios
+      .get(
+        `${urls.login.BASE_URL}${urls.payout.STATUS_TRANSACTION_REPORT}`,
+        options
+      )
+      .catch(() => "");
 
     axios
-      .all([promise1, promise2])
+      .all([promise1, promise2, promise3])
       .then(
         axios.spread((...responses) => {
-          const monthlyReport = responses[0].data;
-          const statusReport = responses[1].data;
+          const monthlyReport = responses[0] && responses[0].data;
+          const statusReport = responses[1] && responses[1].data;
+          const statusTranscReport = responses[2] && responses[2].data;
+
           onSuccess({
             monthlyReport: monthlyReport,
             statusReport: statusReport,
+            statusTranscReport: statusTranscReport,
           });
         })
       )
