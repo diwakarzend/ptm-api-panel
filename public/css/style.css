@@ -4999,6 +4999,22 @@ ul.inbox-pagination li {
 .bank-detail-wrapper > div:last-child span {
   justify-content: flex-end;
 }
+.done,.active {
+  color: #008000;
+  font-weight: 700;
+}
+.initiated {
+  color: #379237;
+  font-weight: 700;
+}
+.rejected {
+  color: #f39a3e;
+  font-weight: 700;
+}
+.fail {
+  color: #ff0000;
+  font-weight: 700;
+}
 @media all and (max-width: 767px) {
   .modal.right .modal-dialog {
     max-width: 320px;
