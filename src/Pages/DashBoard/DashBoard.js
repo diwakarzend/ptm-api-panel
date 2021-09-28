@@ -56,7 +56,7 @@ const DashBoard = (props) => {
   const chartYData =
     monthlyReport &&
     monthlyReport.data &&
-    monthlyReport.data.map((item) => item.totalRevenue);
+    monthlyReport.data.map((item) => Math.abs(item.totalRevenue));
   const chartObj = dynamicDataWithXY(
     chartXData,
     chartYData,
