@@ -13,6 +13,7 @@ const SideBar = (props) => {
   const [toggleCompany, setToggleCompany] = useState(false);
   const [togglePayment, setTogglePayment] = useState(false);
   const [toggleAPI, setToggleAPI] = useState(false);
+  const [activeSection, setActiveSection] = useState("dashboard");
 
   useEffect(() => {
     const { dispatch } = props;
