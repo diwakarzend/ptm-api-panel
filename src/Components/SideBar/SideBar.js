@@ -26,12 +26,20 @@ const SideBar = (props) => {
     dispatch(fetchUserWallet());
   };
 
+  const handleNavClick = (event, pathName) => {
+    event.preventDefault();
+    if (pathName && pathName.split("/")) {
+      const value = pathName.split("/").pop();
+      setActiveSection(value);
+    }
+  };
+
   const { login } = props;
   const userData = login && login.userData;
   const userWallet = login && login.userWallet;
   const isWalletLoading = login && login.isWalletLoading;
 
-  console.log("toggleAPI", toggleAPI);
+  console.log("toggleAPI", activeSection);
 
   return (
     <div className="side_bar scroll_auto">
@@ -67,13 +75,17 @@ const SideBar = (props) => {
           </ul>
         </li>
 
-        <li className="menu_sub">
-          <AnchorLink href="/dashboard">
+        <li
+          className={`menu_sub${activeSection == "dashboard" ? " active" : ""}`}
+        >
+          <AnchorLink href="/dashboard" clicked={handleNavClick}>
             <i className="ti-home"></i> <span>Dashboard</span>
           </AnchorLink>
         </li>
         {userData && userData.role !== "PTM_VENDOR" ? (
-          <li className="menu_sub">
+          <li
+            className={`menu_sub${activeSection == "users" ? " active" : ""}`}
+          >
             <a
               href="javascript:void(0)"
               onClick={() => {
@@ -87,7 +99,9 @@ const SideBar = (props) => {
 
             <ul className={toggleCompany ? "down_menu open" : "down_menu"}>
               <li>
-                <AnchorLink href="/users">Vendors</AnchorLink>
+                <AnchorLink href="/users" clicked={handleNavClick}>
+                  Vendors
+                </AnchorLink>
               </li>
             </ul>
           </li>
@@ -95,7 +109,13 @@ const SideBar = (props) => {
           ""
         )}
 
-        <li className="menu_sub">
+        <li
+          className={`menu_sub${
+            ["request", "beneficiary"].includes(activeSection)
+              ? " active"
+              : false
+          }`}
+        >
           <a
             onClick={() => {
               setTogglePayment(!togglePayment);
@@ -107,27 +127,38 @@ const SideBar = (props) => {
           </a>
 
           <ul className={togglePayment ? "down_menu open" : "down_menu"}>
-            {/* <li>
-              <AnchorLink href="/upi">UPI</AnchorLink>
-            </li> */}
-            {/* <li>
-              <AnchorLink href="/add/money">Add Money</AnchorLink>
-            </li> */}
-            <li>
-              <AnchorLink href="/fund/request">Fund Request</AnchorLink>
+            <li className={`${activeSection == "request" ? " active" : false}`}>
+              <AnchorLink href="/fund/request" clicked={handleNavClick}>
+                Fund Request
+              </AnchorLink>
             </li>
-            <li>
-              <AnchorLink href="/beneficiary">Beneficiary</AnchorLink>
+            <li
+              className={`${
+                activeSection == "beneficiary" ? " active" : false
+              }`}
+            >
+              <AnchorLink href="/beneficiary" clicked={handleNavClick}>
+                Beneficiary
+              </AnchorLink>
             </li>
           </ul>
         </li>
-        <li className="menu_sub">
-          <AnchorLink href="/payout/reports">
+
+        <li
+          className={`menu_sub${
+            activeSection == "reports" ? " active" : false
+          }`}
+        >
+          <AnchorLink href="/payout/reports" clicked={handleNavClick}>
             <i className="icon-wallet"></i> <span>Reports</span>
           </AnchorLink>
         </li>
 
-        <li className="menu_sub">
+        <li
+          className={`menu_sub${
+            activeSection == "document" ? " active" : false
+          }`}
+        >
           <a
             onClick={() => {
               setToggleAPI(!toggleAPI);
@@ -138,8 +169,12 @@ const SideBar = (props) => {
           </a>
 
           <ul className={toggleAPI ? "down_menu open" : "down_menu"}>
-            <li>
-              <AnchorLink href="/userapi/document">Document</AnchorLink>
+            <li
+              className={` ${activeSection == "document" ? " active" : false}`}
+            >
+              <AnchorLink href="/userapi/document" clicked={handleNavClick}>
+                Document
+              </AnchorLink>
             </li>
           </ul>
         </li>
