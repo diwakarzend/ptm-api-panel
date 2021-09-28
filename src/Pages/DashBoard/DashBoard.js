@@ -219,7 +219,7 @@ const DashBoard = (props) => {
               )}
             </div>
 
-            <div className="row">
+            {/* <div className="row">
               <div className="col-xl-6">
                 <div className="card card-shadow mb-4">
                   <div className="card-header">
@@ -330,7 +330,7 @@ const DashBoard = (props) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="row">
               <div className="col-xl-12">

@@ -962,13 +962,7 @@ body {
   padding: 0px 30px;
 }
 .page-heading {
-  background: #1572e8 !important;
-  background: -webkit-linear-gradient(
-    legacy-direction(-45deg),
-    #1e437b,
-    #0851b2
-  ) !important;
-  background: linear-gradient(-45deg, #1e437b, #0851b2) !important;
+  background: #e2f4ff;
   margin: 0 -30px -35px -30px;
   padding-right: 2rem;
   padding-left: 2rem;
@@ -979,7 +973,8 @@ body {
 }
 .page-breadcrumb h1 {
   margin: 0;
-  color: #fff;
+  color: #1e437b;
+  font-weight: 700;
 }
 .breadcrumb_nav {
   margin-bottom: 0;
@@ -993,17 +988,15 @@ body {
   display: inline-block;
   line-height: 1;
   margin: 0px 3px;
-  color: #fff;
+  color: #1e437b;
+  font-weight: 700;
 }
 .breadcrumb_nav .breadcrumb li a {
-  color: #fff;
+  color: #1e437b;
   font-size: 14px;
   text-shadow: none;
   text-decoration: none;
   margin: 0px 3px;
-}
-.breadcrumb_nav .breadcrumb li.active {
-  color: rgba(255, 255, 255, 0.44);
 }
 .inlineblock {
   display: inline-block;

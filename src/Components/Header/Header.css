@@ -360,11 +360,13 @@ body {
 .dropdown-user a.dropdown-toggle {
   height: 40px;
   width: 40px;
-  background: transparent;
-  text-align: left;
+  background: #fff;
   color: #000;
+  font-weight: 700;
 }
-
+.dropdown-user a.dropdown-toggle:hover {
+  background: #fff;
+}
 .badge_coun {
   position: absolute;
   font-weight: 300;
