@@ -33,7 +33,7 @@ const APIDocument = (props) => {
                             aria-controls="pills-week"
                             aria-selected="false"
                           >
-                            Payout API
+                            PAYOUT API
                           </a>
                         </li>
                       </ul>
@@ -52,7 +52,7 @@ const APIDocument = (props) => {
                             <ul className="accordian-wrapper">
                               <li>
                                 <h4 className="accordian-heading">
-                                  Recharge API1
+                                  Send Payout Request
                                   <span
                                     className={`icon plus${
                                       toggleApi1 ? " rotate-icon" : ""
@@ -78,19 +78,34 @@ const APIDocument = (props) => {
                                             <th>Description</th>
                                           </tr>
                                           <tr>
-                                            <td>User Id</td>
+                                            <td>accountNumber</td>
                                             <td>Mendatory</td>
-                                            <td>1</td>
+                                            <td>Benefeciary account number</td>
                                           </tr>
                                           <tr>
-                                            <td>User Id</td>
+                                            <td>beneficiaryName</td>
                                             <td>Mendatory</td>
-                                            <td>1</td>
+                                            <td>Benefeciary Name</td>
                                           </tr>
                                           <tr>
-                                            <td>User Id</td>
+                                            <td>ifscCode</td>
                                             <td>Mendatory</td>
-                                            <td>1</td>
+                                            <td>Benefeciary Ifsc code</td>
+                                          </tr>
+                                          <tr>
+                                            <td>mobileNumber</td>
+                                            <td>Non Mendatory</td>
+                                            <td>Benefeciary Mobile Number</td>
+                                          </tr>
+                                          <tr>
+                                            <td>remittanceAmount</td>
+                                            <td>Mendatory</td>
+                                            <td>Amount need to send</td>
+                                          </tr>
+                                          <tr>
+                                            <td>route</td>
+                                            <td>Mendatory</td>
+                                            <td>NEFT/IMPS/RTGS</td>
                                           </tr>
                                         </table>
                                       </div>
@@ -101,29 +116,18 @@ const APIDocument = (props) => {
                                         <div className="api-code-block">
                                           <span className="pl-0"></span>
                                           <span className="pl-4">
-                                            "Field1" : "1",
+                                          
+                                          "success :true,"
                                           </span>
-                                          <span className="pl-4">
-                                            "Field2" : "2"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field3" : "3"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field4" : "4"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field5" : "5"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field6" : "6"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field7" : "7"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field8" : "8"
-                                          </span>
+                                           <span className="pl-4">
+                                           "code :INFO031",
+                                        
+                                        
+                                         </span>
+                                         <span className="pl-4">
+                                         "msg :PayOut Initiated successfully!"
+                                           </span>
+                                 
                                           <span className="pl-0"></span>
                                         </div>
                                       </div>
@@ -133,7 +137,7 @@ const APIDocument = (props) => {
                               </li>
                               <li>
                                 <h4 className="accordian-heading">
-                                  Recharge API2
+                                 Verify Payout OTP
                                   <span
                                     className={`icon plus${
                                       toggleApi2 ? " rotate-icon" : ""
@@ -159,20 +163,16 @@ const APIDocument = (props) => {
                                             <th>Description</th>
                                           </tr>
                                           <tr>
-                                            <td>User Id</td>
+                                            <td>payOutOtp</td>
                                             <td>Mendatory</td>
-                                            <td>1</td>
+                                            <td>Add recieved otp send to the vendor mobile</td>
                                           </tr>
                                           <tr>
-                                            <td>User Id</td>
+                                            <td>txnId</td>
                                             <td>Mendatory</td>
-                                            <td>1</td>
+                                            <td>Payout transaction id</td>
                                           </tr>
-                                          <tr>
-                                            <td>User Id</td>
-                                            <td>Mendatory</td>
-                                            <td>1</td>
-                                          </tr>
+                                    
                                         </table>
                                       </div>
                                       <div className="col-md-6">
@@ -182,29 +182,12 @@ const APIDocument = (props) => {
                                         <div className="api-code-block">
                                           <span className="pl-0"></span>
                                           <span className="pl-4">
-                                            "Field1" : "1",
+                                            "txnId" : "payoutrequest txn id",
                                           </span>
                                           <span className="pl-4">
-                                            "Field2" : "2"
+                                            "payOutOtp" : "received otp on vendor mobile"
                                           </span>
-                                          <span className="pl-4">
-                                            "Field3" : "3"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field4" : "4"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field5" : "5"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field6" : "6"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field7" : "7"
-                                          </span>
-                                          <span className="pl-4">
-                                            "Field8" : "8"
-                                          </span>
+                                          
                                           <span className="pl-0"></span>
                                         </div>
                                       </div>
