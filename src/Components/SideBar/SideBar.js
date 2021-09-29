@@ -84,7 +84,7 @@ const SideBar = (props) => {
         </li>
 
         <li
-          className={`menu_sub${activeSection == "dashboard" ? " active" : ""}`}
+          className={`menu_sub ${activeSection == "dashboard" ? " active" : ""}`}
         >
           <AnchorLink href="/dashboard" clicked={handleNavClick}>
             <i className="ti-home"></i> <span>Dashboard</span>
@@ -92,7 +92,7 @@ const SideBar = (props) => {
         </li>
         {userData && userData.role !== "PTM_VENDOR" ? (
           <li
-            className={`menu_sub${activeSection == "users" ? " active" : ""}`}
+            className={`menu_sub ${activeSection == "users" ? " active" : ""}`}
           >
             <a
               href="javascript:void(0)"
@@ -118,7 +118,7 @@ const SideBar = (props) => {
         )}
 
         <li
-          className={`menu_sub${
+          className={`menu_sub ${
             ["request", "beneficiary"].includes(activeSection)
               ? " active"
               : false
@@ -153,7 +153,7 @@ const SideBar = (props) => {
         </li>
 
         <li
-          className={`menu_sub${
+          className={`menu_sub ${
             activeSection == "reports" ? " active" : false
           }`}
         >
@@ -163,7 +163,7 @@ const SideBar = (props) => {
         </li>
 
         <li
-          className={`menu_sub${
+          className={`menu_sub ${
             activeSection == "document" ? " active" : false
           }`}
         >
