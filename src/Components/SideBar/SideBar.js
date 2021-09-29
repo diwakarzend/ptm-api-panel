@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, uselo } from "react";
 import { connect } from "react-redux";
 import AnchorLink from "../AnchorLink/AnchorLink";
 import {
@@ -7,6 +7,8 @@ import {
   fetchUserWallet,
 } from "../../actions/Login";
 
+import { useLocation } from "react-router-dom";
+
 import "./SideBar.css";
 
 const SideBar = (props) => {
@@ -14,6 +16,10 @@ const SideBar = (props) => {
   const [togglePayment, setTogglePayment] = useState(false);
   const [toggleAPI, setToggleAPI] = useState(false);
   const [activeSection, setActiveSection] = useState("dashboard");
+  let location = useLocation();
+  const pathname = location.pathname;
+
+  //Mounting Phase
 
   useEffect(() => {
     const { dispatch } = props;
@@ -21,24 +27,27 @@ const SideBar = (props) => {
     dispatch(fetchUserWalletIfNeeded());
   }, []);
 
+  //Updation Phase
+  useEffect(() => {
+    if (pathname && pathname.split("/")) {
+      const value = pathname.split("/").pop();
+      setActiveSection(value);
+    }
+  }, [pathname]);
+
   const handleClick = () => {
     const { dispatch } = props;
     dispatch(fetchUserWallet());
   };
 
-  const handleNavClick = (event, pathName) => {
-    if (pathName && pathName.split("/")) {
-      const value = pathName.split("/").pop();
-      setActiveSection(value);
-    }
-  };
+  const handleNavClick = (event, pathName) => {};
 
   const { login } = props;
   const userData = login && login.userData;
   const userWallet = login && login.userWallet;
   const isWalletLoading = login && login.isWalletLoading;
 
-  console.log("toggleAPI", activeSection);
+  console.log("toggleAPI", activeSection, location);
 
   return (
     <div className="side_bar scroll_auto">
