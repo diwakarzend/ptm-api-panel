@@ -127,9 +127,9 @@ const SideBar = (props) => {
 
         <li
           className={`menu_sub ${
-            ["request", "beneficiary"].includes(activeSection)
+            ["request", "beneficiary", "commission"].includes(activeSection)
               ? " active"
-              : false
+              : ""
           }`}
         >
           <a
@@ -144,7 +144,8 @@ const SideBar = (props) => {
 
           <ul
             className={
-              togglePayment || activeSection == "request"
+              togglePayment ||
+              ["request", "beneficiary", "commission"].includes(activeSection)
                 ? "down_menu open"
                 : "down_menu"
             }
@@ -159,6 +160,11 @@ const SideBar = (props) => {
             >
               <AnchorLink href="/beneficiary" clicked={handleNavClick}>
                 Beneficiary
+              </AnchorLink>
+            </li>
+            <li className={`${activeSection == "commision" ? " active" : ""}`}>
+              <AnchorLink href="/vendor/commission" clicked={handleNavClick}>
+                Commission
               </AnchorLink>
             </li>
           </ul>
@@ -186,7 +192,13 @@ const SideBar = (props) => {
             <span className="icon-arrow-down styleicon"></span>
           </a>
 
-          <ul className={toggleAPI ? "down_menu open" : "down_menu"}>
+          <ul
+            className={
+              toggleAPI || activeSection == "document"
+                ? "down_menu open"
+                : "down_menu"
+            }
+          >
             <li className={` ${activeSection == "document" ? " active" : ""}`}>
               <AnchorLink href="/userapi/document" clicked={handleNavClick}>
                 Document
