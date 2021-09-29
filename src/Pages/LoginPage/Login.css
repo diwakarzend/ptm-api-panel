@@ -113,3 +113,9 @@ input:not(:focus):valid ~ .floating-label {
   height: 70%;
   background-repeat: no-repeat;
 }
+
+@media all and (max-width:767px){
+  .left-banner {
+    display: none;
+  }
+}
