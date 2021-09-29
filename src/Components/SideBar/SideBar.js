@@ -84,7 +84,9 @@ const SideBar = (props) => {
         </li>
 
         <li
-          className={`menu_sub ${activeSection == "dashboard" ? " active" : ""}`}
+          className={`menu_sub ${
+            activeSection == "dashboard" ? " active" : ""
+          }`}
         >
           <AnchorLink href="/dashboard" clicked={handleNavClick}>
             <i className="ti-home"></i> <span>Dashboard</span>
@@ -105,8 +107,14 @@ const SideBar = (props) => {
               <span className="icon-arrow-down styleicon"></span>
             </a>
 
-            <ul className={toggleCompany ? "down_menu open" : "down_menu"}>
-              <li>
+            <ul
+              className={
+                toggleCompany || activeSection == "users"
+                  ? "down_menu open"
+                  : "down_menu"
+              }
+            >
+              <li className={`${activeSection == "users" ? " active" : ""}`}>
                 <AnchorLink href="/users" clicked={handleNavClick}>
                   Vendors
                 </AnchorLink>
@@ -119,9 +127,9 @@ const SideBar = (props) => {
 
         <li
           className={`menu_sub ${
-            ["request", "beneficiary"].includes(activeSection)
+            ["request", "beneficiary", "commission"].includes(activeSection)
               ? " active"
-              : false
+              : ""
           }`}
         >
           <a
@@ -134,28 +142,36 @@ const SideBar = (props) => {
             <span className="icon-arrow-down styleicon"></span>
           </a>
 
-          <ul className={togglePayment ? "down_menu open" : "down_menu"}>
-            <li className={`${activeSection == "request" ? " active" : false}`}>
+          <ul
+            className={
+              togglePayment ||
+              ["request", "beneficiary", "commission"].includes(activeSection)
+                ? "down_menu open"
+                : "down_menu"
+            }
+          >
+            <li className={`${activeSection == "request" ? " active" : ""}`}>
               <AnchorLink href="/fund/request" clicked={handleNavClick}>
                 Fund Request
               </AnchorLink>
             </li>
             <li
-              className={`${
-                activeSection == "beneficiary" ? " active" : false
-              }`}
+              className={`${activeSection == "beneficiary" ? " active" : ""}`}
             >
               <AnchorLink href="/beneficiary" clicked={handleNavClick}>
                 Beneficiary
+              </AnchorLink>
+            </li>
+            <li className={`${activeSection == "commision" ? " active" : ""}`}>
+              <AnchorLink href="/vendor/commission" clicked={handleNavClick}>
+                Commission
               </AnchorLink>
             </li>
           </ul>
         </li>
 
         <li
-          className={`menu_sub ${
-            activeSection == "reports" ? " active" : false
-          }`}
+          className={`menu_sub ${activeSection == "reports" ? " active" : ""}`}
         >
           <AnchorLink href="/payout/reports" clicked={handleNavClick}>
             <i className="icon-wallet"></i> <span>Reports</span>
@@ -164,7 +180,7 @@ const SideBar = (props) => {
 
         <li
           className={`menu_sub ${
-            activeSection == "document" ? " active" : false
+            activeSection == "document" ? " open active" : ""
           }`}
         >
           <a
@@ -176,10 +192,14 @@ const SideBar = (props) => {
             <span className="icon-arrow-down styleicon"></span>
           </a>
 
-          <ul className={toggleAPI ? "down_menu open" : "down_menu"}>
-            <li
-              className={` ${activeSection == "document" ? " active" : false}`}
-            >
+          <ul
+            className={
+              toggleAPI || activeSection == "document"
+                ? "down_menu open"
+                : "down_menu"
+            }
+          >
+            <li className={` ${activeSection == "document" ? " active" : ""}`}>
               <AnchorLink href="/userapi/document" clicked={handleNavClick}>
                 Document
               </AnchorLink>

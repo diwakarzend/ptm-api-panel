@@ -33,6 +33,12 @@ export default (state = initialState, action = {}) => {
       };
       break;
 
+    case actionTypes.FETCH_COMMISION_RANGE_SUCCESS:
+      changes = {
+        commission: action.payload,
+      };
+      break;
+
     default:
       changes = { ...state };
       break;

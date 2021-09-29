@@ -8,6 +8,7 @@ export const actionTypes = {
   FETCH_REPORTS_FAILURE: "FETCH_REPORTS_FAILURE",
   FETCH_DASHBOARD_REPORTS_SUCCESS: "FETCH_DASHBOARD_REPORTS_SUCCESS",
   FETCH_DASHBOARD_REPORTS_FAILURE: "FETCH_DASHBOARD_REPORTS_FAILURE",
+  FETCH_COMMISION_RANGE_SUCCESS: "FETCH_COMMISION_RANGE_SUCCESS",
 };
 
 export function fetchMonthlyReportsSuccess(data) {
@@ -103,5 +104,24 @@ export function fetchTransactionReport(params) {
       `${urls.login.BASE_URL}${urls.payout.TRANSACTION_REPORT}`,
       params
     );
+  };
+}
+
+function fetchCommisionRangeSuccess(data) {
+  return {
+    type: actionTypes.FETCH_COMMISION_RANGE_SUCCESS,
+    payload: data,
+  };
+}
+
+export function fetchCommisionRange() {
+  return (dispatch) => {
+    const onSuccess = (data) => {
+      dispatch(fetchCommisionRangeSuccess(data));
+    };
+    const onFail = (data) => {};
+
+    const api = new Request(dispatch, onSuccess, onFail, false);
+    return api.get(`${urls.login.BASE_URL}${urls.payout.COMMISSION_RANGE}`);
   };
 }
