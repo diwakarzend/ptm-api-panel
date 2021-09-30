@@ -122,12 +122,12 @@ body {
   background: #063884;
   top: 1px;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0; 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 .bg-gold {
   background: #c1993f !important;
@@ -1980,7 +1980,7 @@ a:hover {
   border-bottom: 1px solid #e5e9ec;
   background: #fff;
   display: flex;
-	justify-content: space-between;
+  justify-content: space-between;
 }
 .badge-primary,
 .nav.nav-pills.nav-pills-primary .nav-link.active {
@@ -2005,7 +2005,11 @@ a:hover {
 .nav.nav-pills.nav-pills-inverse .nav-link.active {
   background-color: #292b2c !important;
 }
-.card.bg-info,.card.bg-primary,.card.bg-danger,.card.bg-warning,.card.bg-inverse {
+.card.bg-info,
+.card.bg-primary,
+.card.bg-danger,
+.card.bg-warning,
+.card.bg-inverse {
   background: #1e437b !important;
 }
 .portlets-scroll {
@@ -4999,9 +5003,11 @@ ul.inbox-pagination li {
 .bank-detail-wrapper > div:last-child span {
   justify-content: flex-end;
 }
-.done,.active {
+.done,
+.active {
   color: #008000;
   font-weight: 700;
+  text-align: center;
 }
 .initiated {
   color: #379237;
@@ -5014,6 +5020,7 @@ ul.inbox-pagination li {
 .fail {
   color: #ff0000;
   font-weight: 700;
+  text-align: center;
 }
 @media all and (max-width: 767px) {
   .modal.right .modal-dialog {

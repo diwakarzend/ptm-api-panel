@@ -114,22 +114,6 @@ const FundRequestForm = memo(
             <form onSubmit={submitFormHandler}>
               <div className="modal-body">
                 <div className="row">
-                  {/* <div className="col-md-12">
-                    <div className="form-group">
-                      <label for="exampleFormControlSelect1">Choose Bank</label>
-                      <select
-                        className="form-control"
-                        id="exampleFormControlSelect1"
-                        name="firstName"
-                        onChange={handleChange}
-                      >
-                        <option>ICICI</option>
-                        <option>SBI</option>
-                        <option>HDFC</option>
-                      </select>
-                    </div>
-                  </div> */}
-
                   <div className="col-md-12">
                     <div className="form-group">
                       <label for="exampleInputEmail1">From Bank</label>
@@ -141,6 +125,7 @@ const FundRequestForm = memo(
                         placeholder="Bank Name"
                         name="fromBank"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -148,13 +133,14 @@ const FundRequestForm = memo(
                     <div className="form-group">
                       <label for="exampleInputEmail1">To Bank</label>
                       <input
-                        type="number"
+                        type="text"
                         className="form-control"
                         id="depositAccount"
                         aria-describedby="Bank Name"
                         placeholder="Bank Name"
                         name="toBank"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -172,8 +158,9 @@ const FundRequestForm = memo(
                         required
                       >
                         <option value=""> Choose Payment Mode</option>
-                        <option value="UPI">UPI</option>
-                        <option value="NEFT_IMPS">NEFT/IMPS</option>
+                        <option value="upi">UPI</option>
+                        <option value="netbanking">Netbanking</option>
+                        <option value="cash">Cash</option>
                       </select>
                     </div>
                   </div>
@@ -188,6 +175,7 @@ const FundRequestForm = memo(
                         placeholder="Requested Amount"
                         name="requestAmount"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -200,6 +188,7 @@ const FundRequestForm = memo(
                         placeholder="Reference No"
                         name="transationRefNo"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
@@ -213,23 +202,10 @@ const FundRequestForm = memo(
                         placeholder="Remark"
                         name="remark"
                         onChange={handleChange}
+                        required
                       />
                     </div>
                   </div>
-
-                  {/* <div className="col-md-12">
-                    <div className="form-group">
-                      <label for="exampleInputEmail1">Upload Image</label>
-                      <label className="custom-file">
-                        <input
-                          type="file"
-                          id="file2"
-                          className="custom-file-input"
-                        />
-                        <span className="custom-file-control"></span>
-                      </label>
-                    </div>
-                  </div> */}
                 </div>
 
                 <div className="modal-footer">
@@ -245,14 +221,14 @@ const FundRequestForm = memo(
                     Submit
                   </button>
                   <div>
-                  {errorHTML && errorStyles ? (
-                    <ul style={errorStyles}>{errorHTML}</ul>
-                  ) : success && successStyles ? (
-                    <div style={successStyles}>{success}</div>
-                  ) : (
-                    ""
-                  )}
-                </div>
+                    {errorHTML && errorStyles ? (
+                      <ul style={errorStyles}>{errorHTML}</ul>
+                    ) : success && successStyles ? (
+                      <div style={successStyles}>{success}</div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               </div>
             </form>

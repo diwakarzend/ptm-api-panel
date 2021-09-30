@@ -30,8 +30,7 @@ const Users = (props) => {
       }
     };
 
-    const errorHandler = (error) => {
-    };
+    const errorHandler = (error) => {};
 
     const request = new Request("", successHandler, errorHandler, false);
     return request.get(

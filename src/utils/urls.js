@@ -20,6 +20,8 @@ export default {
     EDIT_USER: "/api/users/search/{userId}",
     ADD_BENEFICIARY: "/api/add-beneficiary",
     GET_BENEFICIARY: "/api/beneficiary?pageNo=0&pageSize=100",
+    SAVE_FDETAILS: "/api/user/save-financial-details",
+    GET_FDETAILS: "/api/user/financial-details",
   },
 
   OperatorList: {
