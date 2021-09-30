@@ -31,6 +31,7 @@ const UserProfileForm = memo(({ closePopUpHandler }) => {
         updateFormData({
           ...formData,
           ...res.data,
+          brandName: res.data.brnadName,
         });
       }
     };
@@ -161,7 +162,7 @@ const UserProfileForm = memo(({ closePopUpHandler }) => {
                       className="form-control"
                       placeholder="Brand"
                       name="brandName"
-                      value={formData.brnadName}
+                      value={formData.brandName}
                       onChange={handleChange}
                       required
                     />
