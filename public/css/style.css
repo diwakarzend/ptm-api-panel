@@ -3629,7 +3629,10 @@ select.form-control-square {
   font-family: "Font Awesome\ 5 Free";
   font-weight: 700;
 }
-
+.fab {
+  font-family: "Font Awesome 5 Brands";
+  font-weight: 400;
+}
 .panel-title .select2-container--open .select2-selection__arrow:before {
   content: "\f106";
 }
@@ -4988,6 +4991,7 @@ ul.inbox-pagination li {
 .balance-wrapper .balance-amount i.fa-inr {
   color: #2e8b57;
   font-weight: 700;
+  margin-right: 4px;
 }
 .balance-wrapper .balance-amount i.fa-refresh {
   color: #1e437b;

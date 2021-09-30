@@ -14,6 +14,7 @@ import "./SideBar.css";
 const SideBar = (props) => {
   const [toggleCompany, setToggleCompany] = useState(false);
   const [togglePayment, setTogglePayment] = useState(false);
+  const [toggleAmount, setToggleAmount] = useState(false);
   const [toggleAPI, setToggleAPI] = useState(false);
   const [activeSection, setActiveSection] = useState("dashboard");
   let location = useLocation();
@@ -68,10 +69,20 @@ const SideBar = (props) => {
 
       <ul id="dc_accordion" className="sidebar-menu tree">
         <li className="menu_sub">
-          <a>
+          <a  
+             onClick={() => {
+                setToggleAmount(!toggleAmount);
+                setTogglePayment(false);
+                setToggleCompany(false)
+              }}
+              >
             <i className="fa fa-inr" aria-hidden="true"></i>
           </a>
-          <ul className="down_menu">
+          <ul className={
+                toggleAmount
+                  ? "down_menu open"
+                  : "down_menu"
+              }>
             <li>
               <a>
                 <span>
@@ -89,7 +100,7 @@ const SideBar = (props) => {
           }`}
         >
           <AnchorLink href="/dashboard" clicked={handleNavClick}>
-            <i className="ti-home"></i> <span>Dashboard</span>
+            <i className="ti-dashboard"></i> <span>Dashboard</span>
           </AnchorLink>
         </li>
         {userData && userData.role !== "PTM_VENDOR" ? (
@@ -97,13 +108,13 @@ const SideBar = (props) => {
             className={`menu_sub ${activeSection == "users" ? " active" : ""}`}
           >
             <a
-              href="javascript:void(0)"
               onClick={() => {
                 setToggleCompany(!toggleCompany);
                 setTogglePayment(false);
+                setToggleAmount(false);
               }}
             >
-              <i className="icon-layers"></i> <span>Manage Company</span>
+              <i className="icon-people"></i> <span>Manage Company</span>
               <span className="icon-arrow-down styleicon"></span>
             </a>
 
@@ -136,6 +147,7 @@ const SideBar = (props) => {
             onClick={() => {
               setTogglePayment(!togglePayment);
               setToggleCompany(false);
+              setToggleAmount(false);
             }}
           >
             <i className="icon-wallet"></i> <span>Payment</span>
@@ -174,7 +186,7 @@ const SideBar = (props) => {
           className={`menu_sub ${activeSection == "reports" ? " active" : ""}`}
         >
           <AnchorLink href="/payout/reports" clicked={handleNavClick}>
-            <i className="icon-wallet"></i> <span>Reports</span>
+            <i className="icon-chart"></i> <span>Reports</span>
           </AnchorLink>
         </li>
 
@@ -188,7 +200,7 @@ const SideBar = (props) => {
               setToggleAPI(!toggleAPI);
             }}
           >
-            <i className="icon-wallet"></i> <span>API Document</span>
+            <i className="ti-settings"></i> <span>API Document</span>
             <span className="icon-arrow-down styleicon"></span>
           </a>
 

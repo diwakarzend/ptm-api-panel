@@ -135,6 +135,31 @@ requestUserName: "9718063555"
                     ""
                   )}
               </div>
+              <div className="card-header">
+                  <div className="card-title">
+                    <div
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example"
+                    >
+                      <button type="button" className="btn-common">
+                        Copy
+                      </button>
+                      <button type="button" className="btn-common">
+                        CSV
+                      </button>
+                      <button type="button" className="btn-common">
+                        Excel
+                      </button>
+                      <button type="button" className="btn-common">
+                        PDF
+                      </button>
+                      <button type="button" className="btn-common">
+                        Print
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
               <div className="card-body">
                 {fundRequestLoading ? (
