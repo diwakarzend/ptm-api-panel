@@ -1,6 +1,6 @@
 export default {
   login: {
-    BASE_URL: "http://34.93.135.35:8083",
+    BASE_URL: "https://34.93.135.35:8083",
     LOGIN_REQUEST: "/api/authenticate",
     OTP_VALIDATION: "/agent/otp/validation",
     LOGIN_OTP_RESEND: "/agent/otp/resend",
