@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import "./assests/css/style.css";
-import "./assests/css/themify-icons.css";
-import "./assests/css/jquery.mCustomScrollbar.css";
-import "./assests/css/simple-line-icons.css";
-import "./assests/css/ionicons.css";
+//  import "./assests/css/style.css";
+//  import "./assests/css/themify-icons.css";
+//  import "./assests/css/jquery.mCustomScrollbar.css";
+//   import "./assests/css/simple-line-icons.css";
+//   import "./assests/css/ionicons.css";
 
 //import "../public/css/style.css";
 import React, { Component, Fragment } from "react";
