@@ -91,7 +91,7 @@ const Reports = memo((props) => {
                       </th>
                       <th scope="col">
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           placeholder="Account number"
                           name="accountNumber"
@@ -133,7 +133,31 @@ const Reports = memo((props) => {
                   </thead>
                 </table>
               </form>
-
+              <div className="card-header">
+                  <div className="card-title">
+                    <div
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example"
+                    >
+                      <button type="button" className="btn-common">
+                        Copy
+                      </button>
+                      <button type="button" className="btn-common">
+                        CSV
+                      </button>
+                      <button type="button" className="btn-common">
+                        Excel
+                      </button>
+                      <button type="button" className="btn-common">
+                        PDF
+                      </button>
+                      <button type="button" className="btn-common">
+                        Print
+                      </button>
+                    </div>
+                  </div>
+                </div>
               <TableHTML
                 filterItems={filterItems}
                 reportsItems={reportsItems}

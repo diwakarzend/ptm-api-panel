@@ -86,9 +86,9 @@ const DashBoard = (props) => {
                 <div className="card bg-primary border-0 text-light pt-3 pb-3 h-100">
                   <div className="card-body ">
                     <div className="row">
-                      {/* <div className=" col-3">
-                        <i className="icon-people f30"></i>
-                      </div> */}
+                      <div className=" col-3">
+                        <i className="ti-server f30"></i>
+                      </div>
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Total Transactions</h6>
                         <p className="f12 mb-0" style={fontCss}>
@@ -103,9 +103,9 @@ const DashBoard = (props) => {
                 <div className="card bg-info border-0 text-light pt-3 pb-3 h-100">
                   <div className="card-body">
                     <div className="row">
-                      {/* <div className=" col-3">
-                        <i className="icon-basket-loaded f30"></i>
-                      </div> */}
+                      <div className=" col-3">
+                        <i className="ti-control-shuffle f30"></i>
+                      </div>
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Total Amount</h6>
                         <p className="f12 mb-0" style={fontCss}>
@@ -120,9 +120,9 @@ const DashBoard = (props) => {
                 <div className="card bg-warning border-0 text-light pt-3 pb-3 h-100">
                   <div className="card-body">
                     <div className="row">
-                      {/* <div className=" col-3">
-                        <i className=" icon-handbag f30"></i>
-                      </div> */}
+                      <div className=" col-3">
+                        <i className="ti-back-left f30"></i>
+                      </div>
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Refunded Transaction</h6>
                         <p className="f12 mb-0" style={fontCss}>
@@ -137,9 +137,9 @@ const DashBoard = (props) => {
                 <div className="card bg-danger border-0 text-light pt-3 pb-3 h-100">
                   <div className="card-body">
                     <div className="row">
-                      {/* <div className=" col-3">
-                        <i className=" icon-badge f30"></i>
-                      </div> */}
+                      <div className=" col-3">
+                        <i className="ti-time f30"></i>
+                      </div>
                       <div className=" col-9">
                         <h6 className="m-0 text-light">
                           Cancelled Transaction
