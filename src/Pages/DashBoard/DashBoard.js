@@ -16,9 +16,27 @@ const DashBoard = (props) => {
   //   data: { totalTransaction, totalSuccess, totalFailed, totalPending },
   // } = transactionStatus;
 
+  const renderPieChart = () => {
+    var ctx = document.getElementById("container-pie-chart").getContext("2d");
+    var myChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Success", "Fail", "Refunded", "Cancel"],
+        datasets: [
+          {
+            backgroundColor: ["#2ecc71", "#e74c3c", "#3498db", "#9b59b6"],
+            data: [12, 19, 3, 17],
+          },
+        ],
+      },
+    });
+  };
   useEffect(() => {
     const { dispatch, payout } = props;
     dispatch(fetchMonthlyReports());
+    // setTimeout(() => {
+    renderPieChart();
+    // }, 2000);
   }, []);
 
   console.log("dashboard", props);
@@ -92,7 +110,7 @@ const DashBoard = (props) => {
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Total Transactions</h6>
                         <p className="f12 mb-0" style={fontCss}>
-                          {transactionReport.count}
+                          {transactionReport && transactionReport.count}
                         </p>
                       </div>
                     </div>
@@ -109,7 +127,8 @@ const DashBoard = (props) => {
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Total Amount</h6>
                         <p className="f12 mb-0" style={fontCss}>
-                          {transactionReport.totalTransaction}
+                          {transactionReport &&
+                            transactionReport.totalTransaction}
                         </p>
                       </div>
                     </div>
@@ -248,119 +267,6 @@ const DashBoard = (props) => {
               )}
             </div>
 
-            {/* <div className="row">
-              <div className="col-xl-6">
-                <div className="card card-shadow mb-4">
-                  <div className="card-header">
-                    <div className="card-title">Pie Chart</div>
-                  </div>
-                  <div className="card-body">
-                    <div id="pie-chart" className="pie-chart">
-                      <div
-                        id="pie-chart-container"
-                        style={{ height: "300px" }}
-                      ></div>
-                    </div>
-
-                    <ul className="color-detail">
-                      <li>
-                        <span className="first-box"></span>Paid Signup{" "}
-                      </li>
-                      <li>
-                        <span className="second-box"></span>Guest Signup
-                      </li>
-                      <li>
-                        <span className="third-box"></span>Free Signup{" "}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-xl-6">
-                <div className="card card-shadow mb-4">
-                  <div className="card-header">
-                    <div className="card-title">Daily Report</div>
-                  </div>
-                  <div className="card-body">
-                    <div className="text_country">
-                      <h2 className="mt-0">
-                        <i
-                          className="fa fa-shopping-basket"
-                          aria-hidden="true"
-                        ></i>
-                        Today's Sales <span>65k</span>
-                      </h2>
-                      <div className="progress mb-5" style={{ height: "5px" }}>
-                        <div
-                          className="progress-bar bg-primary"
-                          role="progressbar"
-                          style={{ width: "65%" }}
-                          aria-valuenow="65"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div className="text_country">
-                      <h2 className="mt-0">
-                        <i
-                          className="fa fa-shopping-cart"
-                          aria-hidden="true"
-                        ></i>
-                        Today's Purchase <span>35k</span>
-                      </h2>
-                      <div className="progress mb-5" style={{ height: "5px" }}>
-                        <div
-                          className="progress-bar bg-primary"
-                          role="progressbar"
-                          style={{ width: "35%" }}
-                          aria-valuenow="35"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div className="text_country">
-                      <h2 className="mt-0">
-                        <i className="fa fa-money" aria-hidden="true"></i>{" "}
-                        Todays's Earning <span>75k</span>
-                      </h2>
-                      <div className="progress mb-5" style={{ height: "5px" }}>
-                        <div
-                          className="progress-bar bg-primary"
-                          role="progressbar"
-                          style={{ width: "75%" }}
-                          aria-valuenow="75"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div className="text_country">
-                      <h2 className="mt-0">
-                        <i className="fa fa-refresh" aria-hidden="true"></i>{" "}
-                        Todays Refund <span>67k</span>
-                      </h2>
-                      <div className="progress mb-4" style={{ height: "5px" }}>
-                        <div
-                          className="progress-bar bg-primary"
-                          role="progressbar"
-                          style={{ width: "67%" }}
-                          aria-valuenow="67"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-
             <div className="row">
               <div className="col-xl-12">
                 <div className="card card-shadow mb-4">
@@ -374,7 +280,7 @@ const DashBoard = (props) => {
                           className="form-control"
                           id="exampleFormControlSelect1"
                         >
-                          <option>Prepaid</option>
+                          <option>Vendor</option>
                           <option>Postpaid</option>
                         </select>
                       </div>
@@ -390,54 +296,38 @@ const DashBoard = (props) => {
                         />
                       </div>
 
-                      <div className="form-group">
-                        <label className="custom-control custom-radio">
-                          <input
-                            id="radio1"
-                            name="radio"
-                            type="radio"
-                            className="custom-control-input"
-                          />
-                          <span className="custom-control-indicator"></span>{" "}
-                          <span className="custom-control-description">
-                            By Amount
-                          </span>
-                        </label>
-                        <label className="custom-control custom-radio">
-                          <input
-                            id="radio2"
-                            name="radio"
-                            type="radio"
-                            className="custom-control-input"
-                          />
-                          <span className="custom-control-indicator"></span>{" "}
-                          <span className="custom-control-description">
-                            By Count
-                          </span>
-                        </label>
-                      </div>
+                      {/* <div className="row py-3">
+                        <div className="col-xl-12 col-md-12">
+                          <div className="px-4">
+                            <canvas
+                              id="myChart3-pie"
+                              className="height_box"
+                            ></canvas>
+                          </div>
+                        </div>
+                      </div> */}
                     </form>
                   </div>
                   <div className="card-body">
-                    <div id="pie-chart" className="pie-chart">
-                      <div
-                        id="pie-chart-container2"
-                        style={{ height: "300px" }}
-                      ></div>
+                    <div className="container-pie-chart">
+                      <canvas
+                        id="container-pie-chart"
+                        className="height_box"
+                      ></canvas>
                     </div>
 
                     <ul className="color-detail">
                       <li>
-                        <span className="first-box"></span>Airtel{" "}
+                        <span className="first-box"></span>Success
                       </li>
                       <li>
-                        <span className="second-box"></span>Vodafone
+                        <span className="second-box"></span>Fail
                       </li>
                       <li>
-                        <span className="third-box"></span>Bsnl{" "}
+                        <span className="third-box"></span>Refunded
                       </li>
                       <li>
-                        <span className="fourth-box"></span>Idea{" "}
+                        <span className="fourth-box"></span>Cancel
                       </li>
                     </ul>
                   </div>
