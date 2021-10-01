@@ -435,3 +435,10 @@ export function autoFocusOTPForm(event) {
     }
   }
 }
+
+export function getUserPermissions(login) {
+  if (login && login.userData && login.userData.apiPermission) {
+    return login.userData.apiPermission;
+  }
+  return "";
+}

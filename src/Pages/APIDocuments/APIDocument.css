@@ -133,3 +133,7 @@
     margin-top: 15px;
   }
 }
+
+.accordian-wrapper li {
+  text-align: left;
+}

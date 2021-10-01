@@ -6,10 +6,34 @@ import {
   fetchUserWalletIfNeeded,
   fetchUserWallet,
 } from "../../actions/Login";
+import { getUserPermissions } from "../../utils/common";
 
 import { useLocation } from "react-router-dom";
 
 import "./SideBar.css";
+
+/* 0: "PTM_PAYOUT_TRANSACTION"
+1: "PTM_PAYOUT_STATUS_REPORT"
+2: "PTM_PAYOUT_MONTHLY_REPORT"
+3: "PTM_PAYOUT_TRANSACTION_SUM_REPORT"
+4: "PTM_REQUEST_PAYOUT"
+5: "PTM_VERIFY_OTP_PAYOUT"
+6: "PTM_REJECT_REQUEST_PAYOUT"
+7: "PTM_RESEND_OTP_PAYOUT"
+8: "PTM_WALLET_AMOUNT"
+9: "PTM_WALLET_TRANSACTIONS"
+10: "PTM_SERVICE_TYPE_REPORT"
+11: "PTM_FUND_REQUEST"
+12: "PTM_FUND_REQUEST_STATUS"
+13: "PTM_GET_PROFILE"
+14: "PTM_SAVE_PROFILE"
+15: "PTM_CHANGE_PASSWORD"
+16: "PTM_GET_FIN_DETAILS"
+17: "PTM_SAVE_FIN_DETAILS"
+18: "PTM_CREATE_BENEFICIARY"
+19: "PTM_DELETE_BENEFICIARY"
+20: "PTM_GET_BENEFICIARY"
+21: "PTM_PAYOUT_RANGE" */
 
 const SideBar = (props) => {
   const [toggleCompany, setToggleCompany] = useState(false);
@@ -24,7 +48,7 @@ const SideBar = (props) => {
 
   useEffect(() => {
     const { dispatch } = props;
-    dispatch(fetchUserDetailsIfNeeded());
+    //   dispatch(fetchUserDetailsIfNeeded());
     dispatch(fetchUserWalletIfNeeded());
   }, []);
 
@@ -48,7 +72,9 @@ const SideBar = (props) => {
   const userWallet = login && login.userWallet;
   const isWalletLoading = login && login.isWalletLoading;
 
-  console.log("toggleAPI", activeSection, location);
+  const userPermissions = getUserPermissions(login);
+
+  console.log("permissions SideBar", userPermissions);
 
   return (
     <div className="side_bar scroll_auto">
@@ -69,20 +95,16 @@ const SideBar = (props) => {
 
       <ul id="dc_accordion" className="sidebar-menu tree">
         <li className="menu_sub">
-          <a  
-             onClick={() => {
-                setToggleAmount(!toggleAmount);
-                setTogglePayment(false);
-                setToggleCompany(false)
-              }}
-              >
+          <a
+            onClick={() => {
+              setToggleAmount(!toggleAmount);
+              setTogglePayment(false);
+              setToggleCompany(false);
+            }}
+          >
             <i className="fa fa-inr" aria-hidden="true"></i>
           </a>
-          <ul className={
-                toggleAmount
-                  ? "down_menu open"
-                  : "down_menu"
-              }>
+          <ul className={toggleAmount ? "down_menu open" : "down_menu"}>
             <li>
               <a>
                 <span>
@@ -162,33 +184,50 @@ const SideBar = (props) => {
                 : "down_menu"
             }
           >
-            <li className={`${activeSection == "request" ? " active" : ""}`}>
-              <AnchorLink href="/fund/request" clicked={handleNavClick}>
-                Fund Request
-              </AnchorLink>
-            </li>
-            <li
-              className={`${activeSection == "beneficiary" ? " active" : ""}`}
-            >
-              <AnchorLink href="/beneficiary" clicked={handleNavClick}>
-                Beneficiary
-              </AnchorLink>
-            </li>
-            <li className={`${activeSection == "commission" ? " active" : ""}`}>
-              <AnchorLink href="/vendor/commission" clicked={handleNavClick}>
-                Commission
-              </AnchorLink>
-            </li>
+            {userPermissions && userPermissions.includes("PTM_FUND_REQUEST") && (
+              <li className={`${activeSection == "request" ? " active" : ""}`}>
+                <AnchorLink href="/fund/request" clicked={handleNavClick}>
+                  Fund Request
+                </AnchorLink>
+              </li>
+            )}
+
+            {userPermissions &&
+              userPermissions.includes("PTM_GET_BENEFICIARY") && (
+                <li
+                  className={`${
+                    activeSection == "beneficiary" ? " active" : ""
+                  }`}
+                >
+                  <AnchorLink href="/beneficiary" clicked={handleNavClick}>
+                    Beneficiary
+                  </AnchorLink>
+                </li>
+              )}
+
+            {userPermissions && userPermissions.includes("PTM_PAYOUT_RANGE") && (
+              <li
+                className={`${activeSection == "commission" ? " active" : ""}`}
+              >
+                <AnchorLink href="/vendor/commission" clicked={handleNavClick}>
+                  Commission
+                </AnchorLink>
+              </li>
+            )}
           </ul>
         </li>
 
-        <li
-          className={`menu_sub ${activeSection == "reports" ? " active" : ""}`}
-        >
-          <AnchorLink href="/payout/reports" clicked={handleNavClick}>
-            <i className="icon-chart"></i> <span>Reports</span>
-          </AnchorLink>
-        </li>
+        {userPermissions && userPermissions.includes("PTM_PAYOUT_TRANSACTION") && (
+          <li
+            className={`menu_sub ${
+              activeSection == "reports" ? " active" : ""
+            }`}
+          >
+            <AnchorLink href="/payout/reports" clicked={handleNavClick}>
+              <i className="icon-chart"></i> <span>Transaction Report </span>
+            </AnchorLink>
+          </li>
+        )}
 
         <li
           className={`menu_sub ${

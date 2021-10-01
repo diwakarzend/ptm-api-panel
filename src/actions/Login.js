@@ -15,7 +15,8 @@ export const actionTypes = {
   FETCH_USER_DETAILS_SUCCESS: "FETCH_USER_DETAILS_SUCCESS",
   FETCH_USER_WALLET_SUCCESS: "FETCH_USER_WALLET_SUCCESS",
   FETCHING_WALLET: "FETCHING_WALLET",
-  FETCHED_WALLET: "FETCHED_WALLET"
+  FETCHED_WALLET: "FETCHED_WALLET",
+  UPDATE_LOGIN_STATUS: "UPDATE_LOGIN_STATUS",
 };
 
 export function loginResetStore() {
@@ -197,14 +198,13 @@ export function fetchedUserWallet() {
   };
 }
 
-
 export function fetchUserWallet() {
   return (dispatch) => {
     const successFn = (response) => {
       dispatch(fetchUserWalletSuccess(response));
       setTimeout(() => {
-         dispatch(fetchedUserWallet());
-      }, 1000)
+        dispatch(fetchedUserWallet());
+      }, 1000);
     };
     const errorFn = (error) => {};
     dispatch(fetchingUserWallet());
@@ -237,5 +237,12 @@ export function fetchUserDetailsIfNeeded() {
       return dispatch(fetchUserDetails());
     }
     return Promise.resolve([]);
+  };
+}
+
+export function updateLoginStatus(loggedinStatus) {
+  return {
+    type: actionTypes.UPDATE_LOGIN_STATUS,
+    loggedinStatus: loggedinStatus,
   };
 }

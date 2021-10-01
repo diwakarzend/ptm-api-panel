@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { Fragment, memo } from "react";
 
 const TableHTML = memo(({ reportsItems, filterItems }) => {
   const reportsDataAvailable =
@@ -48,9 +48,14 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
                       <td>{item.route}</td>
                       <td>
                         <strong> TxnId:</strong> {item.txnId} <br />
-                        {item.merchantTxnId
-                          ? `TxnId:${item.merchantTxnId}`
-                          : ""}
+                        {item.merchantTxnId ? (
+                          <Fragment>
+                            <strong>Merchant TxnId: </strong>{" "}
+                            {item.merchantTxnId}
+                          </Fragment>
+                        ) : (
+                          ""
+                        )}
                       </td>
                       <td>{item.remittanceAmount}</td>
 

@@ -155,14 +155,21 @@ const NotificationPopup = ({
         }}
       >
         <i className="fa fa-bell-o"></i>
-        <span className="badge_coun badge-danger"> 6 </span>
+        <span className="badge_coun badge-danger"> 0 </span>
       </a>
       <ul
         className={`dropdown-menu scroll_auto height_fixed mCustomScrollbar _mCS_2${
           statusNotICon ? " show" : ""
         }`}
+        style={{
+          height: "60px",
+          textAlign: "center",
+          paddingTop: "12px",
+          marginTop: "-14px",
+        }}
       >
-        <div
+        <li>No new notification</li>
+        {/*      <div
           id="mCSB_2"
           className="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside"
           tabIndex="0"
@@ -282,6 +289,7 @@ const NotificationPopup = ({
             </div>
           </div>
         </div>
+      */}
       </ul>
     </div>
   );

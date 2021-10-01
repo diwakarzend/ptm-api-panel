@@ -12,7 +12,7 @@ const initialState = {
   loginInfo: "",
   userData: null,
   userWallet: null,
-  isWalletLoading: false
+  isWalletLoading: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -26,7 +26,8 @@ export default (state = initialState, action = {}) => {
 
     case actionTypes.FETCH_USER_WALLET_SUCCESS:
       if (action.response.success == true && action.response.data) {
-        changes.userWallet = action.response.data;      }
+        changes.userWallet = action.response.data;
+      }
       break;
 
     case actionTypes.LOGIN_RESET_STORE:
@@ -47,53 +48,29 @@ export default (state = initialState, action = {}) => {
 
     case actionTypes.FETCHING_WALLET:
       changes = {
-        isWalletLoading: true
+        isWalletLoading: true,
       };
-      break;  
+      break;
 
     case actionTypes.FETCHED_WALLET:
-        changes = {
-          isWalletLoading: false
-        };
-        break;   
+      changes = {
+        isWalletLoading: false,
+      };
+      break;
 
     case actionTypes.LOGIN_REQUEST_SUCCESS:
       const { payload } = action;
-      // const userData = getObjectValueIfEmpty(
-      //   action,
-      //   "payload.data.id_token",
-      //   {}
-      // );
-      //
-      // const isSingleFactor = !getObjectValueIfEmpty(userData, "mfaEnabled", 0);
-      // // const authToken = isSingleFactor
-      // //   ? getObjectValueIfEmpty(action, "payload.headers.authorization", null)
-      // //   : null;
-      // const authToken = isSingleFactor
-      //   ? getObjectValueIfEmpty(action, "payload.headers.authorization", null)
-      //   : null;
-
-      // const isAuthenticated =
-      //   isSingleFactor && !isEmpty(userData) && !isEmpty(authToken);
-
-      // if (isAuthenticated) saveAuthToken(authToken);
-
-      // changes = {
-      //   isLoggingIn: false,
-      //   isOtpValidated: false,
-      //   invalidOtpCount: 0,
-
-      //   isAuthenticated,
-
-      //   authToken: authToken,
-      //   // userData,
-      // };
-
-
       changes = {
         loginInfo: payload,
         isLoggedIn: isAuthenticated(payload),
         isAuthenticated: isAuthenticated(payload),
+      };
+
+      break;
+
+    case actionTypes.UPDATE_LOGIN_STATUS:
+      changes = {
+        isLoggedIn: action.loggedinStatus,
       };
 
       break;

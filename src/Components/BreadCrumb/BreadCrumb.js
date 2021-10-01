@@ -14,17 +14,19 @@ const BreadCrumb = ({ heading, value }) => {
         </div>
         <div className="col-md-6 justify-content-md-end d-md-flex">
           <div className="breadcrumb_nav">
-            <ol className="breadcrumb">
-              <li>
-                <i className="fa fa-home"></i>
-                <AnchorLink href="/" className="parent-item">
-                  Home
-                </AnchorLink>
+            {heading !== "Dashboard" && (
+              <ol className="breadcrumb">
+                <li>
+                  <i className="fa fa-home"></i>
+                  <AnchorLink href="/dashboard" className="parent-item">
+                    Home
+                  </AnchorLink>
 
-                <i className="fa fa-angle-right"></i>
-              </li>
-              <li className="active">{value}</li>
-            </ol>
+                  <i className="fa fa-angle-right"></i>
+                </li>
+                <li className="active">{value}</li>
+              </ol>
+            )}
           </div>
         </div>
       </div>

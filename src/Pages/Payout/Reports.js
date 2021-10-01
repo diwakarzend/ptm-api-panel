@@ -73,7 +73,7 @@ const Reports = memo((props) => {
       <SideBar {...props} />
       <div className="content_wrapper">
         <div className="container-fluid">
-          <BreadCrumb heading="Reports" value="Reports" />
+          <BreadCrumb heading="Transaction Report" value="Transaction Report" />
           <section className="chart_section">
             <div className="card card-shadow mb-4">
               <form onSubmit={handleSubmit}>
@@ -134,30 +134,30 @@ const Reports = memo((props) => {
                 </table>
               </form>
               <div className="card-header">
-                  <div className="card-title">
-                    <div
-                      className="btn-group"
-                      role="group"
-                      aria-label="Basic example"
-                    >
-                      <button type="button" className="btn-common">
-                        Copy
-                      </button>
-                      <button type="button" className="btn-common">
-                        CSV
-                      </button>
-                      <button type="button" className="btn-common">
-                        Excel
-                      </button>
-                      <button type="button" className="btn-common">
-                        PDF
-                      </button>
-                      <button type="button" className="btn-common">
-                        Print
-                      </button>
-                    </div>
+                <div className="card-title">
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button type="button" className="btn-common">
+                      Copy
+                    </button>
+                    <button type="button" className="btn-common">
+                      CSV
+                    </button>
+                    <button type="button" className="btn-common">
+                      Excel
+                    </button>
+                    <button type="button" className="btn-common">
+                      PDF
+                    </button>
+                    <button type="button" className="btn-common">
+                      Print
+                    </button>
                   </div>
                 </div>
+              </div>
               <TableHTML
                 filterItems={filterItems}
                 reportsItems={reportsItems}

@@ -6,10 +6,9 @@ import { fetchMonthlyReports } from "../../actions/payout";
 import "../../lib/Chart/Chart.min";
 const chartConfig = require("../../lib/Chart/Config");
 import "./DashBoard.css";
-import { chartData, transactionStatus } from "./mockJson";
-import moment from "moment";
 import { dynamicDataWithXY } from "../../lib/Chart/common";
 import CircularProgressBar from "../../Components/CircularProgressBar";
+import { getUserPermissions } from "../../utils/common";
 
 const DashBoard = (props) => {
   // const {
@@ -17,26 +16,29 @@ const DashBoard = (props) => {
   // } = transactionStatus;
 
   const renderPieChart = () => {
-    var ctx = document.getElementById("container-pie-chart").getContext("2d");
-    var myChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: ["Success", "Fail", "Refunded", "Cancel"],
-        datasets: [
-          {
-            backgroundColor: ["#2ecc71", "#e74c3c", "#3498db", "#9b59b6"],
-            data: [12, 19, 3, 17],
-          },
-        ],
-      },
-    });
+    if (document.getElementById("container-pie-chart")) {
+      var ctx = document.getElementById("container-pie-chart").getContext("2d");
+      var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: ["Success", "Fail", "Refunded", "Cancel"],
+          datasets: [
+            {
+              backgroundColor: ["#2ecc71", "#e74c3c", "#3498db", "#9b59b6"],
+              data: [12, 19, 3, 17],
+            },
+          ],
+        },
+      });
+    }
   };
+
   useEffect(() => {
     const { dispatch, payout } = props;
     dispatch(fetchMonthlyReports());
-    // setTimeout(() => {
-    renderPieChart();
-    // }, 2000);
+    setTimeout(() => {
+      renderPieChart();
+    }, 2000);
   }, []);
 
   console.log("dashboard", props);
@@ -92,6 +94,10 @@ const DashBoard = (props) => {
     textAlign: "center",
     fontWeight: "bold",
   };
+
+  const { login } = props;
+  const userPermissions = getUserPermissions(login);
+
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -180,7 +186,7 @@ const DashBoard = (props) => {
                     <div className="row">
                       <div className="col-12">
                         <h2 className="mb-4">
-                          Total income &amp; spend statistics
+                          Last 6 Months Transaction Analysis
                         </h2>
                       </div>
                     </div>
@@ -266,74 +272,10 @@ const DashBoard = (props) => {
                 ""
               )}
             </div>
-
-            <div className="row">
-              <div className="col-xl-12">
-                <div className="card card-shadow mb-4">
-                  <div className="card-header">
-                    <div className="card-title">Transaction Status</div>
-
-                    <form className="filter-table">
-                      <div className="form-group">
-                        <label>Type</label>
-                        <select
-                          className="form-control"
-                          id="exampleFormControlSelect1"
-                        >
-                          <option>Vendor</option>
-                          <option>Postpaid</option>
-                        </select>
-                      </div>
-
-                      <div className="form-group">
-                        <label>Date</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                          placeholder="Enter email"
-                        />
-                      </div>
-
-                      {/* <div className="row py-3">
-                        <div className="col-xl-12 col-md-12">
-                          <div className="px-4">
-                            <canvas
-                              id="myChart3-pie"
-                              className="height_box"
-                            ></canvas>
-                          </div>
-                        </div>
-                      </div> */}
-                    </form>
-                  </div>
-                  <div className="card-body">
-                    <div className="container-pie-chart">
-                      <canvas
-                        id="container-pie-chart"
-                        className="height_box"
-                      ></canvas>
-                    </div>
-
-                    <ul className="color-detail">
-                      <li>
-                        <span className="first-box"></span>Success
-                      </li>
-                      <li>
-                        <span className="second-box"></span>Fail
-                      </li>
-                      <li>
-                        <span className="third-box"></span>Refunded
-                      </li>
-                      <li>
-                        <span className="fourth-box"></span>Cancel
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {userPermissions &&
+              userPermissions.includes("PTM_VENDOR_TRANSACTION_REPORT") && (
+                <VendorTransactionReport />
+              )}
           </section>
         </div>
       </div>
@@ -346,3 +288,58 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(DashBoard);
+
+const VendorTransactionReport = () => {
+  return (
+    <div className="row">
+      <div className="col-xl-12">
+        <div className="card card-shadow mb-4">
+          <div className="card-header">
+            <div className="card-title">Transaction Status</div>
+
+            <form className="filter-table">
+              <div className="form-group">
+                <label>Type</label>
+                <select className="form-control" id="exampleFormControlSelect1">
+                  <option>Vendor</option>
+                  <option>Postpaid</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Date</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />
+              </div>
+            </form>
+          </div>
+          <div className="card-body">
+            <div className="container-pie-chart">
+              <canvas id="container-pie-chart" className="height_box"></canvas>
+            </div>
+
+            <ul className="color-detail">
+              <li>
+                <span className="first-box"></span>Success
+              </li>
+              <li>
+                <span className="second-box"></span>Fail
+              </li>
+              <li>
+                <span className="third-box"></span>Refunded
+              </li>
+              <li>
+                <span className="fourth-box"></span>Cancel
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
