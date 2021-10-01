@@ -23,10 +23,8 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
                   <th scope="col">Wallet Balance</th>
                 )} */}
 
-              {reportsDataAvailable &&
-                reportsItems[0].openingBalance != null && (
-                  <th scope="col">Wallet Balance</th>
-                )}
+              <th scope="col">Wallet Balance</th>
+
               <th scope="col">Service Charges</th>
 
               <th scope="col">Status</th>
@@ -57,7 +55,7 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
                           ""
                         )}
                       </td>
-                      <td>{item.remittanceAmount}</td>
+                      <td>&#8377;{item.remittanceAmount}</td>
 
                       <td>
                         {item.beneficiaryName}, <br />
@@ -65,11 +63,13 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
                         {item.ifscCode}
                       </td>
 
-                      {item.openingBalance != null && (
+                      {item.openingBalance != null ? (
                         <td>
                           <strong> OB:</strong> {item.openingBalance} <br />
                           <strong> CB:</strong> {item.closingBalance} <br />
                         </td>
+                      ) : (
+                        <td>NA</td>
                       )}
 
                       <td>

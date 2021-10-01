@@ -41,6 +41,10 @@ const DashBoard = (props) => {
     }, 2000);
   }, []);
 
+  const changeHandler = () => {
+    renderPieChart();
+  };
+
   console.log("dashboard", props);
 
   const { payout } = props;
@@ -274,7 +278,7 @@ const DashBoard = (props) => {
             </div>
             {userPermissions &&
               userPermissions.includes("PTM_VENDOR_TRANSACTION_REPORT") && (
-                <VendorTransactionReport />
+                <VendorTransactionReport changeHandler={changeHandler} />
               )}
           </section>
         </div>
@@ -289,7 +293,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps)(DashBoard);
 
-const VendorTransactionReport = () => {
+const VendorTransactionReport = ({ changeHandler }) => {
   return (
     <div className="row">
       <div className="col-xl-12">
@@ -300,7 +304,11 @@ const VendorTransactionReport = () => {
             <form className="filter-table">
               <div className="form-group">
                 <label>Vendor</label>
-                <select className="form-control" id="exampleFormControlSelect1">
+                <select
+                  className="form-control"
+                  id="exampleFormControlSelect1"
+                  onChange={changeHandler}
+                >
                   <option>Ranjeet</option>
                   <option>Diwakar</option>
                 </select>
