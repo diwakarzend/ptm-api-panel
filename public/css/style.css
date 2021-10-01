@@ -5007,11 +5007,9 @@ ul.inbox-pagination li {
 .bank-detail-wrapper > div:last-child span {
   justify-content: flex-end;
 }
-.done,
-.active {
+.done, .active {
   color: #008000;
   font-weight: 700;
-  text-align: center;
 }
 .initiated {
   color: #379237;
