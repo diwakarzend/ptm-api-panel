@@ -83,7 +83,9 @@ const SideBar = (props) => {
           <span className="balance-title">Current Balance</span>
           <span className="balance-amount">
             <i className="fa fa-inr" aria-hidden="true"></i>
-            {userWallet && userWallet.MAIN_WALLET}
+            {userWallet &&
+              userWallet.MAIN_WALLET &&
+              parseInt(userWallet.MAIN_WALLET).toLocaleString("en-IN")}
             <i
               className={"fa fa-refresh " + (isWalletLoading ? "fa-spin" : "")}
               aria-hidden="true"

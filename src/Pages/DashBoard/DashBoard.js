@@ -25,7 +25,7 @@ const DashBoard = (props) => {
           datasets: [
             {
               backgroundColor: ["#2ecc71", "#e74c3c", "#3498db", "#9b59b6"],
-              data: [12, 19, 3, 17],
+              data: [90, 2, 5, 3],
             },
           ],
         },
@@ -299,10 +299,10 @@ const VendorTransactionReport = () => {
 
             <form className="filter-table">
               <div className="form-group">
-                <label>Type</label>
+                <label>Vendor</label>
                 <select className="form-control" id="exampleFormControlSelect1">
-                  <option>Vendor</option>
-                  <option>Postpaid</option>
+                  <option>Ranjeet</option>
+                  <option>Diwakar</option>
                 </select>
               </div>
 
@@ -318,12 +318,13 @@ const VendorTransactionReport = () => {
               </div>
             </form>
           </div>
+
           <div className="card-body">
             <div className="container-pie-chart">
               <canvas id="container-pie-chart" className="height_box"></canvas>
             </div>
 
-            <ul className="color-detail">
+            {/* <ul className="color-detail">
               <li>
                 <span className="first-box"></span>Success
               </li>
@@ -336,7 +337,7 @@ const VendorTransactionReport = () => {
               <li>
                 <span className="fourth-box"></span>Cancel
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>

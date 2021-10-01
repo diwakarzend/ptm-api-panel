@@ -33,7 +33,10 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
   const [step1Response, updatestep1Response] = useState({});
 
   const [payoutSuccessData, setPayoutSuccess] = useState("");
-  const [errormsg, setErrors] = useState("");
+  const [statusMessage, updateMessage] = useState({
+    error: "",
+    success: "",
+  });
 
   const { firstName, lastName, mobile, accountNumber, ifscCode, bankName } =
     benificiaryData;
@@ -49,21 +52,29 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
           error: false,
         });
         setPayoutSuccess(response);
+        updateMessage({
+          ...statusMessage,
+          success: response.msg,
+          error: "",
+        });
       } else {
         setotpStatus({
           ...otpStatus,
           error: true,
         });
+        updateMessage({
+          ...statusMessage,
+          error: response.msg,
+          success: "",
+        });
       }
 
-      let errorCode = "";
-      if (response.errorCodeList) {
-        errorCode = response.errorCodeList[0];
-      }
-      setErrors(response.msg + errorCode);
+      // let errorCode = "";
+      // if (response.errorCodeList) {
+      //   errorCode = response.errorCodeList[0];
+      // }
     };
-    const errorHandler = (response) => {
-    };
+    const errorHandler = (response) => {};
 
     const tranSactionId = step1Response.data.tnxId;
     const api = new Request("", successHandler, errorHandler, false);
@@ -98,9 +109,17 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
     const successHandler = (response) => {
       if (response.success) {
         updatestep1Response(response);
-        setErrors(response.msg);
+        updateMessage({
+          ...statusMessage,
+          success: response.msg,
+          error: "",
+        });
       } else {
-        setErrors(response.msg);
+        updateMessage({
+          ...statusMessage,
+          error: response.msg,
+          success: "",
+        });
 
         //removeOverlay();
         // getBeneficiary(userRole);
@@ -160,6 +179,10 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
     });
   }, []);
 
+  const msgClass = statusMessage.success ? "done" : "fail";
+
+  console.log(statusMessage, msgClass);
+
   return (
     <div
       className="modal right fade show"
@@ -185,7 +208,12 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div style={{ textAlign: "center" }}>{errormsg || ""}</div>
+          {!otpStatus.success && (
+            <div style={{ textAlign: "center" }} className={msgClass}>
+              {statusMessage.success || statusMessage.error}
+            </div>
+          )}
+
           {otpStatus.success ? (
             <PayoutThanks payoutSuccessData={payoutSuccessData} />
           ) : !step1Response.success ? (
