@@ -5024,6 +5024,15 @@ ul.inbox-pagination li {
   font-weight: 700;
   text-align: center;
 }
+.sidebar-menu.tree .active {
+  text-align: left;
+}
+ul.down_menu.open a {
+  font-weight: 500!important;
+}
+ul.down_menu.open .active a {
+  font-weight: 700!important;
+}
 @media all and (max-width: 767px) {
   .modal.right .modal-dialog {
     max-width: 320px;

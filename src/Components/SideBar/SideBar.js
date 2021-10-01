@@ -174,7 +174,7 @@ const SideBar = (props) => {
                 Beneficiary
               </AnchorLink>
             </li>
-            <li className={`${activeSection == "commision" ? " active" : ""}`}>
+            <li className={`${activeSection == "commission" ? " active" : ""}`}>
               <AnchorLink href="/vendor/commission" clicked={handleNavClick}>
                 Commission
               </AnchorLink>
