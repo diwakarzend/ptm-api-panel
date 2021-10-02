@@ -12,11 +12,6 @@ const roleMapping = {
   PTM_ADMIN: "Admin",
   PTM_SUB_ADMIN: "Sub Admin",
 };
-const classMapping = {
-  PTM_VENDOR: "rejected",
-  PTM_ADMIN: "done",
-  PTM_SUB: "initiated",
-};
 
 const Users = (props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
@@ -141,13 +136,20 @@ const Users = (props) => {
                     <tbody>
                       {userData && Array.isArray(userData)
                         ? userData.map((item, index) => {
+                            let userClass = "";
+                            if (item.role && roleMapping[item.role]) {
+                              userClass = roleMapping[item.role]
+                                .toLowerCase()
+                                .replace(" ", "-");
+                            }
+
                             return (
                               <tr key={item.userName}>
                                 <td>{index + 1}</td>
                                 <td>{`${item.firstName} ${item.lastName}`}</td>
                                 <td>{item.userName}</td>
                                 <td>{item.email}</td>
-                                <td className={classMapping[item.role]}>
+                                <td className={userClass}>
                                   {roleMapping[item.role] || "NA"}
                                 </td>
                                 <td className="done">Active</td>
