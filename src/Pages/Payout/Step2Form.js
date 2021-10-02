@@ -10,6 +10,7 @@ const Step2Form = memo(
     login,
     formData,
     step1Response,
+    closeQuickPopUpHandler,
   }) => {
     const userData = login && login.userData && login.userData;
 
@@ -19,11 +20,11 @@ const Step2Form = memo(
           <div className="row">
             <div className="col-md-12">
               <div className="form-group merchent-detail-container">
-                <h5> Merchent Details</h5>
+                <h5> Merchant Details</h5>
                 <div className="merchent-detail-section">
                   <div className="merchent-detail-list">
                     <div className="left">
-                      <label>Merchent Name:</label>
+                      <label>Merchant Name:</label>
                     </div>
                     <div className="right">
                       <span>
@@ -31,14 +32,14 @@ const Step2Form = memo(
                       </span>
                     </div>
                   </div>
-                  <div className="merchent-detail-list">
+                  {/*  <div className="merchent-detail-list">
                     <div className="left">
                       <label>Debit Account:</label>
                     </div>
                     <div className="right">
                       <span>ICICI BANK- 101001</span>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="merchent-detail-list">
                     <div className="left">
                       <label>Beneficiary Name:</label>
@@ -151,18 +152,17 @@ const Step2Form = memo(
               </div> */}
           </div>
           <div className="modal-footer">
-          <button
+            <button
               type="button"
               className="btn btn-primary themebtn transparent"
               data-dismiss="modal"
-              // onClick={closeQuickPopUpHandler}
+              onClick={closeQuickPopUpHandler}
             >
               Cancel
             </button>
             <button type="submit" className="btn btn-primary themebtn">
               Proceed To Pay
             </button>
-           
           </div>
         </form>
       </div>

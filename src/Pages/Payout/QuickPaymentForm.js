@@ -232,6 +232,7 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
               step2SubmitHandler={step2SubmitHandler}
               otpChangeHandler={otpChangeHandler}
               formData={formData}
+              closeQuickPopUpHandler={closeQuickPopUpHandler}
             />
           )}
         </div>

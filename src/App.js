@@ -32,6 +32,8 @@ class App extends Component {
     if (login.isLoggedIn && login.isLoggedIn !== prevLogedIn) {
       dispatch(fetchUserDetailsIfNeeded());
     }
+
+    console.log("App's Didupdate Called");
   }
 
   render() {
