@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-//  import "./assests/css/style.css";
+import "../public/css/style.css";
 //  import "./assests/css/themify-icons.css";
 //  import "./assests/css/jquery.mCustomScrollbar.css";
 //   import "./assests/css/simple-line-icons.css";
