@@ -45,7 +45,6 @@ const AddUserForm = (props) => {
   };
 
   const updateUser = () => {
-
     const api = new Request("", successHandler, errorHandler, false);
     return api.post(`${urls.login.BASE_URL}${urls.User.UPDATE_USER}`, formData);
   };
@@ -295,7 +294,7 @@ const AddUserForm = (props) => {
                     >
                       <option value="">Choose Role</option>
                       <option value="PTM_VENDOR">Vendor</option>
-                      <option value="PTM_SUB">Sub Admin</option>
+                      <option value="PTM_SUB_ADMIN">Sub Admin</option>
                     </select>
                   </div>
                 </div>

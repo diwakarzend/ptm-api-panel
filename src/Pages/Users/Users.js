@@ -7,6 +7,17 @@ import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import AddUserForm from "./AddUserForm";
 import { connect } from "react-redux";
 
+const roleMapping = {
+  PTM_VENDOR: "Vendor",
+  PTM_ADMIN: "Admin",
+  PTM_SUB_ADMIN: "Sub Admin",
+};
+const classMapping = {
+  PTM_VENDOR: "rejected",
+  PTM_ADMIN: "done",
+  PTM_SUB: "initiated",
+};
+
 const Users = (props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
   const [userToBeEdit, setUserId] = useState("");
@@ -63,7 +74,7 @@ const Users = (props) => {
             <div className=" col-sm-12">
               <div className="card card-shadow mb-4">
                 <div className="card-header fund-modal">
-                  <div className="card-title">Add User </div>
+                  <div className="card-title"> </div>
                   <button
                     type="button"
                     className="btn-common"
@@ -118,10 +129,11 @@ const Users = (props) => {
                     <thead>
                       <tr>
                         <th>Id</th>
-
                         <th>Company Name</th>
                         <th>Mobile</th>
                         <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -135,6 +147,10 @@ const Users = (props) => {
                                 <td>{`${item.firstName} ${item.lastName}`}</td>
                                 <td>{item.userName}</td>
                                 <td>{item.email}</td>
+                                <td className={classMapping[item.role]}>
+                                  {roleMapping[item.role] || "NA"}
+                                </td>
+                                <td className="done">Active</td>
                                 <td
                                   onClick={() =>
                                     editClickHandler(item.userName)

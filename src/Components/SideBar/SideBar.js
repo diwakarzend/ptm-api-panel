@@ -151,7 +151,7 @@ const SideBar = (props) => {
             >
               <li className={`${activeSection == "users" ? " active" : ""}`}>
                 <AnchorLink href="/users" clicked={handleNavClick}>
-                  Vendors
+                  Manage Users
                 </AnchorLink>
               </li>
             </ul>
