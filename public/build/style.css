@@ -5049,3 +5049,19 @@ ul.down_menu.open .active a {
   margin: 100px 0 32px 0px;
   text-align: center;
 }
+
+.sub-admin {
+  color: #00bfff;
+  font-weight: 500;
+  text-align: center;
+}
+.admin {
+  color: #0d5d4e;
+  font-weight: 500;
+  text-align: center;
+}
+.vendor {
+  color: #f39a3e;
+  font-weight: 500;
+  text-align: center;
+}
