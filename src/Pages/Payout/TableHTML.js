@@ -1,8 +1,10 @@
-import React, { Fragment, memo } from "react";
+import React, { useEffect, memo } from "react";
 import { AgGridColumn, AgGridReact } from "ag-grid-react";
+import { CSVLink, CSVDownload } from "react-csv";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+import { html } from "react-dom-factories";
 
 const TableHTML = memo(({ reportsItems, filterItems }) => {
   const reportsDataAvailable =
@@ -10,6 +12,34 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
     "";
 
   console.log("reportsDataAvailable", reportsItems);
+
+  useEffect(() => {
+    document.addEventListener("DOMContentLoaded", function () {
+      var allColumnIds = [];
+      gridOptions.columnApi.getAllColumns().forEach(function (column) {
+        allColumnIds.push(column.colId);
+      });
+
+      agGrid
+        .simpleHttpRequest({
+          url: "https://www.ag-grid.com/example-assets/olympic-winners.json",
+        })
+        .then(function (data) {
+          gridOptions.api.setRowData(data);
+        });
+    });
+  }, []);
+
+  const transactionData = (params) => {
+    // console.log("TransactionDetails", params);
+    html = "<div><strong> TxnId:</strong>" + params.value.txnId;
+    if (params.value.merchantTxnId) {
+      html += "<strong>Merchant TxnId: </strong>" + params.value.merchantTxnId;
+    }
+    html += "</div>";
+
+    return html;
+  };
 
   const rowData =
     reportsDataAvailable &&
@@ -19,18 +49,6 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
         gst = (item.payoutChanrge * 18) / 100;
         gst = gst.toFixed(2);
       }
-      const transDetails = (
-        <div>
-          <strong> TxnId:</strong> {item.txnId} <br />
-          {item.merchantTxnId ? (
-            <Fragment>
-              <strong>Merchant TxnId: </strong> {item.merchantTxnId}
-            </Fragment>
-          ) : (
-            ""
-          )}
-        </div>
-      );
 
       const walletBalance = item.openingBalance
         ? `OB:${item.openingBalance}\nCB:${item.closingBalance}`
@@ -41,7 +59,7 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
       return {
         DateTime: item.createdDate,
         PaymentMode: item.route,
-        TransactionDetails: transDetails,
+        TransactionDetails: item,
         Amount: item.remittanceAmount,
         Beneficiary: item.beneficiaryName,
         AccountNumber: item.accountNumber,
@@ -57,164 +75,63 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
   //   { DateTime: "Porsche", PaymentMode: "Boxter", TransactionDetails: 72000 },
   // ];
 
-  return (
-    <div className="ag-theme-alpine" style={{ height: 400, width: 950 }}>
-      <AgGridReact rowData={rowData}>
-        <AgGridColumn
-          field="DateTime"
-          sortable="true"
-          flex="2"
-          minWidth="100"
-          //resizable={true}
-        ></AgGridColumn>
-        <AgGridColumn
-          field="PaymentMode"
-          sortable="true"
-          flex="2"
-          minWidth="100"
-          // resizable={true}
-        ></AgGridColumn>
-        <AgGridColumn
-          field="TransactionDetails"
-          flex="2"
-          minWidth="100"
-        ></AgGridColumn>
-        <AgGridColumn
-          field="Amount"
-          flex="2"
-          minWidth="50"
-          sortable="true"
-        ></AgGridColumn>
-        <AgGridColumn
-          field="Beneficiary"
-          flex="2"
-          minWidth="50"
-          sortable="true"
-        ></AgGridColumn>
-        <AgGridColumn
-          field="AccountNumber"
-          flex="2"
-          minWidth=" 50"
-        ></AgGridColumn>
-        <AgGridColumn field="IFSCCode" flex="2" minWidth="50"></AgGridColumn>
-        <AgGridColumn
-          field="WalletBalance"
-          flex="2"
-          minWidth="50"
-        ></AgGridColumn>
-
-        <AgGridColumn
-          field="ServiceCharges"
-          flex="2"
-          minWidth="50"
-        ></AgGridColumn>
-
-        <AgGridColumn
-          field="Status"
-          flex="2"
-          minWidth="50"
-          sortable="true"
-        ></AgGridColumn>
-      </AgGridReact>
-    </div>
-  );
+  const columnDefs = [
+    {
+      field: "DateTime",
+      sortable: true,
+      minWidth: "50",
+    },
+    {
+      field: "PaymentMode",
+      sortable: true,
+      maxWidth: "100",
+    },
+    {
+      field: "TransactionDetails",
+      sortable: true,
+      cellRenderer: transactionData,
+      resizable: true,
+    },
+    {
+      field: "Amount",
+      sortable: true,
+      maxWidth: "100",
+    },
+    {
+      field: "Beneficiary",
+      maxWidth: "150",
+    },
+    {
+      field: "AccountNumber",
+      minWidth: "50",
+    },
+    {
+      field: "IFSCCode",
+    },
+    {
+      field: "WalletBalance",
+      sortable: "true",
+    },
+    {
+      field: "ServiceCharges",
+    },
+    {
+      field: "Status",
+      sortable: "true",
+      filter: true,
+    },
+  ];
 
   return (
-    <div className="card-body">
-      {reportsDataAvailable ? (
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">DateTime</th>
-              <th scope="col">Payment Mode</th>
-              <th scope="col">Transaction Details</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Beneficiary</th>
-              {/* {filterItems &&
-                filterItems.status &&
-                filterItems.status.toLowerCase() == "done" && (
-                  <th scope="col">Wallet Balance</th>
-                )} */}
-
-              <th scope="col">Wallet Balance</th>
-
-              <th scope="col">Service Charges</th>
-
-              <th scope="col">Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reportsDataAvailable
-              ? reportsItems.map((item, index) => {
-                  let gst = "";
-                  if (item.payoutChanrge) {
-                    gst = (item.payoutChanrge * 18) / 100;
-                    gst = gst.toFixed(2);
-                  }
-                  return (
-                    <tr key={item.reqstDate}>
-                      <th scope="row">{index + 1}</th>
-                      <td>{item.createdDate}</td>
-                      <td>{item.route}</td>
-                      <td>
-                        <strong> TxnId:</strong> {item.txnId} <br />
-                        {item.merchantTxnId ? (
-                          <Fragment>
-                            <strong>Merchant TxnId: </strong>{" "}
-                            {item.merchantTxnId}
-                          </Fragment>
-                        ) : (
-                          ""
-                        )}
-                      </td>
-                      <td>&#8377;{item.remittanceAmount}</td>
-
-                      <td>
-                        {item.beneficiaryName}, <br />
-                        {item.accountNumber}, <br />
-                        {item.ifscCode}
-                      </td>
-
-                      {item.openingBalance != null ? (
-                        <td>
-                          <strong> OB:</strong> {item.openingBalance} <br />
-                          <strong> CB:</strong> {item.closingBalance} <br />
-                        </td>
-                      ) : (
-                        <td>NA</td>
-                      )}
-
-                      <td>
-                        <strong>Charge : </strong>
-                        {item.payoutChanrge}
-                        <br />
-                        <strong> GST : </strong>
-                        {gst}
-                      </td>
-
-                      <td className={item.status.toLowerCase()}>
-                        {item.status}
-                      </td>
-                      <td>
-                        <button
-                          onClick={() => {}}
-                          className="quick-payment-btn "
-                        ></button>
-                      </td>
-                    </tr>
-                  );
-                })
-              : ""}
-          </tbody>
-        </table>
-      ) : (
-        <div colSpan="8" style={{ textAlign: "center", color: "green" }}>
-          No transaction Found, You can use filter option to get all required
-          transactions.
-        </div>
-      )}
+    <div>
+      <CSVLink data={rowData}>Download me</CSVLink>
+      <div
+        className="ag-theme-alpine"
+        style={{ height: 400, width: 950 }}
+        id="myGrid"
+      >
+        <AgGridReact rowData={rowData} columnDefs={columnDefs} />
+      </div>
     </div>
   );
 });
