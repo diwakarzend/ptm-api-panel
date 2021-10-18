@@ -109,7 +109,7 @@ body {
 
 .btn-common {
   border-radius: 6px;
-  background: #1e437b;
+  background: #0aaaba;
   color: #fff;
   border: 0;
   display: inline-block;
@@ -974,7 +974,7 @@ body {
 }
 .page-breadcrumb h1 {
   margin: 0;
-  color: #1e437b;
+  color: #0aaaba;
   font-weight: 700;
 }
 .breadcrumb_nav {
@@ -989,11 +989,11 @@ body {
   display: inline-block;
   line-height: 1;
   margin: 0px 3px;
-  color: #1e437b;
+  color: #0aaaba;
   font-weight: 700;
 }
 .breadcrumb_nav .breadcrumb li a {
-  color: #1e437b;
+  color: #0aaaba;
   font-size: 14px;
   text-shadow: none;
   text-decoration: none;
@@ -1166,8 +1166,8 @@ body {
 }
 
 .themebtn {
-  background-color: #1e437b !important;
-  border-color: #1e437b !important;
+  background-color: #0aaaba !important;
+  border-color: #0aaaba !important;
   min-height: 39px;
   min-width: 200px;
   border-radius: 20px;
@@ -1226,7 +1226,7 @@ body {
 }
 .modal .themebtn.transparent {
   background: #ffffff !important;
-  color: #1e437b !important;
+  color: #0aaaba !important;
 }
 .payment-method li {
   display: flex;
@@ -2011,7 +2011,7 @@ a:hover {
 .card.bg-danger,
 .card.bg-warning,
 .card.bg-inverse {
-  background: #1e437b !important;
+  background: #0aaaba !important;
 }
 .portlets-scroll {
   min-height: 101%;
@@ -4995,7 +4995,7 @@ ul.inbox-pagination li {
   margin-right: 4px;
 }
 .balance-wrapper .balance-amount i.fa-refresh {
-  color: #1e437b;
+  color: #0aaaba;
   margin-left: 10px;
   cursor: pointer;
   position: absolute;
