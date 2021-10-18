@@ -12,8 +12,8 @@ const Footer = (props) => {
         <div className="col-md-12 text-center">
           <div className="copy_right">
             <p>
-              2019 © Dashboard Theme By
-              <a href="#">Pay2Mobile</a>
+              2021 © Dashboard Theme By
+              <a href="#"> Prive Pay </a>
             </p>
           </div>
           <a id="back-to-top" href="#">

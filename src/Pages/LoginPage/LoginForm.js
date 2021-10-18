@@ -84,7 +84,7 @@ class LoginForm extends React.Component {
                     <span className={cssClass}>{errorMsg || successMsg}</span>
 
                     <img
-                      src="https://storage.googleapis.com/ptm-assets-prod/banner/imageonline-co-roundcorner.png"
+                      src="https://storage.googleapis.com/ptm-assets-prod/banner/prive-pay-fav-icon.jpeg"
                       alt="logo"
                       className="logo-icon"
                     />

@@ -76,8 +76,9 @@ const Header = (props) => {
                 <span className="logo-default">
                   <AnchorLink href="/dashboard">
                     <img
-                      src="https://storage.googleapis.com/ptm-assets-prod/banner/pay2mobile-logo.png"
-                      alt=""
+                      src="https://storage.googleapis.com/ptm-assets-prod/banner/priv-pay.png"
+                      alt="Logo"
+                      height="60"
                     />
                   </AnchorLink>
                 </span>

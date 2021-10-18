@@ -3,7 +3,7 @@
 }
 .full-page {
   height: 100vh;
-  background: #1e437b;
+  background: #0aaaba;
 }
 .floating-label-group {
   position: relative;
@@ -49,7 +49,7 @@ input:not(:focus):valid ~ .floating-label {
   color: #ffffff;
   padding: 13px 24px;
   min-width: inherit;
-  background: #1e437b;
+  background: #0aaaba;
   border: none;
   border-radius: 25px;
   width: 90%;
@@ -99,7 +99,7 @@ input:not(:focus):valid ~ .floating-label {
 }
 .reset-password {
   float: right;
-  color: #1e437b;
+  color: #0aaaba;
   cursor: pointer;
   font-size: 13px;
   text-decoration: underline;
@@ -107,14 +107,14 @@ input:not(:focus):valid ~ .floating-label {
 
 .left-banner {
   display: block;
-  background: url(https://storage.googleapis.com/ptm-assets-prod/banner/pay2M-login-banner.png);
+  background: url(https://storage.googleapis.com/ptm-assets-prod/banner/privepay-banner.png);
   background-size: contain;
   background-position: center;
   height: 70%;
   background-repeat: no-repeat;
 }
 
-@media all and (max-width:767px){
+@media all and (max-width: 767px) {
   .left-banner {
     display: none;
   }

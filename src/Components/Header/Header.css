@@ -8,7 +8,7 @@ body {
   border: 0;
   padding: 0;
   filter: none;
-  background: #1e437b;
+  background: #0aaaba;
   position: fixed;
   right: 0px;
   left: 0px;
@@ -32,7 +32,7 @@ body {
   height: 70px;
   padding: 10px 22px;
   line-height: 1.7 !important;
-  background: #1e437b;
+  background: #0aaaba;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.11);
   border-right: 1px solid rgba(0, 0, 0, 0.11);
