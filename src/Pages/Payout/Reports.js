@@ -4,6 +4,7 @@ import { fetchTransactionReport } from "../../actions/payout";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
 import TableHTML from "./TableHTML";
+import CSVExport from "../../Components/DataExport/CSVExport";
 
 const Reports = memo((props) => {
   const [filterItems, updateItems] = useState({});
@@ -68,6 +69,24 @@ const Reports = memo((props) => {
 
   console.log("filterItems", filterItems);
 
+  const getData = () => {
+    // const csvData = [
+    //   { firstname: "Ahmed", lastname: "Tomi", email: "ah@smthing.co.com" },
+    //   { firstname: "Raed", lastname: "Labes", email: "rl@smthing.co.com" },
+    //   { firstname: "Yezzi", lastname: "Min l3b", email: "ymin@cocococo.com" },
+    // ];
+
+    // return csvData;
+
+    setTimeout(() => {
+      const csvData = [
+        { firstname: "Ahmed", lastname: "Tomi", email: "ah@smthing.co.com" },
+        { firstname: "Raed", lastname: "Labes", email: "rl@smthing.co.com" },
+        { firstname: "Yezzi", lastname: "Min l3b", email: "ymin@cocococo.com" },
+      ];
+      return csvData;
+    }, 1000);
+  };
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -143,16 +162,22 @@ const Reports = memo((props) => {
                     <button type="button" className="btn-common">
                       Copy
                     </button>
-                    <button type="button" className="btn-common">
-                      CSV
-                    </button>
+
+                    <CSVExport dispatch={dispatch} />
+
                     <button type="button" className="btn-common">
                       Excel
                     </button>
                     <button type="button" className="btn-common">
                       PDF
                     </button>
-                    <button type="button" className="btn-common">
+                    <button
+                      type="button"
+                      className="btn-common"
+                      onClick={() => {
+                        window.print();
+                      }}
+                    >
                       Print
                     </button>
                   </div>
