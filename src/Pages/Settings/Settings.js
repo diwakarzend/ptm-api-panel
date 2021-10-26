@@ -68,6 +68,24 @@ const Settings = (props) => {
                             PAYOUT API
                           </a>
                         </li>
+                        <li
+                          className="nav-item"
+                          onClick={() => handleTabClick("apikey")}
+                        >
+                          <a
+                            className={`nav-link${
+                              activeTab == "apikey" ? " active" : ""
+                            }`}
+                            id="pills-week-tab"
+                            data-toggle="pill"
+                            href="#pills-week"
+                            role="tab"
+                            aria-controls="pills-week"
+                            aria-selected="false"
+                          >
+                            API Key
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -81,6 +99,16 @@ const Settings = (props) => {
                           setToggeleAPI1={setToggeleAPI1}
                           setToggeleAPI2={setToggeleAPI2}
                         />
+                      )}
+                      {activeTab == "apikey" && (
+                        <div className="col-md-12">
+                          <div className="form-group">
+                            <input
+                              className="form-control"
+                              value="BSX4MzMZKnb4g0JFYGEzk-pvPx4a7ZtQfduKmkfHhTsJJNsfLaNHlPufPSfA"
+                            />
+                          </div>
+                        </div>
                       )}
                     </div>
                   </div>
