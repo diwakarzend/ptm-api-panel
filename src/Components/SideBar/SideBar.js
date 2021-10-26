@@ -233,19 +233,14 @@ const SideBar = (props) => {
 
         <li
           className={`menu_sub ${
-            activeSection == "document" ? " open active" : ""
+            activeSection == "settings" ? " open active" : ""
           }`}
         >
-          <a
-            onClick={() => {
-              setToggleAPI(!toggleAPI);
-            }}
-          >
-            <i className="ti-settings"></i> <span>API Document</span>
-            <span className="icon-arrow-down styleicon"></span>
-          </a>
+          <AnchorLink href="/settings" clicked={handleNavClick}>
+            <i className="icon-chart"></i> <span>Settings </span>
+          </AnchorLink>
 
-          <ul
+          {/* <ul
             className={
               toggleAPI || activeSection == "document"
                 ? "down_menu open"
@@ -257,7 +252,7 @@ const SideBar = (props) => {
                 Document
               </AnchorLink>
             </li>
-          </ul>
+          </ul> */}
         </li>
       </ul>
     </div>

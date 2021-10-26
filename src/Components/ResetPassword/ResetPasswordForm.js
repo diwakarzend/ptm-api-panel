@@ -41,7 +41,7 @@ const ResetPasswordForm = memo(
           />
         </div>
         <div className="floating-label-group">
-        <OTPForm otpChangeHandler={otpChangeHandler} />
+          <OTPForm otpChangeHandler={otpChangeHandler} />
         </div>
         <input
           type="submit"

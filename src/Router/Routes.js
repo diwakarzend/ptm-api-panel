@@ -9,7 +9,7 @@ import AddMoneyLoadable from "../Pages/AddMoney/AddMoneyLoadable";
 import FundRequestLoadable from "../Pages/FundRequest/FundRequestLoadable";
 import BeneficiaryLoadable from "../Pages/Benificiary/BeneficiaryLoadable";
 import ReportsLoadable from "../Pages/Payout/ReportsLoadable";
-import APIDocumentsLodable from "../Pages/APIDocuments/APIDocumentsLodable";
+import SettingsLodable from "../Pages/Settings/SettingsLodable";
 import CommissionLoadable from "../Pages/Commission/CommissionLodable";
 
 const Routes = (props) => {
@@ -36,11 +36,7 @@ const Routes = (props) => {
           component={ReportsLoadable}
           exact
         />
-        <PrivateRoute
-          path="/userapi/document"
-          component={APIDocumentsLodable}
-          exact
-        />
+        <PrivateRoute path="/settings" component={SettingsLodable} exact />
         <PrivateRoute
           path="/vendor/commission"
           component={CommissionLoadable}

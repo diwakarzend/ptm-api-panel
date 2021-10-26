@@ -10,6 +10,7 @@ export default {
     GET_API_USERS: "/api/users?pageSize=100",
     RESET_PASSWORD: "/api/user/account/reset-password/init",
     UPDATE_PASSWORD: "/api/user/account/reset-password/finish",
+    CHANGE_PASSWORD: "/api/user/account/change-password",
   },
 
   User: {
