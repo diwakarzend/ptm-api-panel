@@ -2,16 +2,29 @@ import React, { useState } from "react";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import ChangePassword from "../../Components/ResetPassword/ChangePassword";
+import IPForm from "../Settings/IPForm";
+import { addOverlay, removeOverlay } from "../../utils/common";
 import "./Settings.css";
 
 const Settings = (props) => {
   const [toggleApi1, setToggeleAPI1] = useState(false);
   const [toggleApi2, setToggeleAPI2] = useState(false);
   const [activeTab, setactiveTab] = useState("password");
+  const [ipPopup, setIPPopup] = useState(false);
 
   const handleTabClick = (item) => {
     // alert(item);
     setactiveTab(item);
+  };
+
+  const handleIPForm = () => {
+    addOverlay();
+    setIPPopup(true);
+  };
+
+  const closeIPPopUpHandler = () => {
+    removeOverlay();
+    setIPPopup(false);
   };
 
   return (
@@ -86,6 +99,24 @@ const Settings = (props) => {
                             API Key
                           </a>
                         </li>
+                        <li
+                          className="nav-item"
+                          onClick={() => handleTabClick("ip")}
+                        >
+                          <a
+                            className={`nav-link${
+                              activeTab == "ip" ? " active" : ""
+                            }`}
+                            id="pills-week-tab"
+                            data-toggle="pill"
+                            href="#pills-week"
+                            role="tab"
+                            aria-controls="pills-week"
+                            aria-selected="false"
+                          >
+                            IP
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -108,6 +139,53 @@ const Settings = (props) => {
                               value="BSX4MzMZKnb4g0JFYGEzk-pvPx4a7ZtQfduKmkfHhTsJJNsfLaNHlPufPSfA"
                             />
                           </div>
+                        </div>
+                      )}
+                      {activeTab == "ip" && (
+                        <div>
+                          <div class="card-header fund-modal">
+                            <div class="card-title"> </div>
+                            <button
+                              type="button"
+                              class="btn-common"
+                              data-toggle="modal"
+                              onClick={handleIPForm}
+                            >
+                              Add IP
+                            </button>
+                            {ipPopup ? (
+                              <IPForm closePopUpHandler={closeIPPopUpHandler} />
+                            ) : (
+                              ""
+                            )}
+                          </div>
+
+                          <table className="table table-bordered">
+                            <tr>
+                              <th>UserId</th>
+                              <th>User</th>
+                              <th>Mobile</th>
+                              <th>IP Address</th>
+                              <th>Last Modified</th>
+                              <th>Status</th>
+                            </tr>
+                            <tr>
+                              <td>5814</td>
+                              <td>WebTechies Pvt Ltd</td>
+                              <td>9999678976</td>
+                              <td>34.93.135.35</td>
+                              <td>18 June 2021</td>
+                              <td>Active</td>
+                            </tr>
+                            <tr>
+                              <td>5814</td>
+                              <td>WebTechies Pvt Ltd</td>
+                              <td>9999678976</td>
+                              <td>34.93.135.35</td>
+                              <td>18 June 2021</td>
+                              <td>Active</td>
+                            </tr>
+                          </table>
                         </div>
                       )}
                     </div>
