@@ -133,6 +133,7 @@ const Settings = (props) => {
                       )}
                       {activeTab == "apikey" && (
                         <div className="col-md-12">
+                          <span>Generate Token</span>
                           <div className="form-group">
                             <input
                               className="form-control"
