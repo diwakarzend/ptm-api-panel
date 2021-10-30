@@ -12,7 +12,6 @@ const initialFormData = Object.freeze({
   langKey: "en",
   lastName: "",
   otp: "",
-  password: "",
   phoneNumber: "",
   pincode: "",
   qrCodeId: "",
@@ -269,7 +268,7 @@ const AddUserForm = (props) => {
                     />
                   </div>
                 </div>
-                <div className="col-md-12">
+                {/* <div className="col-md-12">
                   <div className="form-group">
                     <label for="exampleInputEmail1">Password</label>
                     <input
@@ -281,7 +280,7 @@ const AddUserForm = (props) => {
                       onChange={handleChange}
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div className="col-md-12">
                   <div className="form-group">

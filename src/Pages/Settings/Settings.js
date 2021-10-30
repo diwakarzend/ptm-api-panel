@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import ChangePassword from "../../Components/ResetPassword/ChangePassword";
@@ -11,6 +11,7 @@ const Settings = (props) => {
   const [toggleApi2, setToggeleAPI2] = useState(false);
   const [activeTab, setactiveTab] = useState("password");
   const [ipPopup, setIPPopup] = useState(false);
+  const tokenInput = useRef();
 
   const handleTabClick = (item) => {
     // alert(item);
@@ -25,6 +26,18 @@ const Settings = (props) => {
   const closeIPPopUpHandler = () => {
     removeOverlay();
     setIPPopup(false);
+  };
+
+  const generateString = (length) => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    let result = " ";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    tokenInput.current.value = result;
   };
 
   return (
@@ -133,11 +146,24 @@ const Settings = (props) => {
                       )}
                       {activeTab == "apikey" && (
                         <div className="col-md-12">
-                          <span>Generate Token</span>
+                          <button
+                            type="button"
+                            class="btn-common"
+                            data-toggle="modal"
+                            onClick={() => generateString(70)}
+                            style={{
+                              float: "right",
+                              marginBottom: "16px",
+                            }}
+                          >
+                            Generate Token
+                          </button>
+
                           <div className="form-group">
                             <input
                               className="form-control"
                               value="BSX4MzMZKnb4g0JFYGEzk-pvPx4a7ZtQfduKmkfHhTsJJNsfLaNHlPufPSfA"
+                              ref={tokenInput}
                             />
                           </div>
                         </div>

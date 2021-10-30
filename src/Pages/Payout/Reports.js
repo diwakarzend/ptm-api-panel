@@ -10,7 +10,7 @@ const Reports = memo((props) => {
   const [filterItems, updateItems] = useState({});
   const { dispatch, payout } = props;
   useEffect(() => {
-    dispatch(fetchTransactionReport({}));
+    dispatch(fetchTransactionReport({ status: "DONE" }));
   }, []);
 
   const handleChange = (event) => {
@@ -38,7 +38,12 @@ const Reports = memo((props) => {
     dispatch(fetchTransactionReport(filterItems));
   };
 
-  const reportsItems = payout && payout.reports && payout.reports.data;
+  const reportsItems =
+    payout &&
+    payout.reports &&
+    payout.reports.data &&
+    payout.reports.data.content;
+
   //   accountNumber: "50100017129260"
   // approvalRequired: "N"
   // beneficiaryName: "Ranjeet Singh Paliwal"
@@ -159,18 +164,8 @@ const Reports = memo((props) => {
                     role="group"
                     aria-label="Basic example"
                   >
-                    <button type="button" className="btn-common">
-                      Copy
-                    </button>
-
                     <CSVExport dispatch={dispatch} />
 
-                    <button type="button" className="btn-common">
-                      Excel
-                    </button>
-                    <button type="button" className="btn-common">
-                      PDF
-                    </button>
                     <button
                       type="button"
                       className="btn-common"

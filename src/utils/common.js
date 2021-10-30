@@ -442,3 +442,9 @@ export function getUserPermissions(login) {
   }
   return "";
 }
+
+export function printPage() {
+  if (typeof window) {
+    window.print();
+  }
+}

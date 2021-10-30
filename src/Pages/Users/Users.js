@@ -99,17 +99,9 @@ const Users = (props) => {
                       aria-label="Basic example"
                     >
                       <button type="button" className="btn-common">
-                        Copy
-                      </button>
-                      <button type="button" className="btn-common">
                         CSV
                       </button>
-                      <button type="button" className="btn-common">
-                        Excel
-                      </button>
-                      <button type="button" className="btn-common">
-                        PDF
-                      </button>
+
                       <button type="button" className="btn-common">
                         Print
                       </button>
@@ -128,6 +120,7 @@ const Users = (props) => {
                         <th>Mobile</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Wallet</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -152,6 +145,7 @@ const Users = (props) => {
                                 <td className={userClass}>
                                   {roleMapping[item.role] || "NA"}
                                 </td>
+                                <td>{roleMapping[item.walletAmount] || "0"}</td>
                                 <td className="done">Active</td>
                                 <td
                                   onClick={() =>

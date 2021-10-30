@@ -52,6 +52,7 @@ export default {
     STATUS_TRANSACTION_REPORT:
       "/api/payout/dashboard/status-transaction-report",
     COMMISSION_RANGE: "/api/user/payout/commission-range",
+    UPDATE_COMMISION: "/api/user/payout/update-commission",
   },
   userCommission: {
     GET_USERCOMMISSION: "/api/user/comission",

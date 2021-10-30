@@ -14,6 +14,7 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
               <th scope="col">#</th>
               <th scope="col">DateTime</th>
               <th scope="col">Payment Mode</th>
+              <th scope="col">API Route</th>
               <th scope="col">Transaction Details</th>
               <th scope="col">Amount</th>
               <th scope="col">Beneficiary</th>
@@ -44,6 +45,8 @@ const TableHTML = memo(({ reportsItems, filterItems }) => {
                       <th scope="row">{index + 1}</th>
                       <td>{item.createdDate}</td>
                       <td>{item.route}</td>
+                      <td>{item.merchantCode}</td>
+
                       <td>
                         <strong> TxnId:</strong> {item.txnId} <br />
                         {item.merchantTxnId ? (
