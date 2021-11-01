@@ -1,24 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
-import { removeOverlay } from "../../utils/common";
 const initialFormData = Object.freeze({
-  address1: "",
-  address2: "",
-  dob: "1985-12-07",
-  email: "",
-  firstName: "",
-  landmark: "",
-  langKey: "en",
-  lastName: "",
-  otp: "",
-  password: "",
-  phoneNumber: "",
-  pincode: "",
-  qrCodeId: "",
-  role: "",
-  tenantId: 0,
-  userName: "",
+  ip: "",
+  username: "",
 });
 
 const AddUserForm = (props) => {
@@ -40,8 +25,10 @@ const AddUserForm = (props) => {
       ...formData,
       [event.target.name]: event.target.value.trim(),
     });
+  };
 
-    const vendorName = event.target.value;
+  const submitFormHandler = (event) => {
+    event.preventDefault();
     const errorHandler = (response) => {
       console.log(response);
     };
@@ -55,21 +42,7 @@ const AddUserForm = (props) => {
     };
 
     const api = new Request("", successHandler, errorHandler, false);
-    return api.get(
-      `${urls.login.BASE_URL}${urls.User.SEARCH_USER}/${vendorName}`
-    );
-  };
-
-  /* const updateUser = () => {
-    const api = new Request("", successHandler, errorHandler, false);
-    return api.post(`${urls.login.BASE_URL}${urls.User.UPDATE_USER}`, formData);
-  }; */
-
-  const submitFormHandler = (event) => {
-    event.preventDefault();
-
-    const api = new Request("", successHandler, errorHandler, false);
-    // return api.post(urls.login.BASE_URL + urls.User.CREATE_NEW_USER, formData);
+    return api.post(urls.login.BASE_URL + urls.User.API_LIST_UPDATE, formData);
   };
 
   return (

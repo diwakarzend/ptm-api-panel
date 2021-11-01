@@ -13,7 +13,8 @@ const initialFormData = Object.freeze({
 });
 
 const CommissionForm = (props) => {
-  const { closePopUp, itemToUpdate, userId } = props;
+  const { closePopUp, itemToUpdate, userId, comissionRange, setMessage } =
+    props;
   const [formData, updateFormData] = useState(initialFormData);
 
   const handleChange = (event) => {
@@ -22,6 +23,23 @@ const CommissionForm = (props) => {
       [event.target.name]: event.target.value.trim(),
     });
   };
+
+  useEffect(() => {
+    const updatedFormData = {
+      minAmount: itemToUpdate.minAmount,
+      maxAmount: itemToUpdate.maxAmount,
+      route: itemToUpdate.mode,
+      userId: userId,
+      merchantCode: itemToUpdate.merchantApiCode,
+      commission: itemToUpdate.comission,
+      commissionType: itemToUpdate.commissionType,
+    };
+
+    updateFormData({
+      ...formData,
+      ...updatedFormData,
+    });
+  }, []);
 
   /* const updateUser = () => {
     const api = new Request("", successHandler, errorHandler, false);
@@ -40,15 +58,11 @@ const CommissionForm = (props) => {
 
       if (!response.success) {
       } else {
+        setMessage("Commision Updated Successfully");
+        comissionRange();
+        closePopUp();
       }
     };
-
-    formData.minAmount = itemToUpdate.minAmount;
-    formData.maxAmount = itemToUpdate.maxAmount;
-    formData.route = itemToUpdate.mode;
-    formData.userId = userId;
-
-    console.log("formData1121", formData);
 
     const api = new Request("", successHandler, errorHandler, false);
     return api.post(
@@ -57,7 +71,7 @@ const CommissionForm = (props) => {
     );
   };
 
-  console.log("render", formData);
+  console.log("render", itemToUpdate, formData);
 
   return (
     <div
@@ -112,8 +126,26 @@ const CommissionForm = (props) => {
                           required
                         >
                           <option value="">Select Merchant Code</option>
-                          <option value="NP">Net Paisa</option>
-                          <option value="PTM">Paytm</option>
+                          <option
+                            value="NP"
+                            selected={
+                              itemToUpdate.merchantApiCode == "NP"
+                                ? "selected"
+                                : ""
+                            }
+                          >
+                            Net Paisa
+                          </option>
+                          <option
+                            value="PTM"
+                            selected={
+                              itemToUpdate.merchantApiCode == "PTM"
+                                ? "selected"
+                                : ""
+                            }
+                          >
+                            Paytm
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -127,8 +159,26 @@ const CommissionForm = (props) => {
                           required
                         >
                           <option value="">Select Commission Type</option>
-                          <option value="FIX">Fix</option>
-                          <option value="PERCENTAGE">Percentage</option>
+                          <option
+                            value="FIX"
+                            selected={
+                              itemToUpdate.commissionType == "FIX"
+                                ? "selected"
+                                : ""
+                            }
+                          >
+                            Fix
+                          </option>
+                          <option
+                            value="PERCENTAGE"
+                            selected={
+                              itemToUpdate.commissionType == "PERCENTAGE"
+                                ? "selected"
+                                : ""
+                            }
+                          >
+                            Percentage
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -142,6 +192,7 @@ const CommissionForm = (props) => {
                           placeholder="Amount"
                           name="commission"
                           onChange={handleChange}
+                          value={formData.commission}
                           required
                         />
                       </div>

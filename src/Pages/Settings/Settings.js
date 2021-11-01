@@ -4,6 +4,8 @@ import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import ChangePassword from "../../Components/ResetPassword/ChangePassword";
 import IPForm from "../Settings/IPForm";
 import { addOverlay, removeOverlay } from "../../utils/common";
+import Request from "../../utils/Request";
+import urls from "../../utils/urls";
 import "./Settings.css";
 
 const Settings = (props) => {
@@ -11,10 +13,28 @@ const Settings = (props) => {
   const [toggleApi2, setToggeleAPI2] = useState(false);
   const [activeTab, setactiveTab] = useState("password");
   const [ipPopup, setIPPopup] = useState(false);
+  const [ipdata, setipData] = useState("");
+
   const tokenInput = useRef();
+
+  const fetchIPDetails = () => {
+    const successHandler = (response) => {
+      if (response.success == true) {
+        setipData(response.data);
+      }
+    };
+
+    const errorHandler = (error) => {};
+
+    const request = new Request("", successHandler, errorHandler, false);
+    return request.get(`${urls.login.BASE_URL}${urls.User.API_LIST}`);
+  };
 
   const handleTabClick = (item) => {
     // alert(item);
+    if (item == "ip") {
+      fetchIPDetails();
+    }
     setactiveTab(item);
   };
 
@@ -40,6 +60,10 @@ const Settings = (props) => {
     tokenInput.current.value = result;
   };
 
+  console.log("ipdata", ipdata);
+
+  /*
+   */
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -170,48 +194,34 @@ const Settings = (props) => {
                       )}
                       {activeTab == "ip" && (
                         <div>
-                          <div class="card-header fund-modal">
-                            <div class="card-title"> </div>
-                            <button
-                              type="button"
-                              class="btn-common"
-                              data-toggle="modal"
-                              onClick={handleIPForm}
-                            >
-                              Add IP
-                            </button>
-                            {ipPopup ? (
-                              <IPForm closePopUpHandler={closeIPPopUpHandler} />
-                            ) : (
-                              ""
-                            )}
-                          </div>
+                          {ipPopup ? (
+                            <IPForm closePopUpHandler={closeIPPopUpHandler} />
+                          ) : (
+                            ""
+                          )}
 
                           <table className="table table-bordered">
                             <tr>
                               <th>UserId</th>
-                              <th>User</th>
-                              <th>Mobile</th>
                               <th>IP Address</th>
                               <th>Last Modified</th>
-                              <th>Status</th>
+                              <th>Action</th>
                             </tr>
-                            <tr>
-                              <td>5814</td>
-                              <td>WebTechies Pvt Ltd</td>
-                              <td>9999678976</td>
-                              <td>34.93.135.35</td>
-                              <td>18 June 2021</td>
-                              <td>Active</td>
-                            </tr>
-                            <tr>
-                              <td>5814</td>
-                              <td>WebTechies Pvt Ltd</td>
-                              <td>9999678976</td>
-                              <td>34.93.135.35</td>
-                              <td>18 June 2021</td>
-                              <td>Active</td>
-                            </tr>
+
+                            {ipdata &&
+                            ipdata.content &&
+                            Array.isArray(ipdata.content)
+                              ? ipdata.content.map((item) => {
+                                  return (
+                                    <tr>
+                                      <td>{item.username}</td>
+                                      <td>{item.ip}</td>
+                                      <td>{item.lastUpdated}</td>
+                                      <td onClick={handleIPForm}>Edit</td>
+                                    </tr>
+                                  );
+                                })
+                              : ""}
                           </table>
                         </div>
                       )}

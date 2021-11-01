@@ -448,3 +448,11 @@ export function printPage() {
     window.print();
   }
 }
+
+export function hideMessage(message, setMessage) {
+  if (message) {
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
+  }
+}

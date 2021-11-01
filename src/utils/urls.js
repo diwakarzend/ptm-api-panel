@@ -16,6 +16,8 @@ export default {
 
   User: {
     USER_LIST: "/api/users",
+    API_LIST: "/api/ip",
+    API_LIST_UPDATE: "/api/update-ip",
     CREATE_NEW_USER: "/api/users",
     UPDATE_USER: "/api/update-users",
     DELETE_USER: "/api/delete-users/",

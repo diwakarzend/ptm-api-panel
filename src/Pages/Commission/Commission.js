@@ -1,26 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { fetchCommisionRange } from "../../actions/payout";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import CommissionForm from "./CommissionForm";
-import { addOverlay, removeOverlay, printPage } from "../../utils/common";
+import {
+  addOverlay,
+  removeOverlay,
+  printPage,
+  hideMessage,
+} from "../../utils/common";
 
 import { connect } from "react-redux";
 
 const Commission = (props) => {
   const { dispatch, payout, login } = props;
   const [isPopupVisible, setPopUp] = useState(false);
-  const [itemToUpdate, setItem] = useState("");
+  const [itemInfo, setItem] = useState({ item: "", vendor: "" });
+  const [message, setMessage] = useState("");
+
+  const comissionRange = () => {
+    dispatch(fetchCommisionRange());
+  };
 
   useEffect(() => {
-    dispatch(fetchCommisionRange());
+    comissionRange();
   }, []);
 
-  const openPopup = (item, itemKey) => {
+  useEffect(() => {
+    hideMessage(message, setMessage);
+  }, [message]);
+
+  const openPopup = (item, itemKey, vendor) => {
     // console.log("item", item);
     item.mode = itemKey;
-    setItem(item);
+    setItem({
+      item: item,
+      vendor: vendor,
+    });
     addOverlay();
     setPopUp(true);
   };
@@ -30,31 +47,60 @@ const Commission = (props) => {
     setPopUp(false);
   };
 
-  const commissionData =
+  // const commissionData =
+  //   payout &&
+  //   payout.commission &&
+  //   payout.commission.data &&
+  //   payout.commission.data.content &&
+  //   payout.commission.data.content["9718063555"];
+
+  const testData =
     payout &&
     payout.commission &&
     payout.commission.data &&
     payout.commission.data.content &&
-    payout.commission.data.content["9718063555"];
+    payout.commission.data.content;
 
-  console.log("commissionData", props);
+  const finalData = [];
 
+  if (testData && testData.constructor == Object) {
+    Object.keys(testData).forEach((key) => {
+      // finalData.push(testData[key]);
+      const objCopy = JSON.parse(JSON.stringify(testData[key]));
+      objCopy["vendor"] = key;
+      finalData.push(objCopy);
+    });
+  }
+
+  console.log("commissionData", finalData);
   const rows = [];
-  let lastCategory = null;
-  if (commissionData) {
-    Object.keys(commissionData).forEach((itemKey) => {
-      commissionData[itemKey].forEach((product) => {
-        if (itemKey !== lastCategory) {
-          rows.push(
-            <ProductRow
-              itemKey={itemKey}
-              data={commissionData}
-              openPopup={openPopup}
-            />
-          );
+
+  const prepareData = (commissionData) => {
+    let lastCategory = null;
+    if (commissionData) {
+      Object.keys(commissionData).forEach((itemKey) => {
+        if (Array.isArray(commissionData[itemKey])) {
+          commissionData[itemKey].forEach((product) => {
+            if (itemKey !== lastCategory) {
+              rows.push(
+                <ProductRow
+                  itemKey={itemKey}
+                  data={commissionData}
+                  openPopup={openPopup}
+                  vendor={commissionData.vendor}
+                />
+              );
+            }
+            lastCategory = itemKey;
+          });
         }
-        lastCategory = itemKey;
       });
+    }
+  };
+
+  if (finalData) {
+    Object.keys(finalData).forEach((item) => {
+      prepareData(finalData[item]);
     });
   }
 
@@ -74,10 +120,6 @@ const Commission = (props) => {
                       role="group"
                       aria-label="Basic example"
                     >
-                      {/* <button type="button" className="btn-common">
-                        CSV
-                      </button> */}
-
                       <button
                         type="button"
                         className="btn-common"
@@ -91,13 +133,16 @@ const Commission = (props) => {
                 {isPopupVisible ? (
                   <CommissionForm
                     closePopUp={closePopUp}
-                    itemToUpdate={itemToUpdate}
-                    userId="9718063555"
+                    itemToUpdate={itemInfo.item}
+                    comissionRange={comissionRange}
+                    setMessage={setMessage}
+                    userId={itemInfo.vendor}
                   />
                 ) : (
                   ""
                 )}
                 <div className="card-body">
+                  <div className="done">{message}</div>
                   <table
                     id="bs4-table"
                     className="table table-bordered table-striped"
@@ -132,7 +177,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps)(Commission);
 
-const ProductRow = ({ itemKey, data, openPopup }) => {
+const ProductRow = ({ itemKey, data, openPopup, vendor }) => {
   const range = [];
   const merchantCode = [];
   const charges = [];
@@ -147,18 +192,19 @@ const ProductRow = ({ itemKey, data, openPopup }) => {
     );
     merchantCode.push(<div>{item.merchantApiCode || "NA"}</div>);
 
-    commission.push(
-      <div>
-        {item.commissionType == "FIX"
-          ? `Rs. ${item.comission} + GST`
-          : `${item.comission}% + GST`}
-      </div>
-    );
-    edit.push(<div onClick={() => openPopup(item, itemKey)}>Edit</div>);
+    let commissionValue = "NA";
+    if (item.commissionType == "FIX") {
+      commissionValue = `Rs. ${item.comission} + GST`;
+    } else if (item.commissionType == "PERCENTAGE") {
+      commissionValue = `${item.comission}% + GST`;
+    }
+
+    commission.push(<div>{commissionValue}</div>);
+    edit.push(<div onClick={() => openPopup(item, itemKey, vendor)}>Edit</div>);
   });
   return (
     <tr>
-      <td>9718063555</td>
+      <td>{vendor}</td>
       <td>{itemKey}</td>
       <td>{range}</td>
       <td>{merchantCode}</td>

@@ -10,17 +10,14 @@ const CSVExport = (props) => {
 
   useEffect(() => {
     if (data && Array.isArray(data) && data.length > 0) {
-      console.log("dddddddd");
       setTimeout(() => {
         csvLink.current.link.click();
       }, 2000);
     }
   }, [data]);
   const downloadCSV = () => {
-    alert("qqqq");
-    setData("loading");
     const onSuccess = (response) => {
-      setData(response.data);
+      setData(response.data.content);
     };
 
     const onFail = (error) => {};
@@ -54,7 +51,7 @@ const CSVExport = (props) => {
         className="btn-common"
         onClick={() => downloadCSV()}
       >
-        {data == "loading" ? "loading" : "CSV"}
+        CSV
       </button>
       <CSVLink
         //  headers={headers}

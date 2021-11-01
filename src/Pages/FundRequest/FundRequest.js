@@ -3,7 +3,7 @@ import { fetchFundRequests } from "../../actions/userwallet";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { connect } from "react-redux";
-import { addOverlay, removeOverlay } from "../../utils/common";
+import { addOverlay, printPage, removeOverlay } from "../../utils/common";
 
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
@@ -143,18 +143,14 @@ requestUserName: "9718063555"
                     aria-label="Basic example"
                   >
                     <button type="button" className="btn-common">
-                      Copy
-                    </button>
-                    <button type="button" className="btn-common">
                       CSV
                     </button>
-                    <button type="button" className="btn-common">
-                      Excel
-                    </button>
-                    <button type="button" className="btn-common">
-                      PDF
-                    </button>
-                    <button type="button" className="btn-common">
+
+                    <button
+                      type="button"
+                      className="btn-common"
+                      onClick={() => printPage()}
+                    >
                       Print
                     </button>
                   </div>
