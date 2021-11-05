@@ -1,30 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
-import { removeOverlay, getAuthToken } from "../../utils/common";
+import { getAuthToken } from "../../utils/common";
 import axios from "axios";
-
-const permissionsToMatch = "";
 
 const PermissionForm = (props) => {
   const { userId, closePopUpHandler } = props;
-  const [formData, updateFormData] = useState("");
   const [permissions, setPermissions] = useState("");
   const [message, setMessage] = useState({ error: "", success: "" });
 
   const fetchPermissions = () => {
     const successHandler = (res) => {
-      console.log("success", res);
+      // console.log("success", res);
       if (res) {
         setPermissions(res);
         updateFormData(res.activePermissions);
       }
     };
-    const errorHandler = (res) => {
-      console.log("error", res);
-    };
-    // const api = new Request("", successHandler, errorHandler, false);
-    // return api.get(`${urls.login.BASE_URL}${urls.User.GET_ALL_PERMISISSIONS}`);
 
     const options = {
       headers: {
@@ -44,16 +36,10 @@ const PermissionForm = (props) => {
       )
       .catch(() => "");
 
-    // const promise2 = axios
-    //   .get(
-    //     `${urls.login.BASE_URL}${urls.User.}?userName=${userId}`, options)
-    //   .catch(() => "");
-
     axios
       .all([promise1, promise2])
       .then(
         axios.spread((...responses) => {
-          console.log("sssssssss", responses);
           const allPermissions = responses[0] && responses[0].data.data;
           const activePermissions = responses[1] && responses[1].data.data;
 
@@ -70,26 +56,15 @@ const PermissionForm = (props) => {
 
   useEffect(() => {
     fetchPermissions();
-
-    const prepareFinalPermissions = [];
-
-    // permissions.forEach((item) => {
-    //   const status = ["A", "C"].includes(item) ? true : false;
-    //   prepareFinalPermissions.push({
-    //     [item]: status,
-    //   });
-    // });
-
-    // setPermissions(prepareFinalPermissions);
   }, []);
 
   const handleClick = (event, permKey) => {
-    console.log(
-      activePermissions,
-      permKey,
-      event.target.name,
-      event.target.checked
-    );
+    // console.log(
+    //   activePermissions,
+    //   permKey,
+    //   event.target.name,
+    //   event.target.checked
+    // );
 
     const activePermissionsCopy = JSON.parse(JSON.stringify(activePermissions));
     if (event.target.checked) {
@@ -111,33 +86,11 @@ const PermissionForm = (props) => {
     });
   };
 
-  // const updateUser = () => {
-  //   const api = new Request("", successHandler, errorHandler, false);
-  //   return api.post(`${urls.login.BASE_URL}${urls.User.UPDATE_USER}`, formData);
-  // };
-
-  // const errorHandler = (res) => {
-  //   // {"timestamp":"2021-09-18T06:25:35.505+00:00","status":401,"error":"Unauthorized","message":"","path":"/api/users"}
-  // };
-
-  const successHandler = (res) => {
-    console.log("resss", res);
-    if (!res.success) {
-      updateError([data.msg]);
-    } else {
-      /* updateError([]);
-      updateSuccess(data.msg);
-      closePopUpHandler();
-      removeOverlay();
-      fetchUsersData(); */
-    }
-  };
-
   const submitFormHandler = (event) => {
     event.preventDefault();
     const { activePermissions } = permissions;
 
-    console.log("submitFormHandler", activePermissions);
+    // console.log("submitFormHandler", activePermissions);
 
     const formData = {
       userRoleUpdateDto: { userName: userId, addApiCode: activePermissions },
