@@ -1,43 +1,47 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
-const initialFormData = Object.freeze({
-  ip: "",
-  username: "",
-});
 
 const IPForm = (props) => {
-  const { closePopUpHandler, userId } = props;
-  const [formData, updateFormData] = useState(initialFormData);
+  const { closePopUpHandler, fetchIPDetails, userInfo, setIpMessage } = props;
+  const [formData, updateFormData] = useState({ ip: "", username: "" });
+  const [message, setMessage] = useState({ success: "", error: "" });
 
   // const [success, updateSuccess] = useState("");
 
-  /* useEffect(() => {
-    if (editUserData) {
-      updateFormData({
-        ...editUserData,
-      });
-    }
-  }, [editUserData]); */
+  useEffect(() => {
+    updateFormData({
+      ip: userInfo.ip && userInfo.ip,
+      username: userInfo && userInfo.username,
+    });
+  }, []);
 
   const handleChange = (event) => {
     updateFormData({
       ...formData,
-      [event.target.name]: event.target.value.trim(),
+      ip: event.target.value.trim(),
     });
   };
 
   const submitFormHandler = (event) => {
     event.preventDefault();
+    console.log("ipInputValue", formData);
     const errorHandler = (response) => {
-      console.log(response);
+      if (response) {
+        setMessage({ error: response.msg, success: "" });
+      }
     };
 
     const successHandler = (response) => {
-      console.log(response);
-
-      if (!response.success) {
-      } else {
+      if (response) {
+        if (response.success) {
+          setMessage({ success: response.msg, error: "" });
+          fetchIPDetails();
+          setIpMessage("IP Updated successfully");
+          closePopUpHandler();
+        } else {
+          setMessage({ error: response.msg, success: "" });
+        }
       }
     };
 
@@ -45,6 +49,7 @@ const IPForm = (props) => {
     return api.post(urls.login.BASE_URL + urls.User.API_LIST_UPDATE, formData);
   };
 
+  console.log("formData", formData, userInfo);
   return (
     <div
       className={`modal right fade show`}
@@ -72,24 +77,19 @@ const IPForm = (props) => {
           </div>
 
           <div className="modal-body">
+            <div className={message.success ? "done" : "fail"}>
+              {message.success || message.error}
+            </div>
             <form onSubmit={submitFormHandler}>
               <div className="row">
                 <div className="col-md-12">
                   <div className="form-group">
-                    <input
+                    <textarea
                       type="text"
                       className="form-control"
-                      placeholder="Search Vendor"
-                      name="vendorInput"
-                      value={formData && formData.vendorInput}
-                      onChange={handleChange}
-                    />
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter IP Address"
-                      name="ipaddress"
-                      value={formData && formData.ipaddress}
+                      placeholder="Enter Comma Separted IPs"
+                      name="ipInput"
+                      value={formData && formData.ip}
                       onChange={handleChange}
                     />
                   </div>
@@ -105,7 +105,7 @@ const IPForm = (props) => {
                   Close
                 </button>
                 <button type="submit" className="btn btn-primary themebtn">
-                  Add IP
+                  Update IP
                 </button>
               </div>
             </form>

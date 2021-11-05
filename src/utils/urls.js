@@ -1,7 +1,7 @@
 export default {
   login: {
     BASE_URL: "https://vendor-apiservice.pay2mobiles.com:8443",
-    //  BASE_URL: "http://34.93.135.35:8083",
+    //  BASE_URL: "http://34.93.135.35:8080",
     LOGIN_REQUEST: "/api/authenticate",
     OTP_VALIDATION: "/agent/otp/validation",
     LOGIN_OTP_RESEND: "/agent/otp/resend",
@@ -27,6 +27,8 @@ export default {
     SAVE_FDETAILS: "/api/user/save-financial-details",
     GET_FDETAILS: "/api/user/financial-details",
     SEARCH_USER: "/api/users/search",
+    GET_ALL_PERMISISSIONS: "/api/user/mapping",
+    MANAGE_USER_PERMISSIONS: "/api/user/mapping-api",
   },
 
   OperatorList: {

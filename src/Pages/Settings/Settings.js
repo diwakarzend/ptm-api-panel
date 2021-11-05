@@ -14,7 +14,8 @@ const Settings = (props) => {
   const [activeTab, setactiveTab] = useState("password");
   const [ipPopup, setIPPopup] = useState(false);
   const [ipdata, setipData] = useState("");
-  const [activeUserId, setActiveUserId] = useState("");
+  const [activeUserInfo, setActiveUserInfo] = useState("");
+  const [ipmessage, setIpMessage] = useState("");
 
   const tokenInput = useRef();
 
@@ -39,10 +40,11 @@ const Settings = (props) => {
     setactiveTab(item);
   };
 
-  const handleIPForm = (userId) => {
+  const handleIPForm = (item) => {
+    console.log("item121", item);
     addOverlay();
     setIPPopup(true);
-    setActiveUserId(userId);
+    setActiveUserInfo(item);
   };
 
   const closeIPPopUpHandler = () => {
@@ -63,7 +65,7 @@ const Settings = (props) => {
     tokenInput.current.value = result;
   };
 
-  console.log("ipdata", ipdata);
+  console.log("ipdata", activeUserInfo);
 
   /*
    */
@@ -200,11 +202,15 @@ const Settings = (props) => {
                           {ipPopup ? (
                             <IPForm
                               closePopUpHandler={closeIPPopUpHandler}
-                              userId={activeUserId}
+                              fetchIPDetails={fetchIPDetails}
+                              setIpMessage={setIpMessage}
+                              userInfo={activeUserInfo}
                             />
                           ) : (
                             ""
                           )}
+
+                          <div className="done">{ipmessage}</div>
 
                           <table className="table table-bordered">
                             <tr>
@@ -221,13 +227,9 @@ const Settings = (props) => {
                                   return (
                                     <tr>
                                       <td>{item.username}</td>
-                                      <td>{item.ip}</td>
+                                      <td>{item.ip && item.ip.join(", ")}</td>
                                       <td>{item.lastUpdated}</td>
-                                      <td
-                                        onClick={() =>
-                                          handleIPForm(item.username)
-                                        }
-                                      >
+                                      <td onClick={() => handleIPForm(item)}>
                                         Edit
                                       </td>
                                     </tr>

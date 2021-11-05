@@ -5,6 +5,8 @@ import { fetchUsersList } from "../../actions/users";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import AddUserForm from "./AddUserForm";
+import PermissionForm from "./PermissionForm";
+
 import { connect } from "react-redux";
 import { printPage } from "../../utils/common";
 
@@ -18,6 +20,11 @@ const Users = (props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
   const [userToBeEdit, setUserId] = useState("");
   const [editUserData, setEditUserData] = useState("");
+  const [permissionData, setPermissionData] = useState({
+    isPopupVisible: false,
+    userId: "",
+  });
+
   const { dispatch } = props;
 
   const fetchUsersData = () => {
@@ -45,6 +52,22 @@ const Users = (props) => {
     );
   };
 
+  const permissionClickHandler = (userId) => {
+    setPermissionData({ isPopupVisible: true, userId: userId });
+    // const successHandler = (response, headers) => {
+    //   if (response.success == true) {
+    //     setEditUserData(response.data);
+    //   }
+    // };
+
+    // const errorHandler = (error) => {};
+
+    // const request = new Request("", successHandler, errorHandler, false);
+    // return request.get(
+    //   `${APIS.login.BASE_URL}${APIS.User.EDIT_USER.replace("{userId}", userId)}`
+    // );
+  };
+
   const openPopupHandler = () => {
     document.body.classList.add("modal-open");
     handlePopUp(true);
@@ -54,6 +77,15 @@ const Users = (props) => {
     setEditUserData("");
     document.body.classList.remove("modal-open");
     handlePopUp(false);
+  };
+
+  const closePermissionPopup = () => {
+    setPermissionData({
+      ...permissionData,
+      userId: "",
+      isPopupVisible: false,
+    });
+    document.body.classList.remove("modal-open");
   };
 
   const { users } = props;
@@ -87,6 +119,14 @@ const Users = (props) => {
                       props={props}
                       editUserData={editUserData}
                       userToBeEdit={userToBeEdit}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {permissionData.isPopupVisible ? (
+                    <PermissionForm
+                      closePopUpHandler={closePermissionPopup}
+                      userId={permissionData.userId}
                     />
                   ) : (
                     ""
@@ -152,12 +192,25 @@ const Users = (props) => {
                                 </td>
                                 <td>{roleMapping[item.walletAmount] || "0"}</td>
                                 <td className="done">Active</td>
-                                <td
-                                  onClick={() =>
-                                    editClickHandler(item.userName)
-                                  }
-                                >
-                                  Edit
+                                <td>
+                                  <div
+                                    onClick={() =>
+                                      editClickHandler(item.userName)
+                                    }
+                                    style={{ cursor: "pointer" }}
+                                    title="update user"
+                                  >
+                                    Edit
+                                  </div>
+                                  <div
+                                    onClick={() =>
+                                      permissionClickHandler(item.userName)
+                                    }
+                                    title="Manage Permissions"
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    | Permissions
+                                  </div>
                                 </td>
                               </tr>
                             );
