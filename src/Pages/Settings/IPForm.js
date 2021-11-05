@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 const initialFormData = Object.freeze({
@@ -6,8 +6,8 @@ const initialFormData = Object.freeze({
   username: "",
 });
 
-const AddUserForm = (props) => {
-  const { closePopUpHandler } = props;
+const IPForm = (props) => {
+  const { closePopUpHandler, userId } = props;
   const [formData, updateFormData] = useState(initialFormData);
 
   // const [success, updateSuccess] = useState("");
@@ -116,4 +116,4 @@ const AddUserForm = (props) => {
   );
 };
 
-export default AddUserForm;
+export default IPForm;

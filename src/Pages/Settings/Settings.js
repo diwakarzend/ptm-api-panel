@@ -14,6 +14,7 @@ const Settings = (props) => {
   const [activeTab, setactiveTab] = useState("password");
   const [ipPopup, setIPPopup] = useState(false);
   const [ipdata, setipData] = useState("");
+  const [activeUserId, setActiveUserId] = useState("");
 
   const tokenInput = useRef();
 
@@ -38,14 +39,16 @@ const Settings = (props) => {
     setactiveTab(item);
   };
 
-  const handleIPForm = () => {
+  const handleIPForm = (userId) => {
     addOverlay();
     setIPPopup(true);
+    setActiveUserId(userId);
   };
 
   const closeIPPopUpHandler = () => {
     removeOverlay();
     setIPPopup(false);
+    setActiveUserId("");
   };
 
   const generateString = (length) => {
@@ -195,7 +198,10 @@ const Settings = (props) => {
                       {activeTab == "ip" && (
                         <div>
                           {ipPopup ? (
-                            <IPForm closePopUpHandler={closeIPPopUpHandler} />
+                            <IPForm
+                              closePopUpHandler={closeIPPopUpHandler}
+                              userId={activeUserId}
+                            />
                           ) : (
                             ""
                           )}
@@ -217,7 +223,13 @@ const Settings = (props) => {
                                       <td>{item.username}</td>
                                       <td>{item.ip}</td>
                                       <td>{item.lastUpdated}</td>
-                                      <td onClick={handleIPForm}>Edit</td>
+                                      <td
+                                        onClick={() =>
+                                          handleIPForm(item.username)
+                                        }
+                                      >
+                                        Edit
+                                      </td>
                                     </tr>
                                   );
                                 })
