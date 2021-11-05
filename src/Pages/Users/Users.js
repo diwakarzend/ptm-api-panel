@@ -6,6 +6,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import AddUserForm from "./AddUserForm";
 import { connect } from "react-redux";
+import { printPage } from "../../utils/common";
 
 const roleMapping = {
   PTM_VENDOR: "Vendor",
@@ -102,7 +103,11 @@ const Users = (props) => {
                         CSV
                       </button>
 
-                      <button type="button" className="btn-common">
+                      <button
+                        type="button"
+                        className="btn-common"
+                        onClick={() => printPage()}
+                      >
                         Print
                       </button>
                     </div>
