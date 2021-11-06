@@ -195,7 +195,7 @@ const PermissionForm = (props) => {
                                         }
                                         style={{ marginRight: "10px" }}
                                       />
-                                      {item}
+                                      {item.replace(/_/g, " ")}
                                     </li>
                                   );
                                 })
