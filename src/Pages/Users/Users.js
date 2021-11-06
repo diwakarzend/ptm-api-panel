@@ -8,7 +8,7 @@ import AddUserForm from "./AddUserForm";
 import PermissionForm from "./PermissionForm";
 
 import { connect } from "react-redux";
-import { printPage } from "../../utils/common";
+import { printPage, addOverlay, removeOverlay } from "../../utils/common";
 
 const roleMapping = {
   PTM_VENDOR: "Vendor",
@@ -37,6 +37,7 @@ const Users = (props) => {
 
   const editClickHandler = (userId) => {
     handlePopUp(true);
+    addOverlay();
     setUserId(userId);
     const successHandler = (response, headers) => {
       if (response.success == true) {
@@ -53,19 +54,8 @@ const Users = (props) => {
   };
 
   const permissionClickHandler = (userId) => {
+    addOverlay();
     setPermissionData({ isPopupVisible: true, userId: userId });
-    // const successHandler = (response, headers) => {
-    //   if (response.success == true) {
-    //     setEditUserData(response.data);
-    //   }
-    // };
-
-    // const errorHandler = (error) => {};
-
-    // const request = new Request("", successHandler, errorHandler, false);
-    // return request.get(
-    //   `${APIS.login.BASE_URL}${APIS.User.EDIT_USER.replace("{userId}", userId)}`
-    // );
   };
 
   const openPopupHandler = () => {
@@ -75,6 +65,7 @@ const Users = (props) => {
 
   const closePopUpHandler = () => {
     setEditUserData("");
+    removeOverlay();
     document.body.classList.remove("modal-open");
     handlePopUp(false);
   };
@@ -85,7 +76,7 @@ const Users = (props) => {
       userId: "",
       isPopupVisible: false,
     });
-    document.body.classList.remove("modal-open");
+    removeOverlay();
   };
 
   const { users } = props;
