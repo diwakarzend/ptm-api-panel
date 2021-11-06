@@ -90,10 +90,18 @@ const PermissionForm = (props) => {
     event.preventDefault();
     const { activePermissions } = permissions;
 
-    // console.log("submitFormHandler", activePermissions);
+    console.log("submitFormHandler", activePermissions);
 
+    let newPermissions = [];
+
+    Object.keys(activePermissions).forEach((key) => {
+      newPermissions = newPermissions.concat(activePermissions[key]);
+    });
+
+    console.log("newPermissions", newPermissions);
     const formData = {
-      userRoleUpdateDto: { userName: userId, addApiCode: activePermissions },
+      userName: userId,
+      addApiCode: newPermissions,
     };
 
     const submitSuccess = (res) => {
