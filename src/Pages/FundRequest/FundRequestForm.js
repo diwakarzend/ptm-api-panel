@@ -23,7 +23,7 @@ const FundRequestForm = memo(
     const handleChange = (event) => {
       updateFormData({
         ...formData,
-        [event.target.name]: event.target.value.trim(),
+        [event.target.name]: event.target.value,
       });
     };
 

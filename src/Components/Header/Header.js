@@ -12,6 +12,12 @@ import {
 import AnchorLink from "../AnchorLink/AnchorLink";
 import UserProfileForm from "../UserProfile/UserProfileForm";
 
+const userRole = {
+  PTM_VENDOR: "VENDOR",
+  PTM_ADMIN: "ADMIN",
+  PTM_SUB_ADMIN: "SUB ADMIN",
+};
+
 const Header = (props) => {
   const { location } = props;
 
@@ -35,20 +41,6 @@ const Header = (props) => {
     removeOverlay();
     setProfileClick(false);
   };
-
-  /*   useEffect(() => {
-    if (didMountRef.current) {
-      //didUpdate
-      alert("AAA");
-      //const { location } = props;
-      console.log("useLocation", useLocation());
-      if (location && location.pathname) toggleUserImage(!false);
-    } else {
-      //didMount
-      didMountRef.current = true;
-      alert("BBBBB");
-    }
-  }); */
 
   function clickHambergerHandler() {
     if (document.body.classList.value != "nav_small") {
@@ -92,7 +84,9 @@ const Header = (props) => {
                   <div className="col-xl-12 col-12 d-flex justify-content-end">
                     <div className="right_bar_top d-flex align-items-center justify-content-md-between justify-content-end">
                       <div className="search"></div>
-
+                      <div style={{ color: "#fff" }}>
+                        Logged-in as {userData && userRole[userData.role]}
+                      </div>
                       <div className="align_end">
                         <NotificationPopup
                           statusQRICon={statusQRICon}
@@ -303,6 +297,7 @@ const UserInfoPopUp = ({
   props,
   clickHandler,
 }) => {
+  console.log("ss", userData);
   return (
     <div className={`dropdown dropdown-user${userPopUpVisible ? " show" : ""}`}>
       <a
