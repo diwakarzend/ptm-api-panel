@@ -85,7 +85,7 @@ const Header = (props) => {
                     <div className="right_bar_top d-flex align-items-center justify-content-md-between justify-content-end">
                       <div className="search"></div>
                       <div style={{ color: "#fff" }}>
-                        Logged in as {userData && userRole[userData.role]}
+                        Logged-in as {userData && userRole[userData.role]}
                       </div>
                       <div className="align_end">
                         <NotificationPopup
