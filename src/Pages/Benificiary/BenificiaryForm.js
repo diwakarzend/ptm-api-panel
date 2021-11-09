@@ -23,7 +23,7 @@ const BenificiaryForm = memo(
     const handleChange = (event) => {
       updateFormData({
         ...formData,
-        [event.target.name]: event.target.value.trim(),
+        [event.target.name]: event.target.value,
       });
     };
 
@@ -210,14 +210,14 @@ const BenificiaryForm = memo(
                     Submit
                   </button>
                   <div>
-                  {errorHTML && errorStyles ? (
-                    <ul style={errorStyles}>{errorHTML}</ul>
-                  ) : success && successStyles ? (
-                    <div style={successStyles}>{success}</div>
-                  ) : (
-                    ""
-                  )}
-                </div>
+                    {errorHTML && errorStyles ? (
+                      <ul style={errorStyles}>{errorHTML}</ul>
+                    ) : success && successStyles ? (
+                      <div style={successStyles}>{success}</div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               </div>
             </form>

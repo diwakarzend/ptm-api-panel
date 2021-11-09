@@ -181,7 +181,7 @@ const Users = (props) => {
                                 <td className={userClass}>
                                   {roleMapping[item.role] || "NA"}
                                 </td>
-                                <td>{roleMapping[item.walletAmount] || "0"}</td>
+                                <td>Rs. {item.userBalance || "0"}</td>
                                 <td className="done">Active</td>
                                 <td>
                                   <div

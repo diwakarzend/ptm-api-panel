@@ -8,7 +8,7 @@ import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import "./Benificiary.css";
 import BenificiaryForm from "./BenificiaryForm";
 import QuickPaymentForm from "../Payout/QuickPaymentForm";
-import { addOverlay, removeOverlay } from "../../utils/common";
+import { addOverlay, removeOverlay, hideMessage } from "../../utils/common";
 
 const Benificiary = memo((props) => {
   const { dispatch, login, beneficiary } = props;
@@ -24,6 +24,10 @@ const Benificiary = memo((props) => {
   useEffect(() => {
     getBeneficiary();
   }, []);
+
+  useEffect(() => {
+    hideMessage(statusMessage, setStatus);
+  }, [statusMessage]);
 
   const getBeneficiary = () => {
     dispatch(fetchBeneficiary());
@@ -102,34 +106,37 @@ const Benificiary = memo((props) => {
                   />
                 )}
               </div>
-              <div style={{ textAlign: "center", marginTop: "15px" }}>
+              <div
+                style={{ textAlign: "center", marginTop: "15px" }}
+                className="done"
+              >
                 {statusMessage}
               </div>
               <div className="card-header">
-                  <div className="card-title">
-                    <div
-                      className="btn-group"
-                      role="group"
-                      aria-label="Basic example"
-                    >
-                      <button type="button" className="btn-common">
-                        Copy
-                      </button>
-                      <button type="button" className="btn-common">
-                        CSV
-                      </button>
-                      <button type="button" className="btn-common">
-                        Excel
-                      </button>
-                      <button type="button" className="btn-common">
-                        PDF
-                      </button>
-                      <button type="button" className="btn-common">
-                        Print
-                      </button>
-                    </div>
+                <div className="card-title">
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button type="button" className="btn-common">
+                      Copy
+                    </button>
+                    <button type="button" className="btn-common">
+                      CSV
+                    </button>
+                    <button type="button" className="btn-common">
+                      Excel
+                    </button>
+                    <button type="button" className="btn-common">
+                      PDF
+                    </button>
+                    <button type="button" className="btn-common">
+                      Print
+                    </button>
                   </div>
                 </div>
+              </div>
 
               <div className="card-body">
                 <table className="table table-bordered">

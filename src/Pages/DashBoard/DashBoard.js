@@ -120,7 +120,7 @@ const DashBoard = (props) => {
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Total Transactions</h6>
                         <p className="f12 mb-0" style={fontCss}>
-                          {transactionReport && transactionReport.count}
+                          {(transactionReport && transactionReport.count) || 0}
                         </p>
                       </div>
                     </div>
@@ -137,8 +137,9 @@ const DashBoard = (props) => {
                       <div className=" col-9">
                         <h6 className="m-0 text-light">Total Amount</h6>
                         <p className="f12 mb-0" style={fontCss}>
-                          {transactionReport &&
-                            transactionReport.totalTransaction}
+                          {(transactionReport &&
+                            transactionReport.totalTransaction) ||
+                            0}
                         </p>
                       </div>
                     </div>

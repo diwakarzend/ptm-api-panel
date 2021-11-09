@@ -4,6 +4,7 @@ import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import ChangePassword from "../../Components/ResetPassword/ChangePassword";
 import IPForm from "../Settings/IPForm";
 import { addOverlay, removeOverlay } from "../../utils/common";
+import { connect } from "react-redux";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import "./Settings.css";
@@ -18,6 +19,8 @@ const Settings = (props) => {
   const [ipmessage, setIpMessage] = useState("");
 
   const tokenInput = useRef();
+
+  const { login } = props;
 
   const fetchIPDetails = () => {
     const successHandler = (response) => {
@@ -65,7 +68,9 @@ const Settings = (props) => {
     tokenInput.current.value = result;
   };
 
-  console.log("ipdata", activeUserInfo);
+  console.log("ipdata", props);
+
+  const userRole = login && login.userData && login.userData.role;
 
   /*
    */
@@ -217,7 +222,7 @@ const Settings = (props) => {
                               <th>UserId</th>
                               <th>IP Address</th>
                               <th>Last Modified</th>
-                              <th>Action</th>
+                              {userRole != "PTM_VENDOR" && <th>Action</th>}
                             </tr>
 
                             {ipdata &&
@@ -229,9 +234,11 @@ const Settings = (props) => {
                                       <td>{item.username}</td>
                                       <td>{item.ip && item.ip.join(", ")}</td>
                                       <td>{item.lastUpdated}</td>
-                                      <td onClick={() => handleIPForm(item)}>
-                                        Edit
-                                      </td>
+                                      {userRole != "PTM_VENDOR" && (
+                                        <td onClick={() => handleIPForm(item)}>
+                                          Edit
+                                        </td>
+                                      )}
                                     </tr>
                                   );
                                 })
@@ -251,7 +258,13 @@ const Settings = (props) => {
   );
 };
 
-export default Settings;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps)(Settings);
 
 const API = ({ toggleApi1, toggleApi2, setToggeleAPI1, setToggeleAPI2 }) => {
   return (

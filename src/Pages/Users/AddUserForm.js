@@ -39,7 +39,7 @@ const AddUserForm = (props) => {
   const handleChange = (event) => {
     updateFormData({
       ...formData,
-      [event.target.name]: event.target.value.trim(),
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -111,6 +111,8 @@ const AddUserForm = (props) => {
       marginTop: "26px",
     };
   }
+
+  console.log("editUserData", editUserData);
 
   return (
     <div
@@ -292,8 +294,26 @@ const AddUserForm = (props) => {
                       onChange={handleChange}
                     >
                       <option value="">Choose Role</option>
-                      <option value="PTM_VENDOR">Vendor</option>
-                      <option value="PTM_SUB_ADMIN">Sub Admin</option>
+                      <option
+                        value="PTM_VENDOR"
+                        selected={
+                          editUserData && editUserData.role == "PTM_VENDOR"
+                            ? true
+                            : false
+                        }
+                      >
+                        Vendor
+                      </option>
+                      <option
+                        value="PTM_SUB_ADMIN"
+                        selected={
+                          editUserData && editUserData.role == "PTM_SUB_ADMIN"
+                            ? true
+                            : false
+                        }
+                      >
+                        Sub Admin
+                      </option>
                     </select>
                   </div>
                 </div>

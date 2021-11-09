@@ -19,7 +19,7 @@ const IPForm = (props) => {
   const handleChange = (event) => {
     updateFormData({
       ...formData,
-      ip: event.target.value.trim(),
+      ip: event.target.value,
     });
   };
 

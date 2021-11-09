@@ -69,20 +69,6 @@ const FundRequest = memo((props) => {
     );
   };
 
-  /*   userwallet:
-fundRequest:
-code: "INFO000"
-data: Array(1)
-0:
-approveStatus: "INITIATED"
-: "HDFC"
-payementMode: "NET_BANKING"
-proofUpdaodStatus: null
-reqstDate: "2021-09-19T09:40:38"
-reqstfundUuid: "65ff9fb4-7e82-44fc-af76-39f22efe613f"
-: 1000
-requestUserName: "9718063555"
-  */
   console.log("fundRequestLoading", fundRequestLoading);
   return (
     <div className="container_full">
@@ -165,13 +151,17 @@ requestUserName: "9718063555"
                     <thead>
                       <tr>
                         <th scope="col">#</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Mobile No.</th>
                         <th scope="col">From Bank Name</th>
                         <th scope="col">To Bank Name</th>
                         <th scope="col">Requested Amount</th>
                         <th scope="col">Payment Mode</th>
                         <th scope="col">Requested Date</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        {userRole !== "PTM_VENDOR" && (
+                          <th scope="col">Action</th>
+                        )}
                       </tr>
                     </thead>
                     <tbody>
@@ -182,39 +172,44 @@ requestUserName: "9718063555"
                           return (
                             <tr key={item.reqstDate}>
                               <th scope="row">{index + 1}</th>
+                              <td>{item.requestUserName}</td>
+                              <td>{item.requestUserName}</td>
                               <td>{item.fromBank}</td>
                               <td>{item.toBank}</td>
-                              <td>{item.requestAmount}</td>
+                              <td>Rs. {item.requestAmount}</td>
                               <td>{item.payementMode}</td>
                               <td>{item.reqstDate}</td>
                               <td className={item.approveStatus.toLowerCase()}>
                                 {item.approveStatus}
                               </td>
-                              <td>
-                                {item.approveStatus != "DONE" &&
-                                userRole !== "PTM_VENDOR" ? (
-                                  <React.Fragment>
-                                    <button
-                                      onClick={() =>
-                                        handleApprove(item.reqstfundUuid)
-                                      }
-                                      class="btn-common"
-                                    >
-                                      Approve
-                                    </button>
-                                    <button
-                                      onClick={() =>
-                                        handleReject(item.reqstfundUuid)
-                                      }
-                                      class="btn-common badge-warning"
-                                    >
-                                      Reject
-                                    </button>
-                                  </React.Fragment>
-                                ) : (
-                                  "NA"
-                                )}
-                              </td>
+
+                              {userRole !== "PTM_VENDOR" && (
+                                <td>
+                                  {item.approveStatus != "DONE" &&
+                                  item.approveStatus != "REJECTED" ? (
+                                    <React.Fragment>
+                                      <button
+                                        onClick={() =>
+                                          handleApprove(item.reqstfundUuid)
+                                        }
+                                        class="btn-common"
+                                      >
+                                        Approve
+                                      </button>
+                                      <button
+                                        onClick={() =>
+                                          handleReject(item.reqstfundUuid)
+                                        }
+                                        class="btn-common badge-warning"
+                                      >
+                                        Reject
+                                      </button>
+                                    </React.Fragment>
+                                  ) : (
+                                    "NA"
+                                  )}
+                                </td>
+                              )}
                             </tr>
                           );
                         })
