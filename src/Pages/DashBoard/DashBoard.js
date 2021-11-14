@@ -45,8 +45,6 @@ const DashBoard = (props) => {
     renderPieChart();
   };
 
-  console.log("dashboard", props);
-
   const { payout } = props;
   const statusReport =
     (payout && payout.statusReport && payout.statusReport.data) || "";
@@ -101,6 +99,8 @@ const DashBoard = (props) => {
 
   const { login } = props;
   const userPermissions = getUserPermissions(login);
+
+  console.log("dashboard", statusReport, totalTransaction);
 
   return (
     <div className="container_full">
@@ -225,9 +225,14 @@ const DashBoard = (props) => {
                         <div className="col-sm-12 mb-xs-30">
                           <div className="ep_1 ">
                             <CircularProgressBar
-                              percentage={Math.floor(
-                                (statusReport.DONE * 100) / totalTransaction
-                              )}
+                              percentage={
+                                totalTransaction == 0
+                                  ? 0
+                                  : Math.floor(
+                                      (statusReport.DONE * 100) /
+                                        totalTransaction
+                                    )
+                              }
                               strokeWidth={7}
                               strokeColor="#097643"
                               sqSize={100}
@@ -241,9 +246,14 @@ const DashBoard = (props) => {
                         <div className="col-sm-6 mb-xs-30">
                           <div className="ep_1 ">
                             <CircularProgressBar
-                              percentage={Math.floor(
-                                (statusReport.FAIL * 100) / totalTransaction
-                              )}
+                              percentage={
+                                totalTransaction == 0
+                                  ? 0
+                                  : Math.floor(
+                                      (statusReport.FAIL * 100) /
+                                        totalTransaction
+                                    )
+                              }
                               strokeWidth={7}
                               strokeColor="#FF333C"
                               sqSize={100}
@@ -257,9 +267,14 @@ const DashBoard = (props) => {
                         <div className="col-sm-6">
                           <div className="ep_1" data-percent="1">
                             <CircularProgressBar
-                              percentage={Math.floor(
-                                (statusReport.REJECTED * 100) / totalTransaction
-                              )}
+                              percentage={
+                                totalTransaction == 0
+                                  ? 0
+                                  : Math.floor(
+                                      (statusReport.REJECTED * 100) /
+                                        totalTransaction
+                                    )
+                              }
                               strokeWidth={7}
                               strokeColor="#0000ff"
                               sqSize={100}

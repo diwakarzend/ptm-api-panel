@@ -192,6 +192,7 @@ const Users = (props) => {
                                     title="update user"
                                   >
                                     Edit
+                                    <i class="bi bi-pen"></i>
                                   </div>
                                   <div
                                     onClick={() =>

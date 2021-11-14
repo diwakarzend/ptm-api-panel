@@ -74,7 +74,7 @@ const SideBar = (props) => {
 
   const userPermissions = getUserPermissions(login);
 
-  console.log("permissions SideBar", userPermissions);
+  console.log("permissions SideBar", activeSection);
 
   return (
     <div className="side_bar scroll_auto">
@@ -118,19 +118,17 @@ const SideBar = (props) => {
           </ul>
         </li>
 
-        <li
-          className={`menu_sub ${
-            activeSection == "dashboard" ? " active" : ""
-          }`}
-        >
-          <AnchorLink href="/dashboard" clicked={handleNavClick}>
+        <li className={`menu_sub`}>
+          <AnchorLink
+            href="/dashboard"
+            clicked={handleNavClick}
+            className={activeSection == "dashboard" ? "active" : ""}
+          >
             <i className="ti-dashboard"></i> <span>Dashboard</span>
           </AnchorLink>
         </li>
         {userData && userData.role !== "PTM_VENDOR" ? (
-          <li
-            className={`menu_sub ${activeSection == "users" ? " active" : ""}`}
-          >
+          <li className="menu_sub">
             <a
               onClick={() => {
                 setToggleCompany(!toggleCompany);
@@ -149,8 +147,12 @@ const SideBar = (props) => {
                   : "down_menu"
               }
             >
-              <li className={`${activeSection == "users" ? " active" : ""}`}>
-                <AnchorLink href="/users" clicked={handleNavClick}>
+              <li>
+                <AnchorLink
+                  href="/users"
+                  clicked={handleNavClick}
+                  className={activeSection == "users" ? "active" : ""}
+                >
                   Manage Users
                 </AnchorLink>
               </li>
@@ -196,22 +198,28 @@ const SideBar = (props) => {
 
             {userPermissions &&
               userPermissions.includes("PTM_GET_BENEFICIARY") && (
-                <li
-                  className={`${
-                    activeSection == "beneficiary" ? " active" : ""
-                  }`}
-                >
-                  <AnchorLink href="/beneficiary" clicked={handleNavClick}>
+                <li className="menu_sub">
+                  <AnchorLink
+                    href="/beneficiary"
+                    clicked={handleNavClick}
+                    className={`${
+                      activeSection == "beneficiary" ? " active" : ""
+                    }`}
+                  >
                     Beneficiary
                   </AnchorLink>
                 </li>
               )}
 
             {userPermissions && userPermissions.includes("PTM_PAYOUT_RANGE") && (
-              <li
-                className={`${activeSection == "commission" ? " active" : ""}`}
-              >
-                <AnchorLink href="/vendor/commission" clicked={handleNavClick}>
+              <li className="menu_sub">
+                <AnchorLink
+                  href="/vendor/commission"
+                  clicked={handleNavClick}
+                  className={`${
+                    activeSection == "commission" ? " active" : ""
+                  }`}
+                >
                   Commission
                 </AnchorLink>
               </li>
@@ -220,23 +228,23 @@ const SideBar = (props) => {
         </li>
 
         {userPermissions && userPermissions.includes("PTM_PAYOUT_TRANSACTION") && (
-          <li
-            className={`menu_sub ${
-              activeSection == "reports" ? " active" : ""
-            }`}
-          >
-            <AnchorLink href="/payout/reports" clicked={handleNavClick}>
+          <li className="menu_sub">
+            <AnchorLink
+              href="/payout/reports"
+              clicked={handleNavClick}
+              className={` ${activeSection == "reports" ? " active" : ""}`}
+            >
               <i className="icon-chart"></i> <span>Transaction Report </span>
             </AnchorLink>
           </li>
         )}
 
-        <li
-          className={`menu_sub ${
-            activeSection == "settings" ? " open active" : ""
-          }`}
-        >
-          <AnchorLink href="/settings" clicked={handleNavClick}>
+        <li className="menu_sub">
+          <AnchorLink
+            href="/settings"
+            clicked={handleNavClick}
+            className={`${activeSection == "settings" ? " open active" : ""}`}
+          >
             <i className="icon-chart"></i> <span>Settings </span>
           </AnchorLink>
 
