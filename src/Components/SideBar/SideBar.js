@@ -189,8 +189,12 @@ const SideBar = (props) => {
             }
           >
             {userPermissions && userPermissions.includes("PTM_FUND_REQUEST") && (
-              <li className={`${activeSection == "request" ? " active" : ""}`}>
-                <AnchorLink href="/fund/request" clicked={handleNavClick}>
+              <li className="menu_sub">
+                <AnchorLink
+                  href="/fund/request"
+                  clicked={handleNavClick}
+                  className={`${activeSection == "request" ? " active" : ""}`}
+                >
                   Fund Request
                 </AnchorLink>
               </li>

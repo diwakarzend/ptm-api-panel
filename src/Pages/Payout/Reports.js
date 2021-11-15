@@ -72,26 +72,19 @@ const Reports = memo((props) => {
     "vendorId": "string"
   } */
 
-  console.log("filterItems", filterItems);
+  // const getData = () => {
+  //   setTimeout(() => {
+  //     const csvData = [
+  //       { firstname: "Ahmed", lastname: "Tomi", email: "ah@smthing.co.com" },
+  //       { firstname: "Raed", lastname: "Labes", email: "rl@smthing.co.com" },
+  //       { firstname: "Yezzi", lastname: "Min l3b", email: "ymin@cocococo.com" },
+  //     ];
+  //     return csvData;
+  //   }, 1000);
+  // };
 
-  const getData = () => {
-    // const csvData = [
-    //   { firstname: "Ahmed", lastname: "Tomi", email: "ah@smthing.co.com" },
-    //   { firstname: "Raed", lastname: "Labes", email: "rl@smthing.co.com" },
-    //   { firstname: "Yezzi", lastname: "Min l3b", email: "ymin@cocococo.com" },
-    // ];
+  const pagingData = payout && payout.reports.data;
 
-    // return csvData;
-
-    setTimeout(() => {
-      const csvData = [
-        { firstname: "Ahmed", lastname: "Tomi", email: "ah@smthing.co.com" },
-        { firstname: "Raed", lastname: "Labes", email: "rl@smthing.co.com" },
-        { firstname: "Yezzi", lastname: "Min l3b", email: "ymin@cocococo.com" },
-      ];
-      return csvData;
-    }, 1000);
-  };
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -181,6 +174,8 @@ const Reports = memo((props) => {
               <TableHTML
                 filterItems={filterItems}
                 reportsItems={reportsItems}
+                pagingData={pagingData}
+                dispatch={dispatch}
               />
             </div>
           </section>

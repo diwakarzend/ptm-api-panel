@@ -90,6 +90,12 @@ export function fetchReportsFailure(error) {
 }
 
 export function fetchTransactionReport(params) {
+  const { pageNo } = params;
+  let apiPath = `${urls.login.BASE_URL}${urls.payout.TRANSACTION_REPORT}`;
+  apiPath = pageNo
+    ? apiPath.replace("{pageNo}", pageNo)
+    : apiPath.replace("{pageNo}", 0);
+
   return (dispatch) => {
     const onSuccess = (data) => {
       dispatch(fetchReportsSuccess(data));
@@ -100,10 +106,7 @@ export function fetchTransactionReport(params) {
     };
 
     const api = new Request(dispatch, onSuccess, onFail, false);
-    return api.post(
-      `${urls.login.BASE_URL}${urls.payout.TRANSACTION_REPORT}`,
-      params
-    );
+    return api.post(apiPath, params);
   };
 }
 
