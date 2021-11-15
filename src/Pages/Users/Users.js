@@ -191,8 +191,7 @@ const Users = (props) => {
                                     style={{ cursor: "pointer" }}
                                     title="update user"
                                   >
-                                    Edit
-                                    <i class="bi bi-pen"></i>
+                                    <i class="icon-pencil"></i>
                                   </div>
                                   <div
                                     onClick={() =>
@@ -201,7 +200,7 @@ const Users = (props) => {
                                     title="Manage Permissions"
                                     style={{ cursor: "pointer" }}
                                   >
-                                    | Permissions
+                                    | <i class="icon-key"></i>
                                   </div>
                                 </td>
                               </tr>
