@@ -184,24 +184,26 @@ const Users = (props) => {
                                 <td>Rs. {item.userBalance || "0"}</td>
                                 <td className="done">Active</td>
                                 <td>
-                                  <div
+                                  <i
+                                    class="icon-pencil"
                                     onClick={() =>
                                       editClickHandler(item.userName)
                                     }
                                     style={{ cursor: "pointer" }}
                                     title="update user"
-                                  >
-                                    <i class="icon-pencil"></i>
-                                  </div>
-                                  <div
+                                  ></i>
+                                  |
+                                  <i
+                                    class="icon-key"
                                     onClick={() =>
                                       permissionClickHandler(item.userName)
                                     }
                                     title="Manage Permissions"
                                     style={{ cursor: "pointer" }}
-                                  >
-                                    | <i class="icon-key"></i>
-                                  </div>
+                                  ></i>
+                                  |
+                                  <i className="icon-plus" title="Add Fund"></i>
+                                  |<i className="icon-bulb" title="Active"></i>
                                 </td>
                               </tr>
                             );

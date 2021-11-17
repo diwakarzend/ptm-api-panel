@@ -249,7 +249,7 @@ const SideBar = (props) => {
             clicked={handleNavClick}
             className={`${activeSection == "settings" ? " open active" : ""}`}
           >
-            <i className="icon-chart"></i> <span>Settings </span>
+            <i className="icon-settings"></i> <span>Settings </span>
           </AnchorLink>
 
           {/* <ul
