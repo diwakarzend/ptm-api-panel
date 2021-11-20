@@ -6,6 +6,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import AddUserForm from "./AddUserForm";
 import PermissionForm from "./PermissionForm";
+import AdminFundForm from "./AdminFundForm";
 
 import { connect } from "react-redux";
 import { printPage, addOverlay, removeOverlay } from "../../utils/common";
@@ -24,6 +25,8 @@ const Users = (props) => {
     isPopupVisible: false,
     userId: "",
   });
+
+  const [adminFormData, setAdminFormData] = useState("");
 
   const { dispatch } = props;
 
@@ -53,6 +56,11 @@ const Users = (props) => {
     );
   };
 
+  const adminFundFormHandler = (userId) => {
+    addOverlay();
+    setAdminFormData(userId);
+  };
+
   const permissionClickHandler = (userId) => {
     addOverlay();
     setPermissionData({ isPopupVisible: true, userId: userId });
@@ -61,6 +69,12 @@ const Users = (props) => {
   const openPopupHandler = () => {
     document.body.classList.add("modal-open");
     handlePopUp(true);
+  };
+
+  const closeAdminFundPopUpHandler = () => {
+    setAdminFormData("");
+    removeOverlay();
+    document.body.classList.remove("modal-open");
   };
 
   const closePopUpHandler = () => {
@@ -144,6 +158,16 @@ const Users = (props) => {
                     </div>
                   </div>
                 </div>
+
+                {adminFormData ? (
+                  <AdminFundForm
+                    userId={adminFormData}
+                    closeAdminFundForm={closeAdminFundPopUpHandler}
+                  />
+                ) : (
+                  ""
+                )}
+
                 <div className="card-body">
                   <table
                     id="bs4-table"
@@ -171,7 +195,7 @@ const Users = (props) => {
                                 .toLowerCase()
                                 .replace(" ", "-");
                             }
-
+                            console.log(item);
                             return (
                               <tr key={item.userName}>
                                 <td>{index + 1}</td>
@@ -184,26 +208,52 @@ const Users = (props) => {
                                 <td>Rs. {item.userBalance || "0"}</td>
                                 <td className="done">Active</td>
                                 <td>
-                                  <i
-                                    class="icon-pencil"
-                                    onClick={() =>
-                                      editClickHandler(item.userName)
-                                    }
-                                    style={{ cursor: "pointer" }}
-                                    title="update user"
-                                  ></i>
-                                  |
-                                  <i
-                                    class="icon-key"
-                                    onClick={() =>
-                                      permissionClickHandler(item.userName)
-                                    }
-                                    title="Manage Permissions"
-                                    style={{ cursor: "pointer" }}
-                                  ></i>
-                                  |
-                                  <i className="icon-plus" title="Add Fund"></i>
-                                  |<i className="icon-bulb" title="Active"></i>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      flexDirection: "row",
+                                    }}
+                                  >
+                                    <div style={styles.iconContainer}>
+                                      <i
+                                        class="icon-pencil"
+                                        onClick={() =>
+                                          editClickHandler(item.userName)
+                                        }
+                                        style={{ cursor: "pointer" }}
+                                        title="update user"
+                                      ></i>
+                                    </div>
+                                    {/* | */}
+                                    <div style={styles.iconContainer}>
+                                      <i
+                                        class="icon-key"
+                                        onClick={() =>
+                                          permissionClickHandler(item.userName)
+                                        }
+                                        title="Manage Permissions"
+                                        style={{ cursor: "pointer" }}
+                                      ></i>
+                                    </div>
+                                    {/* | */}
+                                    <div style={styles.iconContainer}>
+                                      <i
+                                        className="icon-plus"
+                                        title="Add Fund"
+                                        onClick={() => {
+                                          console.log("successful");
+                                          adminFundFormHandler(item.userName);
+                                        }}
+                                      ></i>
+                                    </div>
+                                    {/* | */}
+                                    <div style={styles.bulbContainer}>
+                                      <i
+                                        className="icon-bulb"
+                                        title="Active"
+                                      ></i>
+                                    </div>
+                                  </div>
                                 </td>
                               </tr>
                             );
@@ -228,3 +278,13 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Users);
+
+const styles = {
+  iconContainer: {
+    padding: "10px",
+  },
+  bulbContainer: {
+    color: "green",
+    padding: "10px",
+  },
+};
