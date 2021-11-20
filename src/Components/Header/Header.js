@@ -20,6 +20,7 @@ const userRole = {
 
 const Header = (props) => {
   const { location } = props;
+  console.log(props);
 
   if (location && location.pathname == "/") {
     return "";
