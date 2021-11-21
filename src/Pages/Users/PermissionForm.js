@@ -203,7 +203,9 @@ const PermissionForm = (props) => {
                                         }
                                         style={{ marginRight: "10px" }}
                                       />
-                                      {item.replace(/_/g, " ")}
+                                      {item
+                                        .replace(/_/g, " ")
+                                        .replace("PTM ", "")}
                                     </li>
                                   );
                                 })
