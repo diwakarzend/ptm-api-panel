@@ -85,6 +85,14 @@ const Reports = memo((props) => {
 
   const pagingData = payout && payout.reports && payout.reports.data;
 
+  const date = new Date();
+
+  const [month, day, year] = [
+    date.getMonth(),
+    date.getDate(),
+    date.getFullYear(),
+  ];
+
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -121,6 +129,8 @@ const Reports = memo((props) => {
                           className="form-control"
                           name="date"
                           onChange={handleChange}
+                          min="2021-11-20"
+                          max={`${year}-${month}-${day}`}
                         />
                       </th>
                       <th scope="col">
