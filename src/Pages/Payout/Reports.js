@@ -129,7 +129,7 @@ const Reports = memo((props) => {
                           className="form-control"
                           name="date"
                           onChange={handleChange}
-                          max={`${year}-${month}-${day}`}
+                          max={`${year}-${month + 1}-${day}`}
                         />
                       </th>
                       <th scope="col">
