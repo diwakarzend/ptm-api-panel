@@ -1,6 +1,7 @@
 export default {
   login: {
-    BASE_URL: "https://api.privepay.in:8443", //"https://vendor-apiservice.pay2mobiles.com:8443",
+    BASE_URL: "https://api.privepay.in:8443",
+    //"https://vendor-apiservice.pay2mobiles.com:8443",
     LOGIN_REQUEST: "/api/authenticate",
     OTP_VALIDATION: "/agent/otp/validation",
     LOGIN_OTP_RESEND: "/agent/otp/resend",
@@ -28,6 +29,7 @@ export default {
     SEARCH_USER: "/api/users/search",
     GET_ALL_PERMISISSIONS: "/api/user/mapping",
     MANAGE_USER_PERMISSIONS: "/api/user/mapping-api",
+    MANAGE_USER_STATUS: "/api/user/user-status",
   },
 
   OperatorList: {
@@ -40,8 +42,9 @@ export default {
 
   Wallet: {
     WALLET_SUMMARY: "/api/admin/retailerWalletDetail",
-    ADD_CREDIT: "/api/wallet/deposit",
-    DEDUCT_CREDIT: "/api/wallet/debit",
+    // ADD_CREDIT: "/api/wallet/deposit",
+    // DEDUCT_CREDIT: "/api/wallet/debit",
+    MANAGE_WALLET: "/api/wallet/{actionType}",
     FUND_REQUEST: "/api/wallet/fund-request",
     FETCH_FUND_REQUEST: "/api/wallet/fund-request-list?pageNo=0&pageSize=100",
     FUND_REQUEST_APPROVE: "/api/wallet/fund-approve?reqstfunduuid=",

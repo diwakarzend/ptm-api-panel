@@ -1,26 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import APIS from "../../utils/urls";
 import Request from "../../utils/Request";
 
-function AdminFundForm({ userId, closeAdminFundForm }) {
-  const [amount, setAmount] = useState(0);
-  const [remark, setRemark] = useState("");
+function AdminFundForm({ userId, closeAdminFundForm, setStatusMsg }) {
+  const [formData, setFormData] = useState({
+    amount: "",
+    remark: "",
+    ewalletType: "MAIN_WALLET",
+    userId: userId,
+  });
+  const walletSelect = useRef();
 
   const submitFormHandler = (event) => {
     event.preventDefault();
+    const walletAction = walletSelect.current.value;
     const request = new Request("", successHandler, errorHandler, true);
-    request.post(`${APIS.login.BASE_URL}${APIS.Wallet.ADD_CREDIT}`, {
-      amount: parseInt(amount),
-      ewalletType: "MAIN_WALLET",
-      remark: remark,
-      userId: userId,
-    });
+    let walletAPI =
+      `${APIS.login.BASE_URL}${APIS.Wallet.MANAGE_WALLET}`.replace(
+        "{actionType}",
+        walletAction
+      );
+
+    formData.amount = parseInt(formData.amount);
+    request.post(walletAPI, formData);
   };
-  const successHandler = (response, headers) => {};
+  const successHandler = (response, headers) => {
+    if (response.success) {
+      closeAdminFundForm();
+      setStatusMsg("Action to wallet is submitted successfully");
+    }
+  };
 
   const errorHandler = (error) => {
     console.log("failed call");
   };
+
+  const handleChange = (event) => {
+    setFormData((prevState) => {
+      return {
+        ...prevState,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+
+  console.log("formData", formData);
 
   return (
     <div
@@ -49,29 +73,47 @@ function AdminFundForm({ userId, closeAdminFundForm }) {
           </div>
 
           <div className="modal-body">
-            <form>
+            <form onSubmit={(event) => submitFormHandler(event)}>
               <div className="row">
                 <div className="col-md-12">
                   <div className="form-group">
                     <label for="exampleInputEmail1">Amount</label>
                     <input
-                      type="text"
+                      required
+                      type="number"
                       className="form-control"
                       placeholder="Amount"
                       name="amount"
-                      onChange={(event) => setAmount(event.target.value)}
+                      onChange={handleChange}
                     />
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="form-group">
+                    <label for="exampleInputEmail1">Action</label>
+                    <select
+                      required
+                      ref={walletSelect}
+                      className="form-control"
+                    >
+                      <option value="">Choose Action</option>
+                      <option value="deposit">Deposit</option>
+                      <option value="debit">Withdraw</option>
+                      <option value="hold">Hold</option>
+                      <option value="hold-withdraw">Block</option>
+                    </select>
                   </div>
                 </div>
                 <div className="col-md-12">
                   <div className="form-group">
                     <label for="exampleInputEmail1">Remark</label>
                     <input
+                      required
                       type="text"
                       className="form-control"
                       placeholder="Remark"
                       name="remark"
-                      onChange={(event) => setRemark(event.target.value)}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -86,21 +128,7 @@ function AdminFundForm({ userId, closeAdminFundForm }) {
                   Close
                 </button>
 
-                {/* {isPopupVisible && (
-                  <AdminFundForm
-                    isPopupVisible={isPopupVisible}
-                    closeAdminFundForm={closeAdminFundPopUpHandler}
-                    userRole={userRole}
-                    getFundRequest={getFundRequest}
-                    setStatus={setStatus}
-                  />
-                )} */}
-
-                <button
-                  type="submit"
-                  className="btn btn-primary themebtn"
-                  onClick={(event) => submitFormHandler(event)}
-                >
+                <button type="submit" className="btn btn-primary themebtn">
                   Add Fund
                 </button>
               </div>

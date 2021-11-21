@@ -17,8 +17,29 @@ const roleMapping = {
   PTM_SUB_ADMIN: "Sub Admin",
 };
 
+const styles = {
+  iconContainer: {
+    padding: "10px",
+  },
+  bulbContainer: {
+    N: {
+      color: "gray",
+      padding: "10px",
+    },
+    Y: { color: "green", padding: "10px" },
+  },
+};
+
 const Users = (props) => {
   const [isPopupVisible, handlePopUp] = useState(false);
+  const [userStatus, setUserStatus] = useState({
+    userName: "",
+    msg: "",
+    status: "",
+  });
+
+  const [statusMsg, setStatusMsg] = useState("");
+
   const [userToBeEdit, setUserId] = useState("");
   const [editUserData, setEditUserData] = useState("");
   const [permissionData, setPermissionData] = useState({
@@ -71,6 +92,30 @@ const Users = (props) => {
     handlePopUp(true);
   };
 
+  const handleUserStatus = (userId, curentStatus) => {
+    const status = curentStatus == "N" ? "Y" : "N";
+
+    const successHandler = (response) => {
+      console.log("responseresponse", response);
+      if (response.success) {
+        const msg = status == "N" ? "deactivated" : "activated";
+        setUserStatus({
+          userName: userId,
+          status: status,
+          msg: `This user is now ${msg}`,
+        });
+      }
+    };
+
+    const errorHandler = (error) => {};
+
+    const request = new Request("", successHandler, errorHandler, false);
+    const params = `?userId=${userId}&status=${status}`;
+    return request.put(
+      `${APIS.login.BASE_URL}${APIS.User.MANAGE_USER_STATUS}${params}`
+    );
+  };
+
   const closeAdminFundPopUpHandler = () => {
     setAdminFormData("");
     removeOverlay();
@@ -95,7 +140,16 @@ const Users = (props) => {
 
   const { users } = props;
 
-  const userData = users && users.usersList && users.usersList.data;
+  let userData = users && users.usersList && users.usersList.data;
+
+  if (userData) {
+    userData = userData.map((item) => {
+      if (item.userName == userStatus.userName) {
+        item.isActive = userStatus.status;
+      }
+      return item;
+    });
+  }
 
   return (
     <div className="container_full">
@@ -163,11 +217,12 @@ const Users = (props) => {
                   <AdminFundForm
                     userId={adminFormData}
                     closeAdminFundForm={closeAdminFundPopUpHandler}
+                    setStatusMsg={setStatusMsg}
                   />
                 ) : (
                   ""
                 )}
-
+                <div className="done">{statusMsg}</div>
                 <div className="card-body">
                   <table
                     id="bs4-table"
@@ -181,7 +236,7 @@ const Users = (props) => {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Wallet</th>
-                        <th>Status</th>
+                        {/* <th>Status</th> */}
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -196,6 +251,13 @@ const Users = (props) => {
                                 .replace(" ", "-");
                             }
                             console.log(item);
+
+                            let status = item.isActive;
+
+                            // if (userStatus.userName == item.userName) {
+                            //   status = userStatus.status;
+                            // }
+
                             return (
                               <tr key={item.userName}>
                                 <td>{index + 1}</td>
@@ -206,8 +268,23 @@ const Users = (props) => {
                                   {roleMapping[item.role] || "NA"}
                                 </td>
                                 <td>Rs. {item.userBalance || "0"}</td>
-                                <td className="done">Active</td>
+                                {/* <td className="done">
+                                  {item.isActive == "Y"
+                                    ? "Active"
+                                    : "In Active"}
+                                </td> */}
                                 <td>
+                                  {userStatus.userName == item.userName && (
+                                    <div
+                                      className="done"
+                                      style={{
+                                        position: "absolute",
+                                        marginTop: "-11px",
+                                      }}
+                                    >
+                                      {userStatus.msg}
+                                    </div>
+                                  )}
                                   <div
                                     style={{
                                       display: "flex",
@@ -247,10 +324,20 @@ const Users = (props) => {
                                       ></i>
                                     </div>
                                     {/* | */}
-                                    <div style={styles.bulbContainer}>
+                                    <div
+                                      style={styles.bulbContainer[status]}
+                                      onClick={() =>
+                                        handleUserStatus(item.userName, status)
+                                      }
+                                    >
                                       <i
                                         className="icon-bulb"
-                                        title="Active"
+                                        style={{ fontWeight: "bold" }}
+                                        title={`${
+                                          item.isActive == "N"
+                                            ? "Active"
+                                            : "Inactive"
+                                        }`}
                                       ></i>
                                     </div>
                                   </div>
@@ -278,13 +365,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Users);
-
-const styles = {
-  iconContainer: {
-    padding: "10px",
-  },
-  bulbContainer: {
-    color: "green",
-    padding: "10px",
-  },
-};

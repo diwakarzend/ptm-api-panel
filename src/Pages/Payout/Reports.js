@@ -83,7 +83,7 @@ const Reports = memo((props) => {
   //   }, 1000);
   // };
 
-  const pagingData = payout && payout.reports.data;
+  const pagingData = payout && payout.reports && payout.reports.data;
 
   return (
     <div className="container_full">
