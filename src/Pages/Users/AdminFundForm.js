@@ -59,7 +59,7 @@ function AdminFundForm({ userId, closeAdminFundForm, setStatusMsg }) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Add Fund
+              Manage Fund
             </h5>
             <button
               type="button"
@@ -100,7 +100,7 @@ function AdminFundForm({ userId, closeAdminFundForm, setStatusMsg }) {
                       <option value="deposit">Deposit</option>
                       <option value="debit">Withdraw</option>
                       <option value="hold">Hold</option>
-                      <option value="hold-withdraw">Block</option>
+                      <option value="hold-withdraw">Un Hold</option>
                     </select>
                   </div>
                 </div>
@@ -129,7 +129,7 @@ function AdminFundForm({ userId, closeAdminFundForm, setStatusMsg }) {
                 </button>
 
                 <button type="submit" className="btn btn-primary themebtn">
-                  Add Fund
+                  Submit
                 </button>
               </div>
             </form>

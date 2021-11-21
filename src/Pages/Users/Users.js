@@ -23,7 +23,7 @@ const styles = {
   },
   bulbContainer: {
     N: {
-      color: "gray",
+      color: "red",
       padding: "10px",
     },
     Y: { color: "green", padding: "10px" },
@@ -58,6 +58,16 @@ const Users = (props) => {
   useEffect(() => {
     fetchUsersData();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setUserStatus({
+        userName: "",
+        status: "",
+        msg: "",
+      });
+    }, 4000);
+  }, [userStatus.msg]);
 
   const editClickHandler = (userId) => {
     handlePopUp(true);
@@ -151,6 +161,8 @@ const Users = (props) => {
     });
   }
 
+  console.log("statusMsg", statusMsg);
+
   return (
     <div className="container_full">
       <SideBar {...props} />
@@ -160,37 +172,26 @@ const Users = (props) => {
           <div className="row">
             <div className=" col-sm-12">
               <div className="card card-shadow mb-4">
-                <div className="card-header fund-modal">
-                  <div className="card-title"> </div>
-                  <button
-                    type="button"
-                    className="btn-common"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                    onClick={openPopupHandler}
-                  >
-                    Add User
-                  </button>
-                  {isPopupVisible ? (
-                    <AddUserForm
-                      closePopUpHandler={closePopUpHandler}
-                      fetchUsersData={fetchUsersData}
-                      props={props}
-                      editUserData={editUserData}
-                      userToBeEdit={userToBeEdit}
-                    />
-                  ) : (
-                    ""
-                  )}
-                  {permissionData.isPopupVisible ? (
-                    <PermissionForm
-                      closePopUpHandler={closePermissionPopup}
-                      userId={permissionData.userId}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </div>
+                {isPopupVisible ? (
+                  <AddUserForm
+                    closePopUpHandler={closePopUpHandler}
+                    fetchUsersData={fetchUsersData}
+                    props={props}
+                    editUserData={editUserData}
+                    userToBeEdit={userToBeEdit}
+                  />
+                ) : (
+                  ""
+                )}
+                {permissionData.isPopupVisible ? (
+                  <PermissionForm
+                    closePopUpHandler={closePermissionPopup}
+                    userId={permissionData.userId}
+                  />
+                ) : (
+                  ""
+                )}
+
                 <div className="card-header">
                   <div className="card-title">
                     <div
@@ -211,6 +212,15 @@ const Users = (props) => {
                       </button>
                     </div>
                   </div>
+                  <button
+                    type="button"
+                    className="btn-common"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    onClick={openPopupHandler}
+                  >
+                    Add User
+                  </button>
                 </div>
 
                 {adminFormData ? (
@@ -316,7 +326,7 @@ const Users = (props) => {
                                     <div style={styles.iconContainer}>
                                       <i
                                         className="icon-plus"
-                                        title="Add Fund"
+                                        title="Manage Fund"
                                         onClick={() => {
                                           console.log("successful");
                                           adminFundFormHandler(item.userName);
