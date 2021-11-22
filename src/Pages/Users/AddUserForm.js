@@ -21,8 +21,12 @@ const initialFormData = Object.freeze({
 });
 
 const AddUserForm = (props) => {
-  const { editUserData, userToBeEdit, closePopUpHandler, fetchUsersData } =
-    props;
+  const {
+    editUserData,
+    userToBeEdit,
+    closePopUpHandler,
+    fetchUsersData,
+  } = props;
   const [formData, updateFormData] = useState(initialFormData);
   const [editFormData, updateEditFormData] = useState(initialFormData);
   const [errors, updateError] = useState([]);

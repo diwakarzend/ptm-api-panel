@@ -135,6 +135,7 @@ const Reports = memo((props) => {
                             <option value="DONE">DONE</option>
                             <option value="INITIATED">INITIATED</option>
                             <option value="REJECTED">REJECTED</option>
+                            <option value="PENDING">PENDING</option>
                             <option value="FAIL">FAIL</option>
                           </select>
                         </div>

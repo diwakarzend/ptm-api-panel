@@ -218,6 +218,7 @@ const Users = (props) => {
                     userId={adminFormData}
                     closeAdminFundForm={closeAdminFundPopUpHandler}
                     setStatusMsg={setStatusMsg}
+                    successCallBack={fetchUsersData}
                   />
                 ) : (
                   ""
@@ -236,8 +237,9 @@ const Users = (props) => {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Wallet</th>
-                        {/* <th>Status</th> */}
-                        <th>Action</th>
+                        <th>Add/Edit</th>
+                        <th>User Status</th>
+                        <th>Balance</th>
                       </tr>
                     </thead>
 
@@ -342,6 +344,15 @@ const Users = (props) => {
                                     </div>
                                   </div>
                                 </td>
+                                <td>{`${
+                                  item.isActive == "N" ? "Inactive" : "Active"
+                                }`}</td>
+                                <td>{`${
+                                  item.userBalance == 0
+                                    ? "N/A"
+                                    : item.userBalance
+                                }
+                                  `}</td>
                               </tr>
                             );
                           })

@@ -2,7 +2,12 @@ import React, { useState, useRef } from "react";
 import APIS from "../../utils/urls";
 import Request from "../../utils/Request";
 
-function AdminFundForm({ userId, closeAdminFundForm, setStatusMsg }) {
+function AdminFundForm({
+  userId,
+  closeAdminFundForm,
+  setStatusMsg,
+  successCallBack,
+}) {
   const [formData, setFormData] = useState({
     amount: "",
     remark: "",
@@ -15,11 +20,10 @@ function AdminFundForm({ userId, closeAdminFundForm, setStatusMsg }) {
     event.preventDefault();
     const walletAction = walletSelect.current.value;
     const request = new Request("", successHandler, errorHandler, true);
-    let walletAPI =
-      `${APIS.login.BASE_URL}${APIS.Wallet.MANAGE_WALLET}`.replace(
-        "{actionType}",
-        walletAction
-      );
+    let walletAPI = `${APIS.login.BASE_URL}${APIS.Wallet.MANAGE_WALLET}`.replace(
+      "{actionType}",
+      walletAction
+    );
 
     formData.amount = parseInt(formData.amount);
     request.post(walletAPI, formData);
@@ -27,6 +31,7 @@ function AdminFundForm({ userId, closeAdminFundForm, setStatusMsg }) {
   const successHandler = (response, headers) => {
     if (response.success) {
       closeAdminFundForm();
+      successCallBack();
       setStatusMsg("Action to wallet is submitted successfully");
     }
   };
@@ -127,7 +132,6 @@ function AdminFundForm({ userId, closeAdminFundForm, setStatusMsg }) {
                 >
                   Close
                 </button>
-
                 <button type="submit" className="btn btn-primary themebtn">
                   Add Fund
                 </button>
