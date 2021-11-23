@@ -237,9 +237,9 @@ const Users = (props) => {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Wallet</th>
-                        <th>Add/Edit</th>
-                        <th>User Status</th>
-                        <th>Balance</th>
+                        <th>Hold Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
 
@@ -275,6 +275,16 @@ const Users = (props) => {
                                     ? "Active"
                                     : "In Active"}
                                 </td> */}
+                                <td>
+                                  Rs.{" "}
+                                  {`${
+                                    item.holdBalance ? item.holdBalance : "N/A"
+                                  }
+                                  `}
+                                </td>
+                                <td>{`${
+                                  item.isActive == "N" ? "Inactive" : "Active"
+                                }`}</td>
                                 <td>
                                   {userStatus.userName == item.userName && (
                                     <div
@@ -344,15 +354,6 @@ const Users = (props) => {
                                     </div>
                                   </div>
                                 </td>
-                                <td>{`${
-                                  item.isActive == "N" ? "Inactive" : "Active"
-                                }`}</td>
-                                <td>{`${
-                                  item.userBalance == 0
-                                    ? "N/A"
-                                    : item.userBalance
-                                }
-                                  `}</td>
                               </tr>
                             );
                           })

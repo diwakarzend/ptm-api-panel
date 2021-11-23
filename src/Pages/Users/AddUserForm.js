@@ -252,7 +252,6 @@ const AddUserForm = (props) => {
                       type="date"
                       className="form-control"
                       name="dob"
-                      value={formData && formData.dob}
                       min="1950-01-01"
                       max="2000-12-31"
                       onChange={handleChange}
