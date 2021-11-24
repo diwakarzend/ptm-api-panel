@@ -280,13 +280,9 @@ const Users = (props) => {
                                     : "In Active"}
                                 </td> */}
                                 <td>
-                                  {" "}
-                                  {`${
-                                    item.holdBalance
-                                      ? "Rs." + item.holdBalance
-                                      : "N/A"
-                                  }
-                                  `}
+                                  {item.holdBalance
+                                    ? "Rs." + item.holdBalance
+                                    : "-"}
                                 </td>
                                 <td>{`${
                                   item.isActive == "N" ? "Inactive" : "Active"
