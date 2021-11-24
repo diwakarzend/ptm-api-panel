@@ -38,6 +38,7 @@ const Users = (props) => {
     status: "",
   });
 
+  const [showPhoneNumberField, setShowPhoneNumberField] = useState();
   const [statusMsg, setStatusMsg] = useState("");
 
   const [userToBeEdit, setUserId] = useState("");
@@ -60,6 +61,7 @@ const Users = (props) => {
   }, []);
 
   const editClickHandler = (userId) => {
+    setShowPhoneNumberField(false);
     handlePopUp(true);
     addOverlay();
     setUserId(userId);
@@ -89,6 +91,7 @@ const Users = (props) => {
 
   const openPopupHandler = () => {
     document.body.classList.add("modal-open");
+    setShowPhoneNumberField(true);
     handlePopUp(true);
   };
 
@@ -178,6 +181,7 @@ const Users = (props) => {
                       props={props}
                       editUserData={editUserData}
                       userToBeEdit={userToBeEdit}
+                      showPhoneNumberField={showPhoneNumberField}
                     />
                   ) : (
                     ""
@@ -276,9 +280,11 @@ const Users = (props) => {
                                     : "In Active"}
                                 </td> */}
                                 <td>
-                                  Rs.{" "}
+                                  {" "}
                                   {`${
-                                    item.holdBalance ? item.holdBalance : "N/A"
+                                    item.holdBalance
+                                      ? "Rs." + item.holdBalance
+                                      : "N/A"
                                   }
                                   `}
                                 </td>

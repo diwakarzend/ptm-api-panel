@@ -261,7 +261,7 @@ const AddUserForm = (props) => {
                 </div>
 
                 <div className="col-md-12">
-                  {!(formData && formData.phoneNumber) && (
+                  {props.showPhoneNumberField && (
                     <div className="form-group">
                       <label for="exampleInputEmail1">Mobile</label>
                       <input
