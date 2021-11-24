@@ -5,7 +5,7 @@ import { removeOverlay } from "../../utils/common";
 const initialFormData = Object.freeze({
   address1: "",
   address2: "",
-  dob: "1985-12-07",
+  dob: "YYYY-MM-DD",
   email: "",
   firstName: "",
   landmark: "",
@@ -252,6 +252,7 @@ const AddUserForm = (props) => {
                       type="date"
                       className="form-control"
                       name="dob"
+                      value={formData.dob}
                       min="1950-01-01"
                       max="2000-12-31"
                       onChange={handleChange}
