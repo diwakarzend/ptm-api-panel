@@ -164,6 +164,23 @@ const Users = (props) => {
             <div className=" col-sm-12">
               <div className="card card-shadow mb-4">
                 <div className="card-header fund-modal">
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button type="button" className="btn-common">
+                      CSV
+                    </button>
+
+                    <button
+                      type="button"
+                      className="btn-common"
+                      onClick={() => printPage()}
+                    >
+                      Print
+                    </button>
+                  </div>
                   <div className="card-title"> </div>
                   <button
                     type="button"
@@ -194,27 +211,6 @@ const Users = (props) => {
                   ) : (
                     ""
                   )}
-                </div>
-                <div className="card-header">
-                  <div className="card-title">
-                    <div
-                      className="btn-group"
-                      role="group"
-                      aria-label="Basic example"
-                    >
-                      <button type="button" className="btn-common">
-                        CSV
-                      </button>
-
-                      <button
-                        type="button"
-                        className="btn-common"
-                        onClick={() => printPage()}
-                      >
-                        Print
-                      </button>
-                    </div>
-                  </div>
                 </div>
 
                 {adminFormData ? (
