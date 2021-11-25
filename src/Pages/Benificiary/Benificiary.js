@@ -67,9 +67,10 @@ const Benificiary = memo((props) => {
   };
 
   const editPopupHandler = (item) => {
-    item.mobileNumber = item.mobile;
-    delete item.mobile;
-    setEditUserData(item);
+    const itemCopy = JSON.parse(JSON.stringify(item));
+    itemCopy.mobileNumber = itemCopy.mobile;
+    delete itemCopy.mobile;
+    setEditUserData(itemCopy);
     handlePopUp(true);
     addOverlay();
   };
