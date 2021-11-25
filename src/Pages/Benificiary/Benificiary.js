@@ -39,6 +39,7 @@ const Benificiary = memo((props) => {
   };
 
   const openPopupHandler = () => {
+    setItem({});
     addOverlay();
     handlePopUp(true);
   };
@@ -64,6 +65,21 @@ const Benificiary = memo((props) => {
         setPayeeInfo(payeeData[0]);
       }
     }
+  };
+
+  const [item, setItem] = useState({});
+  const [editUserData, setEditUserData] = useState("");
+
+  const editPopupHandler = (item) => {
+    setItem(item);
+    handlePopUp(true);
+    addOverlay();
+
+    const successHandler = (response, headers) => {
+      if (response.success == true) {
+        setEditUserData(response.data);
+      }
+    };
   };
 
   return (
@@ -95,6 +111,7 @@ const Benificiary = memo((props) => {
                     userRole={userRole}
                     getBeneficiary={getBeneficiary}
                     setStatus={setStatus}
+                    userDetails={item}
                   />
                 )}
 
@@ -173,12 +190,19 @@ const Benificiary = memo((props) => {
                             <td>
                               <button
                                 onClick={() =>
-                                  openQuickPopupHandler(item.beneficiaryId)
+                                  openQuickPopupHandler(item.reqstDate)
                                 }
                                 className="quick-payment-btn btn-common"
                               >
                                 Quick Payment
                               </button>
+                              <i
+                                style={{ paddingLeft: "2em" }}
+                                class="icon-pencil"
+                                onClick={() => editPopupHandler(item)}
+                                style={{ cursor: "pointer" }}
+                                title="Edit user"
+                              ></i>
                             </td>
                           </tr>
                         );

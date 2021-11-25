@@ -261,7 +261,7 @@ const AddUserForm = (props) => {
                 </div>
 
                 <div className="col-md-12">
-                  {props.showPhoneNumberField && (
+                  {
                     <div className="form-group">
                       <label for="exampleInputEmail1">Mobile</label>
                       <input
@@ -274,7 +274,7 @@ const AddUserForm = (props) => {
                         onChange={handleChange}
                       />
                     </div>
-                  )}
+                  }
                 </div>
                 {/* <div className="col-md-12">
                   <div className="form-group">

@@ -14,7 +14,7 @@ const initialFormData = Object.freeze({
 });
 
 const BenificiaryForm = memo(
-  ({ closePopUpHandler, userRole, getBeneficiary, setStatus }) => {
+  ({ closePopUpHandler, userRole, getBeneficiary, setStatus, userDetails }) => {
     const [isPopupVisible, handlePopUp] = useState(false);
     const [formData, updateFormData] = useState(initialFormData);
     const [errors, setErrors] = useState([]);
@@ -120,6 +120,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">First Name</label>
                       <input
                         type="text"
+                        value={userDetails && userDetails.firstName}
                         className="form-control"
                         id="depositAccount"
                         aria-describedby="First Name"
@@ -134,6 +135,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">Last Name</label>
                       <input
                         type="text"
+                        value={userDetails && userDetails.lastName}
                         className="form-control"
                         id="depositAccount"
                         aria-describedby="Last Name"
@@ -149,6 +151,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">Mobile No</label>
                       <input
                         type="number"
+                        value={userDetails && userDetails.mobileNumber}
                         className="form-control"
                         aria-describedby="requestedAmount"
                         placeholder="Mobile No"
@@ -162,6 +165,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">Bank Name</label>
                       <input
                         type="text"
+                        value={userDetails && userDetails.bankName}
                         className="form-control"
                         placeholder="Bank Name"
                         name="bankName"
@@ -175,6 +179,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">Account Number</label>
                       <input
                         type="number"
+                        value={userDetails && userDetails.accountNumber}
                         className="form-control"
                         placeholder="Account Number"
                         name="accountNumber"
@@ -188,6 +193,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">IFSC Code</label>
                       <input
                         type="text"
+                        value={userDetails && userDetails.ifscCode}
                         className="form-control"
                         placeholder="Ifsc Code"
                         name="ifscCode"
