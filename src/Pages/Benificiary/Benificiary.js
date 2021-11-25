@@ -49,7 +49,7 @@ const Benificiary = memo((props) => {
     handleQuickPopUp(false);
   };
 
-  const openQuickPopupHandler = (beneficiaryId) => {
+  const openQuickPopupHandler = (accountNumber) => {
     addOverlay();
     handleQuickPopUp(true);
     let payeeData = "";
@@ -59,7 +59,7 @@ const Benificiary = memo((props) => {
       benificiaryItems.length > 0
     ) {
       payeeData = benificiaryItems.filter(
-        (item) => item.beneficiaryId == beneficiaryId
+        (item) => item.accountNumber == accountNumber
       );
       if (payeeData.length > 0) {
         setPayeeInfo(payeeData[0]);
@@ -191,7 +191,7 @@ const Benificiary = memo((props) => {
                             <td>
                               <button
                                 onClick={() =>
-                                  openQuickPopupHandler(item.reqstDate)
+                                  openQuickPopupHandler(item.accountNumber)
                                 }
                                 className="quick-payment-btn btn-common"
                               >
