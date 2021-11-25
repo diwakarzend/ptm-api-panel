@@ -168,6 +168,7 @@ const Benificiary = memo((props) => {
                       <th scope="col">IFSC</th>
                       <th scope="col">Status</th>
                       <th>Action</th>
+                      <th>Edit User</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -196,8 +197,10 @@ const Benificiary = memo((props) => {
                               >
                                 Quick Payment
                               </button>
+                            </td>
+                            <td>
                               <i
-                                style={{ paddingLeft: "2em" }}
+                                style={{ padding: "12px" }}
                                 class="icon-pencil"
                                 onClick={() => editPopupHandler(item)}
                                 style={{ cursor: "pointer" }}
