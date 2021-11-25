@@ -38,6 +38,7 @@ const Users = (props) => {
     status: "",
   });
 
+  const [showPhoneNumberField, setShowPhoneNumberField] = useState();
   const [statusMsg, setStatusMsg] = useState("");
 
   const [userToBeEdit, setUserId] = useState("");
@@ -70,6 +71,7 @@ const Users = (props) => {
   }, [userStatus.msg]);
 
   const editClickHandler = (userId) => {
+    setShowPhoneNumberField(false);
     handlePopUp(true);
     addOverlay();
     setUserId(userId);
@@ -99,6 +101,7 @@ const Users = (props) => {
 
   const openPopupHandler = () => {
     document.body.classList.add("modal-open");
+    setShowPhoneNumberField(true);
     handlePopUp(true);
   };
 
@@ -172,46 +175,25 @@ const Users = (props) => {
           <div className="row">
             <div className=" col-sm-12">
               <div className="card card-shadow mb-4">
-                {isPopupVisible ? (
-                  <AddUserForm
-                    closePopUpHandler={closePopUpHandler}
-                    fetchUsersData={fetchUsersData}
-                    props={props}
-                    editUserData={editUserData}
-                    userToBeEdit={userToBeEdit}
-                  />
-                ) : (
-                  ""
-                )}
-                {permissionData.isPopupVisible ? (
-                  <PermissionForm
-                    closePopUpHandler={closePermissionPopup}
-                    userId={permissionData.userId}
-                  />
-                ) : (
-                  ""
-                )}
+                <div className="card-header fund-modal">
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button type="button" className="btn-common">
+                      CSV
+                    </button>
 
-                <div className="card-header">
-                  <div className="card-title">
-                    <div
-                      className="btn-group"
-                      role="group"
-                      aria-label="Basic example"
+                    <button
+                      type="button"
+                      className="btn-common"
+                      onClick={() => printPage()}
                     >
-                      <button type="button" className="btn-common">
-                        CSV
-                      </button>
-
-                      <button
-                        type="button"
-                        className="btn-common"
-                        onClick={() => printPage()}
-                      >
-                        Print
-                      </button>
-                    </div>
+                      Print
+                    </button>
                   </div>
+                  <div className="card-title"> </div>
                   <button
                     type="button"
                     className="btn-common"
@@ -221,6 +203,26 @@ const Users = (props) => {
                   >
                     Add User
                   </button>
+                  {isPopupVisible ? (
+                    <AddUserForm
+                      closePopUpHandler={closePopUpHandler}
+                      fetchUsersData={fetchUsersData}
+                      props={props}
+                      editUserData={editUserData}
+                      userToBeEdit={userToBeEdit}
+                      showPhoneNumberField={showPhoneNumberField}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {permissionData.isPopupVisible ? (
+                    <PermissionForm
+                      closePopUpHandler={closePermissionPopup}
+                      userId={permissionData.userId}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </div>
 
                 {adminFormData ? (
@@ -228,6 +230,7 @@ const Users = (props) => {
                     userId={adminFormData}
                     closeAdminFundForm={closeAdminFundPopUpHandler}
                     setStatusMsg={setStatusMsg}
+                    successCallBack={fetchUsersData}
                   />
                 ) : (
                   ""
@@ -246,7 +249,8 @@ const Users = (props) => {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Wallet</th>
-                        {/* <th>Status</th> */}
+                        <th>Hold Amount</th>
+                        <th>Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -283,6 +287,14 @@ const Users = (props) => {
                                     ? "Active"
                                     : "In Active"}
                                 </td> */}
+                                <td>
+                                  {item.holdBalance
+                                    ? "Rs." + item.holdBalance
+                                    : "-"}
+                                </td>
+                                <td>{`${
+                                  item.isActive == "N" ? "Inactive" : "Active"
+                                }`}</td>
                                 <td>
                                   {userStatus.userName == item.userName && (
                                     <div

@@ -236,7 +236,11 @@ const Settings = (props) => {
                                       <td>{item.lastUpdated}</td>
                                       {userRole != "PTM_VENDOR" && (
                                         <td onClick={() => handleIPForm(item)}>
-                                          Edit
+                                          <i
+                                            class="icon-pencil"
+                                            style={{ cursor: "pointer" }}
+                                            title="Edit IP"
+                                          ></i>
                                         </td>
                                       )}
                                     </tr>

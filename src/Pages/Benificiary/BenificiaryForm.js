@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useEffect } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
@@ -14,7 +14,13 @@ const initialFormData = Object.freeze({
 });
 
 const BenificiaryForm = memo(
-  ({ closePopUpHandler, userRole, getBeneficiary, setStatus }) => {
+  ({
+    closePopUpHandler,
+    userRole,
+    getBeneficiary,
+    setStatus,
+    editUserData,
+  }) => {
     const [isPopupVisible, handlePopUp] = useState(false);
     const [formData, updateFormData] = useState(initialFormData);
     const [errors, setErrors] = useState([]);
@@ -26,6 +32,12 @@ const BenificiaryForm = memo(
         [event.target.name]: event.target.value,
       });
     };
+
+    useEffect(() => {
+      if (editUserData) {
+        updateFormData(editUserData);
+      }
+    }, [editUserData]);
 
     const submitFormHandler = (event) => {
       event.preventDefault();
@@ -61,11 +73,16 @@ const BenificiaryForm = memo(
         }
       };
 
+      let apiPath = urls.login.BASE_URL + urls.User.ADD_BENEFICIARY;
+
       const api = new Request("", successHandler, errorHandler, false);
-      return api.post(
-        urls.login.BASE_URL + urls.User.ADD_BENEFICIARY,
-        formData
-      );
+
+      if (editUserData) {
+        apiPath = urls.login.BASE_URL + urls.User.UPDATE_BENEFICIARY;
+
+        return api.put(apiPath, formData);
+      }
+      return api.post(apiPath, formData);
     };
 
     let errorHTML = "";
@@ -120,6 +137,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">First Name</label>
                       <input
                         type="text"
+                        value={formData.firstName}
                         className="form-control"
                         id="depositAccount"
                         aria-describedby="First Name"
@@ -134,6 +152,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">Last Name</label>
                       <input
                         type="text"
+                        value={formData.lastName}
                         className="form-control"
                         id="depositAccount"
                         aria-describedby="Last Name"
@@ -149,6 +168,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">Mobile No</label>
                       <input
                         type="number"
+                        value={formData.mobileNumber}
                         className="form-control"
                         aria-describedby="requestedAmount"
                         placeholder="Mobile No"
@@ -162,6 +182,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">Bank Name</label>
                       <input
                         type="text"
+                        value={formData.bankName}
                         className="form-control"
                         placeholder="Bank Name"
                         name="bankName"
@@ -175,6 +196,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">Account Number</label>
                       <input
                         type="number"
+                        value={formData.accountNumber}
                         className="form-control"
                         placeholder="Account Number"
                         name="accountNumber"
@@ -188,6 +210,7 @@ const BenificiaryForm = memo(
                       <label for="exampleInputEmail1">IFSC Code</label>
                       <input
                         type="text"
+                        value={formData.ifscCode}
                         className="form-control"
                         placeholder="Ifsc Code"
                         name="ifscCode"

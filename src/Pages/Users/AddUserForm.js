@@ -5,7 +5,7 @@ import { removeOverlay } from "../../utils/common";
 const initialFormData = Object.freeze({
   address1: "",
   address2: "",
-  dob: "1985-12-07",
+  dob: "YYYY-MM-DD",
   email: "",
   firstName: "",
   landmark: "",
@@ -21,8 +21,12 @@ const initialFormData = Object.freeze({
 });
 
 const AddUserForm = (props) => {
-  const { editUserData, userToBeEdit, closePopUpHandler, fetchUsersData } =
-    props;
+  const {
+    editUserData,
+    userToBeEdit,
+    closePopUpHandler,
+    fetchUsersData,
+  } = props;
   const [formData, updateFormData] = useState(initialFormData);
   const [editFormData, updateEditFormData] = useState(initialFormData);
   const [errors, updateError] = useState([]);
@@ -248,7 +252,7 @@ const AddUserForm = (props) => {
                       type="date"
                       className="form-control"
                       name="dob"
-                      value={formData && formData.dob}
+                      value={formData.dob}
                       min="1950-01-01"
                       max="2000-12-31"
                       onChange={handleChange}
@@ -257,18 +261,20 @@ const AddUserForm = (props) => {
                 </div>
 
                 <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Mobile</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      placeholder="Mobile"
-                      name="phoneNumber"
-                      value={formData && formData.phoneNumber}
-                      required
-                      onChange={handleChange}
-                    />
-                  </div>
+                  {
+                    <div className="form-group">
+                      <label for="exampleInputEmail1">Mobile</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Mobile"
+                        name="phoneNumber"
+                        value={formData && formData.phoneNumber}
+                        required
+                        onChange={handleChange}
+                      />
+                    </div>
+                  }
                 </div>
                 {/* <div className="col-md-12">
                   <div className="form-group">

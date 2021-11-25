@@ -105,7 +105,7 @@ module.exports = {
     historyApiFallback: true,
     port: PORT,
     host: HOST,
-    disableHostCheck: true,
+    // disableHostCheck: true,
     proxy: [
       {
         context: ["/api/**"],
