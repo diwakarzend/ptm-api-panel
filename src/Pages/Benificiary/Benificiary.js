@@ -1,7 +1,6 @@
 import React, { useEffect, memo, useState } from "react";
 import { fetchBeneficiary } from "../../actions/beneficiary";
-import Request from "../../utils/Request";
-import urls from "../../utils/urls";
+
 import { connect } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
@@ -17,7 +16,7 @@ const Benificiary = memo((props) => {
   const [statusMessage, setStatus] = useState("");
   const [isQuickPopupVisible, handleQuickPopUp] = useState(false);
   const [payeeInfo, setPayeeInfo] = useState("");
-
+  const [editUserData, setEditUserData] = useState("");
   const benificiaryItems =
     beneficiary && beneficiary.items && beneficiary.items.data;
 
@@ -39,9 +38,9 @@ const Benificiary = memo((props) => {
   };
 
   const openPopupHandler = () => {
-    setItem({});
     addOverlay();
     handlePopUp(true);
+    setEditUserData("");
   };
 
   const closeQuickPopUpHandler = () => {
@@ -67,19 +66,12 @@ const Benificiary = memo((props) => {
     }
   };
 
-  const [item, setItem] = useState({});
-  const [editUserData, setEditUserData] = useState("");
-
   const editPopupHandler = (item) => {
-    setItem(item);
+    item.mobileNumber = item.mobile;
+    delete item.mobile;
+    setEditUserData(item);
     handlePopUp(true);
     addOverlay();
-
-    const successHandler = (response, headers) => {
-      if (response.success == true) {
-        setEditUserData(response.data);
-      }
-    };
   };
 
   return (
@@ -111,7 +103,7 @@ const Benificiary = memo((props) => {
                     userRole={userRole}
                     getBeneficiary={getBeneficiary}
                     setStatus={setStatus}
-                    userDetails={item}
+                    editUserData={editUserData}
                   />
                 )}
 
@@ -168,7 +160,6 @@ const Benificiary = memo((props) => {
                       <th scope="col">IFSC</th>
                       <th scope="col">Status</th>
                       <th>Action</th>
-                      <th>Edit User</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -189,23 +180,38 @@ const Benificiary = memo((props) => {
                               {item.status}
                             </td>
                             <td>
-                              <button
+                              <i
                                 onClick={() =>
                                   openQuickPopupHandler(item.accountNumber)
                                 }
-                                className="quick-payment-btn btn-common"
-                              >
-                                Quick Payment
-                              </button>
-                            </td>
-                            <td>
+                                className="fa fa-rupee"
+                                style={{
+                                  fontSize: "22px",
+                                  marginRight: "10px",
+                                  cursor: "pointer",
+                                }}
+                                title="Quick Pay"
+                              />
                               <i
-                                style={{ padding: "12px" }}
+                                style={{
+                                  margin: "-33px 0px -5px 25px",
+                                  display: "block",
+                                  fontSize: "18px",
+                                }}
+                              >
+                                |
+                              </i>
+                              <i
                                 class="icon-pencil"
                                 onClick={() => editPopupHandler(item)}
-                                style={{ cursor: "pointer" }}
                                 title="Edit user"
-                              ></i>
+                                style={{
+                                  fontSize: "17px",
+                                  margin: "-24px -4px -2px 43px",
+                                  cursor: "pointer",
+                                  display: "block",
+                                }}
+                              />
                             </td>
                           </tr>
                         );
