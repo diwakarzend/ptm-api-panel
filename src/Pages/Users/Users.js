@@ -10,6 +10,7 @@ import AdminFundForm from "./AdminFundForm";
 
 import { connect } from "react-redux";
 import { printPage, addOverlay, removeOverlay } from "../../utils/common";
+import WalletDetails from "./WalletDetails";
 
 const roleMapping = {
   PTM_VENDOR: "Vendor",
@@ -38,6 +39,9 @@ const Users = (props) => {
     status: "",
   });
 
+  const [transationPopupVisible, setTransationPopupVisible] = useState(false);
+  const [userTransactionDetails, setUserTransactionDetails] = useState({});
+
   const [showPhoneNumberField, setShowPhoneNumberField] = useState();
   const [statusMsg, setStatusMsg] = useState("");
 
@@ -59,6 +63,16 @@ const Users = (props) => {
   useEffect(() => {
     fetchUsersData();
   }, []);
+
+  const showTransactionHandler = (item) => {
+    setUserTransactionDetails(item);
+    setTransationPopupVisible(true);
+    addOverlay();
+  };
+  const closeTransactionHandler = () => {
+    setTransationPopupVisible(false);
+    removeOverlay();
+  };
 
   const editClickHandler = (userId) => {
     setShowPhoneNumberField(false);
@@ -203,6 +217,16 @@ const Users = (props) => {
                   ) : (
                     ""
                   )}
+
+                  {transationPopupVisible ? (
+                    <WalletDetails
+                      userWallet={userTransactionDetails}
+                      closeTransactionHandler={closeTransactionHandler}
+                    />
+                  ) : (
+                    ""
+                  )}
+
                   {permissionData.isPopupVisible ? (
                     <PermissionForm
                       closePopUpHandler={closePermissionPopup}
@@ -269,7 +293,20 @@ const Users = (props) => {
                                 <td className={userClass}>
                                   {roleMapping[item.role] || "NA"}
                                 </td>
-                                <td>Rs. {item.userBalance || "0"}</td>
+                                <td>
+                                  Rs. {item.userBalance || "0"}
+                                  <i
+                                    style={{
+                                      fontSize: "17px",
+                                      margin: "-24px -4px -2px 43px",
+                                      cursor: "pointer",
+                                      display: "block",
+                                    }}
+                                    className="icon-plus"
+                                    title="Show Transactions"
+                                    onClick={() => showTransactionHandler(item)}
+                                  ></i>
+                                </td>
                                 {/* <td className="done">
                                   {item.isActive == "Y"
                                     ? "Active"

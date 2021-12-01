@@ -46,6 +46,7 @@ export default {
     // ADD_CREDIT: "/api/wallet/deposit",
     // DEDUCT_CREDIT: "/api/wallet/debit",
     MANAGE_WALLET: "/api/wallet/{actionType}",
+    VIEW_TRANSACTIONS: "/api/wallet/transactions/{userId}",
     FUND_REQUEST: "/api/wallet/fund-request",
     FETCH_FUND_REQUEST: "/api/wallet/fund-request-list?pageNo=0&pageSize=100",
     FUND_REQUEST_APPROVE: "/api/wallet/fund-approve?reqstfunduuid=",

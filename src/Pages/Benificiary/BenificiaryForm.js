@@ -31,6 +31,10 @@ const BenificiaryForm = memo(
         ...formData,
         [event.target.name]: event.target.value,
       });
+      console.log({
+        ...formData,
+        [event.target.name]: event.target.value,
+      });
     };
 
     useEffect(() => {
