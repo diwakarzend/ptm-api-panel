@@ -21,6 +21,7 @@ const roleMapping = {
 const styles = {
   iconContainer: {
     padding: "10px",
+    cursor: "pointer",
   },
   bulbContainer: {
     N: {
@@ -296,13 +297,8 @@ const Users = (props) => {
                                 <td>
                                   Rs. {item.userBalance || "0"}
                                   <i
-                                    style={{
-                                      fontSize: "17px",
-                                      margin: "-24px -4px -2px 43px",
-                                      cursor: "pointer",
-                                      display: "block",
-                                    }}
-                                    className="icon-plus"
+                                    style={styles.iconContainer}
+                                    className="icon-info"
                                     title="Show Transactions"
                                     onClick={() => showTransactionHandler(item)}
                                   ></i>

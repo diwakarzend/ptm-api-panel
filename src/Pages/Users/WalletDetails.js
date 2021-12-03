@@ -5,7 +5,6 @@ import Request from "../../utils/Request";
 function WalletDetails({
   userId,
   closeTransactionHandler,
-  setStatusMsg,
   successCallBack,
   userWallet,
 }) {
@@ -42,7 +41,7 @@ function WalletDetails({
       tabindex="-1"
       role="dialog"
       aria-labelledby="myModalLabel2"
-      style={{ display: "block", paddingRight: "15px" }}
+      style={{ display: "block", paddingRight: "20px" }}
     >
       <div className="modal-dialog" role="document">
         <div className="modal-content">
@@ -71,10 +70,15 @@ function WalletDetails({
                 <th>Id</th>
               </tr> */}
               <ul>
-                {obtainedWalletDetails.map((detail) => {
+                {obtainedWalletDetails.map((details) => {
                   return (
                     <React.Fragment>
-                      <li>{detail.userId}</li>
+                      <li>
+                        {Object.entries(details).map(([key, value]) => {
+                          return <li>{`${key} : ${value}`}</li>;
+                        })}
+                      </li>
+                      {/* <li>{detail.userId}</li>
                       <li>{detail.transactionType}</li>
                       <li>{detail.transactionAmout}</li>
                       <li>{detail.remarks}</li>
@@ -82,7 +86,7 @@ function WalletDetails({
                       <li>{detail.transactionId}</li>
                       <li>
                         <br />
-                      </li>
+                      </li> */}
                     </React.Fragment>
                   );
                 })}
