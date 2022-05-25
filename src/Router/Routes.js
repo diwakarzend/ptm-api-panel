@@ -11,6 +11,7 @@ import BeneficiaryLoadable from "../Pages/Benificiary/BeneficiaryLoadable";
 import ReportsLoadable from "../Pages/Payout/ReportsLoadable";
 import SettingsLodable from "../Pages/Settings/SettingsLodable";
 import CommissionLoadable from "../Pages/Commission/CommissionLodable";
+import MapQR from "../Pages/MapQR/MapQR";
 
 const Routes = (props) => {
   return (
@@ -42,6 +43,7 @@ const Routes = (props) => {
           component={CommissionLoadable}
           exact
         />
+        <Route path="/mapqr" component={MapQR} exact />
       </Switch>
     </div>
   );

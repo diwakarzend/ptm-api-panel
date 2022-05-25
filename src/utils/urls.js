@@ -1,7 +1,7 @@
 export default {
   login: {
-    BASE_URL: "https://api.privepay.in:8443",
-    //"https://vendor-apiservice.pay2mobiles.com:8443",
+    // BASE_URL: "https://api.privepay.in:8443",
+    BASE_URL: "https://vendor-apiservice.pay2mobiles.com:8443",
     LOGIN_REQUEST: "/api/authenticate",
     OTP_VALIDATION: "/agent/otp/validation",
     LOGIN_OTP_RESEND: "/agent/otp/resend",
