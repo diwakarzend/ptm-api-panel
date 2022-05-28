@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from "react";
+import React from "react";
 import Pagination from "../../Components/Pagination/Pagination";
 
 const TableHTML = () => {
@@ -9,7 +9,6 @@ const TableHTML = () => {
           <tr>
             <th scope="col">Merchant ID</th>
             <th scope="col">Merchant Name</th>
-            <th scope="col">Payment Mode</th>
             <th scope="col">Store Name</th>
             <th scope="col">Created On</th>
             <th scope="col">Status</th>
@@ -20,15 +19,19 @@ const TableHTML = () => {
             <th scope="row">MUI587458R256</th>
             <td>SukhPal Singh</td>
             <td>Haveela Store</td>
-            <td>Created On</td>
-            <td>Status</td>
+            <td>24 April, 2022 | 10:30 AM</td>
+            <td>
+              <span className="active">Actve</span>
+            </td>
           </tr>
           <tr>
             <th scope="row">MUI587458R256</th>
             <td>SukhPal Singh</td>
             <td>Haveela Store</td>
-            <td>Created On</td>
-            <td>Status</td>
+            <td>24 April, 2022 | 10:30 AM</td>
+            <td>
+              <span className="inacive">Inactve</span>
+            </td>
           </tr>
         </tbody>
       </table>

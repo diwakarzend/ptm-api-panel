@@ -1,7 +1,7 @@
 export default {
   login: {
-    // BASE_URL: "https://api.privepay.in:8443",
-    BASE_URL: "https://vendor-apiservice.pay2mobiles.com:8443",
+    BASE_URL: "http://34.93.135.35:8083",
+    //BASE_URL: "https://vendor-apiservice.pay2mobiles.com:8443",
     LOGIN_REQUEST: "/api/authenticate",
     OTP_VALIDATION: "/agent/otp/validation",
     LOGIN_OTP_RESEND: "/agent/otp/resend",
@@ -71,5 +71,9 @@ export default {
 
   transactionList: {
     GET_TRANSACTION: "/api/report/admin/transactions",
+  },
+  ptp: {
+    GET_VENDOR_LISTING: "/api/ptp/vendor-details",
+    POST_VENDOR_LISTING: "/api/ptp/create-ptp",
   },
 };

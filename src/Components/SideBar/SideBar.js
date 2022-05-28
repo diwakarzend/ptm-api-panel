@@ -244,9 +244,9 @@ const SideBar = (props) => {
         )}
         <li className="menu_sub">
           <AnchorLink
-            href="/mpqr"
+            href="/mapqr"
             clicked={handleNavClick}
-            className={` ${activeSection == "/mpqr" ? " active" : ""}`}
+            className={` ${activeSection == "/mapqr" ? " active" : ""}`}
           >
             <i className="fa fa-qrcode" aria-hidden="true"></i>
             <span>MPQR</span>

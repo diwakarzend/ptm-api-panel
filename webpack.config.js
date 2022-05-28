@@ -102,15 +102,15 @@ module.exports = {
     // embed the webpack-dev-server runtime into the bundle
     // inline: true,
     // serve index.html in place of 404 responses to allow HTML5 history
-    // historyApiFallback: true,
+    historyApiFallback: true,
     port: PORT,
     host: HOST,
-    // disableHostCheck: true,
+    disableHostCheck: true,
     proxy: [
       {
         context: ["/api/**"],
         //  target:
-        target: "192.168.1.102:8081",
+        target: "http://34.93.135.35:8083/",
         secure: false,
         changeOrigin: true,
       },

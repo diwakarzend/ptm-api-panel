@@ -4,11 +4,12 @@ import React from "react";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
 import TableHTML from "./TableHTML";
+import { Wrapper } from "./style";
 //import CSVExport from "../../Components/DataExport/CSVExport";
 
 const MapQR = (props) => {
   return (
-    <div className="container_full">
+    <Wrapper className="container_full">
       <SideBar {...props} />
       <div className="content_wrapper">
         <div className="container-fluid">
@@ -19,55 +20,62 @@ const MapQR = (props) => {
                 <table className="table table-bordered">
                   <thead>
                     <tr>
-                      <th scope="col">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Transaction Id"
-                          name="txnId"
-                          // onChange={handleChange}
-                        />
+                      <th scope="col no-border">
+                        <div className="flex item-center form-control-wrap">
+                          <label>Search By</label>
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              className="form-control search"
+                              placeholder="Merchant name"
+                              name="merchant-name"
+                              // onChange={handleChange}
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text" id="basic-text1">
+                                <i
+                                  class="fa fa-search text-grey"
+                                  aria-hidden="true"
+                                ></i>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                       </th>
                       <th scope="col">
-                        <input
-                          type="number"
-                          className="form-control"
-                          placeholder="Account number"
-                          name="accountNumber"
-                          // onChange={handleChange}
-                        />
-                      </th>
-                      <th scope="col">
-                        <input
-                          type="date"
-                          className="form-control"
-                          name="date"
-                          // onChange={handleChange}
-                        />
-                      </th>
-                      <th scope="col">
-                        <div className="col-md-12">
+                        <div className="flex item-center justify-end form-control-wrap">
+                          <label>Select Filter</label>
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              className="form-control search"
+                              placeholder="Merchant ID"
+                              name="merchant-ID"
+                              // onChange={handleChange}
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text" id="basic-text1">
+                                <i
+                                  class="fa fa-search text-grey"
+                                  aria-hidden="true"
+                                ></i>
+                              </span>
+                            </div>
+                          </div>
                           <select
                             className="form-control"
-                            id="exampleFormControlSelect1"
+                            id="merchant-status"
                             name="status"
                             // onChange={handleChange}
                           >
                             <option value="">Status</option>
-                            <option value="DONE">DONE</option>
-                            <option value="INITIATED">INITIATED</option>
+                            <option value="DONE">Active</option>
+                            <option value="INITIATED">Inactive</option>
                             <option value="REJECTED">REJECTED</option>
                             <option value="PENDING">PENDING</option>
                             <option value="FAIL">FAIL</option>
                           </select>
                         </div>
-                      </th>
-                      <th scope="col">
-                        <input
-                          type="submit"
-                          className="btn-common"
-                          value="Search"
-                        />
                       </th>
                     </tr>
                   </thead>
@@ -99,7 +107,7 @@ const MapQR = (props) => {
           </section>
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

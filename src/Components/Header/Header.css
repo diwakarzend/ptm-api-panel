@@ -365,6 +365,7 @@ body {
   color: #000;
   font-weight: 700;
   cursor: pointer;
+  margin:0 auto;
 }
 .dropdown-user a.dropdown-toggle:hover {
   background: #fff;
