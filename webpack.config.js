@@ -110,7 +110,7 @@ module.exports = {
       {
         context: ["/api/**"],
         //  target:
-        target: "192.168.1.102:8081",
+        target: "http://34.93.135.35:8083",
         secure: false,
         changeOrigin: true,
       },

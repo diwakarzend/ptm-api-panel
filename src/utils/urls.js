@@ -1,6 +1,6 @@
 export default {
   login: {
-    BASE_URL: "http://localhost:8083",
+    BASE_URL: "http://34.93.135.35:8083",
     //"https://vendor-apiservice.pay2mobiles.com:8443",
     LOGIN_REQUEST: "/api/authenticate",
     OTP_VALIDATION: "/agent/otp/validation",
