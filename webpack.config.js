@@ -105,10 +105,10 @@ module.exports = {
     historyApiFallback: true,
     port: PORT,
     host: HOST,
-    disableHostCheck: true,
+    // disableHostCheck: true,
     proxy: [
       {
-        context: ["/api/**"],
+        context: ["/api/**", "/app/**"],
         //  target:
         target: "http://34.93.135.35:8083/",
         secure: false,

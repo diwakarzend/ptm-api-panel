@@ -75,5 +75,6 @@ export default {
   ptp: {
     GET_VENDOR_LISTING: "/api/ptp/vendor-details",
     POST_VENDOR_LISTING: "/api/ptp/create-ptp",
+    GET_P2P_USER_DETAILS: "/app/merchant/sender/details",
   },
 };

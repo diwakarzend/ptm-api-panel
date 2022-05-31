@@ -254,6 +254,18 @@ const SideBar = (props) => {
         </li>
         <li className="menu_sub">
           <AnchorLink
+            href="/p2p-transaction"
+            clicked={handleNavClick}
+            className={` ${
+              activeSection == "/p2p-transaction" ? " active" : ""
+            }`}
+          >
+            <i className="icon-settings"></i> <span>Settings </span>
+            <span>P2P Transaction</span>
+          </AnchorLink>
+        </li>
+        <li className="menu_sub">
+          <AnchorLink
             href="/settings"
             clicked={handleNavClick}
             className={`${activeSection == "settings" ? " open active" : ""}`}

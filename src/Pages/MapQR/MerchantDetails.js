@@ -6,7 +6,8 @@ import { Wrapper } from "./style";
 //import CSVExport from "../../Components/DataExport/CSVExport";
 
 const initPtpDto = {
-  qrDetails: "",
+  qrDetails: null,
+  vendorId: null,
   vpaId: null,
   phoneNo: null,
   dailyLimit: 0,
@@ -17,7 +18,7 @@ const MerchantDetails = (props) => {
   const [vender, SetVendor] = useState([]);
   const [controls, setControls] = useState({
     vendorId: null,
-    ptpDto: [{ ...initPtpDto }],
+    qrDataList: [{ ...initPtpDto }],
   });
   useEffect(() => {
     const params = { pageNo: 1, pageSize: 100 };
@@ -30,20 +31,16 @@ const MerchantDetails = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postVendorListing(controls.ptpDto).then((res) => {
+    const params = {
+      userUUID: "",
+      qrDataList: controls.qrDataList,
+    };
+    postVendorListing(params).then((res) => {
       if (res?.data && res?.data?.data) {
         SetVendor(res?.data?.data);
         console.log("res = ", res);
       }
     });
-  };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const updateControls = {
-      ...controls,
-      [name]: value,
-    };
-    setControls(updateControls);
   };
 
   const dtoChangeHandler = (e, i) => {
@@ -51,7 +48,7 @@ const MerchantDetails = (props) => {
     const updateControls = {
       ...controls,
     };
-    updateControls.ptpDto[i][name] = value;
+    updateControls.qrDataList[i][name] = value;
     setControls(updateControls);
   };
 
@@ -59,7 +56,7 @@ const MerchantDetails = (props) => {
     const updateControls = {
       ...controls,
     };
-    updateControls.ptpDto.push({ ...initPtpDto });
+    updateControls.qrDataList.push({ ...initPtpDto });
     setControls(updateControls);
   };
 
@@ -67,7 +64,7 @@ const MerchantDetails = (props) => {
     const updateControls = {
       ...controls,
     };
-    updateControls.ptpDto.splice(i, 1);
+    updateControls.qrDataList.splice(i, 1);
     setControls(updateControls);
   };
   console.log("controls = ", controls);
@@ -77,7 +74,7 @@ const MerchantDetails = (props) => {
       <SideBar {...props} />
       <div className="content_wrapper">
         <div className="container-fluid">
-          <BreadCrumb heading="Merchant List" value="Merchant List" />
+          <BreadCrumb heading="Map QR" value="mapqr" />
           <section className="chart_section">
             <div className="card card-shadow mb-4">
               <div className="card-body">
@@ -97,27 +94,11 @@ const MerchantDetails = (props) => {
                       <div className="value">Radhe Radhe store</div>
                     </div>
                   </div>
-                  <div className="flex mapping-dtails row">
-                    <div className="col-4">
-                      <select
-                        className="form-control"
-                        name="vendorId"
-                        onChange={handleChange}
-                      >
-                        <option value="">Select Vendor</option>
-                        {vender.map((option) => (
-                          <option value={option?.id}>
-                            {option?.brandName}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
                   <h3>Mapping Details</h3>
-                  {controls.ptpDto.map((dto, i) => (
+                  {controls.qrDataList.map((dto, i) => (
                     <>
                       <div className="flex mapping-dtails row">
-                        <div className="col">
+                        <div className="col-4">
                           <input
                             type="text"
                             className="form-control search"
@@ -127,7 +108,23 @@ const MerchantDetails = (props) => {
                             onChange={(e) => dtoChangeHandler(e, i)}
                           />
                         </div>
-                        <div className="col">
+                        <div className="col-4">
+                          <div className="col-4">
+                            <select
+                              className="form-control"
+                              name="vendorId"
+                              onChange={(e) => dtoChangeHandler(e, i)}
+                            >
+                              <option value="">Select Vendor</option>
+                              {vender.map((option) => (
+                                <option value={option?.id}>
+                                  {option?.brandName}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                        <div className="col-4">
                           <input
                             type="text"
                             className="form-control"
