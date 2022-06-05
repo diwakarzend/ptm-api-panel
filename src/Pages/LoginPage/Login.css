@@ -110,7 +110,7 @@ input:not(:focus):valid ~ .floating-label {
   background: url(https://storage.googleapis.com/ptm-assets-prod/banner/banner.jpg);
   background-size: contain;
   background-position: center;
-  height: 70%;
+  height: 100%;
   background-repeat: no-repeat;
 }
 
