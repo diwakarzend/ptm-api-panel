@@ -2,7 +2,7 @@ import axios from "axios";
 import moment from "moment";
 export function timeout(func, time, dispatch) {
   setTimeout(
-    function () {
+    function() {
       if (dispatch == null) func();
       else {
         dispatch(func());
@@ -37,7 +37,9 @@ export function getDateInFormat(dateInString, dateFormat) {
   if (isEmpty(dateInString)) {
     return null;
   }
-  var temp = moment(dateInString).format(dateFormat).split(" ");
+  var temp = moment(dateInString)
+    .format(dateFormat)
+    .split(" ");
   return temp[0];
 }
 
@@ -335,8 +337,7 @@ export function checkValidity(value, rules) {
   }
 
   if (rules.isEmail && !isEmpty(value)) {
-    const pattern =
-      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     isValid = pattern.test(value) && isValid;
   }
 
@@ -391,7 +392,7 @@ export function checkValidity(value, rules) {
 }
 
 export function loadScript(src) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function(resolve, reject) {
     let script = document.createElement("script");
     script.src = src;
     script.onload = () => resolve(script);
@@ -456,3 +457,16 @@ export function hideMessage(message, setMessage) {
     }, 3000);
   }
 }
+
+export const convertBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
+};
