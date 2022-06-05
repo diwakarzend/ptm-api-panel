@@ -70,12 +70,14 @@ class Request {
         const headers = getObjectValue(response, "headers", null);
         const isSuccess = true;
         this.successFn(data, headers, isSuccess);
+        return response;
       })
       .catch((error) => {
         const data = getObjectValue(error, "response.data", null);
         const headers = getObjectValue(error, "response.headers", null);
         const status = getObjectValue(error, "response.status", null);
         this.errorFn(data, headers, status);
+        return error;
       });
   }
 
@@ -103,12 +105,14 @@ class Request {
         const headers = getObjectValue(response, "headers", null);
         const isSuccess = true;
         this.successFn(data, headers, isSuccess);
+        return response;
       })
       .catch((error) => {
         const data = getObjectValue(error, "response.data", null);
         const headers = getObjectValue(error, "response.headers", null);
         const status = getObjectValue(error, "response.status", null);
         this.errorFn(data, headers, status);
+        return error;
       });
   }
 
@@ -124,11 +128,13 @@ class Request {
       .then((response) => {
         const data = getObjectValue(response, "data", null);
         this.successFn(data);
+        return response;
       })
       .catch((error) => {
         const data = getObjectValue(response, "data", null);
 
         this.errorFn(data);
+        return error;
       });
   }
 }
