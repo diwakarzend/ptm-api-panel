@@ -16,7 +16,9 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
         pageSize: 10,
       },
     };
+    
     getP2pUserListing(params).then((res) => {
+      console.log("response come",res);
       setReportsItems(res?.data?.data?.content);
     });
   }, []);
