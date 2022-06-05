@@ -13,12 +13,10 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
       date: "2022-05-29",
       pagination: {
         pageNo: 1,
-        pageSize: 10,
+        pageSize: 500,
       },
     };
-    
     getP2pUserListing(params).then((res) => {
-      console.log("response come",res);
       setReportsItems(res?.data?.data?.content);
     });
   }, []);

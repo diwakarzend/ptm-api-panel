@@ -16,16 +16,13 @@ const TableHTML = memo(
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">DateTime</th>
+                <th scope="col">UTR Number</th>
                 <th scope="col">Payment Mode</th>
-                <th scope="col">API Route</th>
                 <th scope="col">Transaction Details</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Beneficiary</th>
-                <th scope="col">Wallet Balance</th>
-                <th scope="col">Service Charges</th>
-                <th scope="col">Status</th>
-                <th>Action</th>
+                <th scope="col">Receiver Name</th>
+                <th scope="col">Receiver UPI</th>
+                <th scope="col">status</th>
               </tr>
             </thead>
             <tbody>
@@ -39,27 +36,15 @@ const TableHTML = memo(
                     return (
                       <tr key={item.transactionRefId}>
                         <th scope="row">{index + 1}</th>
-                        <td>{`${item?.transactionDate} ${item?.transactionTime}`}</td>
-                        <td>{item.transactionType}</td>
-                        <td>{item?.merchantCode}</td>
+                        <td>{item?.utrNumber}</td>
+                        <td>{item?.transactionType}</td>
 
                         <td>{item?.transactionRefId}</td>
                         <td>&#8377;{item?.amount}</td>
-
-                        <td>{item?.senderUpi}</td>
-
-                        <td>
-                          <td>{item?.senderUpi}</td>
-                        </td>
-
+                        <td>{item?.receiverName}</td>
+                        <td>{item?.receiverUpi}</td>
                         <td className={item?.status?.toLowerCase()}>
-                          {item.status}
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => {}}
-                            className="quick-payment-btn "
-                          ></button>
+                          {item?.status}
                         </td>
                       </tr>
                     );
