@@ -12,6 +12,7 @@ import ReportsLoadable from "../Pages/Payout/ReportsLoadable";
 import SettingsLodable from "../Pages/Settings/SettingsLodable";
 import CommissionLoadable from "../Pages/Commission/CommissionLodable";
 import MapQRPageLoadable from "../Pages/MapQR/MapqrLoadable";
+import MapQRListLoadable from "../Pages/MapQR/MapQRListLoadable";
 import P2PLoadable from "../Pages/P2PTransaction/P2PLoadable";
 
 const Routes = (props) => {
@@ -45,7 +46,8 @@ const Routes = (props) => {
           exact
         />
         <PrivateRoute path="/p2p-transaction" component={P2PLoadable} exact />
-        <PrivateRoute path="/mapqr" component={MapQRPageLoadable} exact />
+        <PrivateRoute path="/mapqr-list" component={MapQRListLoadable} exact />
+        <PrivateRoute path="/mapqr-add" component={MapQRPageLoadable} exact />
       </Switch>
     </div>
   );

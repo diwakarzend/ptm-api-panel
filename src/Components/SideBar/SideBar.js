@@ -41,6 +41,7 @@ const SideBar = (props) => {
   const [toggleAmount, setToggleAmount] = useState(false);
   const [toggleAPI, setToggleAPI] = useState(false);
   const [activeSection, setActiveSection] = useState("dashboard");
+  const [toggleMapqr, setToggleMapqr] = useState(false);
   let location = useLocation();
   const pathname = location.pathname;
 
@@ -242,6 +243,46 @@ const SideBar = (props) => {
             </AnchorLink>
           </li>
         )}
+        <li className="menu_sub">
+          <a
+            onClick={() => {
+              setToggleMapqr(!toggleMapqr);
+              setToggleCompany(false);
+              setTogglePayment(false);
+              setToggleAmount(false);
+            }}
+          >
+            <i className="icon-people"></i> <span>Map Vendor QR</span>
+            <span className="icon-arrow-down styleicon"></span>
+          </a>
+
+          <ul
+            className={
+              toggleMapqr || ["mapqr-list", "mapqr-add"].includes(activeSection)
+                ? "down_menu open"
+                : "down_menu"
+            }
+          >
+            <li>
+              <AnchorLink
+                href="/mapqr-list"
+                clicked={handleNavClick}
+                className={activeSection == "mapqr-list" ? "active" : ""}
+              >
+                Listing
+              </AnchorLink>
+            </li>
+            <li>
+              <AnchorLink
+                href="/mapqr-add"
+                clicked={handleNavClick}
+                className={activeSection == "mapqr-add" ? "active" : ""}
+              >
+                Add
+              </AnchorLink>
+            </li>
+          </ul>
+        </li>
         <li className="menu_sub">
           <AnchorLink
             href="/mapqr"

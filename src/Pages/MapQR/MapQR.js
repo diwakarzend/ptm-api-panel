@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 //import { connect } from "react-redux";
 //import { fetchTransactionReport } from "../../actions/payout";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
 import TableHTML from "./TableHTML";
 import { Wrapper } from "./style";
+import { getMapqrListing } from "../../utils/api";
 //import CSVExport from "../../Components/DataExport/CSVExport";
 
 const MapQR = (props) => {
+  const [listData, setListData] = useState([]);
+  useEffect(() => {
+    getMapqrListing({ pageNo: 1, pageSize: 100 }).then((res) => {
+      console.log("result", res);
+    });
+  }, []);
   return (
     <Wrapper className="container_full">
       <SideBar {...props} />
