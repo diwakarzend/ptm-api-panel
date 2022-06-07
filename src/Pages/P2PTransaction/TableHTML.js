@@ -1,13 +1,26 @@
-import React, { Fragment, memo } from "react";
+import React, { Fragment, memo, useState } from "react";
+import P2PModal from "./P2PModal";
+import { addOverlay, removeOverlay } from "../../utils/common";
 import Pagination from "../../Components/Pagination/Pagination";
 
 const TableHTML = memo(
   ({ reportsItems, filterItems, pagingData, dispatch }) => {
+    const [modal, setModal] = useState({ status: false, data: null });
     const reportsDataAvailable =
       (reportsItems &&
         Array.isArray(reportsItems) &&
         reportsItems.length > 0) ||
       "";
+
+    const closePopUpHandler = () => {
+      removeOverlay();
+      setModal({ status: false, data: null });
+    };
+
+    const openPopupHandler = (data) => {
+      addOverlay();
+      setModal({ status: true, data });
+    };
 
     return (
       <div className="card-body">
@@ -22,19 +35,15 @@ const TableHTML = memo(
                 <th scope="col">Amount</th>
                 <th scope="col">Receiver Name</th>
                 <th scope="col">Receiver UPI</th>
-                <th scope="col">status</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {reportsDataAvailable
                 ? reportsItems.map((item, index) => {
-                    let gst = "";
-                    if (item.payoutChanrge) {
-                      gst = (item.payoutChanrge * 18) / 100;
-                      gst = gst.toFixed(2);
-                    }
                     return (
-                      <tr key={item.transactionRefId}>
+                      <tr key={index}>
                         <th scope="row">{index + 1}</th>
                         <td>{item?.utrNumber}</td>
                         <td>{item?.transactionType}</td>
@@ -45,6 +54,11 @@ const TableHTML = memo(
                         <td>{item?.receiverUpi}</td>
                         <td className={item?.status?.toLowerCase()}>
                           {item?.status}
+                        </td>
+                        <td>
+                          <span onClick={() => openPopupHandler(item)}>
+                            <i className="icon-eye" title="update user" />
+                          </span>
                         </td>
                       </tr>
                     );
@@ -62,6 +76,12 @@ const TableHTML = memo(
           <div>
             <Pagination pagingData={pagingData} dispatch={dispatch} />
           </div>
+        )}
+        {modal?.status && (
+          <P2PModal
+            modalData={modal?.data}
+            closePopUpHandler={closePopUpHandler}
+          />
         )}
       </div>
     );

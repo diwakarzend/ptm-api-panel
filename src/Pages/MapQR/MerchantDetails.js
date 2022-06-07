@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getVendorListing, postVendorListing } from "../../utils/api";
+import {
+  getVendorListing,
+  postVendorListing,
+  getUserDetails,
+} from "../../utils/api";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
 import { Wrapper } from "./style";
@@ -19,6 +23,8 @@ const MerchantDetails = (props) => {
   const [vender, SetVendor] = useState([]);
   const [controls, setControls] = useState([{ ...initPtpDto }]);
   const [message, setMessage] = useState({ type: "", text: "" });
+  const [user, setUser] = useState([]);
+
   useEffect(() => {
     const params = { pageNo: 1, pageSize: 100 };
     getVendorListing(params).then((res) => {
@@ -34,6 +40,14 @@ const MerchantDetails = (props) => {
       // setControls([{ ...initPtpDto }]);
     }, 5000);
   }, [message?.type]);
+
+  // user Details
+  useEffect(() => {
+    getUserDetails().then((res) => {
+      setUser(res?.data?.data);
+      console.log("result", res);
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,16 +110,24 @@ const MerchantDetails = (props) => {
                   <h3>Merchant Details</h3>
                   <div className="flex mercahnt-details row">
                     <div className="col">
-                      <div className="label-name">Merchant Name</div>
-                      <div className="value">Sukhpal Singh</div>
+                      <div className="label-name">Brand Name</div>
+                      <div className="value">{user?.brnadName}</div>
                     </div>
                     <div className="col">
-                      <div className="label-name">Merchant ID</div>
-                      <div className="value">MUI587458R256</div>
+                      <div className="label-name">GST No.</div>
+                      <div className="value">{user?.gstNo}</div>
                     </div>
                     <div className="col">
-                      <div className="label-name">Store Name</div>
-                      <div className="value">Radhe Radhe store</div>
+                      <div className="label-name">Address</div>
+                      <div className="value">{user?.registerAddress}</div>
+                    </div>
+                    <div className="col">
+                      <div className="label-name">Company</div>
+                      <div className="value">{user?.registerCompany}</div>
+                    </div>
+                    <div className="col">
+                      <div className="label-name">Website</div>
+                      <div className="value">{user?.website}</div>
                     </div>
                   </div>
                   <h3>

@@ -65,9 +65,6 @@ export const Wrapper = styled.div`
   .value {
     font-weight: 700;
   }
-  .mercahnt-details {
-    max-width: 650px;
-  }
   .mercahnt-details,
   .mapping-dtails {
     margin-bottom: 30px;
@@ -138,5 +135,8 @@ export const Wrapper = styled.div`
       height: 100%;
       opacity: 0;
     }
+  }
+  .center {
+    text-align: center;
   }
 `;

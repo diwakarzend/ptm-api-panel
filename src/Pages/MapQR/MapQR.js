@@ -12,9 +12,10 @@ const MapQR = (props) => {
   const [listData, setListData] = useState([]);
   useEffect(() => {
     getMapqrListing({ pageNo: 1, pageSize: 100 }).then((res) => {
-      console.log("result", res);
+      setListData(res?.data?.data);
     });
   }, []);
+  console.log("result", listData);
   return (
     <Wrapper className="container_full">
       <SideBar {...props} />
@@ -109,7 +110,7 @@ const MapQR = (props) => {
                   </div>
                 </div>
               </div>
-              <TableHTML />
+              <TableHTML listData={listData} />
             </div>
           </section>
         </div>

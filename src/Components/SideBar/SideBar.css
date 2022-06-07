@@ -64,6 +64,8 @@
 .sidebar-menu {
   margin: 0px;
   padding: 0px 15px;
+  height: calc(100vh - 162px);
+  overflow: auto;
 }
 .sidebar-menu li .badge {
   color: #fff !important;

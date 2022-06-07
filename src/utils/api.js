@@ -33,3 +33,8 @@ export const getMapqrListing = (params) => {
     params
   );
 };
+
+export const getUserDetails = () => {
+  console.log("inside user");
+  return apiRequest.get(`${urls.login.BASE_URL + urls.user.GET_USER_DETAILS}`);
+};

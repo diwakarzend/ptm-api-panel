@@ -77,4 +77,7 @@ export default {
     GET_P2P_USER_DETAILS: "/api/merchant/sender/details",
     GET_MAPQR_LISTING: "/api/ptp/ptp-details",
   },
+  user: {
+    GET_USER_DETAILS: "/api/user/financial-details",
+  },
 };
