@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   .flex {
     display: flex;
     gap: 20px;
+    margin-bottom: 10px;
   }
   .label-name {
     font-weight: bold;

@@ -15,7 +15,7 @@ const TableHTML = ({ listData = [] }) => {
           </tr>
         </thead>
         <tbody>
-          {listData && listData.lengths > 0 ? (
+          {listData && listData.length > 0 ? (
             listData.map((item, index) => (
               <tr key={index}>
                 <td>{item?.id}</td>

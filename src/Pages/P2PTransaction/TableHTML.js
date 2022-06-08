@@ -56,8 +56,11 @@ const TableHTML = memo(
                           {item?.status}
                         </td>
                         <td>
-                          <span onClick={() => openPopupHandler(item)}>
-                            <i className="icon-eye" title="update user" />
+                          <span
+                            className="cursor-pointer"
+                            onClick={() => openPopupHandler(item)}
+                          >
+                            <i className="icon-eye" />
                           </span>
                         </td>
                       </tr>
