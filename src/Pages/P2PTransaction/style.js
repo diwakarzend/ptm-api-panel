@@ -13,4 +13,7 @@ export const Wrapper = styled.div`
   h5 {
     margin: 0;
   }
+  .cursor-pointer {
+    cursor: pointer;
+  }
 `;

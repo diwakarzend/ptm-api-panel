@@ -25,6 +25,7 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
   return (
     <div className="container_full">
       <SideBar {...props} />

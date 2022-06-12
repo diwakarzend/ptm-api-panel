@@ -2,7 +2,7 @@ import React, { Fragment, memo, useState } from "react";
 import P2PModal from "./P2PModal";
 import { addOverlay, removeOverlay } from "../../utils/common";
 import Pagination from "../../Components/Pagination/Pagination";
-
+import { Wrapper } from "./style";
 const TableHTML = memo(
   ({ reportsItems, filterItems, pagingData, dispatch }) => {
     const [modal, setModal] = useState({ status: false, data: null });
@@ -23,14 +23,14 @@ const TableHTML = memo(
     };
 
     return (
-      <div className="card-body">
+      <Wrapper className="card-body">
         {reportsDataAvailable ? (
           <table className="table table-bordered">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">UTR Number</th>
-                <th scope="col">Payment Mode</th>
+                <th scope="col">Date and Time</th>
                 <th scope="col">Transaction Details</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Receiver Name</th>
@@ -46,7 +46,9 @@ const TableHTML = memo(
                       <tr key={index}>
                         <th scope="row">{index + 1}</th>
                         <td>{item?.utrNumber}</td>
-                        <td>{item?.transactionType}</td>
+                        <td>
+                          {item?.transactionDate} {item?.transactionTime}
+                        </td>
 
                         <td>{item?.transactionRefId}</td>
                         <td>&#8377;{item?.amount}</td>
@@ -86,7 +88,7 @@ const TableHTML = memo(
             closePopUpHandler={closePopUpHandler}
           />
         )}
-      </div>
+      </Wrapper>
     );
   }
 );

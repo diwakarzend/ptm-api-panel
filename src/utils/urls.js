@@ -79,5 +79,6 @@ export default {
   },
   user: {
     GET_USER_DETAILS: "/api/user/financial-details",
+    GET_VENDOR_DETAILS: "/api/users?pageSize=100",
   },
 };

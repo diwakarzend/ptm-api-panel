@@ -38,3 +38,10 @@ export const getUserDetails = () => {
   console.log("inside user");
   return apiRequest.get(`${urls.login.BASE_URL + urls.user.GET_USER_DETAILS}`);
 };
+
+export const getVendorDetails = () => {
+  console.log("inside user");
+  return apiRequest.get(
+    `${urls.login.BASE_URL + urls.user.GET_VENDOR_DETAILS}`
+  );
+};

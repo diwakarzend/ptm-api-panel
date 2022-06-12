@@ -1,33 +1,45 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Pagination from "../../Components/Pagination/Pagination";
-
 const TableHTML = ({ listData = [] }) => {
   return (
     <div className="card-body">
       <table className="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">User UUID</th>
-            <th scope="col">Vendor Id</th>
-            <th scope="col">VPA Id</th>
-            <th scope="col">Phone No</th>
+            <th>Id</th>
+            <th>Company Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Balance</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {listData && listData.length > 0 ? (
-            listData.map((item, index) => (
-              <tr key={index}>
-                <td>{item?.id}</td>
-                <td>{item?.userUUID}</td>
-                <td>{item?.vendorId}</td>
-                <td>{item?.vpaId}</td>
-                <td>{item?.phoneNo}</td>
-              </tr>
-            ))
+            listData
+              .filter((item) => item.role === "PTM_VENDOR")
+              .map((item, index) => (
+                <tr key={item.userName}>
+                  <td>{index + 1}</td>
+                  <td>{`${item.firstName} ${item.lastName}`}</td>
+                  <td>{item.userName}</td>
+                  <td>{item.email}</td>
+                  <td className="vendor">
+                    {item.role.replace("PTM_VENDOR", "Vendor")}
+                  </td>
+                  <td>{item.userBalance}</td>
+                  <td>
+                    <Link to="vendor-list" className="cursor-pointer">
+                      <i className="icon-eye" />
+                    </Link>
+                  </td>
+                </tr>
+              ))
           ) : (
             <tr>
-              <td colSpan={5} className="center">
+              <td colSpan={7} className="center">
                 No data found
               </td>
             </tr>

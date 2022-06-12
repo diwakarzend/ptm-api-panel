@@ -139,4 +139,7 @@ export const Wrapper = styled.div`
   .center {
     text-align: center;
   }
+  .cursor-pointer {
+    cursor: pointer;
+  }
 `;
