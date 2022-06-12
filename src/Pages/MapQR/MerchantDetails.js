@@ -3,7 +3,9 @@ import {
   getVendorListing,
   postVendorListing,
   getUserDetails,
+  uploadMapqrRequest,
 } from "../../utils/api";
+import imagePlaceholder from "../../assests/images/gallery.png";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
 import { Wrapper } from "./style";
@@ -17,6 +19,8 @@ const initPtpDto = {
   phoneNo: null,
   dailyLimit: 0,
   totalLimit: 0,
+  s3Path: "",
+  fileName: "",
 };
 
 const MerchantDetails = (props) => {
@@ -91,10 +95,18 @@ const MerchantDetails = (props) => {
 
   const handleFileRead = async (event, i) => {
     const file = event.target.files[0];
-    const base64 = await convertBase64(file);
-    const updateControls = JSON.parse(JSON.stringify(controls));
-    updateControls[i][event.target.name] = base64;
-    setControls(updateControls);
+    const params = new FormData();
+    params.append("file", file);
+    uploadMapqrRequest(params).then((res) => {
+      console.log("res = > ", res);
+      const updateControls = JSON.parse(JSON.stringify(controls));
+      if (res?.data) {
+        updateControls[i][event.target.name] = res?.data?.downloadUri || "";
+        updateControls[i].s3Path = res?.data?.s3Path || "";
+        updateControls[i].fileName = res?.data?.fileName || "";
+      }
+      setControls(updateControls);
+    });
   };
 
   return (
@@ -141,38 +153,29 @@ const MerchantDetails = (props) => {
                       <div className="flex mapping-dtails row">
                         <div className="QR-wrap col-6">
                           <div className="QR-Image">
+                            <img
+                              src={
+                                dto?.s3Path
+                                  ? dto?.s3Path + dto?.fileName
+                                  : imagePlaceholder
+                              }
+                              alt=""
+                            />
                             <div className="upload">
                               <i class="fa fa-upload" aria-hidden="true"></i>
                               <div className="upload-here">
                                 Upload QR code here
                               </div>
-                              <input
-                                type="file"
-                                placeholder="Upload QR Code"
-                                name="qrDetails"
-                                onChange={(e) => handleFileRead(e, i)}
-                              />
                             </div>
+                            <input
+                              type="file"
+                              placeholder="Upload QR Code"
+                              name="qrDetails"
+                              onChange={(e) => handleFileRead(e, i)}
+                            />
                           </div>
                         </div>
                         <div className="col-6">
-                          <div className="col-12">
-                            <div className="form-group">
-                              <div className="file-control-wrapper">
-                                <input
-                                  type="file"
-                                  placeholder="Upload QR Code"
-                                  name="qrDetails"
-                                  onChange={(e) => handleFileRead(e, i)}
-                                />
-                                <input
-                                  className="form-control search"
-                                  placeholder="Upload QR Code"
-                                  value={dto?.qrDetails}
-                                />
-                              </div>
-                            </div>
-                          </div>
                           <div className="col-12">
                             <div className="form-group">
                               <select

@@ -147,14 +147,9 @@ export const Wrapper = styled.div`
     border: 1px solid rgba(0, 0, 0, 0.125);
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .upload {
-    text-align: center;
-    .fa-upload {
-      font-size: 36px;
-    }
     input[type="file"] {
       position: absolute;
       left: 0;
@@ -163,6 +158,24 @@ export const Wrapper = styled.div`
       height: 100%;
       opacity: 0;
       cursor: pointer;
+    }
+  }
+  .upload {
+    text-align: center;
+    .fa-upload {
+      font-size: 36px;
+    }
+  }
+  .qr-pic {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    img {
+      max-width: 100%;
+      max-height: 100%;
     }
   }
   .center {

@@ -31,7 +31,10 @@ const TableHTML = ({ listData = [] }) => {
                   </td>
                   <td>{item.userBalance}</td>
                   <td>
-                    <Link to="vendor-list" className="cursor-pointer">
+                    <Link
+                      to={`vendor-list?uuid=${item.uuid || "1"}`}
+                      className="cursor-pointer"
+                    >
                       <i className="icon-eye" />
                     </Link>
                   </td>

@@ -76,6 +76,7 @@ export default {
     POST_VENDOR_LISTING: "/api/ptp/create-ptp",
     GET_P2P_USER_DETAILS: "/api/merchant/sender/details",
     GET_MAPQR_LISTING: "/api/ptp/ptp-details",
+    UPLOAD_MAPQR_REQUEST: "/api/ptp/uploadQRCode",
   },
   user: {
     GET_USER_DETAILS: "/api/user/financial-details",

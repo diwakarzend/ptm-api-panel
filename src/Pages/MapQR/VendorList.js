@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 //import { connect } from "react-redux";
 //import { fetchTransactionReport } from "../../actions/payout";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
@@ -7,15 +7,25 @@ import SideBar from "../../Components/SideBar/SideBar";
 import VendorTableHTML from "./VendorTableHTML";
 import { Wrapper } from "./style";
 import { getVendorDetailsByID } from "../../utils/api";
+import { getQueryParams } from "../../utils/common";
 //import CSVExport from "../../Components/DataExport/CSVExport";
 
 const VendorList = (props) => {
   const [vendorData, setvendorData] = useState([]);
+  const location = useLocation();
+  console.log("aaaaaaaa", query);
   useEffect(() => {
-    getVendorDetailsByID({ pageNo: 1, pageSize: 100 }).then((res) => {
-      setvendorData(res?.data?.data);
-    });
-  }, []);
+    if (location?.search) {
+      let queryParams = getQueryParams(location?.search);
+      getVendorDetailsByID({
+        pageNo: 1,
+        pageSize: 100,
+        uuid: queryParams?.uuid,
+      }).then((res) => {
+        setvendorData(res?.data?.data);
+      });
+    }
+  }, [location]);
 
   return (
     <Wrapper className="container_full">

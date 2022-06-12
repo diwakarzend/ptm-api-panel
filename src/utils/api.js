@@ -46,8 +46,17 @@ export const getMapqrListing = () => {
   );
 };
 
-export const getVendorDetailsByID = (byID = "") => {
+export const getVendorDetailsByID = (params) => {
   return apiRequest.get(
-    `${urls.login.BASE_URL + urls.ptp.GET_MAPQR_LISTING}/${byID}`
+    `${urls.login.BASE_URL + urls.ptp.GET_MAPQR_LISTING}/${
+      params.uuid
+    }?pageNo=${params.pageNo}&pageSize=${params.pageNo}`
+  );
+};
+
+export const uploadMapqrRequest = (params) => {
+  return apiRequest.post(
+    `${urls.login.BASE_URL + urls.ptp.UPLOAD_MAPQR_REQUEST}`,
+    params
   );
 };
