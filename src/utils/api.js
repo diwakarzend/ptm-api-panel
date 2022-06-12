@@ -27,7 +27,7 @@ export const getP2pUserListing = (params) => {
   );
 };
 
-export const getMapqrListing = (params) => {
+export const getVendorDetails = (params) => {
   return apiRequest.get(
     `${urls.login.BASE_URL + urls.ptp.GET_MAPQR_LISTING}`,
     params
@@ -39,9 +39,15 @@ export const getUserDetails = () => {
   return apiRequest.get(`${urls.login.BASE_URL + urls.user.GET_USER_DETAILS}`);
 };
 
-export const getVendorDetails = () => {
+export const getMapqrListing = () => {
   console.log("inside user");
   return apiRequest.get(
     `${urls.login.BASE_URL + urls.user.GET_VENDOR_DETAILS}`
+  );
+};
+
+export const getVendorDetailsByID = (byID = "") => {
+  return apiRequest.get(
+    `${urls.login.BASE_URL + urls.ptp.GET_MAPQR_LISTING}/${byID}`
   );
 };

@@ -113,7 +113,7 @@ const MerchantDetails = (props) => {
                       <div className="label-name">Brand Name</div>
                       <div className="value">{user?.brnadName}</div>
                     </div>
-                    <div className="col">
+                    <div className="col-3">
                       <div className="label-name">GST No.</div>
                       <div className="value">{user?.gstNo}</div>
                     </div>
@@ -121,7 +121,7 @@ const MerchantDetails = (props) => {
                       <div className="label-name">Address</div>
                       <div className="value">{user?.registerAddress}</div>
                     </div>
-                    <div className="col">
+                    <div className="col-3">
                       <div className="label-name">Company</div>
                       <div className="value">{user?.registerCompany}</div>
                     </div>
@@ -139,85 +139,103 @@ const MerchantDetails = (props) => {
                   {controls.map((dto, i) => (
                     <>
                       <div className="flex mapping-dtails row">
-                        <div className="col-4">
-                          <div className="form-group">
-                            <div className="file-control-wrapper">
+                        <div className="QR-wrap col-6">
+                          <div className="QR-Image">
+                            <div className="upload">
+                              <i class="fa fa-upload" aria-hidden="true"></i>
+                              <div className="upload-here">
+                                Upload QR code here
+                              </div>
                               <input
                                 type="file"
                                 placeholder="Upload QR Code"
                                 name="qrDetails"
                                 onChange={(e) => handleFileRead(e, i)}
                               />
-                              <input
-                                className="form-control search"
-                                placeholder="Upload QR Code"
-                                value={dto?.qrDetails}
-                              />
                             </div>
                           </div>
                         </div>
-                        <div className="col-4">
-                          <div className="form-group">
-                            <select
-                              className="form-control"
-                              name="vendorId"
-                              onChange={(e) => dtoChangeHandler(e, i)}
-                            >
-                              <option value="">Select Vendor</option>
-                              {vender.map((option) => (
-                                <option value={option?.id}>
-                                  {option?.brandName}
-                                </option>
-                              ))}
-                            </select>
+                        <div className="col-6">
+                          <div className="col-12">
+                            <div className="form-group">
+                              <div className="file-control-wrapper">
+                                <input
+                                  type="file"
+                                  placeholder="Upload QR Code"
+                                  name="qrDetails"
+                                  onChange={(e) => handleFileRead(e, i)}
+                                />
+                                <input
+                                  className="form-control search"
+                                  placeholder="Upload QR Code"
+                                  value={dto?.qrDetails}
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-4">
-                          <div className="form-group">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="VPA ID"
-                              name="vpaId"
-                              value={dto?.vpaId}
-                              onChange={(e) => dtoChangeHandler(e, i)}
-                            />
+                          <div className="col-12">
+                            <div className="form-group">
+                              <select
+                                className="form-control"
+                                name="vendorId"
+                                onChange={(e) => dtoChangeHandler(e, i)}
+                              >
+                                <option value="">Select Vendor</option>
+                                {vender.map((option) => (
+                                  <option value={option?.id}>
+                                    {option?.brandName}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-4">
-                          <div className="form-group">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Phone No."
-                              name="phoneNo"
-                              value={dto?.phoneNo}
-                              onChange={(e) => dtoChangeHandler(e, i)}
-                            />
+                          <div className="col-12">
+                            <div className="form-group">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="VPA ID"
+                                name="vpaId"
+                                value={dto?.vpaId}
+                                onChange={(e) => dtoChangeHandler(e, i)}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Daily Limit"
-                              name="dailyLimit"
-                              value={dto?.dailyLimit}
-                              onChange={(e) => dtoChangeHandler(e, i)}
-                            />
+                          <div className="col-12">
+                            <div className="form-group">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Phone No."
+                                name="phoneNo"
+                                value={dto?.phoneNo}
+                                onChange={(e) => dtoChangeHandler(e, i)}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className="col">
-                          <div className="form-group">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Total Limit."
-                              name="totalLimit"
-                              value={dto?.totalLimit}
-                              onChange={(e) => dtoChangeHandler(e, i)}
-                            />
+                          <div className="col-12">
+                            <div className="form-group">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Daily Limit"
+                                name="dailyLimit"
+                                value={dto?.dailyLimit}
+                                onChange={(e) => dtoChangeHandler(e, i)}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-12">
+                            <div className="form-group">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Total Limit."
+                                name="totalLimit"
+                                value={dto?.totalLimit}
+                                onChange={(e) => dtoChangeHandler(e, i)}
+                              />
+                            </div>
                           </div>
                         </div>
                         <div className="remove-it">

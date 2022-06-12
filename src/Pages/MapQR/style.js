@@ -100,7 +100,7 @@ export const Wrapper = styled.div`
   }
   .addmore-btn-wrap {
     margin-bottom: 40px;
-    margin-top: -50px;
+    margin-top: -30px;
     display: flex;
     align-items: center;
     .btn {
@@ -127,6 +127,7 @@ export const Wrapper = styled.div`
   }
   .file-control-wrapper {
     position: relative;
+    z-index: 2;
     input[type="file"] {
       position: absolute;
       left: 0;
@@ -134,6 +135,34 @@ export const Wrapper = styled.div`
       width: 100%;
       height: 100%;
       opacity: 0;
+    }
+  }
+  .QR-wrap {
+    padding-bottom: 1rem;
+  }
+  .QR-Image {
+    height: 100%;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .upload {
+    text-align: center;
+    .fa-upload {
+      font-size: 36px;
+    }
+    input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
     }
   }
   .center {
