@@ -13,7 +13,6 @@ import { getQueryParams } from "../../utils/common";
 const VendorList = (props) => {
   const [vendorData, setvendorData] = useState([]);
   const location = useLocation();
-  console.log("aaaaaaaa", query);
   useEffect(() => {
     if (location?.search) {
       let queryParams = getQueryParams(location?.search);

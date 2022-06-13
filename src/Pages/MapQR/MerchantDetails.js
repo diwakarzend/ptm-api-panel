@@ -103,7 +103,7 @@ const MerchantDetails = (props) => {
       if (res?.data) {
         updateControls[i][event.target.name] = res?.data?.downloadUri || "";
         updateControls[i].s3Path = res?.data?.s3Path || "";
-        updateControls[i].fileName = res?.data?.fileName || "";
+        updateControls[i].fileName = res?.data || "";
       }
       setControls(updateControls);
     });
@@ -154,13 +154,10 @@ const MerchantDetails = (props) => {
                         <div className="QR-wrap col-6">
                           <div className="QR-Image">
                             <img
-                              src={
-                                dto?.s3Path
-                                  ? dto?.s3Path + dto?.fileName
-                                  : imagePlaceholder
-                              }
+                              src={dto?.s3Path ? dto?.s3Path : imagePlaceholder}
                               alt=""
                             />
+
                             <div className="upload">
                               <i class="fa fa-upload" aria-hidden="true"></i>
                               <div className="upload-here">

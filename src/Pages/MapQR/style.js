@@ -159,6 +159,11 @@ export const Wrapper = styled.div`
       opacity: 0;
       cursor: pointer;
     }
+    img {
+      max-width: 150px;
+      max-height: 150px;
+      margin-bottom: 15px;
+    }
   }
   .upload {
     text-align: center;
