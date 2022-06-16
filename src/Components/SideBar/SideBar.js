@@ -243,6 +243,8 @@ const SideBar = (props) => {
             </AnchorLink>
           </li>
         )}
+
+        {userData && userData.role !== "PTM_VENDOR" ? (
         <li className="menu_sub">
           <a
             onClick={() => {
@@ -282,7 +284,9 @@ const SideBar = (props) => {
               </AnchorLink>
             </li>
           </ul>
-        </li>
+</li> ) : (
+          ""
+        )}
         <li className="menu_sub">
           <AnchorLink
             href="/p2p-transaction"
