@@ -13,7 +13,7 @@ const Footer = (props) => {
           <div className="copy_right">
             <p>
               2021 © Dashboard Theme By
-              <a href="#"> Prive Pay </a>
+              <a href="#"> InrPay </a>
             </p>
           </div>
           <a id="back-to-top" href="#">
