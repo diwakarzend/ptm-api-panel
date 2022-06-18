@@ -4,6 +4,7 @@ import users from "./reducers/users";
 import userwallet from "./reducers/userwallet";
 import beneficiary from "./reducers/beneficiary";
 import payout from "./reducers/payout";
+import selectedVendor from "./reducers/selectedVendor";
 
 export default combineReducers({
   login,
@@ -11,4 +12,5 @@ export default combineReducers({
   userwallet,
   beneficiary,
   payout,
+  selectedVendor,
 });

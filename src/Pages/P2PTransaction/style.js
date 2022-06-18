@@ -17,3 +17,20 @@ export const Wrapper = styled.div`
     cursor: pointer;
   }
 `;
+
+export const FilterWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  .form-group {
+    flex: 0 0 240px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .form-action {
+    .btn-common {
+      margin-left: 20px;
+    }
+  }
+`;

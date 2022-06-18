@@ -20,9 +20,9 @@ export const postVendorListing = (params) => {
   );
 };
 
-export const getP2pUserListing = (params) => {
+export const getP2pTxnListing = (params) => {
   return apiRequest.post(
-    `${urls.login.BASE_URL + urls.ptp.GET_P2P_USER_DETAILS}`,
+    `${urls.login.BASE_URL + urls.ptp.GET_P2P_TXT_DETAILS}`,
     params
   );
 };
@@ -34,9 +34,11 @@ export const getVendorDetails = (params) => {
   );
 };
 
-export const getUserDetails = () => {
+export const getUserDetails = (mobile) => {
   console.log("inside user");
-  return apiRequest.get(`${urls.login.BASE_URL + urls.user.GET_USER_DETAILS}`);
+  return apiRequest.get(
+    `${urls.login.BASE_URL + urls.user.GET_USER_DETAILS}/${mobile}`
+  );
 };
 
 export const getMapqrListing = () => {
@@ -50,7 +52,7 @@ export const getVendorDetailsByID = (params) => {
   return apiRequest.get(
     `${urls.login.BASE_URL + urls.ptp.GET_MAPQR_LISTING}/${
       params.uuid
-    }?pageNo=${params.pageNo}&pageSize=${params.pageNo}`
+    }?pageNo=${params.pageNo}&pageSize=${params.pageSize}`
   );
 };
 

@@ -74,12 +74,12 @@ export default {
   ptp: {
     GET_VENDOR_LISTING: "/api/ptp/vendor-details",
     POST_VENDOR_LISTING: "/api/ptp/create-ptp",
-    GET_P2P_USER_DETAILS: "/api/merchant/usertxn/details",
+    GET_P2P_TXT_DETAILS: "/api/merchant/usertxn/details",
     GET_MAPQR_LISTING: "/api/ptp/ptp-details",
     UPLOAD_MAPQR_REQUEST: "/api/ptp/uploadQRCode",
   },
   user: {
-    GET_USER_DETAILS: "/api/user/financial-details",
+    GET_USER_DETAILS: "/api/users/search",
     GET_VENDOR_DETAILS: "/api/users?pageSize=100",
   },
 };

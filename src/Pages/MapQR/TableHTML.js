@@ -1,7 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { setSelectedVendor } from "../../actions/selectedVendor";
 import Pagination from "../../Components/Pagination/Pagination";
 const TableHTML = ({ listData = [] }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const onViewClick = (vendor) => {
+    dispatch(setSelectedVendor(vendor));
+    history.push(`vendor-list?uuid=${vendor?.uuid}`);
+  };
   return (
     <div className="card-body">
       <table className="table table-bordered">
@@ -31,12 +39,12 @@ const TableHTML = ({ listData = [] }) => {
                   </td>
                   <td>{item.userBalance}</td>
                   <td>
-                    <Link
-                      to={`vendor-list?uuid=${item.uuid || "1"}`}
+                    <span
+                      onClick={() => onViewClick(item)}
                       className="cursor-pointer"
                     >
                       <i className="icon-eye" />
-                    </Link>
+                    </span>
                   </td>
                 </tr>
               ))

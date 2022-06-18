@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   getVendorListing,
   postVendorListing,
@@ -28,6 +30,9 @@ const MerchantDetails = (props) => {
   const [controls, setControls] = useState([{ ...initPtpDto }]);
   const [message, setMessage] = useState({ type: "", text: "" });
   const [user, setUser] = useState([]);
+  const selectedVendor = useSelector((state) => state?.selectedVendor?.data);
+  const history = useHistory();
+  console.log("selectedVendor", selectedVendor);
 
   useEffect(() => {
     const params = { pageNo: 1, pageSize: 100 };
@@ -47,11 +52,15 @@ const MerchantDetails = (props) => {
 
   // user Details
   useEffect(() => {
-    getUserDetails().then((res) => {
-      setUser(res?.data?.data);
-      console.log("result", res);
-    });
-  }, []);
+    if (selectedVendor?.userName) {
+      getUserDetails(selectedVendor?.userName).then((res) => {
+        setUser(res?.data?.data);
+        console.log("result", res);
+      });
+    } else {
+      history.push("mapqr-list");
+    }
+  }, [selectedVendor]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -122,24 +131,33 @@ const MerchantDetails = (props) => {
                   <h3>Merchant Details</h3>
                   <div className="flex mercahnt-details row">
                     <div className="col">
-                      <div className="label-name">Brand Name</div>
-                      <div className="value">{user?.brnadName}</div>
+                      <div className="label-name">Name</div>
+                      <div className="value">
+                        {selectedVendor?.firstName || "-"}{" "}
+                        {selectedVendor?.lastName || ""}
+                      </div>
                     </div>
                     <div className="col-3">
-                      <div className="label-name">GST No.</div>
-                      <div className="value">{user?.gstNo}</div>
+                      <div className="label-name">Mobile No.</div>
+                      <div className="value">
+                        {selectedVendor?.phoneNumber || "-"}
+                      </div>
+                    </div>
+                    <div className="col-3">
+                      <div className="label-name">Email</div>
+                      <div className="value">
+                        {selectedVendor?.email || "-"}
+                      </div>
                     </div>
                     <div className="col">
                       <div className="label-name">Address</div>
-                      <div className="value">{user?.registerAddress}</div>
-                    </div>
-                    <div className="col-3">
-                      <div className="label-name">Company</div>
-                      <div className="value">{user?.registerCompany}</div>
-                    </div>
-                    <div className="col">
-                      <div className="label-name">Website</div>
-                      <div className="value">{user?.website}</div>
+                      <div className="value">
+                        {selectedVendor?.address1 || "-"}{" "}
+                        {selectedVendor?.address2 || ""}
+                        {selectedVendor?.pincode
+                          ? ` - ${selectedVendor?.pincode}`
+                          : ""}
+                      </div>
                     </div>
                   </div>
                   <h3>
