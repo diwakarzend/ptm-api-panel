@@ -78,6 +78,7 @@ export default {
     GET_P2P_TXT_DETAILS: "/api/merchant/usertxn/details",
     GET_MAPQR_LISTING: "/api/ptp/ptp-details",
     UPLOAD_MAPQR_REQUEST: "/api/ptp/uploadQRCode",
+    GET_DASHBOARD_USER_TXN: "/api/merchant/usertxn/dashboard",
   },
   user: {
     GET_USER_DETAILS: "/api/users/search",

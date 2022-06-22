@@ -62,3 +62,10 @@ export const uploadMapqrRequest = (params) => {
     params
   );
 };
+
+export const getDashboardUserTxnRequest = (params) => {
+  return apiRequest.post(
+    `${urls.login.BASE_URL + urls.ptp.GET_DASHBOARD_USER_TXN}`,
+    params
+  );
+};

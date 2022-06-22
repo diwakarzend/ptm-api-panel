@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
@@ -9,6 +9,7 @@ import "./DashBoard.css";
 import { dynamicDataWithXY } from "../../lib/Chart/common";
 import CircularProgressBar from "../../Components/CircularProgressBar";
 import { getUserPermissions } from "../../utils/common";
+import { getDashboardUserTxnRequest } from "../../utils/api";
 
 const DashBoard = (props) => {
   // const {
@@ -32,13 +33,21 @@ const DashBoard = (props) => {
       });
     }
   };
-
+  const [userTxnDetails, setUserTxnDetails] = useState(null);
   useEffect(() => {
     const { dispatch, payout } = props;
     dispatch(fetchMonthlyReports());
     setTimeout(() => {
       renderPieChart();
     }, 2000);
+    const params = {
+      pageNo: 1,
+      pageSize: 20,
+    };
+    getDashboardUserTxnRequest(params).then((res) => {
+      console.log("dashboard res = ", res);
+      setUserTxnDetails(res?.data?.data || null);
+    });
   }, []);
 
   const changeHandler = () => {
@@ -291,6 +300,78 @@ const DashBoard = (props) => {
               ) : (
                 ""
               )}
+            </div>
+            <div className="row">
+              <div className="col-xl-3 col-sm-6 mb-4">
+                <div className="card bg-primary border-0 text-light pt-3 pb-3 h-100">
+                  <div className="card-body ">
+                    <div className="row">
+                      <div className=" col-3">
+                        <i className="ti-server f30"></i>
+                      </div>
+                      <div className=" col-9">
+                        <h6 className="m-0 text-light">Total Transactions</h6>
+                        <p className="f12 mb-0" style={fontCss}>
+                          {(userTxnDetails && userTxnDetails?.totalCount) || 0}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-3 col-sm-6 mb-4">
+                <div className="card bg-info border-0 text-light pt-3 pb-3 h-100">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className=" col-3">
+                        <i className="ti-control-shuffle f30"></i>
+                      </div>
+                      <div className=" col-9">
+                        <h6 className="m-0 text-light">Total Amount</h6>
+                        <p className="f12 mb-0" style={fontCss}>
+                          {(userTxnDetails &&
+                            userTxnDetails.totalTransactionSum) ||
+                            0}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-3 col-sm-6 mb-4">
+                <div className="card bg-warning border-0 text-light pt-3 pb-3 h-100">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className=" col-3">
+                        <i className="ti-back-left f30"></i>
+                      </div>
+                      <div className=" col-9">
+                        <h6 className="m-0 text-light">Total Synced Count</h6>
+                        <p className="f12 mb-0" style={fontCss}>
+                          0
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-3 col-sm-6 mb-4">
+                <div className="card bg-danger border-0 text-light pt-3 pb-3 h-100">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className=" col-3">
+                        <i className="ti-time f30"></i>
+                      </div>
+                      <div className=" col-9">
+                        <h6 className="m-0 text-light">Credited count</h6>
+                        <p className="f12 mb-0" style={fontCss}>
+                          {userTxnDetails?.totalCreditedCount}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             {userPermissions &&
               userPermissions.includes("PTM_VENDOR_TRANSACTION_REPORT") && (

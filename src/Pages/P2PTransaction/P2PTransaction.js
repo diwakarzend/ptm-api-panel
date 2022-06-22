@@ -6,10 +6,13 @@ import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
 import TableHTML from "./TableHTML";
 import CSVExport from "../../Components/DataExport/CSVExport";
+import Pagination from "../../Components/PaginationNew/PaginationNew/Pagination";
 import { FilterWrapper } from "./style";
 
 const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const [reportsItems, setReportsItems] = useState([]);
+  const [paging_data, setPagingData] = useState(null);
+  const [pageNo, setPageNo] = useState(1);
   const [filter, setFilter] = useState({
     status: "",
     txnRefId: "",
@@ -19,16 +22,15 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
     vendorCode: "",
   });
   const userData = useSelector((state) => state?.login?.userData || {});
-  console.log("hiiii", userData);
   useEffect(() => {
-    getListing();
+    getListing(pageNo);
   }, []);
 
-  const getListing = () => {
+  const getListing = (page_no) => {
     const params = {
       pagination: {
-        pageNo: 1,
-        pageSize: 500,
+        pageNo: page_no,
+        pageSize: 20,
       },
     };
     if (userData?.role === "PTM_VENDOR") {
@@ -40,6 +42,7 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
       }
     });
     getP2pTxnListing(params).then((res) => {
+      setPagingData(res?.data?.data);
       setReportsItems(res?.data?.data?.content);
     });
   };
@@ -52,6 +55,13 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
     e.preventDefault();
     getListing();
   };
+
+  const getCurrentPageData = (page_no) => {
+    console.log("page No", page_no);
+    getListing(page_no);
+  };
+
+  console.log("paging_data = ", paging_data);
 
   return (
     <div className="container_full">
@@ -157,12 +167,16 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
                   </div>
                 </div>
               </div> */}
-              <TableHTML
-                filterItems={{}}
-                reportsItems={reportsItems}
-                pagingData={{}}
-                dispatch={dispatch}
-              />
+              <TableHTML filterItems={{}} reportsItems={reportsItems} />
+              {reportsItems && paging_data && (
+                <Pagination
+                  currentPage={
+                    paging_data?.number >= 0 ? paging_data?.number + 1 : 1
+                  }
+                  totalPages={paging_data?.totalPages}
+                  getCurrentPageData={getCurrentPageData}
+                />
+              )}
             </div>
           </section>
         </div>
