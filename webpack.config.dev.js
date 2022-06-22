@@ -13,13 +13,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "public/build"),
     filename: "[name]-[hash].js",
-    publicPath: "/"
+    publicPath: "/",
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
   },
   module: {
-    loaders
+    loaders,
   },
   devServer: {
     contentBase: "./public",
@@ -37,12 +37,12 @@ module.exports = {
     proxy: [
       {
         context: ["/api/**"],
-      //  target:
-        target: "http://34.93.135.35:8083",
+        //  target:
+        target: "http://34.93.135.35:8080",
         secure: false,
-        changeOrigin: true
-      }
-    ]
+        changeOrigin: true,
+      },
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -50,7 +50,7 @@ module.exports = {
     new DashboardPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
-      inject: "body"
-    })
-  ]
+      inject: "body",
+    }),
+  ],
 };

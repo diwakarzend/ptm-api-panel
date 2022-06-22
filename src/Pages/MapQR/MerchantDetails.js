@@ -168,7 +168,7 @@ const MerchantDetails = (props) => {
                               type="file"
                               placeholder="Upload QR Code"
                               name="qrDetails"
-                              onChange={(e) => handleFileRead(e, i)}
+                              onInput={(e) => handleFileRead(e, i)}
                             />
                           </div>
                         </div>
