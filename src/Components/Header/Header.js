@@ -69,7 +69,7 @@ const Header = (props) => {
                 <span className="logo-default">
                   <AnchorLink href="/dashboard">
                     <img
-                      src="https://storage.googleapis.com/ptm-assets-prod/banner/WhiteLogo.png"
+                      src="https://assets-inrpay-pro.s3.me-south-1.amazonaws.com/logo.jpeg"
                       alt="Logo"
                     />
                   </AnchorLink>

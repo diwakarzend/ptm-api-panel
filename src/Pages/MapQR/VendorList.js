@@ -18,7 +18,7 @@ const VendorList = (props) => {
       let queryParams = getQueryParams(location?.search);
       getVendorDetailsByID({
         pageNo: 1,
-        pageSize: 100,
+        pageSize: 1,
         uuid: queryParams?.uuid,
       }).then((res) => {
         setvendorData(res?.data?.data);
@@ -42,7 +42,7 @@ const VendorList = (props) => {
                     aria-label="Basic example"
                   >
                     <Link to="/mapqr-add" class="btn btn-primary themebtn">
-                      Add
+                      Add / Update
                     </Link>
                   </div>
                 </div>

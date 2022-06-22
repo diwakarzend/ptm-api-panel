@@ -243,36 +243,39 @@ const SideBar = (props) => {
             </AnchorLink>
           </li>
         )}
-        <li className="menu_sub">
-          <a
-            onClick={() => {
-              setToggleMapqr(!toggleMapqr);
-              setToggleCompany(false);
-              setTogglePayment(false);
-              setToggleAmount(false);
-            }}
-          >
-            <i className="icon-people"></i> <span>Map Vendor QR</span>
-            <span className="icon-arrow-down styleicon"></span>
-          </a>
 
-          <ul
-            className={
-              toggleMapqr || ["mapqr-list", "mapqr-add"].includes(activeSection)
-                ? "down_menu open"
-                : "down_menu"
-            }
-          >
-            <li>
-              <AnchorLink
-                href="/mapqr-list"
-                clicked={handleNavClick}
-                className={activeSection == "mapqr-list" ? "active" : ""}
-              >
-                Listing
-              </AnchorLink>
-            </li>
-            <li>
+        {userData && userData.role !== "PTM_VENDOR" ? (
+          <li className="menu_sub">
+            <a
+              onClick={() => {
+                setToggleMapqr(!toggleMapqr);
+                setToggleCompany(false);
+                setTogglePayment(false);
+                setToggleAmount(false);
+              }}
+            >
+              <i className="icon-people"></i> <span>Map Vendor QR</span>
+              <span className="icon-arrow-down styleicon"></span>
+            </a>
+
+            <ul
+              className={
+                toggleMapqr ||
+                ["mapqr-list", "mapqr-add"].includes(activeSection)
+                  ? "down_menu open"
+                  : "down_menu"
+              }
+            >
+              <li>
+                <AnchorLink
+                  href="/mapqr-list"
+                  clicked={handleNavClick}
+                  className={activeSection == "mapqr-list" ? "active" : ""}
+                >
+                  Listing
+                </AnchorLink>
+              </li>
+              {/* <li>
               <AnchorLink
                 href="/mapqr-add"
                 clicked={handleNavClick}
@@ -280,9 +283,12 @@ const SideBar = (props) => {
               >
                 Add
               </AnchorLink>
-            </li>
-          </ul>
-        </li>
+            </li> */}
+            </ul>
+          </li>
+        ) : (
+          ""
+        )}
         <li className="menu_sub">
           <AnchorLink
             href="/p2p-transaction"

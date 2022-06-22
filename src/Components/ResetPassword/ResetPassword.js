@@ -106,7 +106,7 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
         {formData.successMsg || formData.errorMsg}
       </span>
       <img
-        src="https://storage.googleapis.com/ptm-assets-prod/banner/Blue%20logo.png"
+        src="https://assets-inrpay-pro.s3.me-south-1.amazonaws.com/logo.jpeg"
         alt="logo"
         className="logo-icon"
       />
