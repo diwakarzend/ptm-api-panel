@@ -169,7 +169,7 @@ const MerchantDetails = (props) => {
                   {controls.map((dto, i) => (
                     <>
                       <div className="flex mapping-dtails row">
-                        <div className="QR-wrap col-6">
+                        <div className="QR-wrap col-12 col-md-6">
                           <div className="QR-Image">
                             <img
                               src={dto?.s3Path ? dto?.s3Path : imagePlaceholder}
@@ -190,8 +190,8 @@ const MerchantDetails = (props) => {
                             />
                           </div>
                         </div>
-                        <div className="col-6">
-                          <div className="col-12">
+                        <div className="col-12 col-md-6">
+                          <div className="form-wrap-group">
                             <div className="form-group">
                               <select
                                 className="form-control"
@@ -207,7 +207,7 @@ const MerchantDetails = (props) => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-12">
+                          <div className="form-wrap-group">
                             <div className="form-group">
                               <input
                                 type="text"
@@ -219,7 +219,7 @@ const MerchantDetails = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="col-12">
+                          <div className="form-wrap-group">
                             <div className="form-group">
                               <input
                                 type="text"
@@ -231,7 +231,7 @@ const MerchantDetails = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="col-12">
+                          <div className="form-wrap-group">
                             <div className="form-group">
                               <input
                                 type="text"
@@ -243,7 +243,7 @@ const MerchantDetails = (props) => {
                               />
                             </div>
                           </div>
-                          <div className="col-12">
+                          <div className="form-wrap-group">
                             <div className="form-group">
                               <input
                                 type="text"
