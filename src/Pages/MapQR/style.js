@@ -190,4 +190,9 @@ export const Wrapper = styled.div`
   .cursor-pointer {
     cursor: pointer;
   }
+  .themebtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
