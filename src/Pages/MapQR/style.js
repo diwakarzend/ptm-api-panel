@@ -139,6 +139,7 @@ export const Wrapper = styled.div`
   }
   .QR-wrap {
     padding-bottom: 1rem;
+    min-height: 200px;
   }
   .QR-Image {
     height: 100%;
