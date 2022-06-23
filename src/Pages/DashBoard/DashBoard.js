@@ -10,6 +10,7 @@ import { dynamicDataWithXY } from "../../lib/Chart/common";
 import CircularProgressBar from "../../Components/CircularProgressBar";
 import { getUserPermissions } from "../../utils/common";
 import { getDashboardUserTxnRequest } from "../../utils/api";
+import UpiCollections from "../../Components/Dashboard/PtmVendor/UpiCollections";
 
 const DashBoard = (props) => {
   // const {
@@ -375,7 +376,10 @@ const DashBoard = (props) => {
             </div>
             {userPermissions &&
               userPermissions.includes("PTM_VENDOR_TRANSACTION_REPORT") && (
-                <VendorTransactionReport changeHandler={changeHandler} />
+                <UpiCollections
+                  changeHandler={changeHandler}
+                  userTxnDetails={userTxnDetails}
+                />
               )}
           </section>
         </div>
