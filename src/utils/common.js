@@ -480,3 +480,9 @@ export function getQueryParams(query) {
   }
   return queryParams;
 }
+
+export function numberToCurrency(value) {
+  if(!value) return '₹ 0';
+  let v = (value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+  return `₹ ${v}`;
+}

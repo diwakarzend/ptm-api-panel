@@ -49,8 +49,8 @@
 }
 .card .card-header .card-title {
   margin-bottom: 0;
-  color: #53505f;
-  font-size: 18px;
+  color: rgb(33, 37, 41);
+  font-size: 24px;
   font-weight: 500;
 }
 .lobicard-custom-icon > .card-header .dropdown,

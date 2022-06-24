@@ -83,5 +83,6 @@ export default {
   user: {
     GET_USER_DETAILS: "/api/users/search",
     GET_VENDOR_DETAILS: "/api/users?pageSize=100",
+    GET_USER_BY_VENDOR_ROLE: '/api/users/searchByVendor'
   },
 };

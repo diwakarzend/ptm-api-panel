@@ -42,7 +42,6 @@ export const getUserDetails = (mobile) => {
 };
 
 export const getMapqrListing = () => {
-  console.log("inside user");
   return apiRequest.get(
     `${urls.login.BASE_URL + urls.user.GET_VENDOR_DETAILS}`
   );
@@ -69,3 +68,9 @@ export const getDashboardUserTxnRequest = (params) => {
     params
   );
 };
+
+export const getUserByVendorRole = (pageNo = 0, pageSize = 20) => {
+  return apiRequest.get(
+    `${urls.login.BASE_URL + urls.user.GET_USER_BY_VENDOR_ROLE}?pageNo=${pageNo}&pageSize=${pageSize}`, 
+  );
+}
