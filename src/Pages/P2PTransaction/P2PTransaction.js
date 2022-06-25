@@ -8,6 +8,7 @@ import TableHTML from "./TableHTML";
 import CSVExport from "../../Components/DataExport/CSVExport";
 import Pagination from "../../Components/PaginationNew/PaginationNew/Pagination";
 import { FilterWrapper } from "./style";
+import { CSVLink } from "react-csv";
 
 const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const [reportsItems, setReportsItems] = useState([]);
@@ -144,7 +145,13 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
                       value="Search"
                     />
                   </div>
+                  <div className="form-group">
+                    <CSVLink title="Download CSV" className="csv-link" data={reportsItems}>
+                      <i class="fa fa-download " aria-hidden="true"></i>
+                    </CSVLink>
+                  </div>
                 </FilterWrapper>
+                  
               </form>
               {/* <div className="card-header">
                 <div className="card-title">

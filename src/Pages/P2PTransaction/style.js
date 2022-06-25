@@ -22,6 +22,7 @@ export const FilterWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
+  position: relative;
   .form-group {
     flex: 0 0 240px;
     margin-left: 20px;
@@ -31,6 +32,22 @@ export const FilterWrapper = styled.div`
   .form-action {
     .btn-common {
       margin-left: 20px;
+    }
+  }
+  .csv-link {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    background-color: #EAEEF2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+    font-size: 20px;
+    transition: all 500ms ease-in-out;
+    &:hover {
+      background-color: rgb(41,156,219, .4);
+      color: rgb(41,156,219, .8);
     }
   }
 `;
