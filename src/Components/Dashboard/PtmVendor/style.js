@@ -82,4 +82,20 @@ export const UpiCollectionsStyle = styled.div`
   .container-pie-chart {
     margin: 0 auto;
   }
+  .csv-link {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    background-color: #EAEEF2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+    font-size: 20px;
+    transition: all 500ms ease-in-out;
+    &:hover {
+      background-color: rgb(41,156,219, .4);
+      color: rgb(41,156,219, .8);
+    }
+  }
 `;

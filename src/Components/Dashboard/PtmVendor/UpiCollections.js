@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { CSVLink } from 'react-csv';
 import moment from 'moment';
 import "../../../lib/Chart/Chart.min";
 const chartConfig = require("../../../lib/Chart/Config");
@@ -29,16 +30,17 @@ const fontCss = {
 };
 
 export default function UpiCollections() {
-  const [filters, setFilters] = useState({...initFilters});
+  const [filters, setFilters] = useState({ ...initFilters });
   const [vendorList, setVendorList] = useState([]);
   const [userTxnDetails, setUserTxnDetails] = useState(null);
+  const [downloadData, setDownloadData] = useState([]);
   const userData = useSelector((state) => state?.login?.userData || {});
   let isVendor = false;
   if (userData?.role === "PTM_VENDOR") {
-    isVendor=true;
+    isVendor = true;
   }
   const changeHandler = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     const _filters = JSON.parse(JSON.stringify(filters));
     _filters[name] = value;
     setFilters(_filters);
@@ -64,27 +66,29 @@ export default function UpiCollections() {
 
   useEffect(() => {
     getUserByVendorRole().then(res => {
-      if(res?.data?.data) {
+      if (res?.data?.data) {
         setVendorList(res?.data?.data);
       }
     });
   }, [])
 
   useEffect(() => {
-    if(userTxnDetails) {
-      console.log("userTxnDetails = ", userTxnDetails);
+    if (userTxnDetails) {
+      let data = []
+      data.push(userTxnDetails);
+      setDownloadData(data);
       setTimeout(() => {
         renderPieChart(userTxnDetails?.totalCount, userTxnDetails?.totalTransactionSum, userTxnDetails?.totalSyncedCount, userTxnDetails?.totalCreditedCount);
       }, 1000)
-    } 
+    }
   }, [userTxnDetails, userTxnDetails?.totalCount])
 
   useEffect(() => {
     getDashboardUserTxnRequest(filters).then((res) => {
-      if(res?.data?.data) {
+      if (res?.data?.data) {
         setUserTxnDetails(res?.data?.data || null);
       }
-      
+
     });
   }, [filters]);
 
@@ -99,7 +103,7 @@ export default function UpiCollections() {
             <form className="filter-table">
               {
                 !isVendor &&
-                  <div className="form-group">
+                <div className="form-group">
                   <select
                     name="userId"
                     className="form-control"
@@ -125,13 +129,16 @@ export default function UpiCollections() {
                   value={filters?.date}
                 />
               </div>
+              <div className="form-group">
+                <CSVLink title="Download CSV" className="csv-link" data={downloadData}><i class="fa fa-download " aria-hidden="true"></i></CSVLink>
+              </div>
             </form>
           </div>
         </div>
       </div>
       <div className="card-body">
         <div className="row">
-          
+
           <div className="col-xl-7">
             <div className="container-pie-chart">
               <canvas id="container-pie-chart" className="height_box"></canvas>
@@ -165,7 +172,7 @@ export default function UpiCollections() {
               <div className="collection-info">
                 <div className="info-left">
                   <strong className="amount">
-                  {userTxnDetails?.totalSyncedCount}
+                    {userTxnDetails?.totalSyncedCount}
                   </strong>
                   <div className="text third">
                     Total Synced
