@@ -137,13 +137,16 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
                     />
                   </div>
                   <div className="form-group">
-                    <input
-                      type="text"
+                    <select
                       className="form-control"
                       name="vendorCode"
                       placeholder="Vendor Code"
                       onChange={handleChange}
-                    />
+                    >
+                      <option value="">Vendor Code</option>
+                      <option value="3">Paytm</option>
+                      <option value="2">Phonepe</option>
+                    </select>
                   </div>
                   <div className="form-group">
                     <select
@@ -153,12 +156,9 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
                       placeholder="Status"
                       onChange={handleChange}
                     >
-                      <option value="">Status</option>
-                      <option value="DONE">DONE</option>
-                      <option value="INITIATED">INITIATED</option>
-                      <option value="REJECTED">REJECTED</option>
-                      <option value="PENDING">PENDING</option>
-                      <option value="FAIL">FAIL</option>
+                      <option value="">Select Status</option>
+                      <option value="synced">Synced</option>
+                      <option value="credited">Credited</option>
                     </select>
                   </div>
                   <div className="form-action">
