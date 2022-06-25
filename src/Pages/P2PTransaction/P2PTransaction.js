@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { connect } from "react-redux";
 import { getP2pTxnListing } from "../../utils/api";
@@ -9,9 +9,11 @@ import CSVExport from "../../Components/DataExport/CSVExport";
 import Pagination from "../../Components/PaginationNew/PaginationNew/Pagination";
 import { FilterWrapper } from "./style";
 import { CSVLink } from "react-csv";
+import moment from "moment";
 
 const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const [reportsItems, setReportsItems] = useState([]);
+  const [downloadData, setDownloadData] = useState([]);
   const [paging_data, setPagingData] = useState(null);
   const [pageNo, setPageNo] = useState(1);
   const [filter, setFilter] = useState({
@@ -22,16 +24,18 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
     utrNumber: "",
     vendorCode: "",
   });
+  const downloadRef = useRef();
   const userData = useSelector((state) => state?.login?.userData || {});
   useEffect(() => {
     getListing(pageNo);
   }, []);
 
-  const getListing = (page_no) => {
+  const getListing = (page_no, page_size = 20, isDownload = false) => {
     const params = {
+      date: moment(new Date()).format('YYYY-MM-DD'),
       pagination: {
         pageNo: page_no,
-        pageSize: 20,
+        pageSize: page_size,
       },
     };
     if (userData?.role === "PTM_VENDOR") {
@@ -43,8 +47,12 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
       }
     });
     getP2pTxnListing(params).then((res) => {
-      setPagingData(res?.data?.data);
-      setReportsItems(res?.data?.data?.content);
+      if(isDownload && res?.data?.data?.content) {
+        setDownloadData(res?.data?.data?.content);
+      } else {
+        setPagingData(res?.data?.data);
+        setReportsItems(res?.data?.data?.content);
+      }
     });
   };
 
@@ -62,7 +70,22 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
     getListing(page_no);
   };
 
-  console.log("paging_data = ", paging_data);
+  const onDownloadClick = () => {
+    if(paging_data && paging_data?.totalElements) {
+      getListing(1, paging_data?.totalElements, true);
+    }
+  }
+
+  useEffect(() => {
+    if(Array.isArray(downloadData) && downloadData.length > 0) {
+      console.log("downloadData inside = ", downloadData);
+      setTimeout(() => {
+        downloadRef.current.link.click();
+      }, 1000)
+    }
+  }, [downloadData])
+
+  console.log("downloadData = ", downloadData);
 
   return (
     <div className="container_full">
@@ -145,10 +168,14 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
                       value="Search"
                     />
                   </div>
-                  <div className="form-group">
-                    <CSVLink title="Download CSV" className="csv-link" data={reportsItems}>
-                      <i class="fa fa-download " aria-hidden="true"></i>
-                    </CSVLink>
+                  <div className="form-group csv-link-wrapper">
+                    <span className="csv-link" onClick={onDownloadClick}><i class="fa fa-download " aria-hidden="true"></i></span>
+                    <CSVLink 
+                      title="Download CSV" 
+                      className="csv-link-hide" 
+                      data={downloadData} 
+                      ref={downloadRef}
+                      />
                   </div>
                 </FilterWrapper>
                   
