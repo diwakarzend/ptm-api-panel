@@ -16,6 +16,15 @@ export const Wrapper = styled.div`
   .cursor-pointer {
     cursor: pointer;
   }
+  .credited, .synced {
+    text-transform: uppercase;
+  }
+  .credited {
+    color: rgb(64,81,137);
+  }
+  .synced {
+    color: rgb(247,184,75);
+  }
 `;
 
 export const FilterWrapper = styled.div`
@@ -45,6 +54,7 @@ export const FilterWrapper = styled.div`
     color: #aaa;
     font-size: 20px;
     transition: all 500ms ease-in-out;
+    cursor: pointer;
     &:hover {
       background-color: rgb(41,156,219, .4);
       color: rgb(41,156,219, .8);

@@ -8,21 +8,26 @@ export const pagination = styled.div`
 
   .next-btn,
   .prev-btn {
-    width: 50px;
-    height: 100%;
+    width: 70px;
+    height: 32px;
     position: relative;
     cursor: pointer;
     border: 0;
     font-size: 12px;
     letter-spacing: 0.6px;
     color: #1974ef;
+    text-align: center;
+    padding: 0 10px;
+    border-radius: 2px;
     &.disabled {
       cursor: not-allowed;
-      color: #e8e8e8;
+      color: #888;
     }
   }
 
   .next-btn {
+    padding-right: 20px;
+    margin-left: 10px;
     &:before {
       content: "";
       position: absolute;
@@ -30,19 +35,21 @@ export const pagination = styled.div`
       height: 6px;
       transform: rotate(45deg);
       top: 0;
-      right: 4px;
+      right: 18px;
       bottom: 0;
       margin: auto;
     }
   }
   .prev-btn {
+    padding-left: 20px;
+    margin-right: 10px;
     &:before {
       content: "";
       position: absolute;
       width: 6px;
       height: 6px;
       transform: rotate(45deg);
-      left: 2px;
+      left: 18px;
       top: 0;
       bottom: 0;
       margin: auto;
@@ -71,15 +78,15 @@ export const pagination = styled.div`
     }
   }
   .pagination-nav {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     border-radius: 2px;
     background-color: #deedfd;
     font-size: 10px;
     letter-spacing: 0.3px;
     color: #1974ef;
     text-align: center;
-    margin: 0 2px;
+    margin: 0 3px;
     border: 0;
     padding: 0;
     &.active {

@@ -34,7 +34,7 @@ const TableHTML = memo(
                 <th scope="col">Transaction Details</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Receiver Name</th>
-                <th scope="col">Receiver UPI</th>
+                <th scope="col">Vendor Name</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
@@ -53,7 +53,7 @@ const TableHTML = memo(
                         <td>{item?.transactionRefId}</td>
                         <td>&#8377;{item?.amount}</td>
                         <td>{item?.receiverName}</td>
-                        <td>{item?.receiverUpi}</td>
+                        <td>{item?.vendorCode == '3' ? "PAYTM" : item?.vendorCode == '2' ? 'PHONEPE' : '-' }</td>
                         <td className={item?.status?.toLowerCase()}>
                           {item?.status}
                         </td>

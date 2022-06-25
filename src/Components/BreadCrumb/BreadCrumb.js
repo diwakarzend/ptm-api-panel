@@ -4,6 +4,9 @@ import AnchorLink from "../AnchorLink/AnchorLink";
 import "./BreadCrumb.css";
 
 const BreadCrumb = ({ heading, value }) => {
+  const refreshPage = ()=>{
+    window.location.reload();
+ }
   return (
     <div className="page-heading">
       <div className="row d-flex align-items-center">
@@ -30,6 +33,16 @@ const BreadCrumb = ({ heading, value }) => {
           </div>
         </div>
       </div>
+      {
+        heading == "Dashboard" && 
+        <span className="reload-page">
+          <i
+            className="fa fa-refresh"
+            aria-hidden="true"
+            onClick={refreshPage}
+          ></i>
+        </span>
+      }
     </div>
   );
 };

@@ -17,6 +17,7 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const [paging_data, setPagingData] = useState(null);
   const [pageNo, setPageNo] = useState(1);
   const [filter, setFilter] = useState({
+    date: moment(new Date()).format('YYYY-MM-DD'),
     status: "",
     txnRefId: "",
     txnType: "",
@@ -32,7 +33,7 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
 
   const getListing = (page_no, page_size = 20, isDownload = false) => {
     const params = {
-      date: moment(new Date()).format('YYYY-MM-DD'),
+      date: filter.date,
       pagination: {
         pageNo: page_no,
         pageSize: page_size,
@@ -58,7 +59,9 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    filter[name] = value || null;
+    let _filter = JSON.parse(JSON.stringify(filter));
+    _filter[name] = value || null;
+    setFilter(_filter);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,7 +88,7 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
     }
   }, [downloadData])
 
-  console.log("downloadData = ", downloadData);
+  console.log("filter = ", filter);
 
   return (
     <div className="container_full">
@@ -160,6 +163,16 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
                       <option value="synced">Synced</option>
                       <option value="credited">Credited</option>
                     </select>
+                  </div>
+                  <div className="form-group">
+                    <input
+                      name="date"
+                      type="date"
+                      className="form-control"
+                      placeholder="Enter email"
+                      onChange={handleChange}
+                      value={filter?.date}
+                    />
                   </div>
                   <div className="form-action">
                     <input
