@@ -9,7 +9,8 @@ import { UpiCollectionsStyle } from "./style";
 import { numberToCurrency } from "../../../utils/common";
 
 const initFilters = {
-  date: moment(new Date()).format('YYYY-MM-DD'),
+  toDate: moment(new Date()).format('YYYY-MM-DD'),
+  fromDate: moment(new Date()).format('YYYY-MM-DD'),
   "pagination": {
     "pageNo": 1,
     "pageSize": 100

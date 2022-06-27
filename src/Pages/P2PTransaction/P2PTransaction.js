@@ -17,7 +17,8 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const [paging_data, setPagingData] = useState(null);
   const [pageNo, setPageNo] = useState(1);
   const [filter, setFilter] = useState({
-    date: moment(new Date()).format('YYYY-MM-DD'),
+    toDate: moment(new Date()).format('YYYY-MM-DD'),
+    fromDate: moment(new Date()).format('YYYY-MM-DD'),
     status: "",
     txnRefId: "",
     txnType: "",
