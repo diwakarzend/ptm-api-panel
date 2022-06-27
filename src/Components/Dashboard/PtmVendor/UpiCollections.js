@@ -122,14 +122,26 @@ export default function UpiCollections() {
               }
               <div className="form-group">
                 <input
-                  name="date"
+                  name="fromDate"
                   type="date"
                   className="form-control"
-                  placeholder="Enter email"
+                  placeholder="Enter From Date"
                   onChange={changeHandler}
-                  value={filters?.date}
+                  value={filters?.fromDate}
                 />
               </div>
+
+              <div className="form-group">
+                <input
+                  name="toDate"
+                  type="date"
+                  className="form-control"
+                  placeholder="Enter To Date"
+                  onChange={changeHandler}
+                  value={filters?.toDate}
+                />
+              </div>
+
               <div className="form-group">
                 <CSVLink title="Download CSV" className="csv-link" data={downloadData}><i class="fa fa-download " aria-hidden="true"></i></CSVLink>
               </div>

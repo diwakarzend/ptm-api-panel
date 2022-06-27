@@ -17,8 +17,8 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const [paging_data, setPagingData] = useState(null);
   const [pageNo, setPageNo] = useState(1);
   const [filter, setFilter] = useState({
-    toDate: moment(new Date()).format('YYYY-MM-DD'),
     fromDate: moment(new Date()).format('YYYY-MM-DD'),
+    toDate: moment(new Date()).format('YYYY-MM-DD'),
     status: "",
     txnRefId: "",
     txnType: "",
@@ -34,7 +34,8 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
 
   const getListing = (page_no, page_size = 20, isDownload = false) => {
     const params = {
-      date: filter.date,
+      fromDate: filter.fromDate,
+      toDate: filter.toDate,
       pagination: {
         pageNo: page_no,
         pageSize: page_size,
@@ -167,15 +168,27 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
                   </div>
                   <div className="form-group">
                     <input
-                      name="date"
+                      name="fromDate"
                       type="date"
                       className="form-control"
                       placeholder="Enter email"
                       onChange={handleChange}
-                      value={filter?.date}
+                      value={filter?.fromDate}
                     />
                   </div>
-                  <div className="form-action">
+
+
+                  <div className="form-group">
+                    <input
+                      name="toDate"
+                      type="date"
+                      className="form-control"
+                      placeholder="Enter To Date"
+                      onChange={handleChange}
+                      value={filter?.toDate}
+                    />
+                  </div>
+                                    <div className="form-action">
                     <input
                       type="submit"
                       className="btn-common"
