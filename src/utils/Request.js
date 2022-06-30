@@ -1,8 +1,9 @@
 import axios from "axios";
-
-import { getObjectValue, httpStatusCodes } from "../utils/common";
+import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
+import { clearAuthToken, getObjectValue, httpStatusCodes } from "../utils/common";
 import { getAuthToken, isAuthenticated } from "./common.js";
-import { logoutUser } from "../actions/Login";
+import { loginResetStore, logoutUser } from "../actions/Login";
 
 class Request {
   constructor(dispatch, successFn, errorFn, authorize = true) {
@@ -53,6 +54,11 @@ class Request {
    */
   get(url, params = {}) {
     if (this.authorize && !isAuthenticated()) {
+      const dispatch = useDispatch();
+      const history = useHistory();
+      clearAuthToken();
+      dispatch(loginResetStore());
+      history.push("/");
       return this.errorFn([], {}, httpStatusCodes.BAD_REQUEST);
     }
 
@@ -88,6 +94,11 @@ class Request {
    */
   post(url, params) {
     if (this.authorize && !isAuthenticated()) {
+      const dispatch = useDispatch();
+      const history = useHistory();
+      clearAuthToken();
+      dispatch(loginResetStore());
+      history.push("/");
       return this.errorFn([], {}, httpStatusCodes.BAD_REQUEST);
     }
 
