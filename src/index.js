@@ -8,6 +8,7 @@ import WebFont from "webfontloader";
 import App from "./App";
 import rootReducer from "./rootReducer";
 import { getAuthToken, setAuthorizationToken } from "./utils/common";
+import GlobalCss from "./global.css";
 
 WebFont.load({
   google: {
@@ -24,6 +25,7 @@ if (getAuthToken()) {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+      <GlobalCss />
       <App />
     </BrowserRouter>
   </Provider>,

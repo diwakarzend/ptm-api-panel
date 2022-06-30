@@ -16,8 +16,12 @@ const ResetPasswordForm = memo(
     return (
       <form className="form-group" onSubmit={submitFormHandler}>
         <div className="floating-label-group">
+          <div className="flex space-between mb-8">
+            <label className="label" htmlFor="mobile">Forget Password</label>
+          </div>
           <input
             className="form-control"
+            id="mobile"
             autoFocus="autofocus"
             type="number"
             autoComplete="off"
@@ -29,8 +33,12 @@ const ResetPasswordForm = memo(
             onChange={handleChange}
           />
         </div>
-        <div className="floating-label-group">
+        <div className="floating-label-group inputgroup">
+        <div className="flex space-between mb-8">
+            <label className="label" htmlFor="pass">Password</label>
+          </div>
           <input
+            id="pass"
             name="password"
             className="form-control"
             type="password"
@@ -40,22 +48,22 @@ const ResetPasswordForm = memo(
             placeholder="New Password"
           />
         </div>
-        <div className="floating-label-group">
+        <div className="floating-label-group inputgroup">
           <OTPForm otpChangeHandler={otpChangeHandler} />
         </div>
+        <div className="flex space-between">
         <input
           type="submit"
           value="Submit"
-          className="submit-btn"
-          style={btnStyle}
+          className="submit-btn primary-btn wd48"
         />
         <input
           type="button"
           value="Cancel"
-          className="submit-btn"
-          style={btnStyle}
+          className="submit-btn border-btn wd48"
           onClick={handleCancel}
         />
+        </div>
       </form>
     );
   }

@@ -9,7 +9,7 @@ const RequestOTPForm = memo(
   ({ handleChange, sendOTPHandler, handleCancel }) => {
     return (
         <form onSubmit={sendOTPHandler}>
-           <div className="floating-label-group">
+           <div className="floating-label-group inputgroup">
             <input
               className="form-control"
               autoFocus="autofocus"
@@ -21,19 +21,19 @@ const RequestOTPForm = memo(
               onChange={handleChange}
             />
            </div>
+           <div className="flex space-between">
           <input
             type="submit"
             value="Send"
-            className="submit-btn"
-            style={btnStyle}
+            className="submit-btn primary-btn wd48"
           />
           <input
             type="button"
             value="Cancel"
-            className="submit-btn"
-            style={btnStyle}
+            className="submit-btn border-btn wd48"
             onClick={handleCancel}
           />
+          </div>
         </form>
      
     );

@@ -69,9 +69,11 @@ class LoginForm extends React.Component {
     const cssClass = successMsg ? "success-msg" : "error-msg";
     return (
       <div className="container-fluid">
-        <div className="d-flex align-items-stretch row full-page">
-          <div className="col-md-7 align-self-center left-banner "></div>
-          <div className="d-flex col-md-5 form-wrapper">
+        <div className="d-flex align-items-stretch row full-page flex justify-center">
+          
+          <div className="form-wrapper center-form">
+            <h3 className="text-center mb12">Easy & fast payment with UPI</h3>
+            <p className="text-center mb-28">pay directlyfrom your bank account using your mobile</p>
             <div className="form-content-wrapper align-self-center">
               {forgotPasswordClicked ? (
                 <ResetPassword
@@ -88,8 +90,12 @@ class LoginForm extends React.Component {
                       alt="logo"
                       className="logo-icon"
                     />
-                    <div className="floating-label-group">
+                    <div className="floating-label-group inputgroup">
+                      <div className="flex space-between mb-8">
+                        <label className="label" htmlFor="user-name">Username</label>
+                      </div>
                       <input
+                        id="user-name"
                         placeholder="Mobile No"
                         className="form-control"
                         autoFocus="autofocus"
@@ -102,7 +108,16 @@ class LoginForm extends React.Component {
                         required
                       />
                     </div>
-                    <div className="floating-label-group">
+                    <div className="floating-label-group inputgroup">
+                    <div className="flex space-between mb-8">
+                        <label className="label" htmlFor="password">Password</label>
+                        <div
+                        className="reset-password"
+                          onClick={this.handleForgotPassword}
+                        >
+                          Forgot password
+                        </div>
+                      </div>
                       <input
                         placeholder="Password"
                         id="password"
@@ -119,15 +134,9 @@ class LoginForm extends React.Component {
                     <input
                       type="submit"
                       value="Submit"
-                      className="submit-btn"
+                      className="submit-btn primary-btn"
                     />
                   </form>
-                  <div
-                    className="reset-password"
-                    onClick={this.handleForgotPassword}
-                  >
-                    Forgot password
-                  </div>
                 </Fragment>
               )}
             </div>

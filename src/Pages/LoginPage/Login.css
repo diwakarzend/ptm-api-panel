@@ -1,4 +1,4 @@
-*:focus {
+/* *:focus {
   outline: none;
 }
 .full-page {
@@ -118,4 +118,23 @@ input:not(:focus):valid ~ .floating-label {
   .left-banner {
     display: none;
   }
+} */
+
+.left-banner {
+  display: block;
+  background: url(https://storage.googleapis.com/ptm-assets-prod/banner/banner.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  background-repeat: no-repeat;
 }
+
+.center-form{
+  max-width: 475px;
+}
+.form-content-wrapper{
+    background-color: var(--ip-white-bg);
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgab(#000,.12);
+  }

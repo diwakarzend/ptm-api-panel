@@ -16,6 +16,7 @@ import { getAuthToken } from "./utils/common";
 import { fetchUserDetailsIfNeeded, updateLoginStatus } from "./actions/Login";
 
 import Routes from "./Router/Routes";
+// import "./index.css";
 
 class App extends Component {
   componentDidMount() {

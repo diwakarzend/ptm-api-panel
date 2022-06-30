@@ -101,7 +101,6 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
   const cssClass = formData.successMsg ? "success-msg" : "error-msg";
   return (
     <div>
-      <h2>Forgot Password</h2>
       <span className={cssClass}>
         {formData.successMsg || formData.errorMsg}
       </span>
