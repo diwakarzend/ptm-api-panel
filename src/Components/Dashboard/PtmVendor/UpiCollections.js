@@ -74,6 +74,12 @@ export default function UpiCollections() {
   }, [])
 
   useEffect(() => {
+    if (userData?.role === "PTM_VENDOR") {
+      setFilters({...filters, userId: userData.uuid});
+    }
+  }, [userData])
+
+  useEffect(() => {
     if (userTxnDetails) {
       let data = []
       data.push(userTxnDetails);

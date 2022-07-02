@@ -30,7 +30,7 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const userData = useSelector((state) => state?.login?.userData || {});
   useEffect(() => {
     getListing(pageNo);
-  }, []);
+  }, [filter]);
 
   const getListing = (page_no, page_size = 20, isDownload = false) => {
     const params = {
@@ -89,6 +89,12 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
       }, 1000)
     }
   }, [downloadData])
+
+  useEffect(() => {
+    if (userData?.role === "PTM_VENDOR") {
+      setFilter({...filter, userId: userData.uuid});
+    }
+  }, [userData])
 
   console.log("filter = ", filter);
 
