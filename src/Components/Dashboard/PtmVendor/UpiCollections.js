@@ -91,12 +91,22 @@ export default function UpiCollections() {
   }, [userTxnDetails, userTxnDetails?.totalCount])
 
   useEffect(() => {
-    getDashboardUserTxnRequest(filters).then((res) => {
-      if (res?.data?.data) {
-        setUserTxnDetails(res?.data?.data || null);
-      }
-
-    });
+    if (userData?.role === "PTM_VENDOR" && filters?.userId) {
+      getDashboardUserTxnRequest(filters).then((res) => {
+        if (res?.data?.data) {
+          setUserTxnDetails(res?.data?.data || null);
+        }
+      });
+    } else if(userData?.role === "PTM_ADMIN") {
+      getDashboardUserTxnRequest(filters).then((res) => {
+        if (res?.data?.data) {
+          setUserTxnDetails(res?.data?.data || null);
+        }
+      });
+    } else {
+      // else code here
+    }
+    
   }, [filters]);
 
 

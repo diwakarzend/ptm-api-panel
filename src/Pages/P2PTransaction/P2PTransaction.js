@@ -41,22 +41,36 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
         pageSize: page_size,
       },
     };
-    if (userData?.role === "PTM_VENDOR") {
-      params.userId = userData?.uuid;
-    }
+    
     Object.keys(filter).map((key) => {
       if (filter[key]) {
         params[key] = filter[key];
       }
     });
-    getP2pTxnListing(params).then((res) => {
-      if(isDownload && res?.data?.data?.content) {
-        setDownloadData(res?.data?.data?.content);
-      } else {
-        setPagingData(res?.data?.data);
-        setReportsItems(res?.data?.data?.content);
-      }
-    });
+    console.log("userData?.role = ", userData?.role);
+    if (userData?.role === "PTM_VENDOR") {
+      params.userId = userData?.uuid;
+      getP2pTxnListing(params).then((res) => {
+        if(isDownload && res?.data?.data?.content) {
+          setDownloadData(res?.data?.data?.content);
+        } else {
+          setPagingData(res?.data?.data);
+          setReportsItems(res?.data?.data?.content);
+        }
+      });
+    } else if(userData?.role === "PTM_ADMIN") {
+      getP2pTxnListing(params).then((res) => {
+        if(isDownload && res?.data?.data?.content) {
+          setDownloadData(res?.data?.data?.content);
+        } else {
+          setPagingData(res?.data?.data);
+          setReportsItems(res?.data?.data?.content);
+        }
+      });
+    } else {
+      // else code here
+    }
+    
   };
 
   const handleChange = (e) => {
