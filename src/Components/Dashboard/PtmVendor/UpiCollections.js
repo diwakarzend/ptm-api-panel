@@ -9,7 +9,8 @@ import { UpiCollectionsStyle } from "./style";
 import { numberToCurrency } from "../../../utils/common";
 
 const initFilters = {
-  date: moment(new Date()).format('YYYY-MM-DD'),
+  toDate: moment(new Date()).format('YYYY-MM-DD'),
+  fromDate: moment(new Date()).format('YYYY-MM-DD'),
   "pagination": {
     "pageNo": 1,
     "pageSize": 100
@@ -73,6 +74,12 @@ export default function UpiCollections() {
   }, [])
 
   useEffect(() => {
+    if (userData?.role === "PTM_VENDOR") {
+      setFilters({...filters, userId: userData.uuid});
+    }
+  }, [userData])
+
+  useEffect(() => {
     if (userTxnDetails) {
       let data = []
       data.push(userTxnDetails);
@@ -121,14 +128,26 @@ export default function UpiCollections() {
               }
               <div className="form-group">
                 <input
-                  name="date"
+                  name="fromDate"
                   type="date"
                   className="form-control"
-                  placeholder="Enter email"
+                  placeholder="Enter From Date"
                   onChange={changeHandler}
-                  value={filters?.date}
+                  value={filters?.fromDate}
                 />
               </div>
+
+              <div className="form-group">
+                <input
+                  name="toDate"
+                  type="date"
+                  className="form-control"
+                  placeholder="Enter To Date"
+                  onChange={changeHandler}
+                  value={filters?.toDate}
+                />
+              </div>
+
               <div className="form-group">
                 <CSVLink title="Download CSV" className="csv-link" data={downloadData}><i class="fa fa-download " aria-hidden="true"></i></CSVLink>
               </div>
