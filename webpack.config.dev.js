@@ -18,6 +18,9 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
   },
+  alias: {
+    public: path.join(__dirname, './public')
+  },
   module: {
     loaders,
   },

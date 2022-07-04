@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment, useRef } from "react";
 import { connect } from "react-redux";
-import "../../../public/css/style.css";
+// import "../../../public/css/style.css";
 import "./Header.css";
 import Logout from "../Logout/Logout";
 import {

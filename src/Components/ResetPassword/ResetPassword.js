@@ -4,7 +4,6 @@ import urls from "../../utils/urls";
 import { autoFocusOTPForm } from "../../utils/common";
 import RequestOTPForm from "./RequestOTPForm";
 import ResetPasswordForm from "./ResetPasswordForm";
-import "../../Pages/LoginPage/Login.css";
 
 const initialState = {
   otpSend: false,
@@ -101,14 +100,28 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
   const cssClass = formData.successMsg ? "success-msg" : "error-msg";
   return (
     <div>
+      <div className="logo-wrapper text-center mb24">
+        {/* <h5 className="fw-medium">Forgot Password?</h5> */}
+        <img
+          src={'/images/inrpay-logo.png'}
+          alt="INRPAY"
+          className="logo-icon"
+        />
+        <p>Reset password with INRPAY</p>
+      </div>
       <span className={cssClass}>
         {formData.successMsg || formData.errorMsg}
       </span>
-      <img
-        src="https://assets-inrpay-pro.s3.me-south-1.amazonaws.com/logo.jpeg"
-        alt="logo"
-        className="logo-icon"
-      />
+      <div class="alert alert-warning text-center" role="alert">
+        Enter your email and instructions will be sent to you!
+      </div>
+      {
+        (formData.successMsg || formData.errorMsg) &&
+        <div class={`${formData.successMsg ? 'alert-success' : 'alert-danger'} alert text-center`} role="alert">
+          Enter your email and instructions will be sent to you!
+        </div>
+      }
+      
       {formData.otpSend ? (
         <ResetPasswordForm
           submitFormHandler={submitForgotPassword}

@@ -3,8 +3,10 @@ import { createGlobalStyle } from 'styled-components'
 export default createGlobalStyle`
   :root {
     --font: 'Poppins', sans-serif;
+    --ip-body-font-size: 13px;
     --ip-body-bg: #f3f3f9;
     --ip-white-bg:#fff;
+    --ip-white-color:#fff;
     --ip-body-color: #212529;
     --ip-body-color-rgb: 33,37,41;
     --ip-vertical-menu-bg: #fff;
@@ -89,7 +91,7 @@ export default createGlobalStyle`
     --h4: 20px;
     --h5: 16px;
     --h6: 14px;
-    --p: 16px;
+    --p: 13px;
 }
   * {
     margin: 0;
@@ -98,10 +100,18 @@ export default createGlobalStyle`
   }
   body{
     font-family: var(--font);
+    font-size: var(--ip-body-font-size);
     color:var(--ip-body-color-rgb);
     background: var(--ip-body-bg);
     line-height:1.2;
     font-weight:400;
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
   }
   .mb4{
     margin-bottom:4px;
@@ -133,8 +143,16 @@ export default createGlobalStyle`
   .mb4{
     margin-bottom:4px;
   }
-  .mb4{
-    margin-bottom:4px;
+  .mt4{
+    margin-top:4px;
+  }
+
+  .fs-15 {
+    font-size: 15px;
+  }
+
+  .fw-medium {
+    font-weight: medium;
   }
   
   h1{
@@ -167,6 +185,9 @@ export default createGlobalStyle`
   .text-center{
     text-align:center;
   }
+  .cursor-pointer {
+    cursor: pointer;
+  }
   .inputgroup{
     margin-bottom:16px;
   }
@@ -174,6 +195,7 @@ export default createGlobalStyle`
     font-size:13px;
     font-weight:500;
     color: var(--ip-body-color);
+    margin-bottom: 8px;
   }
   .form-control{
     font-size:13px;
@@ -234,5 +256,26 @@ export default createGlobalStyle`
   .reset-password{
     font-size:13px;
     color: var(--text-grey);
+  }
+  .alert {
+    position: relative;
+    padding: 13px 16px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+  }
+  .alert-success {
+    color: #088675;
+    background-color: #daf4f0;
+    border-color: #b6e8e1;
+  }
+  .alert-danger {
+    color: #b44c36;
+    background-color: #fde8e4;
+    border-color: #fbd1c8;
+}
+  .alert-warning {
+    color: #b98a38;
+    background-color: #fef4e4;
+    border-color: #fdeac9;
   }
 `

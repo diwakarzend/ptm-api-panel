@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { isEmpty } from "../../utils/common";
 import ResetPassword from "../../Components/ResetPassword/ResetPassword";
-import "./Login.css";
+import { LoginFormWrapper } from "./style";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -66,15 +66,16 @@ class LoginForm extends React.Component {
   render() {
     const { errorMsg } = this.props;
     const { forgotPasswordClicked, successMsg } = this.state;
-    const cssClass = successMsg ? "success-msg" : "error-msg";
     return (
-      <div className="container-fluid">
-        <div className="d-flex align-items-stretch row full-page flex justify-center">
-          
-          <div className="form-wrapper center-form">
-            <h3 className="text-center mb12">Easy & fast payment with UPI</h3>
-            <p className="text-center mb-28">pay directlyfrom your bank account using your mobile</p>
-            <div className="form-content-wrapper align-self-center">
+      <LoginFormWrapper className="login-form-wrapper">
+        <div className="">
+          <div className="login-bg"></div>
+          <div className="login-form">
+            <div className="form-heading text-center mb-28">
+              <h4 className="fw-medium">Easy & fast payment with UPI</h4>
+              <p className="fs-15 fw-medium">pay directlyfrom your bank account using your mobile</p>
+            </div>
+            <div className="login-form-inner">
               {forgotPasswordClicked ? (
                 <ResetPassword
                   handleCancel={this.cancelForgotPassword}
@@ -83,13 +84,20 @@ class LoginForm extends React.Component {
               ) : (
                 <Fragment>
                   <form className="form-group" onSubmit={this.onFormSubmit}>
-                    <span className={cssClass}>{errorMsg || successMsg}</span>
-
-                    <img
-                      src="https://assets-inrpay-pro.s3.me-south-1.amazonaws.com/logo.jpeg"
-                      alt="logo"
-                      className="logo-icon"
-                    />
+                    <div className="logo-wrapper text-center mb24">
+                      <img
+                        src={'/images/inrpay-logo.png'}
+                        alt="INRPAY"
+                        className="logo-icon"
+                      />
+                      <p className="mt4">Sign in to continue to INRPAY.</p>
+                    </div>
+                    {
+                      (successMsg || errorMsg) &&
+                      <div class={`${successMsg ? 'alert-success' : 'alert-danger'} alert text-center`} role="alert">
+                        {successMsg || errorMsg}
+                      </div>
+                    }
                     <div className="floating-label-group inputgroup">
                       <div className="flex space-between mb-8">
                         <label className="label" htmlFor="user-name">Username</label>
@@ -112,7 +120,7 @@ class LoginForm extends React.Component {
                     <div className="flex space-between mb-8">
                         <label className="label" htmlFor="password">Password</label>
                         <div
-                        className="reset-password"
+                        className="reset-password cursor-pointer"
                           onClick={this.handleForgotPassword}
                         >
                           Forgot password
@@ -142,7 +150,7 @@ class LoginForm extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </LoginFormWrapper>
     );
   }
 }
