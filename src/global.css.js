@@ -18,7 +18,7 @@ export default createGlobalStyle`
     --ip-vertical-menu-sub-item-active-color: #405189;
     --ip-vertical-menu-title-color: #919da9;
     --ip-vertical-menu-bg-dark: #405189;
-    --ip-vertical-menu-item-color-dark: #abb9e8;
+    --ip-nav-link-color: #abb9e8;
     --ip-vertical-menu-item-hover-color-dark: #fff;
     --ip-vertical-menu-item-active-color-dark: #fff;
     --ip-vertical-menu-sub-item-color-dark: #abb9e8;
@@ -106,12 +106,19 @@ export default createGlobalStyle`
     line-height:1.2;
     font-weight:400;
   }
+  input, button {
+    font-family: var(--font);
+  }
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
+  }
+  button, img, a {
+    outline: none;
+    user-select: none;
   }
   .mb4{
     margin-bottom:4px;
@@ -146,13 +153,35 @@ export default createGlobalStyle`
   .mt4{
     margin-top:4px;
   }
+  .mr4{
+    margin-right: 8px;
+  }
+  .mr8{
+    margin-right: 8px;
+  }
+  .mr12{
+    margin-right: 8px;
+  }
+  .mr16{
+    margin-right: 8px;
+  }
 
+
+  .fs-13 {
+    font-size: 13px;
+  }
   .fs-15 {
     font-size: 15px;
   }
+  .fs-16 {
+    font-size: 16px;
+  }
 
   .fw-medium {
-    font-weight: medium;
+    font-weight: 500;
+  }
+  .fw-bold {
+    font-weight: 600;
   }
   
   h1{
@@ -182,11 +211,17 @@ export default createGlobalStyle`
   p{
     font-size:var(--p);
   }
+  .text-left{
+    text-align:left;
+  }
   .text-center{
     text-align:center;
   }
   .cursor-pointer {
     cursor: pointer;
+  }
+  .rounded-full {
+    border-radius: 50%;
   }
   .inputgroup{
     margin-bottom:16px;

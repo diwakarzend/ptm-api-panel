@@ -1,7 +1,5 @@
-import React, { useState, useEffect, Fragment, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
-// import "../../../public/css/style.css";
-import "./Header.css";
 import Logout from "../Logout/Logout";
 import {
   printUserName,
@@ -9,8 +7,8 @@ import {
   addOverlay,
   removeOverlay,
 } from "../../utils/common";
-import AnchorLink from "../AnchorLink/AnchorLink";
 import UserProfileForm from "../UserProfile/UserProfileForm";
+import { HeaderWrapper } from "./style";
 
 const userRole = {
   PTM_VENDOR: "VENDOR",
@@ -52,62 +50,47 @@ const Header = (props) => {
   }
   const { login } = props;
   const userData = login && login.userData;
-
+  console.log("userData = ", userData);
   return (
-    <div className="header-bg">
-      <header className="main-header">
-        <div className="container_header phone_view border_top_bott">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="logo d-flex align-items-center">
-                <strong className="logo_icon">
-                  <img
-                    src="http://localhost:3008/images/small-logo.png"
-                    alt=""
-                  />
-                </strong>
-                <span className="logo-default">
-                  <AnchorLink href="/dashboard">
-                    <img
-                      src="https://assets-inrpay-pro.s3.me-south-1.amazonaws.com/logo.jpeg"
-                      alt="Logo"
-                    />
-                  </AnchorLink>
-                </span>
-                <div className="icon_menu" onClick={clickHambergerHandler}>
-                  <a className="menu-toggler sidebar-toggler"></a>
-                </div>
-              </div>
-
-              <div className="right_detail d-flex justify-content-end">
-                <div className="row full_width">
-                  <div className="col-xl-12 col-12 d-flex justify-content-end">
-                    <div className="right_bar_top d-flex align-items-center justify-content-md-between justify-content-end">
-                      <div className="search"></div>
-
-                      <div className="align_end">
-                        <UserInfoPopUp
-                          userPopUpVisible={userPopUpVisible}
-                          toggleUserImage={toggleUserImage}
-                          userData={userData}
-                          props={props}
-                          clickHandler={clickHandler}
-                        />
-                      </div>
-                    </div>
-                  </div>
+    <>
+      <HeaderWrapper className="header flex space-between">
+          <div className="header-left">
+            <button className="header-hamburger" type="button" onClick={clickHambergerHandler}>
+              <span className="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+          </div>
+          <div className="header-right flex">
+            <div className="user-info">
+              <div className="user-info-inner flex item-center">
+                <span className="short-name flex item-center justify-center rounded-full fw-medium mr8">{printUserNameShort(userData)}</span>
+                <div className="full-name text-left">
+                  <div className="user-full-name fw-bold">{printUserName(userData)}</div>
+                  <div className="user-role mt4">{userData && userRole[userData.role]}</div>
                 </div>
               </div>
             </div>
+          {/* <div className="align_end">
+            <UserInfoPopUp
+              userPopUpVisible={userPopUpVisible}
+              toggleUserImage={toggleUserImage}
+              userData={userData}
+              props={props}
+              clickHandler={clickHandler}
+            />
+          </div> */}
           </div>
-        </div>
-      </header>
+              
+      </HeaderWrapper>
       {isProfileClicked && (
         <div className="card-header fund-modal">
           <UserProfileForm closePopUpHandler={closePopUpHandler} />
         </div>
       )}
-    </div>
+    </>
   );
 };
 

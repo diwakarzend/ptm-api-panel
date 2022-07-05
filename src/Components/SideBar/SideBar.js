@@ -9,8 +9,7 @@ import {
 import { getUserPermissions } from "../../utils/common";
 
 import { useLocation } from "react-router-dom";
-
-import "./SideBar.css";
+import { SidebarWrapper } from "./style";
 
 /* 0: "PTM_PAYOUT_TRANSACTION"
 1: "PTM_PAYOUT_STATUS_REPORT"
@@ -78,27 +77,24 @@ const SideBar = (props) => {
   console.log("permissions SideBar", activeSection);
 
   return (
-    <div className="side_bar scroll_auto">
-      <div className="user-panel">
-        <div className="balance-wrapper">
-          <span className="balance-title">Current Balance</span>
-          <span className="balance-amount">
-            <i className="fa fa-inr" aria-hidden="true"></i>
-            {userWallet &&
-              userWallet.MAIN_WALLET &&
-              parseInt(userWallet.MAIN_WALLET).toLocaleString("en-IN")}
-            <i
-              className={"fa fa-refresh " + (isWalletLoading ? "fa-spin" : "")}
-              aria-hidden="true"
-              onClick={handleClick}
-            ></i>
-          </span>
-        </div>
+    <SidebarWrapper className="sidebar">
+      <div className="balance-wrapper">
+        <span className="balance-title">Current Balance</span>
+        <span className="balance-amount">
+          <i className="fa fa-inr" aria-hidden="true"></i>
+          {userWallet &&
+            userWallet.MAIN_WALLET &&
+            parseInt(userWallet.MAIN_WALLET).toLocaleString("en-IN")}
+          <i
+            className={"fa fa-refresh " + (isWalletLoading ? "fa-spin" : "")}
+            aria-hidden="true"
+            onClick={handleClick}
+          ></i>
+        </span>
       </div>
-
       <ul id="dc_accordion" className="sidebar-menu tree">
-        <li className="menu_sub">
-          <a
+        {/* <li className="menu_sub">
+          <a className="nav-link"
             onClick={() => {
               setToggleAmount(!toggleAmount);
               setTogglePayment(false);
@@ -109,7 +105,7 @@ const SideBar = (props) => {
           </a>
           <ul className={toggleAmount ? "down_menu open" : "down_menu"}>
             <li>
-              <a>
+              <a className="nav-link">
                 <span>
                   <i className="fa fa-inr" aria-hidden="true"></i>
                   {userWallet && userWallet.MAIN_WALLET}
@@ -117,13 +113,13 @@ const SideBar = (props) => {
               </a>
             </li>
           </ul>
-        </li>
+        </li> */}
 
         <li className={`menu_sub`}>
           <AnchorLink
             href="/dashboard"
             clicked={handleNavClick}
-            className={activeSection == "dashboard" ? "active" : ""}
+            className={`${activeSection == "dashboard" ? "active" : ""} nav-link`}
           >
             <i className="ti-dashboard"></i> <span>Dashboard</span>
           </AnchorLink>
@@ -131,6 +127,7 @@ const SideBar = (props) => {
         {userData && userData.role !== "PTM_VENDOR" ? (
           <li className="menu_sub">
             <a
+             className="nav-link"
               onClick={() => {
                 setToggleCompany(!toggleCompany);
                 setTogglePayment(false);
@@ -152,9 +149,10 @@ const SideBar = (props) => {
                 <AnchorLink
                   href="/users"
                   clicked={handleNavClick}
-                  className={activeSection == "users" ? "active" : ""}
+                  className={`${activeSection == "users" ? "active" : ""} nav-link`}
                 >
-                  Manage Users
+                  <i className="icon-people"></i>
+                  <span>Manage Users</span>
                 </AnchorLink>
               </li>
             </ul>
@@ -171,6 +169,7 @@ const SideBar = (props) => {
           }`}
         >
           <a
+            className="nav-link"
             onClick={() => {
               setTogglePayment(!togglePayment);
               setToggleCompany(false);
@@ -194,7 +193,7 @@ const SideBar = (props) => {
                 <AnchorLink
                   href="/fund/request"
                   clicked={handleNavClick}
-                  className={`${activeSection == "request" ? " active" : ""}`}
+                  className={`${activeSection == "request" ? " active" : ""} nav-link`}
                 >
                   Fund Request
                 </AnchorLink>
@@ -209,7 +208,7 @@ const SideBar = (props) => {
                     clicked={handleNavClick}
                     className={`${
                       activeSection == "beneficiary" ? " active" : ""
-                    }`}
+                    } nav-link`}
                   >
                     Beneficiary
                   </AnchorLink>
@@ -223,7 +222,7 @@ const SideBar = (props) => {
                   clicked={handleNavClick}
                   className={`${
                     activeSection == "commission" ? " active" : ""
-                  }`}
+                  } nav-link`}
                 >
                   Commission
                 </AnchorLink>
@@ -237,7 +236,7 @@ const SideBar = (props) => {
             <AnchorLink
               href="/payout/reports"
               clicked={handleNavClick}
-              className={` ${activeSection == "reports" ? " active" : ""}`}
+              className={` ${activeSection == "reports" ? " active" : ""} nav-link`}
             >
               <i className="icon-chart"></i> <span>Transaction Report </span>
             </AnchorLink>
@@ -247,12 +246,13 @@ const SideBar = (props) => {
         {userData && userData.role !== "PTM_VENDOR" ? (
           <li className="menu_sub">
             <a
+              className="nav-link"
               onClick={() => {
-                setToggleMapqr(!toggleMapqr);
-                setToggleCompany(false);
-                setTogglePayment(false);
-                setToggleAmount(false);
-              }}
+              setToggleMapqr(!toggleMapqr);
+              setToggleCompany(false);
+              setTogglePayment(false);
+              setToggleAmount(false);
+            }}
             >
               <i className="icon-people"></i> <span>Map Vendor QR</span>
               <span className="icon-arrow-down styleicon"></span>
@@ -270,7 +270,7 @@ const SideBar = (props) => {
                 <AnchorLink
                   href="/mapqr-list"
                   clicked={handleNavClick}
-                  className={activeSection == "mapqr-list" ? "active" : ""}
+                  className={`${activeSection == "mapqr-list" ? "active" : ""} nav-link`}
                 >
                   Listing
                 </AnchorLink>
@@ -295,7 +295,7 @@ const SideBar = (props) => {
             clicked={handleNavClick}
             className={` ${
               activeSection == "p2p-transaction" ? " active" : ""
-            }`}
+            } nav-link`}
           >
             <i className="icon-settings"></i>
             <span>P2P Transaction</span>
@@ -305,7 +305,7 @@ const SideBar = (props) => {
           <AnchorLink
             href="/settings"
             clicked={handleNavClick}
-            className={`${activeSection == "settings" ? " open active" : ""}`}
+            className={`${activeSection == "settings" ? " open active" : ""} nav-link`}
           >
             <i className="icon-settings"></i> <span>Settings </span>
           </AnchorLink>
@@ -325,7 +325,7 @@ const SideBar = (props) => {
           </ul> */}
         </li>
       </ul>
-    </div>
+    </SidebarWrapper>
   );
 };
 
