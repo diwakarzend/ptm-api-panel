@@ -85,10 +85,10 @@ export default createGlobalStyle`
     --ip-red: #f06548;
     --ip-green: #0ab39c;
     --text-grey:#878a99;
-    --h1: 32px;
-    --h2: 28px;
-    --h3: 24px;
-    --h4: 20px;
+    --h1: 24px;
+    --h2: 20px;
+    --h3: 18px;
+    --h4: 16px;
     --h5: 16px;
     --h6: 14px;
     --p: 13px;
@@ -119,6 +119,9 @@ export default createGlobalStyle`
   button, img, a {
     outline: none;
     user-select: none;
+  }
+  ul, li {
+    list-style: none;
   }
   .mb4{
     margin-bottom:4px;
@@ -186,26 +189,23 @@ export default createGlobalStyle`
   
   h1{
     font-size:var(--h1);
-    font-weight:500;
   }
   h2{
     font-size:var(--h2);
-    font-weight:500;
   }
   h3{
     font-size:var(--h3);
-    font-weight:500;
   }
   h4{
     font-size:var(--h4);
-    font-weight:500;
   }
   h5{
     font-size:var(--h5);
-    font-weight:500;
   }
   h6{
     font-size:var(--h6);
+  }
+  h1, h2, h3, h4, h5, h6 {
     font-weight:500;
   }
   p{
@@ -279,6 +279,12 @@ export default createGlobalStyle`
   .item-center{
     align-items:center;
   }
+  .shrink-0 {
+    flex-shrink: 0;
+  }
+  .flex-column {
+    flex-direction: column;
+  }
   .error-msg{
     color: var(--ip-red);
   }
@@ -312,5 +318,27 @@ export default createGlobalStyle`
     color: #b98a38;
     background-color: #fef4e4;
     border-color: #fdeac9;
+  }
+
+  /* Auth Layout CSS */
+  .main-content {
+    margin-left: 250px;
+    padding: 70px 16px 60px;
+  }
+  .card-wrapper {
+    position: relative;
+    display: flex;
+    word-wrap: break-word;
+    background-color: var(--ip-card-bg);
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgb(56 65 74 / 15%);
+    margin-bottom: 24px;
+  }
+  .card-header {
+    border-radius: 4px 4px 0 0;
+    padding: 16px;
+    border-bottom: 1px solid var(--ip-border-color);
   }
 `

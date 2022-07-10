@@ -6,7 +6,7 @@ import "./Company.css";
 const Company = (props) => {
   return (
     <div>
-      <SideBar {...props} />
+      {/* <SideBar {...props} /> */}
       <main className="content_wrapper">
         <div className="page-heading">
           <div className="container-fluid">

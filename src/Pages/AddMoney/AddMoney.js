@@ -7,7 +7,7 @@ import "./AddMoney.css";
 const AddMoney = (props) => {
   return (
     <div className="container_full">
-      <SideBar {...props} />
+      {/* <SideBar {...props} /> */}
       <div className="content_wrapper">
         <div className="container-fluid">
           <BreadCrumb heading="Add Money" value="Add Money" />

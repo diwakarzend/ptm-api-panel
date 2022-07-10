@@ -1,40 +1,30 @@
 import React from "react";
 import AnchorLink from "../AnchorLink/AnchorLink";
-
-import "./BreadCrumb.css";
+import { PageTitleWrapper } from "./style";
 
 const BreadCrumb = ({ heading, value }) => {
-  const refreshPage = ()=>{
+  const refreshPage = () => {
     window.location.reload();
- }
+  }
   return (
-    <div className="page-heading">
-      <div className="row d-flex align-items-center">
-        <div className="col-md-6">
-          <div className="page-breadcrumb">
-            <h1>{heading}</h1>
-          </div>
-        </div>
-        <div className="col-md-6 justify-content-md-end d-md-flex">
-          <div className="breadcrumb_nav">
-            {heading !== "Dashboard" && (
-              <ol className="breadcrumb">
-                <li>
-                  <i className="fa fa-home"></i>
-                  <AnchorLink href="/dashboard" className="parent-item">
-                    Home
-                  </AnchorLink>
+    <PageTitleWrapper className="flex item-center space-between">
+      <h4>{heading}</h4>
+      <div className="breadcrumb_nav">
+        {heading !== "Dashboard" && (
+          <ol className="breadcrumb">
+            <li>
+              <i className="fa fa-home"></i>
+              <AnchorLink href="/dashboard" className="parent-item">
+                Home
+              </AnchorLink>
 
-                  <i className="fa fa-angle-right"></i>
-                </li>
-                <li className="active">{value}</li>
-              </ol>
-            )}
-          </div>
-        </div>
+              <i className="fa fa-angle-right"></i>
+            </li>
+            <li className="active">{value}</li>
+          </ol>
+        )}
       </div>
-      {
-        heading == "Dashboard" && 
+      {heading == "Dashboard" &&
         <span className="reload-page">
           <i
             className="fa fa-refresh"
@@ -43,7 +33,7 @@ const BreadCrumb = ({ heading, value }) => {
           ></i>
         </span>
       }
-    </div>
+    </PageTitleWrapper>
   );
 };
 

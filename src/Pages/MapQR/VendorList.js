@@ -28,7 +28,7 @@ const VendorList = (props) => {
 
   return (
     <Wrapper className="container_full">
-      <SideBar {...props} />
+      {/* <SideBar {...props} /> */}
       <div className="content_wrapper">
         <div className="container-fluid">
           <BreadCrumb heading="Vendor List" value="Vendor List" />

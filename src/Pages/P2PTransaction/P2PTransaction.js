@@ -100,7 +100,7 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
 
   return (
     <div className="container_full">
-      <SideBar {...props} />
+      {/* <SideBar {...props} /> */}
       <div className="content_wrapper">
         <div className="container-fluid">
           <BreadCrumb

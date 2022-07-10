@@ -9,6 +9,7 @@ export const HeaderWrapper = styled.header`
     left: 250px;
     top: 0;
     right: 0;
+    z-index: 9;
     .header-hamburger {
         border: none;
         background-color: transparent;

@@ -1,15 +1,18 @@
 import React, { useState, useEffect, uselo } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AnchorLink from "../AnchorLink/AnchorLink";
 import {
-  fetchUserDetailsIfNeeded,
+  // fetchUserDetailsIfNeeded,
   fetchUserWalletIfNeeded,
   fetchUserWallet,
 } from "../../actions/Login";
-import { getUserPermissions } from "../../utils/common";
+import { getUserPermissions, isEmpty } from "../../utils/common";
 
 import { useLocation } from "react-router-dom";
 import { SidebarWrapper } from "./style";
+import { Logo } from "../UI/StyledConstants";
+import {Navigation} from './constants';
+import NavItem from "./NavItem";
 
 /* 0: "PTM_PAYOUT_TRANSACTION"
 1: "PTM_PAYOUT_STATUS_REPORT"
@@ -43,12 +46,10 @@ const SideBar = (props) => {
   const [toggleMapqr, setToggleMapqr] = useState(false);
   let location = useLocation();
   const pathname = location.pathname;
+  const dispatch = useDispatch();
 
   //Mounting Phase
-
   useEffect(() => {
-    const { dispatch } = props;
-    //   dispatch(fetchUserDetailsIfNeeded());
     dispatch(fetchUserWalletIfNeeded());
   }, []);
 
@@ -61,13 +62,12 @@ const SideBar = (props) => {
   }, [pathname]);
 
   const handleClick = () => {
-    const { dispatch } = props;
     dispatch(fetchUserWallet());
   };
 
   const handleNavClick = (event, pathName) => {};
 
-  const { login } = props;
+  const { login } = useSelector(state => state);
   const userData = login && login.userData;
   const userWallet = login && login.userWallet;
   const isWalletLoading = login && login.isWalletLoading;
@@ -76,8 +76,44 @@ const SideBar = (props) => {
 
   console.log("permissions SideBar", activeSection);
 
+  const [inrpayNavigation, setInrpayNavigation] = useState(Navigation);
+
+  const onNavItemClick = (i) => {
+    const _inrpayNavigation = JSON.parse(JSON.stringify(inrpayNavigation));
+    _inrpayNavigation[i].active = !_inrpayNavigation[i].active;
+    setInrpayNavigation(_inrpayNavigation);
+  }
+
+  useEffect(() => {
+    if (pathname && pathname.split("/")) {
+      const value = "/" + pathname.split("/").pop();
+      console.log("pathname = ", value);
+      const _inrpayNavigation = JSON.parse(JSON.stringify(inrpayNavigation));
+      _inrpayNavigation.map((navData, i) => {
+        let isActive = navData.active;
+        if(!isEmpty(navData.subNav)) {
+          navData.subNav.map((subNavData, j) => {
+            if(subNavData.link === value) {
+              isActive = true;
+              return;
+            }
+          })
+          navData.active = isActive;
+          return;
+        }
+      })
+      setInrpayNavigation(_inrpayNavigation);
+      // setActiveSection(value);
+    }
+  }, [pathname]);
+
+  console.log("inrpayNavigation = ", inrpayNavigation);
+
   return (
     <SidebarWrapper className="sidebar">
+      <Logo className="logo" type="white">
+        <span className="icon">₹</span> INRPAY
+      </Logo>
       <div className="balance-wrapper">
         <span className="balance-title">Current Balance</span>
         <span className="balance-amount">
@@ -92,30 +128,19 @@ const SideBar = (props) => {
           ></i>
         </span>
       </div>
-      <ul id="dc_accordion" className="sidebar-menu tree">
-        {/* <li className="menu_sub">
-          <a className="nav-link"
-            onClick={() => {
-              setToggleAmount(!toggleAmount);
-              setTogglePayment(false);
-              setToggleCompany(false);
-            }}
-          >
-            <i className="fa fa-inr" aria-hidden="true"></i>
-          </a>
-          <ul className={toggleAmount ? "down_menu open" : "down_menu"}>
-            <li>
-              <a className="nav-link">
-                <span>
-                  <i className="fa fa-inr" aria-hidden="true"></i>
-                  {userWallet && userWallet.MAIN_WALLET}
-                </span>
-              </a>
-            </li>
-          </ul>
-        </li> */}
-
-        <li className={`menu_sub`}>
+      <ul className="menu-wrapper">
+        {!isEmpty(inrpayNavigation) && inrpayNavigation.map((navData, i) => 
+          <NavItem 
+            key={`nav-${i}`} 
+            navData={navData} 
+            onNavItemClick={onNavItemClick} 
+            activeIndex={i} 
+            subNavLength={navData?.subNav?.length || 0} 
+          />
+        )}
+      </ul>
+      <ul id="dc_accordion" className="sidebar-menu-list">
+        <li className={`nav-link-list`}>
           <AnchorLink
             href="/dashboard"
             clicked={handleNavClick}
@@ -124,20 +149,12 @@ const SideBar = (props) => {
             <i className="ti-dashboard"></i> <span>Dashboard</span>
           </AnchorLink>
         </li>
-        {userData && userData.role !== "PTM_VENDOR" ? (
-          <li className="menu_sub">
-            <a
-             className="nav-link"
-              onClick={() => {
-                setToggleCompany(!toggleCompany);
-                setTogglePayment(false);
-                setToggleAmount(false);
-              }}
-            >
-              <i className="icon-people"></i> <span>Manage Company</span>
-              <span className="icon-arrow-down styleicon"></span>
+        {userData && userData.role !== "PTM_VENDOR" && (
+          <li className="nav-link-list has-sub-menu">
+            <a className="nav-link">
+              <i className="icon-people"></i>
+              <span>Manage Company</span>
             </a>
-
             <ul
               className={
                 toggleCompany || activeSection == "users"
@@ -148,8 +165,7 @@ const SideBar = (props) => {
               <li>
                 <AnchorLink
                   href="/users"
-                  clicked={handleNavClick}
-                  className={`${activeSection == "users" ? "active" : ""} nav-link`}
+                  className="nav-link"
                 >
                   <i className="icon-people"></i>
                   <span>Manage Users</span>
@@ -157,25 +173,10 @@ const SideBar = (props) => {
               </li>
             </ul>
           </li>
-        ) : (
-          ""
         )}
 
-        <li
-          className={`menu_sub ${
-            ["request", "beneficiary", "commission"].includes(activeSection)
-              ? " active"
-              : ""
-          }`}
-        >
-          <a
-            className="nav-link"
-            onClick={() => {
-              setTogglePayment(!togglePayment);
-              setToggleCompany(false);
-              setToggleAmount(false);
-            }}
-          >
+        <li className={`nav-link-list has-sub-menu`}>
+          <a className="nav-link">
             <i className="icon-wallet"></i> <span>Payment</span>
             <span className="icon-arrow-down styleicon"></span>
           </a>
@@ -189,14 +190,8 @@ const SideBar = (props) => {
             }
           >
             {userPermissions && userPermissions.includes("PTM_FUND_REQUEST") && (
-              <li className="menu_sub">
-                <AnchorLink
-                  href="/fund/request"
-                  clicked={handleNavClick}
-                  className={`${activeSection == "request" ? " active" : ""} nav-link`}
-                >
-                  Fund Request
-                </AnchorLink>
+              <li className="nav-link-list">
+                <AnchorLink href="/fund/request" className="nav-link">Fund Request</AnchorLink>
               </li>
             )}
 
@@ -329,8 +324,9 @@ const SideBar = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return { ...state };
-}
+// function mapStateToProps(state) {
+//   return { ...state };
+// }
 
-export default connect(mapStateToProps)(SideBar);
+export default SideBar;
+// export default connect(mapStateToProps)(SideBar);

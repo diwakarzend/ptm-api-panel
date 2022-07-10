@@ -26,7 +26,7 @@ const Routes = (props) => {
         <PrivateRoute path="/add/money" component={AddMoneyLoadable} exact />
         <PrivateRoute path="/users" component={UsersLoadable} exact />
         <PrivateRoute
-          path="/fund/request"
+          path="/fund-request"
           component={FundRequestLoadable}
           exact
         />
@@ -36,13 +36,13 @@ const Routes = (props) => {
           exact
         />
         <PrivateRoute
-          path="/payout/reports"
+          path="/payout-reports"
           component={ReportsLoadable}
           exact
         />
         <PrivateRoute path="/settings" component={SettingsLodable} exact />
         <PrivateRoute
-          path="/vendor/commission"
+          path="/vendor-commission"
           component={CommissionLoadable}
           exact
         />
