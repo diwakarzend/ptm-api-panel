@@ -1,5 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import Footer from "../Components/Footer/Footer";
+import Header from "../Components/Header/Header";
 import SideBar from "../Components/SideBar/SideBar";
 import { isAuthenticated } from "../utils/common";
 
@@ -13,7 +15,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       <div className="main-container">
         <SideBar />
         <div className="main-content">
+          <Header />
           <Component {...props} />
+          <Footer />
         </div>
       </div>
        

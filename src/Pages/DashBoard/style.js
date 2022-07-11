@@ -31,7 +31,7 @@ export const DashboardWrapper = styled.div`
     &.analysis-and-statistics {
         .transaction-analysis {
             margin-right: 24px;
-            flex: 1;
+            flex: 0 0 70%;
             max-width: 70%;
         }
         .overall-statistics {

@@ -47,24 +47,19 @@ class App extends Component {
     if (login.isLoggedIn && permissions && permissions.length == 0) {
       return (
         <div className="app-container">
-          <Header {...this.props} />
+          <Header />
           <div className="no-access">
             <h1>
               You are not authorize to access this page, please contact to site
               Administrator
             </h1>
           </div>
-          <Footer {...this.props} />
+          <Footer />
         </div>
       );
     }
-
     return (
-      <div className="app-container">
-        <Header {...this.props} />
-        <Routes />
-        <Footer {...this.props} />
-      </div>
+      <Routes />
     );
   }
 }

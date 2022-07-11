@@ -1,27 +1,13 @@
 import React from "react";
-import "./Footer.css";
+import { FooterWrapper } from "./style";
 
-const Footer = (props) => {
-  const { location } = props;
-  if (location && location.pathname == "/") {
-    return "";
-  }
+const Footer = () => {
+  const d = new Date();
   return (
-    <footer className="footer ptb-20">
-      <div className="row">
-        <div className="col-md-12 text-center">
-          <div className="copy_right">
-            <p>
-              2021 © Dashboard Theme By
-              <a href="#"> InrPay </a>
-            </p>
-          </div>
-          <a id="back-to-top" href="#">
-            <i className="ion-android-arrow-up"></i>
-          </a>
-        </div>
-      </div>
-    </footer>
+    <FooterWrapper className="footer flex item-center space-between">
+      <span>{d.getFullYear()} © INRPAY</span> 
+      <span>Design & Developed By INRPAY</span>
+    </FooterWrapper>
   );
 };
 

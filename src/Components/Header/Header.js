@@ -1,14 +1,14 @@
-import React, { useState, useRef } from "react";
-import { connect } from "react-redux";
-import Logout from "../Logout/Logout";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import {
   printUserName,
   printUserNameShort,
-  addOverlay,
-  removeOverlay,
+  clearAuthToken,
 } from "../../utils/common";
 import UserProfileForm from "../UserProfile/UserProfileForm";
-import { HeaderWrapper } from "./style";
+import { HeaderWrapper, UserInfoWrapper } from "./style";
+import { loginResetStore } from "../../actions/Login";
 
 const userRole = {
   PTM_VENDOR: "VENDOR",
@@ -16,30 +16,13 @@ const userRole = {
   PTM_SUB_ADMIN: "SUB ADMIN",
 };
 
-const Header = (props) => {
-  const { location } = props;
-  console.log(props);
+const Header = () => {
 
-  if (location && location.pathname == "/") {
-    return "";
-  }
-
-  const [statusQRICon, toggleQRIcon] = useState(false);
-  const [statusNotICon, toggleNotificationIcon] = useState(false);
-  const [userPopUpVisible, toggleUserImage] = useState(false);
   const [isProfileClicked, setProfileClick] = useState(false);
 
-  const didMountRef = useRef(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const clickHandler = () => {
-    addOverlay();
-    setProfileClick(true);
-  };
-
-  const closePopUpHandler = () => {
-    removeOverlay();
-    setProfileClick(false);
-  };
 
   function clickHambergerHandler() {
     if (document.body.classList.value != "nav_small") {
@@ -48,8 +31,13 @@ const Header = (props) => {
       document.body.classList.remove("nav_small");
     }
   }
-  const { login } = props;
-  const userData = login && login.userData;
+
+  const logout = () => {
+    clearAuthToken();
+    dispatch(loginResetStore());
+    history.push("/");
+  };
+  const userData = useSelector(state => state?.login?.userData);
   console.log("userData = ", userData);
   return (
     <>
@@ -72,16 +60,14 @@ const Header = (props) => {
                   <div className="user-role mt4">{userData && userRole[userData.role]}</div>
                 </div>
               </div>
+              <UserInfoWrapper className="user-info-dropdown">
+                <h6>Welcome {userData?.firstName || '-'}</h6>
+                <ul>
+                  <li>Profile</li>
+                  <li onClick={() => logout()}>Logout</li>
+                </ul>
+              </UserInfoWrapper>
             </div>
-          {/* <div className="align_end">
-            <UserInfoPopUp
-              userPopUpVisible={userPopUpVisible}
-              toggleUserImage={toggleUserImage}
-              userData={userData}
-              props={props}
-              clickHandler={clickHandler}
-            />
-          </div> */}
           </div>
               
       </HeaderWrapper>
@@ -94,78 +80,4 @@ const Header = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return { ...state };
-}
-
-export default connect(mapStateToProps)(Header);
-
-const UserInfoPopUp = ({
-  userPopUpVisible,
-  toggleUserImage,
-  userData,
-  props,
-  clickHandler,
-}) => {
-  // console.log("ss", userData);
-  return (
-    <div className={`dropdown dropdown-user${userPopUpVisible ? " show" : ""}`}>
-      <a
-        className="dropdown-toggle"
-        data-toggle="dropdown"
-        data-hover="dropdown"
-        data-close-others="true"
-        aria-expanded="true"
-        onClick={() => toggleUserImage(!userPopUpVisible)}
-      >
-        {printUserNameShort(userData)}
-      </a>
-      <div style={{ color: "#fff" }}>{userData && userRole[userData.role]}</div>
-      <ul
-        className={`dropdown-menu dropdown-menu-default${
-          userPopUpVisible ? " show" : ""
-        }`}
-      >
-        <li>
-          <div className="user-panel">
-            {/* <div className="user_image">
-              <img
-                src="http://localhost:3008/images/user3.png"
-                className="img-circle mCS_img_loaded"
-                alt="User Image"
-              />
-            </div> */}
-            <div className="info">
-              <p>{printUserName(userData)}</p>
-              <a> {userData && userData.email}</a>
-            </div>
-          </div>
-        </li>
-        <li onClick={clickHandler}>
-          <a>
-            <i className="icon-user"></i> Profile
-          </a>
-        </li>
-        {/*<li>
-          <a>
-            <i className="icon-settings"></i> Settings
-          </a>
-        </li>
-        <li>
-          <a>
-            <i className="icon-directions"></i> Help
-          </a>
-        </li>
-        <li className="divider"></li>
-        <li>
-          <a href="lock_screen.html">
-            <i className="icon-lock"></i> Lock
-          </a>
-        </li> */}
-        <li>
-          <Logout {...props} />
-        </li>
-      </ul>
-    </div>
-  );
-};
+export default Header;

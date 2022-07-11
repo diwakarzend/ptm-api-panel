@@ -324,6 +324,7 @@ export default createGlobalStyle`
   .main-content {
     margin-left: 250px;
     padding: 70px 16px 60px;
+    position: relative;
   }
   .card-wrapper {
     position: relative;

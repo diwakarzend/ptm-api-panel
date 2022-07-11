@@ -97,6 +97,15 @@ export const HeaderWrapper = styled.header`
         .user-info {
             background-color: var(--ip-topbar-user-bg);
             height: 100%;
+            position: relative;
+            &:hover {
+                .user-info-dropdown {
+                    visibility: visible;
+                    transform: translateY(0);
+                    z-index: 9;
+                    opacity: 1;
+                }
+            }
         }
         .user-info-inner {
             padding: 19px;
@@ -118,6 +127,45 @@ export const HeaderWrapper = styled.header`
         .user-role {
             font-size: 11px;
             color: var(--text-grey);
+        }
+    }
+`
+
+export const UserInfoWrapper = styled.div`
+    box-shadow: 0 5px 10px rgb(30 32 37 / 12%);
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: -1;
+    visibility: hidden;
+    opacity: 0;
+    min-width: 100%;
+    padding: 8px 0;
+    margin: 0;
+    font-size: 13px;
+    color: var(--ip-body-color);
+    text-align: left;
+    list-style: none;
+    background-color: var(--ip-dropdown-bg);
+    background-clip: padding-box;
+    border: var(--ip-dropdown-border-width) solid var(--ip-border-color);
+    border-radius: 4px;
+    transform: translateY(10px);
+    transition: all 300ms ease-in;
+    h6 {
+        padding: 8px 20px;
+        line-height: 20px;
+        color: var(--text-grey);
+    }
+    li {
+        padding: 8px 20px;
+        line-height: 20px;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--ip-dropdown-link-color);
+        &:hover {
+            color: var(--ip-dropdown-link-hover-color);
+            background-color: var(--ip-dropdown-link-hover-bg);
         }
     }
 `
