@@ -31,3 +31,25 @@ export const Logo = styled.span`
     }
     
 `
+export const IconRefresh = styled.i`
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border-top: solid 1px currentColor;
+    border-bottom: solid 1px currentColor;
+    border-left: solid 1px transparent;
+    border-right: solid 1px currentColor;
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        left: 1px;
+        top: 10px;
+        width: 4px;
+        height: 4px;
+        border-top: solid 1px currentColor;
+        border-left: solid 1px currentColor;
+        transform: rotate(-22.5deg);
+    }
+`

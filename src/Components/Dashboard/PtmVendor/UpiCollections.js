@@ -101,70 +101,62 @@ export default function UpiCollections() {
 
 
   return (
-    <UpiCollectionsStyle className="card card-shadow mb-4">
-      <div className="row">
-        <div className="col-xl-12">
-          <div className="card-header">
-            <div className="card-title">UPI & QR Collections</div>
-
-            <form className="filter-table">
-              {
-                !isVendor &&
-                <div className="form-group">
-                  <select
-                    name="userId"
-                    className="form-control"
-                    id="exampleFormControlSelect1"
-                    onChange={changeHandler}
-                  >
-                    <option value="">Select Merchant</option>
-                    {
-                      vendorList.map(vendor =>
-                        <option key={vendor?.uuid} value={vendor?.uuid}>{`${vendor.firstName || '-'} ${vendor.lastName || ''}`}</option>
-                      )
-                    }
-                  </select>
-                </div>
-              }
-              <div className="form-group">
-                <input
-                  name="fromDate"
-                  type="date"
-                  className="form-control"
-                  placeholder="Enter From Date"
-                  onChange={changeHandler}
-                  value={filters?.fromDate}
-                />
-              </div>
-
-              <div className="form-group">
-                <input
-                  name="toDate"
-                  type="date"
-                  className="form-control"
-                  placeholder="Enter To Date"
-                  onChange={changeHandler}
-                  value={filters?.toDate}
-                />
-              </div>
-
-              <div className="form-group">
-                <CSVLink title="Download CSV" className="csv-link" data={downloadData}><i class="fa fa-download " aria-hidden="true"></i></CSVLink>
-              </div>
-            </form>
+    <UpiCollectionsStyle className="card-wrapper flex-column mb-4">
+      
+      <div className="card-header flex item-center space-between">
+        <h4 className="card-title">UPI & QR Collections</h4>
+        <form className="filter-table flex item-center">
+          {
+            !isVendor &&
+            <div className="form-group">
+              <select
+                name="userId"
+                className="form-control"
+                id="exampleFormControlSelect1"
+                onChange={changeHandler}
+              >
+                <option value="">Select Merchant</option>
+                {
+                  vendorList.map(vendor =>
+                    <option key={vendor?.uuid} value={vendor?.uuid}>{`${vendor.firstName || '-'} ${vendor.lastName || ''}`}</option>
+                  )
+                }
+              </select>
+            </div>
+          }
+          <div className="form-group">
+            <input
+              name="fromDate"
+              type="date"
+              className="form-control"
+              placeholder="Enter From Date"
+              onChange={changeHandler}
+              value={filters?.fromDate}
+            />
           </div>
-        </div>
+          <div className="form-group">
+            <input
+              name="toDate"
+              type="date"
+              className="form-control"
+              placeholder="Enter To Date"
+              onChange={changeHandler}
+              value={filters?.toDate}
+            />
+          </div>
+          <div className="form-group">
+            <CSVLink title="Download CSV" className="csv-link" data={downloadData}><i class="fa fa-download " aria-hidden="true"></i></CSVLink>
+          </div>
+        </form>
       </div>
       <div className="card-body">
-        <div className="row">
-
-          <div className="col-xl-7">
+        <div className="upi-n-qr-collection row">
+          <div className="col-7">
             <div className="container-pie-chart">
               <canvas id="container-pie-chart" className="height_box"></canvas>
             </div>
           </div>
-
-          <div className="col-xl-5">
+          <div className="col-5">
             <div className="collection-info-wrapper">
               <div className="collection-info">
                 <div className="info-left">
@@ -212,7 +204,6 @@ export default function UpiCollections() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </UpiCollectionsStyle>

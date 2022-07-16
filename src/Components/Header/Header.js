@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import {
@@ -8,7 +8,8 @@ import {
 } from "../../utils/common";
 import UserProfileForm from "../UserProfile/UserProfileForm";
 import { HeaderWrapper, UserInfoWrapper } from "./style";
-import { loginResetStore } from "../../actions/Login";
+import { fetchUserWallet, fetchUserWalletIfNeeded, loginResetStore } from "../../actions/Login";
+import { IconRefresh } from "../UI/StyledConstants";
 
 const userRole = {
   PTM_VENDOR: "VENDOR",
@@ -22,6 +23,12 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  
+
+  const handleClick = () => {
+    dispatch(fetchUserWallet());
+  };
 
 
   function clickHambergerHandler() {
@@ -37,12 +44,20 @@ const Header = () => {
     dispatch(loginResetStore());
     history.push("/");
   };
+
+  //Mounting Phase
+  useEffect(() => {
+    dispatch(fetchUserWalletIfNeeded());
+  }, []);
+
   const userData = useSelector(state => state?.login?.userData);
-  console.log("userData = ", userData);
+  const userWallet = useSelector(state => state?.login?.userWallet);
+  const isWalletLoading = useSelector(state => state?.login?.isWalletLoading);
+  console.log("userWallet = ", userWallet);
   return (
     <>
       <HeaderWrapper className="header flex space-between">
-          <div className="header-left">
+          <div className="header-left flex item-center">
             <button className="header-hamburger" type="button" onClick={clickHambergerHandler}>
               <span className="hamburger-icon">
                 <span></span>
@@ -50,6 +65,10 @@ const Header = () => {
                 <span></span>
               </span>
             </button>
+            <div className="user-wallet">
+              <strong>Wallet Ballence {userWallet?.MAIN_WALLET?.toLocaleString("en-IN") || 0}</strong>
+              <i class={`fa fa-refresh${isWalletLoading ? ' loading' : ''}`} aria-hidden="true" onClick={handleClick}></i>
+            </div>
           </div>
           <div className="header-right flex">
             <div className="user-info">

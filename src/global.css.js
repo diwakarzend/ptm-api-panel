@@ -342,4 +342,47 @@ export default createGlobalStyle`
     padding: 16px;
     border-bottom: 1px solid var(--ip-border-color);
   }
+  .row {
+    display: flex;
+    margin: 0 -12px;
+    [class*="col-"] {
+      padding: 0 12px;
+    }
+  }
+  .col-1 {
+    flex: 0 0 calc(100% * 1 / 12);
+  }
+  .col-2 {
+    flex: 0 0 calc(100% * 2 / 12);
+  }
+  .col-3 {
+    flex: 0 0 calc(100% * 3 / 12);
+  }
+  .col-4 {
+    flex: 0 0 calc(100% * 4 / 12);
+  }
+  .col-5 {
+    flex: 0 0 calc(100% * 5 / 12);
+  }
+  .col-6 {
+    flex: 0 0 calc(100% * 6 / 12);
+  }
+  .col-7 {
+    flex: 0 0 calc(100% * 7 / 12);
+  }
+  .col-8 {
+    flex: 0 0 calc(100% * 8 / 12);
+  }
+  .col-9 {
+    flex: 0 0 calc(100% * 9 / 12);
+  }
+  .col-10 {
+    flex: 0 0 calc(100% * 10 / 12);
+  }
+  .col-11 {
+    flex: 0 0 calc(100% * 11 / 12);
+  }
+  .col-12 {
+    flex: 0 0 calc(100% * 12 / 12);
+  }
 `

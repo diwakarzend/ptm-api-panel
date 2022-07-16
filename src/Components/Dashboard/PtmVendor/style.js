@@ -1,14 +1,12 @@
 import styled from "styled-components";
 
 export const UpiCollectionsStyle = styled.div`
-  .item-center {
-    align-items: center;
+  
+  .filter-table {
+    gap: 16px;
   }
-  .justify-end {
-    justify-content: flex-end;
-  }
-  .justify-between {
-    justify-content: space-between;
+  .upi-n-qr-collection {
+    padding: 24px;
   }
   .collection-info-wrapper {
     background-color: rgb(171, 185, 232, .1);
@@ -81,6 +79,10 @@ export const UpiCollectionsStyle = styled.div`
   }
   .container-pie-chart {
     margin: 0 auto;
+    max-width: 400px;
+    canvas {
+      max-height: 383px;
+    }
   }
   .csv-link {
     width: 39px;

@@ -1,4 +1,13 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const spin = keyframes`
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+`
 
 export const HeaderWrapper = styled.header`
     height: 70px;
@@ -127,6 +136,22 @@ export const HeaderWrapper = styled.header`
         .user-role {
             font-size: 11px;
             color: var(--text-grey);
+        }
+    }
+    .user-wallet {
+        color: var(--ip-heading-color);
+        strong {
+            font-weight: 500;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .fa {
+            font-size: 16px;
+            &.loading {
+                animation-name: ${spin};
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+            }
         }
     }
 `
