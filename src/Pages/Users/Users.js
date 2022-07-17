@@ -11,6 +11,7 @@ import AdminFundForm from "./AdminFundForm";
 import { connect } from "react-redux";
 import { printPage, addOverlay, removeOverlay } from "../../utils/common";
 import WalletDetails from "./WalletDetails";
+import { TableWrapper } from "../../Components/UI/StyledConstants";
 
 const roleMapping = {
   PTM_VENDOR: "Vendor",
@@ -86,7 +87,7 @@ const Users = (props) => {
       }
     };
 
-    const errorHandler = (error) => {};
+    const errorHandler = (error) => { };
 
     const request = new Request("", successHandler, errorHandler, false);
     return request.get(
@@ -125,7 +126,7 @@ const Users = (props) => {
       }
     };
 
-    const errorHandler = (error) => {};
+    const errorHandler = (error) => { };
 
     const request = new Request("", successHandler, errorHandler, false);
     const params = `?userId=${userId}&status=${status}`;
@@ -170,234 +171,230 @@ const Users = (props) => {
   }
 
   return (
-    <div className="container_full">
-      {/* <SideBar {...props} /> */}
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb heading="Users" value="Users" />
-          <div className="row">
-            <div className=" col-sm-12">
-              <div className="card card-shadow mb-4">
-                <div className="card-header fund-modal">
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <button type="button" className="btn-common">
-                      CSV
-                    </button>
-
-                    <button
-                      type="button"
-                      className="btn-common"
-                      onClick={() => printPage()}
-                    >
-                      Print
-                    </button>
-                  </div>
-                  <div className="card-title"> </div>
-                  <button
-                    type="button"
-                    className="btn-common"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                    onClick={openPopupHandler}
-                  >
-                    Add User
-                  </button>
-                  {isPopupVisible ? (
-                    <AddUserForm
-                      closePopUpHandler={closePopUpHandler}
-                      fetchUsersData={fetchUsersData}
-                      props={props}
-                      editUserData={editUserData}
-                      userToBeEdit={userToBeEdit}
-                      showPhoneNumberField={showPhoneNumberField}
-                    />
-                  ) : (
-                    ""
-                  )}
-
-                  {transationPopupVisible ? (
-                    <WalletDetails
-                      userWallet={userTransactionDetails}
-                      closeTransactionHandler={closeTransactionHandler}
-                    />
-                  ) : (
-                    ""
-                  )}
-
-                  {permissionData.isPopupVisible ? (
-                    <PermissionForm
-                      closePopUpHandler={closePermissionPopup}
-                      userId={permissionData.userId}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </div>
-
-                {adminFormData ? (
-                  <AdminFundForm
-                    userId={adminFormData}
-                    closeAdminFundForm={closeAdminFundPopUpHandler}
-                    setStatusMsg={setStatusMsg}
-                    successCallBack={fetchUsersData}
-                  />
-                ) : (
-                  ""
-                )}
-                <div className="done">{statusMsg}</div>
-                <div className="card-body">
-                  <table
-                    id="bs4-table"
-                    className="table table-bordered table-striped"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Id</th>
-                        <th>Company Name</th>
-                        <th>Mobile</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Wallet</th>
-                        <th>Hold Amount</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {userData && Array.isArray(userData)
-                        ? userData.map((item, index) => {
-                            let userClass = "";
-                            if (item.role && roleMapping[item.role]) {
-                              userClass = roleMapping[item.role]
-                                .toLowerCase()
-                                .replace(" ", "-");
-                            }
-                            console.log(item);
-
-                            let status = item.isActive;
-
-                            // if (userStatus.userName == item.userName) {
-                            //   status = userStatus.status;
-                            // }
-
-                            return (
-                              <tr key={item.userName}>
-                                <td>{index + 1}</td>
-                                <td>{`${item.firstName} ${item.lastName}`}</td>
-                                <td>{item.userName}</td>
-                                <td>{item.email}</td>
-                                <td className={userClass}>
-                                  {roleMapping[item.role] || "NA"}
-                                </td>
-                                <td>
-                                  Rs. {item.userBalance || "0"}
-                                  <i
-                                    style={styles.iconContainer}
-                                    className="icon-info"
-                                    title="Show Transactions"
-                                    onClick={() => showTransactionHandler(item)}
-                                  ></i>
-                                </td>
-                                {/* <td className="done">
-                                  {item.isActive == "Y"
-                                    ? "Active"
-                                    : "In Active"}
-                                </td> */}
-                                <td>
-                                  {item.holdBalance
-                                    ? "Rs." + item.holdBalance
-                                    : "-"}
-                                </td>
-                                <td>{`${
-                                  item.isActive == "N" ? "Inactive" : "Active"
-                                }`}</td>
-                                <td>
-                                  {userStatus.userName == item.userName && (
-                                    <div
-                                      className="done"
-                                      style={{
-                                        position: "absolute",
-                                        marginTop: "-11px",
-                                      }}
-                                    >
-                                      {userStatus.msg}
-                                    </div>
-                                  )}
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      flexDirection: "row",
-                                    }}
-                                  >
-                                    <div style={styles.iconContainer}>
-                                      <i
-                                        class="icon-pencil"
-                                        onClick={() =>
-                                          editClickHandler(item.userName)
-                                        }
-                                        style={{ cursor: "pointer" }}
-                                        title="update user"
-                                      ></i>
-                                    </div>
-                                    {/* | */}
-                                    <div style={styles.iconContainer}>
-                                      <i
-                                        class="icon-key"
-                                        onClick={() =>
-                                          permissionClickHandler(item.userName)
-                                        }
-                                        title="Manage Permissions"
-                                        style={{ cursor: "pointer" }}
-                                      ></i>
-                                    </div>
-                                    {/* | */}
-                                    <div style={styles.iconContainer}>
-                                      <i
-                                        className="icon-plus"
-                                        title="Add Fund"
-                                        onClick={() => {
-                                          console.log("successful");
-                                          adminFundFormHandler(item.userName);
-                                        }}
-                                      ></i>
-                                    </div>
-                                    {/* | */}
-                                    <div
-                                      style={styles.bulbContainer[status]}
-                                      onClick={() =>
-                                        handleUserStatus(item.userName, status)
-                                      }
-                                    >
-                                      <i
-                                        className="icon-bulb"
-                                        style={{ fontWeight: "bold" }}
-                                        title={`${
-                                          item.isActive == "N"
-                                            ? "Active"
-                                            : "Inactive"
-                                        }`}
-                                      ></i>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                            );
-                          })
-                        : ""}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+    <>
+      <BreadCrumb heading="Users" value="Users" />
+      <div className="flex space-between mb8">
+        <div></div>
+        <button
+          type="button"
+          className="btn-common"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          onClick={openPopupHandler}
+        >
+          Add User
+        </button>
+      </div>
+      <div className="card-wrapper flex-column mb-4">
+        <div className="card-header flex item-center space-between">
+          <h4 className="card-title">Users List</h4>
+          <div className="flex">
+            <div
+              className="btn-group"
+              role="group"
+              aria-label="Basic example"
+            >
+              <button type="button" className="btn-common">
+                CSV
+              </button>
+              <button
+                type="button"
+                className="btn-common"
+                onClick={() => printPage()}
+              >
+                Print
+              </button>
             </div>
           </div>
         </div>
+        <div className="card-body">
+          <TableWrapper>
+            <table
+              id="bs4-table"
+              className="table"
+            >
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Company Name</th>
+                  <th>Mobile</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Wallet</th>
+                  <th>Hold Amount</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {userData && Array.isArray(userData)
+                  ? userData.map((item, index) => {
+                    let userClass = "";
+                    if (item.role && roleMapping[item.role]) {
+                      userClass = roleMapping[item.role]
+                        .toLowerCase()
+                        .replace(" ", "-");
+                    }
+                    console.log(item);
+
+                    let status = item.isActive;
+
+                    // if (userStatus.userName == item.userName) {
+                    //   status = userStatus.status;
+                    // }
+
+                    return (
+                      <tr key={item.userName}>
+                        <td>{index + 1}</td>
+                        <td>{`${item.firstName} ${item.lastName}`}</td>
+                        <td>{item.userName}</td>
+                        <td>{item.email}</td>
+                        <td className={userClass}>
+                          {roleMapping[item.role] || "NA"}
+                        </td>
+                        <td>
+                          Rs. {item.userBalance || "0"}
+                          <i
+                            style={styles.iconContainer}
+                            className="icon-info"
+                            title="Show Transactions"
+                            onClick={() => showTransactionHandler(item)}
+                          ></i>
+                        </td>
+                        {/* <td className="done">
+                                {item.isActive == "Y"
+                                  ? "Active"
+                                  : "In Active"}
+                              </td> */}
+                        <td>
+                          {item.holdBalance
+                            ? "Rs." + item.holdBalance
+                            : "-"}
+                        </td>
+                        <td>{`${item.isActive == "N" ? "Inactive" : "Active"
+                          }`}</td>
+                        <td>
+                          {userStatus.userName == item.userName && (
+                            <div
+                              className="done"
+                              style={{
+                                position: "absolute",
+                                marginTop: "-11px",
+                              }}
+                            >
+                              {userStatus.msg}
+                            </div>
+                          )}
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                            }}
+                          >
+                            <div style={styles.iconContainer}>
+                              <i
+                                class="icon-pencil"
+                                onClick={() =>
+                                  editClickHandler(item.userName)
+                                }
+                                style={{ cursor: "pointer" }}
+                                title="update user"
+                              ></i>
+                            </div>
+                            {/* | */}
+                            <div style={styles.iconContainer}>
+                              <i
+                                class="icon-key"
+                                onClick={() =>
+                                  permissionClickHandler(item.userName)
+                                }
+                                title="Manage Permissions"
+                                style={{ cursor: "pointer" }}
+                              ></i>
+                            </div>
+                            {/* | */}
+                            <div style={styles.iconContainer}>
+                              <i
+                                className="icon-plus"
+                                title="Add Fund"
+                                onClick={() => {
+                                  console.log("successful");
+                                  adminFundFormHandler(item.userName);
+                                }}
+                              ></i>
+                            </div>
+                            {/* | */}
+                            <div
+                              style={styles.bulbContainer[status]}
+                              onClick={() =>
+                                handleUserStatus(item.userName, status)
+                              }
+                            >
+                              <i
+                                className="icon-bulb"
+                                style={{ fontWeight: "bold" }}
+                                title={`${item.isActive == "N"
+                                    ? "Active"
+                                    : "Inactive"
+                                  }`}
+                              ></i>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })
+                  : ""}
+              </tbody>
+            </table>
+          </TableWrapper>
+        </div>
       </div>
-    </div>
+
+
+      {adminFormData ? (
+        <AdminFundForm
+          userId={adminFormData}
+          closeAdminFundForm={closeAdminFundPopUpHandler}
+          setStatusMsg={setStatusMsg}
+          successCallBack={fetchUsersData}
+        />
+      ) : (
+        ""
+      )}
+      <div className="done">{statusMsg}</div>
+      {isPopupVisible ? (
+        <AddUserForm
+          closePopUpHandler={closePopUpHandler}
+          fetchUsersData={fetchUsersData}
+          props={props}
+          editUserData={editUserData}
+          userToBeEdit={userToBeEdit}
+          showPhoneNumberField={showPhoneNumberField}
+        />
+      ) : (
+        ""
+      )}
+
+      {transationPopupVisible ? (
+        <WalletDetails
+          userWallet={userTransactionDetails}
+          closeTransactionHandler={closeTransactionHandler}
+        />
+      ) : (
+        ""
+      )}
+
+      {permissionData.isPopupVisible ? (
+        <PermissionForm
+          closePopUpHandler={closePermissionPopup}
+          userId={permissionData.userId}
+        />
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 

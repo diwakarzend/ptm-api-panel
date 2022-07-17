@@ -123,6 +123,10 @@ export default createGlobalStyle`
   ul, li {
     list-style: none;
   }
+  table {
+    caption-side: bottom;
+    border-collapse: collapse;
+}
   .mb4{
     margin-bottom:4px;
   }

@@ -53,3 +53,20 @@ export const IconRefresh = styled.i`
         transform: rotate(-22.5deg);
     }
 `
+
+export const TableWrapper = styled.div`
+    overflow: auto;
+    padding: 24px 16px;
+    .table {
+        width: 100%;
+        color: var(--ip-body-color);
+        th {
+            font-weight: 600;
+            text-align: left;
+        }
+        td, th {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--ip-border-color);
+        }
+    }
+`
