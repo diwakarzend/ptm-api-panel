@@ -105,8 +105,11 @@ export default createGlobalStyle`
     background: var(--ip-body-bg);
     line-height:1.2;
     font-weight:400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  input, button {
+  input, 
+  button {
     font-family: var(--font);
   }
   input[type=number]::-webkit-inner-spin-button,
@@ -116,9 +119,25 @@ export default createGlobalStyle`
     appearance: none;
     margin: 0; 
   }
-  button, img, a {
+  button, 
+  img, 
+  a, 
+  select {
     outline: none;
     user-select: none;
+    text-transform: none;
+  }
+  [type=button], 
+  [type=reset], 
+  [type=submit], 
+  button {
+    -webkit-appearance: button;
+  }
+  [type=button]:not(:disabled), 
+  [type=reset]:not(:disabled), 
+  [type=submit]:not(:disabled), 
+  button:not(:disabled) {
+    cursor: pointer;
   }
   ul, li {
     list-style: none;
@@ -171,6 +190,10 @@ export default createGlobalStyle`
   }
   .mr16{
     margin-right: 8px;
+  }
+
+  .p16 {
+    padding: 16px;
   }
 
 
@@ -288,6 +311,9 @@ export default createGlobalStyle`
   }
   .flex-column {
     flex-direction: column;
+  }
+  .gap4 {
+    gap: 4px;
   }
   .error-msg{
     color: var(--ip-red);

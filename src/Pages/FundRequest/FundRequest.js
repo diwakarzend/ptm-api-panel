@@ -4,12 +4,10 @@ import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { connect } from "react-redux";
 import { addOverlay, printPage, removeOverlay } from "../../utils/common";
-
-import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
-import "./FundRequest.css";
 import FundRequestForm from "./FundRequestForm";
 import FullPageLoader from "../../Components/FullPageLoader";
+import { Button, TableWrapper } from "../../Components/UI/StyledConstants";
 
 const FundRequest = memo((props) => {
   const { dispatch, login, userwallet } = props;
@@ -71,164 +69,134 @@ const FundRequest = memo((props) => {
 
   console.log("fundRequestLoading", fundRequestLoading);
   return (
-    <div className="container_full">
-      {/* <SideBar {...props} /> */}
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb heading="Fund Request" value="Fund Request" />
-          <section className="chart_section">
-            <div className="card card-shadow mb-4">
-              <div className="card-header fund-modal">
-                <div className="card-title">All Fund Requests</div>
-                {userRole !== "PTM_ADMIN" && (
-                  <button
-                    // type="button"
-                    className="btn-common"
-                    //data-toggle="modal"
-                    data-target="#exampleModal"
-                    onClick={openPopupHandler}
-                  >
-                    Fund Request
-                  </button>
-                )}
+    <>
+      <BreadCrumb heading="Fund Request" value="Fund Request" />
+      <div style={{ textAlign: "center", marginTop: "15px" }}>
+        {statusMessage}
+      </div>
+      <div className="card-wrapper flex-column mb-4">
+        <div className="card-header flex item-center space-between">
+          <h4 className="card-title">All Fund Requests</h4>
+          <div className="flex gap4">
+            <Button className="btn-soft-success">CSV</Button>
+            <Button className="btn-soft-success" onClick={printPage}>Print</Button>
+          </div>
+        </div>
+        <div className="card-body p16">
+          <div className="flex space-between">
+            {userRole !== "PTM_ADMIN" && (
+              <Button
+                className="btn-success"
+                onClick={openPopupHandler}
+              >
+                Fund Request
+              </Button>
+            )}
+            <div className="col-2">
+              {userRole != "PTM_ADMIN" &&
+                <select
+                  className="form-control"
+                  id="exampleFormControlSelect1"
+                  onChange={changeHandler}
+                >
+                  <option value="">Search Payment Status</option>
+                  <option value="INITIATED">INITIATED</option>
+                  <option value="DONE">Completed</option>
+                </select>
+              }
+            </div>
+          </div>
+          <TableWrapper>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">User Name</th>
+                  <th scope="col">Mobile No.</th>
+                  <th scope="col">From Bank Name</th>
+                  <th scope="col">To Bank Name</th>
+                  <th scope="col">Requested Amount</th>
+                  <th scope="col">Payment Mode</th>
+                  <th scope="col">Requested Date</th>
+                  <th scope="col">Status</th>
+                  {userRole !== "PTM_VENDOR" && (
+                    <th scope="col">Action</th>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {fundRequestLoading && <FullPageLoader />}
+                {!fundRequestLoading 
+                  && fundRequestItems 
+                  && Array.isArray(fundRequestItems) 
+                  && fundRequestItems.length > 0 ? (
+                  fundRequestItems.map((item, index) => {
+                    return (
+                      <tr key={item.reqstDate}>
+                        <th scope="row">{index + 1}</th>
+                        <td>{item.requestUserName}</td>
+                        <td>{item.requestUserName}</td>
+                        <td>{item.fromBank}</td>
+                        <td>{item.toBank}</td>
+                        <td>Rs. {item.requestAmount}</td>
+                        <td>{item.payementMode}</td>
+                        <td>{item.reqstDate}</td>
+                        <td className={item.approveStatus.toLowerCase()}>
+                          {item.approveStatus}
+                        </td>
 
-                {isPopupVisible && (
-                  <FundRequestForm
-                    isPopupVisible={isPopupVisible}
-                    closePopUpHandler={closePopUpHandler}
-                    userRole={userRole}
-                    getFundRequest={getFundRequest}
-                    setStatus={setStatus}
-                  />
-                )}
-              </div>
-              <div style={{ textAlign: "center", marginTop: "15px" }}>
-                {statusMessage}
-              </div>
-
-              <div className="col-md-3">
-                {userRole != "PTM_ADMIN" ? (
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect1"
-                    onChange={changeHandler}
-                  >
-                    <option value="">Search Payment Status</option>
-                    <option value="INITIATED">INITIATED</option>
-                    <option value="DONE">Completed</option>
-                  </select>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="card-header">
-                <div className="card-title">
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <button type="button" className="btn-common">
-                      CSV
-                    </button>
-
-                    <button
-                      type="button"
-                      className="btn-common"
-                      onClick={() => printPage()}
-                    >
-                      Print
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="card-body">
-                {fundRequestLoading ? (
-                  <FullPageLoader />
-                ) : (
-                  <table className="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">User Name</th>
-                        <th scope="col">Mobile No.</th>
-                        <th scope="col">From Bank Name</th>
-                        <th scope="col">To Bank Name</th>
-                        <th scope="col">Requested Amount</th>
-                        <th scope="col">Payment Mode</th>
-                        <th scope="col">Requested Date</th>
-                        <th scope="col">Status</th>
                         {userRole !== "PTM_VENDOR" && (
-                          <th scope="col">Action</th>
+                          <td>
+                            {item.approveStatus != "DONE" &&
+                              item.approveStatus != "REJECTED" ? (
+                              <React.Fragment>
+                                <button
+                                  onClick={() =>
+                                    handleApprove(item.reqstfundUuid)
+                                  }
+                                  class="btn-common"
+                                >
+                                  Approve
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleReject(item.reqstfundUuid)
+                                  }
+                                  class="btn-common badge-warning"
+                                >
+                                  Reject
+                                </button>
+                              </React.Fragment>
+                            ) : (
+                              "NA"
+                            )}
+                          </td>
                         )}
                       </tr>
-                    </thead>
-                    <tbody>
-                      {fundRequestItems &&
-                      Array.isArray(fundRequestItems) &&
-                      fundRequestItems.length > 0 ? (
-                        fundRequestItems.map((item, index) => {
-                          return (
-                            <tr key={item.reqstDate}>
-                              <th scope="row">{index + 1}</th>
-                              <td>{item.requestUserName}</td>
-                              <td>{item.requestUserName}</td>
-                              <td>{item.fromBank}</td>
-                              <td>{item.toBank}</td>
-                              <td>Rs. {item.requestAmount}</td>
-                              <td>{item.payementMode}</td>
-                              <td>{item.reqstDate}</td>
-                              <td className={item.approveStatus.toLowerCase()}>
-                                {item.approveStatus}
-                              </td>
-
-                              {userRole !== "PTM_VENDOR" && (
-                                <td>
-                                  {item.approveStatus != "DONE" &&
-                                  item.approveStatus != "REJECTED" ? (
-                                    <React.Fragment>
-                                      <button
-                                        onClick={() =>
-                                          handleApprove(item.reqstfundUuid)
-                                        }
-                                        class="btn-common"
-                                      >
-                                        Approve
-                                      </button>
-                                      <button
-                                        onClick={() =>
-                                          handleReject(item.reqstfundUuid)
-                                        }
-                                        class="btn-common badge-warning"
-                                      >
-                                        Reject
-                                      </button>
-                                    </React.Fragment>
-                                  ) : (
-                                    "NA"
-                                  )}
-                                </td>
-                              )}
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <tr>
-                          <td colSpan="8" style={{ textAlign: "center" }}>
-                            No Data Found
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan="9" style={{ textAlign: "center" }}>
+                      No Data Found
+                    </td>
+                  </tr>
                 )}
-              </div>
-            </div>
-          </section>
+              </tbody>
+            </table>
+          </TableWrapper>
         </div>
       </div>
-    </div>
+      {isPopupVisible && (
+        <FundRequestForm
+          isPopupVisible={isPopupVisible}
+          closePopUpHandler={closePopUpHandler}
+          userRole={userRole}
+          getFundRequest={getFundRequest}
+          setStatus={setStatus}
+        />
+      )}
+    </>
   );
 });
 
