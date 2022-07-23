@@ -11,14 +11,13 @@ const BreadCrumb = ({ heading, value }) => {
       <h4>{heading}</h4>
       <div className="breadcrumb_nav">
         {heading !== "Dashboard" && (
-          <ol className="breadcrumb">
+          <ol className="breadcrumb flex item-center">
             <li>
-              <i className="fa fa-home"></i>
               <AnchorLink href="/dashboard" className="parent-item">
                 Home
               </AnchorLink>
 
-              <i className="fa fa-angle-right"></i>
+              <i className="fa fa-angle-right separator"></i>
             </li>
             <li className="active">{value}</li>
           </ol>

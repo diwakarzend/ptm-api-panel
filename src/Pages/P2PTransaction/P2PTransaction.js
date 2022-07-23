@@ -10,8 +10,10 @@ import Pagination from "../../Components/PaginationNew/PaginationNew/Pagination"
 import { FilterWrapper } from "./style";
 import { CSVLink } from "react-csv";
 import moment from "moment";
+import { Button, FilterFormWrapper } from "../../Components/UI/StyledConstants";
+import { printPage } from "../../utils/common";
 
-const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
+const P2PTransaction = ({ dispatch = () => { }, ...props }) => {
   const [reportsItems, setReportsItems] = useState([]);
   const [downloadData, setDownloadData] = useState([]);
   const [paging_data, setPagingData] = useState(null);
@@ -50,7 +52,7 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
       }
     });
     getP2pTxnListing(params).then((res) => {
-      if(isDownload && res?.data?.data?.content) {
+      if (isDownload && res?.data?.data?.content) {
         setDownloadData(res?.data?.data?.content);
       } else {
         setPagingData(res?.data?.data);
@@ -76,13 +78,13 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   };
 
   const onDownloadClick = () => {
-    if(paging_data && paging_data?.totalElements) {
+    if (paging_data && paging_data?.totalElements) {
       getListing(1, paging_data?.totalElements, true);
     }
   }
 
   useEffect(() => {
-    if(Array.isArray(downloadData) && downloadData.length > 0) {
+    if (Array.isArray(downloadData) && downloadData.length > 0) {
       console.log("downloadData inside = ", downloadData);
       setTimeout(() => {
         downloadRef.current.link.click();
@@ -92,163 +94,148 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
 
   useEffect(() => {
     if (userData?.role === "PTM_VENDOR") {
-      setFilter({...filter, userId: userData.uuid});
+      setFilter({ ...filter, userId: userData.uuid });
     }
   }, [userData])
 
   console.log("filter = ", filter);
 
   return (
-    <div className="container_full">
-      {/* <SideBar {...props} /> */}
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb
-            heading="P2P Transaction Report"
-            value="P2P Transaction Report"
-          />
-          <section className="chart_section">
-            <div className="card card-shadow mb-4">
-              <form onSubmit={handleSubmit}>
-                <FilterWrapper className="form-group-wrapper">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Transaction Id"
-                      name="txnRefId"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="number"
-                      className="form-control"
-                      placeholder="UTR Number"
-                      name="utrNumber"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="txnType"
-                      placeholder="Txn Type"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="userId"
-                      placeholder="User Id"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <select
-                      className="form-control"
-                      name="vendorCode"
-                      placeholder="Vendor Code"
-                      onChange={handleChange}
-                    >
-                      <option value="">Vendor Code</option>
-                      <option value="3">Paytm</option>
-                      <option value="2">Phonepe</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <select
-                      className="form-control"
-                      id="exampleFormControlSelect1"
-                      name="status"
-                      placeholder="Status"
-                      onChange={handleChange}
-                    >
-                      <option value="">Select Status</option>
-                      <option value="synced">Synced</option>
-                      <option value="credited">Credited</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <input
-                      name="fromDate"
-                      type="date"
-                      className="form-control"
-                      placeholder="Enter email"
-                      onChange={handleChange}
-                      value={filter?.fromDate}
-                    />
-                  </div>
-
-
-                  <div className="form-group">
-                    <input
-                      name="toDate"
-                      type="date"
-                      className="form-control"
-                      placeholder="Enter To Date"
-                      onChange={handleChange}
-                      value={filter?.toDate}
-                    />
-                  </div>
-                                    <div className="form-action">
-                    <input
-                      type="submit"
-                      className="btn-common"
-                      value="Search"
-                    />
-                  </div>
-                  <div className="form-group csv-link-wrapper">
-                    <span className="csv-link" onClick={onDownloadClick}><i class="fa fa-download " aria-hidden="true"></i></span>
-                    <CSVLink 
-                      title="Download CSV" 
-                      className="csv-link-hide" 
-                      data={downloadData} 
-                      ref={downloadRef}
-                      />
-                  </div>
-                </FilterWrapper>
-                  
-              </form>
-              {/* <div className="card-header">
-                <div className="card-title">
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <CSVExport dispatch={dispatch} />
-
-                    <button
-                      type="button"
-                      className="btn-common"
-                      onClick={() => {
-                        window.print();
-                      }}
-                    >
-                      Print
-                    </button>
-                  </div>
-                </div>
-              </div> */}
-              <TableHTML filterItems={{}} reportsItems={reportsItems} />
-              {reportsItems && paging_data && (
-                <Pagination
-                  currentPage={
-                    paging_data?.number >= 0 ? paging_data?.number + 1 : 1
-                  }
-                  totalPages={paging_data?.totalPages}
-                  getCurrentPageData={getCurrentPageData}
-                />
-              )}
+    <>
+      <BreadCrumb
+        heading="P2P Transaction Report"
+        value="P2P Transaction Report"
+      />
+      <div className="card-wrapper flex-column mb-4">
+        <div className="card-header flex item-center space-between">
+          <h4 className="card-title">P2P Transactions</h4>
+          <div className="flex gap4">
+            <div className="download-csv">
+              <Button className="btn-soft-success" onClick={onDownloadClick}>CSV</Button>
+              <CSVLink
+                title="Download CSV"
+                className="csv-link-hide"
+                data={downloadData}
+                ref={downloadRef}
+              />
             </div>
-          </section>
+            <Button className="btn-soft-success" onClick={printPage}>Print</Button>
+          </div>
+        </div>
+        <div className="card-body p16">
+          <div className="flex">
+            <form className="filter-form" onSubmit={handleSubmit}>
+              <FilterFormWrapper className="flex flex-wrap gap4">
+                <div className="form-item">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Transaction Id"
+                    name="txnRefId"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-item">
+                  <input
+                    type="number"
+                    className="form-control"
+                    placeholder="UTR Number"
+                    name="utrNumber"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-item">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="txnType"
+                    placeholder="Txn Type"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-item">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="userId"
+                    placeholder="User Id"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-item">
+                  <select
+                    className="form-control"
+                    name="vendorCode"
+                    placeholder="Vendor Code"
+                    onChange={handleChange}
+                  >
+                    <option value="">Vendor Code</option>
+                    <option value="3">Paytm</option>
+                    <option value="2">Phonepe</option>
+                  </select>
+                </div>
+                <div className="form-item">
+                  <select
+                    className="form-control"
+                    id="exampleFormControlSelect1"
+                    name="status"
+                    placeholder="Status"
+                    onChange={handleChange}
+                  >
+                    <option value="">Select Status</option>
+                    <option value="synced">Synced</option>
+                    <option value="credited">Credited</option>
+                  </select>
+                </div>
+                <div className="form-item">
+                  <input
+                    name="fromDate"
+                    type="date"
+                    className="form-control"
+                    placeholder="Enter email"
+                    onChange={handleChange}
+                    value={filter?.fromDate}
+                  />
+                </div>
+
+
+                <div className="form-item">
+                  <input
+                    name="toDate"
+                    type="date"
+                    className="form-control"
+                    placeholder="Enter To Date"
+                    onChange={handleChange}
+                    value={filter?.toDate}
+                  />
+                </div>
+                <div className="form-action">
+                  <Button
+                    type="submit"
+                    className="btn-success"
+                  >
+                    Search
+                  </Button>
+                </div>
+              </FilterFormWrapper>
+
+            </form>
+          </div>
+          <div className="">
+            <TableHTML filterItems={{}} reportsItems={reportsItems} />
+            {reportsItems && paging_data && (
+              <Pagination
+                currentPage={
+                  paging_data?.number >= 0 ? paging_data?.number + 1 : 1
+                }
+                totalPages={paging_data?.totalPages}
+                getCurrentPageData={getCurrentPageData}
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 const mapStateToProps = (state) => {

@@ -1,10 +1,10 @@
-import React, { Fragment, memo, useState } from "react";
+import React, { memo, useState } from "react";
 import P2PModal from "./P2PModal";
 import { addOverlay, removeOverlay } from "../../utils/common";
 import Pagination from "../../Components/Pagination/Pagination";
-import { Wrapper } from "./style";
+import { TableWrapper } from "../../Components/UI/StyledConstants";
 const TableHTML = memo(
-  ({ reportsItems, filterItems, pagingData, dispatch }) => {
+  ({ reportsItems, pagingData, dispatch }) => {
     const [modal, setModal] = useState({ status: false, data: null });
     const reportsDataAvailable =
       (reportsItems &&
@@ -23,9 +23,9 @@ const TableHTML = memo(
     };
 
     return (
-      <Wrapper className="card-body">
+      <TableWrapper>
         {reportsDataAvailable ? (
-          <table className="table table-bordered">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -40,35 +40,34 @@ const TableHTML = memo(
               </tr>
             </thead>
             <tbody>
-              {reportsDataAvailable
-                ? reportsItems.map((item, index) => {
-                    return (
-                      <tr key={index}>
-                        <th scope="row">{index + 1}</th>
-                        <td>{item?.utrNumber}</td>
-                        <td>
-                          {item?.transactionDate} {item?.transactionTime}
-                        </td>
+              {reportsDataAvailable &&
+                reportsItems.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item?.utrNumber}</td>
+                      <td>
+                        {item?.transactionDate} {item?.transactionTime}
+                      </td>
 
-                        <td>{item?.transactionRefId}</td>
-                        <td>&#8377;{item?.amount}</td>
-                        <td>{item?.receiverName}</td>
-                        <td>{item?.vendorCode == '3' ? "PAYTM" : item?.vendorCode == '2' ? 'PHONEPE' : '-' }</td>
-                        <td className={item?.status?.toLowerCase()}>
-                          {item?.status}
-                        </td>
-                        <td>
-                          <span
-                            className="cursor-pointer"
-                            onClick={() => openPopupHandler(item)}
-                          >
-                            <i className="icon-eye" />
-                          </span>
-                        </td>
-                      </tr>
-                    );
-                  })
-                : ""}
+                      <td>{item?.transactionRefId}</td>
+                      <td>&#8377;{item?.amount}</td>
+                      <td>{item?.receiverName}</td>
+                      <td>{item?.vendorCode == '3' ? "PAYTM" : item?.vendorCode == '2' ? 'PHONEPE' : '-'}</td>
+                      <td className={item?.status?.toLowerCase()}>
+                        {item?.status}
+                      </td>
+                      <td>
+                        <span
+                          className="cursor-pointer"
+                          onClick={() => openPopupHandler(item)}
+                        >
+                          <i className="icon-eye" />
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         ) : (
@@ -88,7 +87,7 @@ const TableHTML = memo(
             closePopUpHandler={closePopUpHandler}
           />
         )}
-      </Wrapper>
+      </TableWrapper>
     );
   }
 );

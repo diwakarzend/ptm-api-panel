@@ -10,4 +10,7 @@ export const PageTitleWrapper = styled.div`
         font-size: 15px;
         text-transform: uppercase;
     }
+    .separator {
+        margin: 0 5px;
+    }
 `

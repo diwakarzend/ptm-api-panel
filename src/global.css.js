@@ -297,6 +297,9 @@ export default createGlobalStyle`
   .flex{
     display:flex;
   }
+  .flex-wrap{
+    flex-wrap: wrap;
+  }
   .space-between{
     justify-content:space-between;
   }

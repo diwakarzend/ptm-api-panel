@@ -125,3 +125,9 @@ export const Button = styled.button`
         vertical-align: middle;
     }
 `
+
+export const FilterFormWrapper = styled.div`
+    .form-item {
+        flex: 0 0 14%;
+    }
+`

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { fetchCommisionRange } from "../../actions/payout";
-import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import CommissionForm from "./CommissionForm";
 import {
@@ -11,10 +10,10 @@ import {
   hideMessage,
 } from "../../utils/common";
 
-import { connect } from "react-redux";
+import { Button, TableWrapper } from "../../Components/UI/StyledConstants";
 
 const Commission = (props) => {
-  const { dispatch, payout, login } = props;
+  const { dispatch, payout } = props;
   const [isPopupVisible, setPopUp] = useState(false);
   const [itemInfo, setItem] = useState({ item: "", vendor: "" });
   const [message, setMessage] = useState("");
@@ -46,13 +45,6 @@ const Commission = (props) => {
     removeOverlay();
     setPopUp(false);
   };
-
-  // const commissionData =
-  //   payout &&
-  //   payout.commission &&
-  //   payout.commission.data &&
-  //   payout.commission.data.content &&
-  //   payout.commission.data.content["9718063555"];
 
   const testData =
     payout &&
@@ -105,67 +97,44 @@ const Commission = (props) => {
   }
 
   return (
-    <div className="container_full">
-      {/* <SideBar {...props} /> */}
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb heading="Commission" value="Commission" />
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="card card-shadow mb-4">
-                <div className="card-header">
-                  <div className="card-title">
-                    <div
-                      className="btn-group"
-                      role="group"
-                      aria-label="Basic example"
-                    >
-                      <button
-                        type="button"
-                        className="btn-common"
-                        onClick={printPage}
-                      >
-                        Print
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                {isPopupVisible ? (
-                  <CommissionForm
-                    closePopUp={closePopUp}
-                    itemToUpdate={itemInfo.item}
-                    comissionRange={comissionRange}
-                    setMessage={setMessage}
-                    userId={itemInfo.vendor}
-                  />
-                ) : (
-                  ""
-                )}
-                <div className="card-body">
-                  <div className="done">{message}</div>
-                  <table
-                    id="bs4-table"
-                    className="table table-bordered table-striped"
-                  >
-                    <thead>
-                      <tr>
-                        <th>UserName</th>
-                        <th>Mode</th>
-                        <th>Range</th>
-                        <th>Merchant Code</th>
-                        <th>Charges</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>{rows}</tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+    <>
+      <BreadCrumb heading="Commission" value="Commission" />
+      <div className="card-wrapper flex-column mb-4">
+        <div className="card-header flex item-center space-between">
+          <h4 className="card-title">Commission</h4>
+          <div className="flex gap4">
+            <Button className="btn-soft-success" onClick={printPage}>Print</Button>
+            <div className="done">{message}</div>
           </div>
         </div>
+        <div className="card-body p16">
+        <TableWrapper>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>UserName</th>
+              <th>Mode</th>
+              <th>Range</th>
+              <th>Merchant Code</th>
+              <th>Charges</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </table>
+        </TableWrapper>
+        </div>
       </div>
-    </div>
+      {isPopupVisible && (
+        <CommissionForm
+          closePopUp={closePopUp}
+          itemToUpdate={itemInfo.item}
+          comissionRange={comissionRange}
+          setMessage={setMessage}
+          userId={itemInfo.vendor}
+        />
+      )}
+    </>
   );
 };
 
@@ -213,60 +182,3 @@ const ProductRow = ({ itemKey, data, openPopup, vendor }) => {
     </tr>
   );
 };
-
-/* const PRODUCTS = {
-    NEFT: [
-      {
-        minAmount: 1.0,
-        maxAmount: 25000.0,
-        commissionType: "CASH",
-        comission: 5.0,
-        merchantApiCode: null,
-      },
-      {
-        minAmount: 25001.0,
-        maxAmount: 50000.0,
-        commissionType: "CASH",
-        comission: 10.0,
-
-        merchantApiCode: null,
-      },
-      {
-        minAmount: 50001.0,
-        maxAmount: 100000.0,
-        commissionType: "CASH",
-        comission: 20.0,
-        merchantApiCode: null,
-      },
-    ],
-    IMPS: [
-      {
-        minAmount: 1.0,
-        maxAmount: 25000.0,
-        commissionType: "CASH",
-        comission: 5.0,
-        merchantApiCode: "NP",
-      },
-      {
-        minAmount: 1.0,
-        maxAmount: 25000.0,
-        commissionType: "PERCENTAGE",
-        comission: 6.0,
-        merchantApiCode: "PTM",
-      },
-      {
-        minAmount: 25001.0,
-        maxAmount: 50000.0,
-        commissionType: "CASH",
-        comission: 10.0,
-        merchantApiCode: null,
-      },
-      {
-        minAmount: 50001.0,
-        maxAmount: 1000000.0,
-        commissionType: "CASH",
-        comission: 15.0,
-        merchantApiCode: null,
-      },
-    ],
-  }; */
