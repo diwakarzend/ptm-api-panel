@@ -17,19 +17,22 @@ const MapQR = (props) => {
   }, []);
 
   return (
-    <Wrapper className="container_full">
-      {/* <SideBar {...props} /> */}
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb heading="Merchant List" value="Merchant List" />
-          <section className="chart_section">
-            <div className="card card-shadow mb-4">
-              <TableHTML listData={listData} />
-            </div>
-          </section>
-        </div>
+    <>
+      <BreadCrumb heading="Merchant List" value="Merchant List" />
+      <div className="card-wrapper flex-column mb-4">
+        {/* <div className="card-header flex item-center space-between">
+          <h4 className="card-title">Beneficiary</h4>
+          <div className="flex gap4">
+            <Button className="btn-soft-success">Copy</Button>
+            <Button className="btn-soft-success">CSV</Button>
+            <Button className="btn-soft-success">Excel</Button>
+            <Button className="btn-soft-success">PDF</Button>
+            <Button className="btn-soft-success" onClick={printPage}>Print</Button>
+          </div>
+        </div> */}
+        <TableHTML listData={listData} />
       </div>
-    </Wrapper>
+    </>
   );
 };
 

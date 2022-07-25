@@ -102,17 +102,17 @@ export const Button = styled.button`
         background-color: rgba(240,101,72,.1);
         border-color: transparent;
     }
-    .btn-danger {
+    &.btn-danger {
         color: #fff;
         background-color: #f06548;
         border-color: #f06548;
     }
-    .btn-light {
+    &.btn-light {
         color: #000;
         background-color: #f3f6f9;
         border-color: #f3f6f9;
     }
-    .btn-sm {
+    &.btn-sm {
         font-size: 11.375px;
         line-height: 17.0625px;
         padding: 4px 8px;
@@ -129,5 +129,56 @@ export const Button = styled.button`
 export const FilterFormWrapper = styled.div`
     .form-item {
         flex: 0 0 14%;
+    }
+`
+
+export const ModalWrapper = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    background-color: rgba(0,0,0,.7);
+    .modal-dialog {
+        position: relative;
+        max-width: 500px;
+        margin: 50px auto;
+        transform: translateY(0);
+        transition: transform .3s ease-out,-webkit-transform .3s ease-out;
+    }
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        pointer-events: auto;
+        background-color: var(--ip-modal-bg);
+        background-clip: padding-box;
+        border: 1px solid var(--ip-border-color);
+        border-radius: 8px;
+        outline: 0;
+    }
+    .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        border-bottom: 1 solid var(--ip-border-color);
+    }
+    .modal-body {
+        position: relative;
+        flex: 1;
+        padding: 20px;
+    }
+    .modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 20px;
+        border-top: 1px solid var(--ip-border-color);
     }
 `

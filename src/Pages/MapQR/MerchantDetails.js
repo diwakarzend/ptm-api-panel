@@ -10,8 +10,9 @@ import {
 import imagePlaceholder from "../../assests/images/gallery.png";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
-import { Wrapper } from "./style";
+import { FormWrapper, Wrapper } from "./style";
 import { convertBase64 } from "../../utils/common";
+import { Button } from "../../Components/UI/StyledConstants";
 //import CSVExport from "../../Components/DataExport/CSVExport";
 
 const initPtpDto = {
@@ -119,180 +120,164 @@ const MerchantDetails = (props) => {
   };
 
   return (
-    <Wrapper className="container_full">
-      {/* <SideBar {...props} /> */}
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb heading="Map QR" value="mapqr" />
-          <section className="chart_section">
-            <div className="card card-shadow mb-4">
-              <div className="card-body">
-                <form onSubmit={handleSubmit} autoComplete="off">
-                  <h3>Merchant Details</h3>
-                  <div className="flex mercahnt-details row">
-                    <div className="col">
-                      <div className="label-name">Name</div>
-                      <div className="value">
-                        {selectedVendor?.firstName || "-"}{" "}
-                        {selectedVendor?.lastName || ""}
-                      </div>
-                    </div>
-                    <div className="col-3">
-                      <div className="label-name">Mobile No.</div>
-                      <div className="value">
-                        {selectedVendor?.phoneNumber || "-"}
-                      </div>
-                    </div>
-                    <div className="col-3">
-                      <div className="label-name">Email</div>
-                      <div className="value">
-                        {selectedVendor?.email || "-"}
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="label-name">Address</div>
-                      <div className="value">
-                        {selectedVendor?.address1 || "-"}{" "}
-                        {selectedVendor?.address2 || ""}
-                        {selectedVendor?.pincode
-                          ? ` - ${selectedVendor?.pincode}`
-                          : ""}
-                      </div>
-                    </div>
-                  </div>
-                  <h3>
-                    Mapping Details
-                    <span className={`${message?.type} message-text`}>
-                      {message?.text}
-                    </span>
-                  </h3>
-                  {controls.map((dto, i) => (
-                    <>
-                      <div className="flex mapping-dtails row">
-                        <div className="QR-wrap col-12 col-md-6">
-                          <div className="QR-Image">
-                            <img
-                              src={dto?.s3Path ? dto?.s3Path : imagePlaceholder}
-                              alt=""
-                            />
-
-                            <div className="upload">
-                              <i class="fa fa-upload" aria-hidden="true"></i>
-                              <div className="upload-here">
-                                Upload QR code here
-                              </div>
-                            </div>
-                            <input
-                              type="file"
-                              placeholder="Upload QR Code"
-                              name="qrDetails"
-                              onInput={(e) => handleFileRead(e, i)}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-md-6">
-                          <div className="form-wrap-group">
-                            <div className="form-group">
-                              <select
-                                className="form-control"
-                                name="vendorId"
-                                onChange={(e) => dtoChangeHandler(e, i)}
-                              >
-                                <option value="">Select Vendor</option>
-                                {vender.map((option) => (
-                                  <option value={option?.id}>
-                                    {option?.brandName}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-                          <div className="form-wrap-group">
-                            <div className="form-group">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="VPA ID"
-                                name="vpaId"
-                                value={dto?.vpaId}
-                                onChange={(e) => dtoChangeHandler(e, i)}
-                              />
-                            </div>
-                          </div>
-                          <div className="form-wrap-group">
-                            <div className="form-group">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Phone No."
-                                name="phoneNo"
-                                value={dto?.phoneNo}
-                                onChange={(e) => dtoChangeHandler(e, i)}
-                              />
-                            </div>
-                          </div>
-                          <div className="form-wrap-group">
-                            <div className="form-group">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Daily Limit"
-                                name="dailyLimit"
-                                value={dto?.dailyLimit}
-                                onChange={(e) => dtoChangeHandler(e, i)}
-                              />
-                            </div>
-                          </div>
-                          <div className="form-wrap-group">
-                            <div className="form-group">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Total Limit."
-                                name="totalLimit"
-                                value={dto?.totalLimit}
-                                onChange={(e) => dtoChangeHandler(e, i)}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="remove-it">
-                          {i > 0 && (
-                            <button
-                              type="button"
-                              className="btn btn-outline"
-                              onClick={() => removePtpDto(i)}
-                            >
-                              <i className="ion-android-delete"></i>
-                              Remove QR Codes
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </>
-                  ))}
-
-                  <div className="addmore-btn-wrap">
-                    <button
-                      type="button"
-                      className="btn btn-outline"
-                      onClick={() => addMoreQrCodes()}
-                    >
-                      <i className="fa fa-plus-circle" aria-hidden="true"></i>{" "}
-                      Add more QR Codes
-                    </button>
-                    <div className="max-char">Maximum 6 QR Codes</div>
-                  </div>
-                  <button type="submit" className="btn btn-primary themebtn">
-                    Submit
-                  </button>
-                </form>
+    <>
+      <BreadCrumb heading="Map QR" value="mapqr" />
+      <div className="card-wrapper flex-column mb-4">
+        <div className="card-header flex item-center space-between">
+          <h4 className="card-title">Merchant Details</h4>
+        </div>
+        <div className="card-body p16">
+          <div className="flex mercahnt-details pb16">
+            <div className="col-3">
+              <div className="label-name">Name</div>
+              <div className="value">
+                {selectedVendor?.firstName || "-"}{" "}
+                {selectedVendor?.lastName || ""}
               </div>
             </div>
-          </section>
+            <div className="col-2">
+              <div className="label-name">Mobile No.</div>
+              <div className="value">
+                {selectedVendor?.phoneNumber || "-"}
+              </div>
+            </div>
+            <div className="col-3">
+              <div className="label-name">Email</div>
+              <div className="value">
+                {selectedVendor?.email || "-"}
+              </div>
+            </div>
+            <div className="col-4">
+              <div className="label-name">Address</div>
+              <div className="value">
+                {selectedVendor?.address1 || "-"}{" "}
+                {selectedVendor?.address2 || ""}
+                {selectedVendor?.pincode
+                  ? ` - ${selectedVendor?.pincode}`
+                  : ""}
+              </div>
+            </div>
+          </div>
+          <div className="">
+            <span className={`${message?.type} message-text`}>
+              {message?.text}
+            </span>
+          </div>
+
+          <FormWrapper onSubmit={handleSubmit} autoComplete="off">
+            <div className="flex gap16 mapping-details-wrapper">
+              {controls.map((dto, i) => (
+                <>
+                  <div className="mapping-details">
+                    <div className="QR-wrap col-4">
+                      <div className="QR-Image">
+                        <img
+                          src={dto?.s3Path ? dto?.s3Path : imagePlaceholder}
+                          alt=""
+                        />
+
+                        <div className="upload">
+                          <i class="fa fa-upload" aria-hidden="true"></i>
+                          <div className="upload-here">
+                            Upload QR code here
+                          </div>
+                        </div>
+                        <input
+                          type="file"
+                          placeholder="Upload QR Code"
+                          name="qrDetails"
+                          onInput={(e) => handleFileRead(e, i)}
+                        />
+                      </div>
+                      <div className="controls-wrapper flex flex-column gap4 p16">
+                        <div className="form-group">
+                          <select
+                            className="form-control"
+                            name="vendorId"
+                            onChange={(e) => dtoChangeHandler(e, i)}
+                          >
+                            <option value="">Select Vendor</option>
+                            {vender.map((option) => (
+                              <option value={option?.id}>
+                                {option?.brandName}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="VPA ID"
+                            name="vpaId"
+                            value={dto?.vpaId}
+                            onChange={(e) => dtoChangeHandler(e, i)}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Phone No."
+                            name="phoneNo"
+                            value={dto?.phoneNo}
+                            onChange={(e) => dtoChangeHandler(e, i)}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Daily Limit"
+                            name="dailyLimit"
+                            value={dto?.dailyLimit}
+                            onChange={(e) => dtoChangeHandler(e, i)}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Total Limit."
+                            name="totalLimit"
+                            value={dto?.totalLimit}
+                            onChange={(e) => dtoChangeHandler(e, i)}
+                          />
+                        </div>
+                        {controls.length > 1 && (
+                          <Button
+                            type="button"
+                            className="btn-danger"
+                            onClick={() => removePtpDto(i)}
+                          >
+                            <i className="ion-android-delete"></i>
+                            Remove QR Codes
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="addmore-btn-wrap flex item-center justify-end gap16">
+              <div className="flex item-center">
+                <Button
+                  type="button"
+                  className="btn-soft-success"
+                  onClick={() => addMoreQrCodes()}
+                >
+                  <i className="fa fa-plus-circle" aria-hidden="true"></i>{" "}
+                  Add more QR Codes
+                </Button>
+                <div className="max-char">Maximum 6 QR Codes</div>
+              </div>
+              <Button type="submit" className="btn-success">Submit QR Details</Button>
+            </div>
+          </FormWrapper>
         </div>
       </div>
-    </Wrapper>
+    </>
   );
 };
 

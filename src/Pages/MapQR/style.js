@@ -1,18 +1,7 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  .flex {
-    display: flex;
-  }
-  .item-center {
-    align-items: center;
-  }
-  .justify-end {
-    justify-content: flex-end;
-  }
-  .justify-between {
-    justify-content: space-between;
-  }
+export const FormWrapper = styled.div`
+  
   .form-control-wrap {
     .input-group {
       max-width: 180px;
@@ -65,53 +54,18 @@ export const Wrapper = styled.div`
   .value {
     font-weight: 700;
   }
-  .mercahnt-details,
-  .mapping-dtails {
-    margin-bottom: 30px;
+  .mapping-details-wrapper {
+    overflow: auto;
+
   }
-  .mapping-dtails {
-    padding-top: 20px;
-    border: 1px solid #e5e9ec;
-    border-radius: 10px;
-    box-shadow: 0 0 5px #e5e9ec;
-    background-color: ghostwhite;
-    position: relative;
-    &.row {
-      margin: 0 0 60px;
-    }
-    .remove-it {
-      position: absolute;
-      right: 0;
-      top: calc(100% + 15px);
-      button {
-        border-radius: 4px;
-        border: 1px solid #009fe3;
-        height: 33px;
-        color: #009fe3;
-        font-size: 14px;
-        font-weight: 400;
-        padding: 0 15px;
-        i {
-          font-size: 16px;
-          margin-right: 5px;
-        }
-      }
-    }
+  .mapping-details{
+    border-radius: 4px;
+    background-color: var(--ip-topbar-user-bg);
+    border: 1px solid rgba(0, 0, 0, 0.125);
   }
+  
   .addmore-btn-wrap {
-    margin-bottom: 40px;
-    margin-top: -30px;
-    display: flex;
-    align-items: center;
-    .btn {
-      border-radius: 4px;
-      border: 1px solid #009fe3;
-      height: 33px;
-      color: #009fe3;
-      font-size: 14px;
-      font-weight: 400;
-      padding: 0 15px;
-    }
+    padding: 16px 0;
     .max-char {
       font-size: 14px;
       margin-left: 10px;
@@ -138,14 +92,10 @@ export const Wrapper = styled.div`
     }
   }
   .QR-wrap {
-    padding-bottom: 1rem;
-    min-height: 200px;
   }
   .QR-Image {
-    height: 100%;
-    border-radius: 4px;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    height: 232px;
+    width: 300px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -196,3 +146,18 @@ export const Wrapper = styled.div`
     align-items: center;
   }
 `;
+
+export const ChangeQrWrapper = styled.div`
+  max-width: 300px;
+  margin: 0 auto;
+  .qr-image {
+    padding: 24px 0;
+    img {
+      width: 300px;
+      max-width: 100%;
+    }
+  }
+  button {
+    width: 100%;
+  }
+`

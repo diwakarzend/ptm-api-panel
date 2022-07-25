@@ -3,6 +3,7 @@ import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
 import "./Benificiary.css";
+import { ModalWrapper } from "../../Components/UI/StyledConstants";
 
 const initialFormData = Object.freeze({
   firstName: "",
@@ -20,6 +21,7 @@ const BenificiaryForm = memo(
     getBeneficiary,
     setStatus,
     editUserData,
+    status = false,
   }) => {
     const [isPopupVisible, handlePopUp] = useState(false);
     const [formData, updateFormData] = useState(initialFormData);
@@ -109,14 +111,7 @@ const BenificiaryForm = memo(
       };
     }
     return (
-      <div
-        className="modal right fade show"
-        id="exampleModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel2"
-        style={{ display: "block" }}
-      >
+      <ModalWrapper>
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -250,7 +245,7 @@ const BenificiaryForm = memo(
             </form>
           </div>
         </div>
-      </div>
+      </ModalWrapper>
     );
   }
 );

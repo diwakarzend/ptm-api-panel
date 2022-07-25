@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
-//import { connect } from "react-redux";
-//import { fetchTransactionReport } from "../../actions/payout";
+import { useLocation, Link } from "react-router-dom";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
-import SideBar from "../../Components/SideBar/SideBar";
 import VendorTableHTML from "./VendorTableHTML";
-import { Wrapper } from "./style";
 import { getVendorDetailsByID } from "../../utils/api";
 import { getQueryParams } from "../../utils/common";
-//import CSVExport from "../../Components/DataExport/CSVExport";
+import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
+import { ChangeQrWrapper } from "./style";
 
-const VendorList = (props) => {
+const VendorList = () => {
   const [vendorData, setvendorData] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [qrCode, setQrCode] = useState(null);
   const location = useLocation();
+
   useEffect(() => {
     if (location?.search) {
       let queryParams = getQueryParams(location?.search);
@@ -27,32 +27,50 @@ const VendorList = (props) => {
   }, [location]);
 
   return (
-    <Wrapper className="container_full">
-      {/* <SideBar {...props} /> */}
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb heading="Vendor List" value="Vendor List" />
-          <section className="chart_section">
-            <div className="card card-shadow mb-4">
-              <div className="card-header justify-end">
-                <div className="card-title">
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <Link to="/mapqr-add" class="btn btn-primary themebtn">
-                      Add / Update
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <VendorTableHTML vendorData={vendorData} />
-            </div>
-          </section>
+    <>
+      <BreadCrumb heading="Vendor List" value="Vendor List" />
+      <div className="card-wrapper flex-column mb-4">
+        <div className="card-header flex item-center space-between">
+          <h4 className="card-title">Vendor Table</h4>
+        </div>
+        <div className="card-body p16">
+          <Button className="btn-success" as={Link} to="/mapqr-add">Add / Update</Button>
+          <VendorTableHTML vendorData={vendorData} setModal={setModal} />
         </div>
       </div>
-    </Wrapper>
+      {modal &&
+        <ModalWrapper>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4>Change Active QR Code</h4>
+              </div>
+              <div className="modal-body">
+                <ChangeQrWrapper>
+                  <select
+                    name="qrCode"
+                    className="form-control"
+                    onChange={(e) => setQrCode(e.target.value)}
+                  >
+                    <option value="">Select QR Code</option>
+                    <option value="QR Code 1">QR Code 1</option>
+                    <option value="QR Code 2">QR Code 2</option>
+                    <option value="QR Code 3">QR Code 3</option>
+                  </select>
+                  <div className="qr-image flex item-center justify-center">
+                    <img src="https://storage.googleapis.com/ptm-assets-prod/icons/yes-paytm.png" alt="" />
+                  </div>
+                  <div className="flex item-center justify-center">
+                    <Button className="btn-success">Change QR Code</Button>
+                  </div>
+                </ChangeQrWrapper>
+              </div>
+            </div>
+          </div>
+
+        </ModalWrapper>
+      }
+    </>
   );
 };
 

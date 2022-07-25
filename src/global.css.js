@@ -195,6 +195,9 @@ export default createGlobalStyle`
   .p16 {
     padding: 16px;
   }
+  .pb16{
+    padding-bottom: 16px;
+  }
 
 
   .fs-13 {
@@ -306,6 +309,9 @@ export default createGlobalStyle`
   .justify-center{
     justify-content:center;
   }
+  .justify-end {
+    justify-content: end;
+  }
   .item-center{
     align-items:center;
   }
@@ -317,6 +323,9 @@ export default createGlobalStyle`
   }
   .gap4 {
     gap: 4px;
+  }
+  .gap16 {
+    gap: 16px;
   }
   .error-msg{
     color: var(--ip-red);
