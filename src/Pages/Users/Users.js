@@ -11,7 +11,7 @@ import AdminFundForm from "./AdminFundForm";
 import { connect } from "react-redux";
 import { printPage, addOverlay, removeOverlay } from "../../utils/common";
 import WalletDetails from "./WalletDetails";
-import { TableWrapper } from "../../Components/UI/StyledConstants";
+import { Button, TableWrapper } from "../../Components/UI/StyledConstants";
 
 const roleMapping = {
   PTM_VENDOR: "Vendor",
@@ -173,41 +173,30 @@ const Users = (props) => {
   return (
     <>
       <BreadCrumb heading="Users" value="Users" />
-      <div className="flex space-between mb8">
-        <div></div>
-        <button
-          type="button"
-          className="btn-common"
-          data-toggle="modal"
-          data-target="#exampleModal"
-          onClick={openPopupHandler}
-        >
-          Add User
-        </button>
-      </div>
       <div className="card-wrapper flex-column mb-4">
         <div className="card-header flex item-center space-between">
           <h4 className="card-title">Users List</h4>
-          <div className="flex">
-            <div
-              className="btn-group"
-              role="group"
-              aria-label="Basic example"
+          <div className="flex gap4">
+            <Button type="button" className="btn-soft-success">CSV</Button>
+            <Button
+              type="button"
+              className="btn-soft-success"
+              onClick={() => printPage()}
             >
-              <button type="button" className="btn-common">
-                CSV
-              </button>
-              <button
-                type="button"
-                className="btn-common"
-                onClick={() => printPage()}
-              >
-                Print
-              </button>
-            </div>
+              Print
+            </Button>
           </div>
         </div>
         <div className="card-body">
+        <div className="flex space-between p16">
+          <Button
+            type="button"
+            className="btn-success"
+            onClick={openPopupHandler}
+          >
+            Add User
+          </Button>
+        </div>
           <TableWrapper>
             <table
               id="bs4-table"
@@ -236,13 +225,8 @@ const Users = (props) => {
                         .toLowerCase()
                         .replace(" ", "-");
                     }
-                    console.log(item);
 
                     let status = item.isActive;
-
-                    // if (userStatus.userName == item.userName) {
-                    //   status = userStatus.status;
-                    // }
 
                     return (
                       <tr key={item.userName}>
