@@ -65,10 +65,32 @@ export const Navigation = [
         subNav: [],
     },
     {
+        title: 'Bank Entity',
+        link: '',
+        active: false,
+        applicableRoles: ['PTM_ADMIN'],
+        subNav: [
+            {
+                title: 'Add Entity',
+                link: '/add-entity',
+                active: false,
+                applicableRoles: ['PTM_ADMIN'],
+                subNav: [],
+            },
+            {
+                title: 'View Entities',
+                link: '/view-entities',
+                active: false,
+                applicableRoles: ['PTM_ADMIN'],
+                subNav: [],
+            },
+        ],
+    },
+    {
         title: 'P2P Transaction',
         link: '/p2p-transaction',
         active: false,
-        applicableRoles: ['PTM_VENDOR'],
+        applicableRoles: ['PTM_VENDOR', 'PTM_ADMIN'],
         subNav: [],
     },
     {
