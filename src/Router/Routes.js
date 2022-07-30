@@ -15,6 +15,7 @@ import MapQRPageLoadable from "../Pages/MapQR/MapqrLoadable";
 import MapQRListLoadable from "../Pages/MapQR/MapQRListLoadable";
 import VendorListLoadable from "../Pages/MapQR/VendorListLoadable";
 import P2PLoadable from "../Pages/P2PTransaction/P2PLoadable";
+import BankEntityLoadable from "../Pages/BankEntity/BankEntityLoadable";
 
 const Routes = (props) => {
   return (
@@ -52,6 +53,11 @@ const Routes = (props) => {
         <PrivateRoute
           path="/vendor-list"
           component={VendorListLoadable}
+          exact
+        />
+        <PrivateRoute
+          path="/bank-entity"
+          component={BankEntityLoadable}
           exact
         />
       </Switch>

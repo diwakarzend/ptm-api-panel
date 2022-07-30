@@ -27,7 +27,6 @@ export const SidebarWrapper = styled.nav`
                     flex: 0 0 18px;
                     width: 18px;
                     height: 18px;
-                    border: 1px solid #fff;
                     margin-right: 10px;
                 }
             }

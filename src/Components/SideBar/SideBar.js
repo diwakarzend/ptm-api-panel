@@ -49,7 +49,7 @@ const SideBar = () => {
   const [inrpayNavigation, setInrpayNavigation] = useState(Navigation);
 
   const onNavItemClick = (i) => {
-    const _inrpayNavigation = JSON.parse(JSON.stringify(inrpayNavigation));
+    const _inrpayNavigation = [...inrpayNavigation];
     _inrpayNavigation[i].active = !_inrpayNavigation[i].active;
     setInrpayNavigation(_inrpayNavigation);
   }

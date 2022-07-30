@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 import { isEmpty } from '../../utils/common';
+import { IconMap } from './constants';
 import { NavItemWreapper } from './style';
 
 export default function NavItem({navData = {}, subNavLength = 0, className = '', activeIndex, onNavItemClick = () => {}}) {
@@ -21,11 +22,11 @@ export default function NavItem({navData = {}, subNavLength = 0, className = '',
         <NavItemWreapper className={setListClass()} subNavLength={subNavLength} onClick={!isEmpty(navData?.subNav) ? () => onNavItemClick(activeIndex) : () => {}}>
             { navData.link 
                 ? <NavLink to={navData.link} className="nav-link">
-                    <i className='icon'></i>
+                    <i className='icon'>{navData?.icon && IconMap[navData.icon]}</i>
                     <span className='nav-title'>{navData.title}</span>
                   </NavLink>
                 : <a className="nav-link">
-                    <i className='icon'></i>
+                    <i className='icon'>{navData?.icon && IconMap[navData.icon]}</i>
                     <span className='nav-title'>{navData.title}</span>
                   </a>
             }

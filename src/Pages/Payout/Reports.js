@@ -5,6 +5,7 @@ import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
 import TableHTML from "./TableHTML";
 import CSVExport from "../../Components/DataExport/CSVExport";
+import { Button } from "../../Components/UI/StyledConstants";
 
 const Reports = memo((props) => {
   const [filterItems, updateItems] = useState({});
@@ -86,14 +87,35 @@ const Reports = memo((props) => {
   const pagingData = payout && payout.reports && payout.reports.data;
 
   return (
-    <div className="container_full">
-      {/* <SideBar {...props} /> */}
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb heading="Transaction Report" value="Transaction Report" />
-          <section className="chart_section">
-            <div className="card card-shadow mb-4">
-              <form onSubmit={handleSubmit}>
+    <>
+    <BreadCrumb heading="Transaction Report" value="Transaction Report" />
+    <div className="card-wrapper flex-column mb-4">
+        <div className="card-header flex item-center space-between">
+          <h4 className="card-title">P2P Transactions</h4>
+          <div className="flex gap4">
+            <Button type="button" className="btn-soft-success">CSV</Button>
+            <Button
+              type="button"
+              className="btn-soft-success"
+              onClick={() => {
+                window.print();
+              }}>
+              Print
+            </Button>
+          </div>
+          <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <CSVExport dispatch={dispatch} />
+
+                    
+                  </div>
+        </div>
+        <div className="card-body p16">
+          <div className="report-form">
+          <form onSubmit={handleSubmit}>
                 <table className="table table-bordered">
                   <thead>
                     <tr>
@@ -151,38 +173,16 @@ const Reports = memo((props) => {
                   </thead>
                 </table>
               </form>
-              <div className="card-header">
-                <div className="card-title">
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <CSVExport dispatch={dispatch} />
-
-                    <button
-                      type="button"
-                      className="btn-common"
-                      onClick={() => {
-                        window.print();
-                      }}
-                    >
-                      Print
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <TableHTML
-                filterItems={filterItems}
-                reportsItems={reportsItems}
-                pagingData={pagingData}
-                dispatch={dispatch}
-              />
-            </div>
-          </section>
+          </div>
+          <TableHTML
+              filterItems={filterItems}
+              reportsItems={reportsItems}
+              pagingData={pagingData}
+              dispatch={dispatch}
+            />
         </div>
-      </div>
     </div>
+    </>
   );
 });
 

@@ -1,5 +1,6 @@
 import React, { Fragment, memo } from "react";
 import Pagination from "../../Components/Pagination/Pagination";
+import { TableWrapper } from "../../Components/UI/StyledConstants";
 
 const TableHTML = memo(
   ({ reportsItems, filterItems, pagingData, dispatch }) => {
@@ -10,9 +11,9 @@ const TableHTML = memo(
       "";
 
     return (
-      <div className="card-body">
+      <TableWrapper>
         {reportsDataAvailable ? (
-          <table className="table table-bordered">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -113,7 +114,7 @@ const TableHTML = memo(
             <Pagination pagingData={pagingData} dispatch={dispatch} />
           </div>
         )}
-      </div>
+      </TableWrapper>
     );
   }
 );

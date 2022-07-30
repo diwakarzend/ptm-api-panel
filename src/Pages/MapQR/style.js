@@ -157,7 +157,4 @@ export const ChangeQrWrapper = styled.div`
       max-width: 100%;
     }
   }
-  button {
-    width: 100%;
-  }
 `

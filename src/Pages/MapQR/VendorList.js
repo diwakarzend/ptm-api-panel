@@ -60,7 +60,8 @@ const VendorList = () => {
                   <div className="qr-image flex item-center justify-center">
                     <img src="https://storage.googleapis.com/ptm-assets-prod/icons/yes-paytm.png" alt="" />
                   </div>
-                  <div className="flex item-center justify-center">
+                  <div className="flex item-center justify-center gap16">
+                    <Button className="btn-light" onClick={() => setModal(false)}>Close</Button>
                     <Button className="btn-success">Change QR Code</Button>
                   </div>
                 </ChangeQrWrapper>

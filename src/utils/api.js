@@ -74,3 +74,22 @@ export const getUserByVendorRole = (pageNo = 0, pageSize = 20) => {
     `${urls.login.BASE_URL + urls.user.GET_USER_BY_VENDOR_ROLE}?pageNo=${pageNo}&pageSize=${pageSize}`, 
   );
 }
+
+export const AddBankEntityRequest = (params, isUpdate = false) => {
+  let url = urls.ptp.ADD_BANK_ENTITY
+  if(isUpdate) {
+    url = urls.ptp.UPDATE_BANK_ENTITY;
+  }
+  return apiRequest.post(
+    `${urls.login.BASE_URL + url}`,
+    params
+  );
+};
+
+export const getBankEntitiesRequest = (params) => {
+  return apiRequest.get(
+    `${urls.login.BASE_URL + urls.ptp.GET_BANK_ENTITY}/${params.userUUID}?pageNo=${params.pageNo}&pageSize=${params.pageSize}`, 
+  );
+}
+
+

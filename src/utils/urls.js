@@ -1,6 +1,7 @@
 export default {
   login: {
-    BASE_URL: "https://vendor-apiservice.pay2mobiles.com:8443",
+    BASE_URL: "https://service-api.digitpay.pro",
+    // BASE_URL: "https://vendor-apiservice.pay2mobiles.com:8443",
     //BASE_URL: "http://34.93.135.35:8080",
     LOGIN_REQUEST: "/api/authenticate",
     OTP_VALIDATION: "/agent/otp/validation",
@@ -79,6 +80,9 @@ export default {
     GET_MAPQR_LISTING: "/api/ptp/ptp-details",
     UPLOAD_MAPQR_REQUEST: "/api/ptp/uploadQRCode",
     GET_DASHBOARD_USER_TXN: "/api/merchant/usertxn/dashboard",
+    ADD_BANK_ENTITY: "/api/ptp/create-ptpbank",
+    UPDATE_BANK_ENTITY: "/api/ptp/update-bank-details",
+    GET_BANK_ENTITY: "/api/ptp/bank-details"
   },
   user: {
     GET_USER_DETAILS: "/api/users/search",

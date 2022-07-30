@@ -256,11 +256,15 @@ export default createGlobalStyle`
   .inputgroup{
     margin-bottom:16px;
   }
+  .form-error {
+    font-size:12px;
+  }
   .label{
     font-size:13px;
     font-weight:500;
     color: var(--ip-body-color);
     margin-bottom: 8px;
+    display: block;
   }
   .form-control{
     font-size:13px;
@@ -327,10 +331,7 @@ export default createGlobalStyle`
   .gap16 {
     gap: 16px;
   }
-  .error-msg{
-    color: var(--ip-red);
-  }
-  .error-msg{
+  .error-msg, .form-error{
     color: var(--ip-red);
   }
   .success-msg{
