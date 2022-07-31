@@ -11,7 +11,7 @@ import AdminFundForm from "./AdminFundForm";
 import { connect } from "react-redux";
 import { printPage, addOverlay, removeOverlay } from "../../utils/common";
 import WalletDetails from "./WalletDetails";
-import { Button, TableWrapper } from "../../Components/UI/StyledConstants";
+import { AlertWrapper, Button, TableWrapper, TooltipWrapper } from "../../Components/UI/StyledConstants";
 
 const roleMapping = {
   PTM_VENDOR: "Vendor",
@@ -55,6 +55,7 @@ const Users = (props) => {
   });
 
   const [adminFormData, setAdminFormData] = useState("");
+  const [isTooltip, setTooltip] = useState(false);
 
   const { dispatch } = props;
 
@@ -113,15 +114,16 @@ const Users = (props) => {
 
   const handleUserStatus = (userId, curentStatus) => {
     const status = curentStatus == "N" ? "Y" : "N";
-
+    setTooltip(false);
     const successHandler = (response) => {
       console.log("responseresponse", response);
       if (response.success) {
         const msg = status == "N" ? "deactivated" : "activated";
+        setTooltip(true);
         setUserStatus({
           userName: userId,
           status: status,
-          msg: `This user is now ${msg}`,
+          msg: <>This user is now <strong>{msg}</strong></>,
         });
       }
     };
@@ -170,6 +172,22 @@ const Users = (props) => {
     });
   }
 
+  // useEffect(() => {
+  //   if(isTooltip) {
+  //     setTimeout(() => {
+  //       setTooltip(false);
+  //     }, 2000)
+  //   }
+  // }, [isTooltip])
+
+  useEffect(() => {
+    if(statusMsg) {
+      setTimeout(() => {
+        setStatusMsg("");
+      }, 3000)
+    }
+  }, [statusMsg])
+
   return (
     <>
       <BreadCrumb heading="Users" value="Users" />
@@ -188,18 +206,18 @@ const Users = (props) => {
           </div>
         </div>
         <div className="card-body">
-        <div className="flex space-between p16">
-          <Button
-            type="button"
-            className="btn-success"
-            onClick={openPopupHandler}
-          >
-            Add User
-          </Button>
-        </div>
+          <div className="flex space-between p16">
+            <Button
+              type="button"
+              className="btn-success"
+              onClick={openPopupHandler}
+            >
+              Add User
+            </Button>
+          </div>
           <TableWrapper>
+          {statusMsg && <AlertWrapper className="alert alert-normal">{statusMsg}</AlertWrapper>}
             <table
-              id="bs4-table"
               className="table"
             >
               <thead>
@@ -259,17 +277,7 @@ const Users = (props) => {
                         <td>{`${item.isActive == "N" ? "Inactive" : "Active"
                           }`}</td>
                         <td>
-                          {userStatus.userName == item.userName && (
-                            <div
-                              className="done"
-                              style={{
-                                position: "absolute",
-                                marginTop: "-11px",
-                              }}
-                            >
-                              {userStatus.msg}
-                            </div>
-                          )}
+
                           <div
                             style={{
                               display: "flex",
@@ -309,7 +317,7 @@ const Users = (props) => {
                               ></i>
                             </div>
                             {/* | */}
-                            <div
+                            <TooltipWrapper
                               style={styles.bulbContainer[status]}
                               onClick={() =>
                                 handleUserStatus(item.userName, status)
@@ -319,11 +327,16 @@ const Users = (props) => {
                                 className="icon-bulb"
                                 style={{ fontWeight: "bold" }}
                                 title={`${item.isActive == "N"
-                                    ? "Active"
-                                    : "Inactive"
+                                  ? "Active"
+                                  : "Inactive"
                                   }`}
                               ></i>
-                            </div>
+
+                              {userStatus.userName == item.userName && isTooltip && (
+                                <div className="tooltip tooltip-success">{userStatus?.msg}</div>
+                              )}
+
+                            </TooltipWrapper>
                           </div>
                         </td>
                       </tr>
@@ -347,7 +360,6 @@ const Users = (props) => {
       ) : (
         ""
       )}
-      <div className="done">{statusMsg}</div>
       {isPopupVisible ? (
         <AddUserForm
           closePopUpHandler={closePopUpHandler}

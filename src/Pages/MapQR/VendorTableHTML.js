@@ -13,7 +13,6 @@ const VendorTableHTML = ({ vendorData = [], setModal }) => {
               <th scope="col">User UUID</th>
               <th scope="col">Vendor Id</th>
               <th scope="col">VPA Id</th>
-              <th scope="col">Active QR Code</th>
               <th scope="col">Phone No</th>
               <th scope="col">Actions</th>
             </tr>
@@ -26,9 +25,6 @@ const VendorTableHTML = ({ vendorData = [], setModal }) => {
                   <td>{item?.userUUID}</td>
                   <td>{item?.vendorId}</td>
                   <td>{item?.vpaId}</td>
-                  <td>
-                    <img width="80" src={item?.qrDetails} alt="" />
-                  </td>
                   <td>{item?.phoneNo}</td>
                   <td>
                     <Button className="btn-sm btn-soft-success" onClick={() => setModal(true)}>Change QR Code</Button>

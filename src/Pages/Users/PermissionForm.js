@@ -3,6 +3,7 @@ import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { getAuthToken } from "../../utils/common";
 import axios from "axios";
+import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
 
 const PermissionForm = (props) => {
   const { userId, closePopUpHandler } = props;
@@ -130,122 +131,100 @@ const PermissionForm = (props) => {
   const permKeys = allPermissions ? Object.keys(allPermissions) : "";
 
   return (
-    <div
-      className={`modal right fade show`}
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-      style={{ display: "block", paddingRight: "15px" }}
-    >
+    <ModalWrapper>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
+            <h4 className="modal-title" id="exampleModalLabel">
               Manage Permissions
-            </h5>
-            <button
+            </h4>
+            <Button
               type="button"
               className="close"
-              data-dismiss="modal"
-              aria-label="Close"
               onClick={closePopUpHandler}
             >
               <span aria-hidden="true">&times;</span>
-            </button>
+            </Button>
           </div>
 
           <div className="modal-body">
             <form onSubmit={submitFormHandler}>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="form-group" style={{ marginLeft: "-40px" }}>
-                    <div className={message.success ? "done" : "fail"}>
-                      {message.success || message.error}
-                    </div>
-                    {permKeys && Array.isArray(permKeys) ? (
-                      permKeys.map((permKey) => {
-                        return (
-                          <ul>
-                            <li
-                              style={{
-                                listStyle: "none",
-                                fontWeight: "bold",
-                                marginBottom: "10px",
-                              }}
-                            >
-                              {permKey}
-                            </li>
-                            {allPermissions &&
+
+              <div className="pb16">
+                <div className={message.success ? "done" : "fail"}>
+                  {message.success || message.error}
+                </div>
+                {permKeys && Array.isArray(permKeys) ? (
+                  permKeys.map((permKey) => {
+                    return (
+                      <>
+                        <h6 className="py8">{permKey}</h6>
+                        <ul className="pl16">
+                          {allPermissions &&
                             allPermissions[permKey] &&
                             Array.isArray(allPermissions[permKey])
-                              ? allPermissions[permKey].map((item) => {
-                                  return (
-                                    <li
-                                      style={{
-                                        listStyle: "none",
-                                      }}
-                                    >
-                                      <input
-                                        type="checkbox"
-                                        name={item}
-                                        checked={
-                                          activePermissions &&
-                                          activePermissions[permKey] &&
-                                          activePermissions[permKey].includes(
-                                            item
-                                          )
-                                            ? true
-                                            : false
-                                        }
-                                        onClick={(event) =>
-                                          handleClick(event, permKey)
-                                        }
-                                        style={{ marginRight: "10px" }}
-                                      />
-                                      {item
-                                        .replace(/_/g, " ")
-                                        .replace("PTM ", "")}
-                                    </li>
-                                  );
-                                })
-                              : ""}
-                          </ul>
-                        );
-                      })
-                    ) : (
-                      <div
-                        style={{
-                          margin: "167px 0 156px 0",
-                          fontSize: "26px",
-                          textAlign: "center",
-                          color: "#0aaaba",
-                        }}
-                      >
-                        Loading....
-                      </div>
-                    )}
+                            ? allPermissions[permKey].map((item) => {
+                              return (
+                                <li className="py4">
+                                  <input
+                                    type="checkbox"
+                                    name={item}
+                                    checked={
+                                      activePermissions &&
+                                        activePermissions[permKey] &&
+                                        activePermissions[permKey].includes(
+                                          item
+                                        )
+                                        ? true
+                                        : false
+                                    }
+                                    onClick={(event) =>
+                                      handleClick(event, permKey)
+                                    }
+                                    style={{ marginRight: "10px" }}
+                                  />
+                                  {item
+                                    .replace(/_/g, " ")
+                                    .replace("PTM ", "")}
+                                </li>
+                              );
+                            })
+                            : ""}
+                        </ul>
+                      </>
+                    );
+                  })
+                ) : (
+                  <div
+                    style={{
+                      margin: "167px 0 156px 0",
+                      fontSize: "26px",
+                      textAlign: "center",
+                      color: "#0aaaba",
+                    }}
+                  >
+                    Loading....
                   </div>
-                </div>
+                )}
               </div>
-              <div className="modal-footer">
-                <button
+              <div className="flex item-center justify-center gap16">
+                <Button
                   type="button"
-                  className="btn btn-primary themebtn transparent"
+                  className="btn-light"
                   data-dismiss="modal"
                   onClick={closePopUpHandler}
                 >
                   Close
-                </button>
-                <button type="submit" className="btn btn-primary themebtn">
+                </Button>
+                <Button type="submit" className="btn-success">
                   Update Permissions
-                </button>
+                </Button>
               </div>
             </form>
           </div>
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
 };
 

@@ -82,7 +82,7 @@ const Header = () => {
               <UserInfoWrapper className="user-info-dropdown">
                 <h6>Welcome {userData?.firstName || '-'}</h6>
                 <ul>
-                  <li>Profile</li>
+                  <li onClick={() => setProfileClick(true)}>Profile</li>
                   <li onClick={() => logout()}>Logout</li>
                 </ul>
               </UserInfoWrapper>
@@ -92,7 +92,7 @@ const Header = () => {
       </HeaderWrapper>
       {isProfileClicked && (
         <div className="card-header fund-modal">
-          <UserProfileForm closePopUpHandler={closePopUpHandler} />
+          <UserProfileForm closePopUpHandler={setProfileClick} />
         </div>
       )}
     </>

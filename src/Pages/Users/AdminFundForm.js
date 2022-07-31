@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import APIS from "../../utils/urls";
 import Request from "../../utils/Request";
+import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
 
 function AdminFundForm({
   userId,
@@ -52,37 +53,27 @@ function AdminFundForm({
   console.log("formData", formData);
 
   return (
-    <div
-      className={`modal right fade show`}
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-      style={{ display: "block", paddingRight: "15px" }}
-    >
+    <ModalWrapper>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
+            <h4 className="modal-title">
               Add Fund
-            </h5>
-            <button
+            </h4>
+            <Button
               type="button"
               className="close"
-              data-dismiss="modal"
-              aria-label="Close"
               onClick={closeAdminFundForm}
             >
               <span aria-hidden="true">&times;</span>
-            </button>
+            </Button>
           </div>
 
           <div className="modal-body">
             <form onSubmit={(event) => submitFormHandler(event)}>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Amount</label>
+                <div className="">
+                  <div className="pb16">
+                    <label className="label">Amount</label>
                     <input
                       required
                       type="number"
@@ -92,10 +83,9 @@ function AdminFundForm({
                       onChange={handleChange}
                     />
                   </div>
-                </div>
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Action</label>
+                
+                  <div className="pb16">
+                    <label className="label">Action</label>
                     <select
                       required
                       ref={walletSelect}
@@ -108,10 +98,9 @@ function AdminFundForm({
                       <option value="hold-withdraw">Block</option>
                     </select>
                   </div>
-                </div>
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Remark</label>
+                
+                  <div className="pb16">
+                    <label className="label">Remark</label>
                     <input
                       required
                       type="text"
@@ -121,41 +110,26 @@ function AdminFundForm({
                       onChange={handleChange}
                     />
                   </div>
-                </div>
               </div>
-              <div className="modal-footer">
-                <button
+              <div className="flex item-center justify-center gap16">
+                <Button
                   type="button"
-                  className="btn btn-primary themebtn transparent"
+                  className="btn-light"
                   data-dismiss="modal"
                   onClick={closeAdminFundForm}
                 >
                   Close
-                </button>
-                <button type="submit" className="btn btn-primary themebtn">
+                </Button>
+                <Button type="submit" className="btn-success">
                   Add Fund
-                </button>
+                </Button>
               </div>
             </form>
           </div>
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
-
-  // return (
-  //   <div>
-  //     <div>
-  //       <label>Amount</label>
-  //       <input onChange={(event) => setAmount(event.target.value)} />
-  //     </div>
-  //     <div>
-  //       <label>Remark</label>
-  //       <input onChange={(event) => setRemark(event.target.value)} />
-  //     </div>
-  //     <button onClick={(event) => submitFormHandler(event)}>Submit</button>
-  //   </div>
-  // );
 }
 
 export default AdminFundForm;

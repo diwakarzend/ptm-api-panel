@@ -3,14 +3,14 @@ import { useLocation, Link } from "react-router-dom";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import VendorTableHTML from "./VendorTableHTML";
 import { getVendorDetailsByID } from "../../utils/api";
-import { getQueryParams } from "../../utils/common";
+import { getQueryParams, isEmpty } from "../../utils/common";
 import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
 import { ChangeQrWrapper } from "./style";
 
 const VendorList = () => {
   const [vendorData, setvendorData] = useState([]);
   const [modal, setModal] = useState(false);
-  const [qrCode, setQrCode] = useState(null);
+  const [qrCode, setQrCode] = useState('');
   const location = useLocation();
 
   useEffect(() => {
@@ -44,22 +44,26 @@ const VendorList = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h4>Change Active QR Code</h4>
+                <Button className="close" onClick={() => setModal(false)}><span aria-hidden="true">&times;</span></Button>
               </div>
               <div className="modal-body">
                 <ChangeQrWrapper>
-                  <select
-                    name="qrCode"
-                    className="form-control"
-                    onChange={(e) => setQrCode(e.target.value)}
-                  >
-                    <option value="">Select QR Code</option>
-                    <option value="QR Code 1">QR Code 1</option>
-                    <option value="QR Code 2">QR Code 2</option>
-                    <option value="QR Code 3">QR Code 3</option>
-                  </select>
-                  <div className="qr-image flex item-center justify-center">
-                    <img src="https://storage.googleapis.com/ptm-assets-prod/icons/yes-paytm.png" alt="" />
+                  <div className="pb16">
+                    <select
+                      name="qrCode"
+                      className="form-control"
+                      value={qrCode}
+                      onChange={(e) => setQrCode(e.target.value)}
+                    >
+                      <option value="">Select QR Code</option>
+                      {vendorData.map((option, i) =>
+                        <option value={option?.vpaId}>{option?.vpaId}</option>
+                      )}
+                    </select>
                   </div>
+                  {/* <div className="qr-image flex item-center justify-center">
+                    <img src="https://storage.googleapis.com/ptm-assets-prod/icons/yes-paytm.png" alt="" />
+                  </div> */}
                   <div className="flex item-center justify-center gap16">
                     <Button className="btn-light" onClick={() => setModal(false)}>Close</Button>
                     <Button className="btn-success">Change QR Code</Button>

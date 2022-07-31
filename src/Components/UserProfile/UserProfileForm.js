@@ -3,6 +3,7 @@ import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
 import "./UserProfile.css";
+import { Button, ModalWrapper } from "../UI/StyledConstants";
 
 const initialFormData = Object.freeze({
   brandName: "",
@@ -124,39 +125,29 @@ const UserProfileForm = memo(({ closePopUpHandler }) => {
   const cssClass = statusMessage.success ? "done" : "fail";
 
   return (
-    <div
-      className="modal right fade show"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-      style={{ display: "block" }}
-    >
+    <ModalWrapper>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
+            <h4 className="modal-title">
               My Profile
-            </h5>
-            <button
+            </h4>
+            <Button
               type="button"
               className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-              onClick={closePopUpHandler}
+              onClick={() => closePopUpHandler(false)}
             >
               <span aria-hidden="true">&times;</span>
-            </button>
+            </Button>
           </div>
           <div className={cssClass}>
             {statusMessage.success || statusMessage.error}
           </div>
           <form onSubmit={submitFormHandler}>
             <div className="modal-body">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Brand</label>
+              <div className="">
+                  <div className="pb16">
+                    <label className="label" >Brand</label>
                     <input
                       type="text"
                       className="form-control"
@@ -167,10 +158,8 @@ const UserProfileForm = memo(({ closePopUpHandler }) => {
                       required
                     />
                   </div>
-                </div>
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Company Name</label>
+                  <div className="pb16">
+                    <label className="label" >Company Name</label>
                     <input
                       type="text"
                       className="form-control"
@@ -181,11 +170,8 @@ const UserProfileForm = memo(({ closePopUpHandler }) => {
                       required
                     />
                   </div>
-                </div>
-
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Address</label>
+                  <div className="pb16">
+                    <label className="label" >Address</label>
                     <input
                       type="text"
                       className="form-control"
@@ -196,10 +182,8 @@ const UserProfileForm = memo(({ closePopUpHandler }) => {
                       required
                     />
                   </div>
-                </div>
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">GST</label>
+                  <div className="pb16">
+                    <label className="label" >GST</label>
                     <input
                       type="text"
                       className="form-control"
@@ -210,11 +194,8 @@ const UserProfileForm = memo(({ closePopUpHandler }) => {
                       required
                     />
                   </div>
-                </div>
-
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Website</label>
+                  <div className="pb16">
+                    <label className="label" >Website</label>
                     <input
                       type="text"
                       className="form-control"
@@ -225,36 +206,25 @@ const UserProfileForm = memo(({ closePopUpHandler }) => {
                       required
                     />
                   </div>
-                </div>
               </div>
 
-              <div className="modal-footer">
-                <button
+              <div className="flex item-center justify-center gap16">
+                <Button
                   type="button"
-                  className="btn btn-primary themebtn transparent"
-                  data-dismiss="modal"
-                  onClick={closePopUpHandler}
+                  className="btn-light"
+                  onClick={() => closePopUpHandler(false)}
                 >
                   Close
-                </button>
-                <button type="submit" className="btn btn-primary themebtn">
+                </Button>
+                <Button type="submit" className="btn-success">
                   Submit
-                </button>
-                {/* <div>
-                  {errorHTML && errorStyles ? (
-                    <ul style={errorStyles}>{errorHTML}</ul>
-                  ) : success && successStyles ? (
-                    <div style={successStyles}>{success}</div>
-                  ) : (
-                    ""
-                  )}
-                </div> */}
+                </Button>
               </div>
             </div>
           </form>
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
 });
 

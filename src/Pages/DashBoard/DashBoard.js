@@ -77,12 +77,11 @@ const DashBoard = (props) => {
   return (
       <>
         <BreadCrumb heading="Dashboard" />
-        <TopInfo transactionReport={transactionReport} />
-
         {userPermissions && userPermissions.includes("PTM_VENDOR_TRANSACTION_REPORT") && (
           <UpiCollections />
         )}
-        
+        <TopInfo transactionReport={transactionReport} />
+        { false && 
         <DashboardWrapper className="flex analysis-and-statistics">
           <div className="card-wrapper flex-column transaction-analysis">
             <div className="card-header">
@@ -165,7 +164,7 @@ const DashBoard = (props) => {
             </div>
           </div>
         </DashboardWrapper>
-        
+        }
       </>
   );
 };

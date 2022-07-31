@@ -198,7 +198,17 @@ export default createGlobalStyle`
   .pb16{
     padding-bottom: 16px;
   }
-
+  .pl16{
+    padding-left: 16px;
+  }
+  .py8{
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .py4{
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
 
   .fs-13 {
     font-size: 13px;

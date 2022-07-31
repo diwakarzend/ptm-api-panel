@@ -171,7 +171,7 @@ export const ModalWrapper = styled.div`
         align-items: center;
         justify-content: space-between;
         padding: 20px;
-        border-bottom: 1 solid var(--ip-border-color);
+        border-bottom: 1px solid var(--ip-border-color);
     }
     .modal-body {
         position: relative;
@@ -185,4 +185,42 @@ export const ModalWrapper = styled.div`
         padding: 20px;
         border-top: 1px solid var(--ip-border-color);
     }
+`
+
+export const TooltipWrapper = styled.div`
+    position: relative;
+    .tooltip {
+        position: absolute;
+        padding: 8px 16px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        bottom: calc(100% + 8px);
+        right: 0;
+        &.tooltip-success {
+            color: #088675;
+            background-color: #daf4f0;
+            border-color: #b6e8e1;
+        }
+        &.tooltip-danger {
+            color: #b44c36;
+            background-color: #fde8e4;
+            border-color: #fbd1c8;
+        }
+    }
+`
+export const AlertWrapper = styled.div`
+    &.alert {
+        position: relative;
+        padding: 8px 16px;
+        margin-bottom: 16px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        width: fit-content;
+        &.alert-normal {
+            color: #2859b5;
+            background-color: #e1ebfd;
+            border-color: #c2d6fb;
+        }   
+    }
+    
 `

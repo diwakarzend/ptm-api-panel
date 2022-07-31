@@ -34,6 +34,7 @@ const MerchantDetails = (props) => {
   const [user, setUser] = useState([]);
   const selectedVendor = useSelector((state) => state?.selectedVendor?.data);
   const [bankOptions, SetBankOptions] = useState([]);
+  const [bankId, setBankId] = useState('');
   const history = useHistory();
   console.log("selectedVendor", selectedVendor);
 
@@ -76,6 +77,7 @@ const MerchantDetails = (props) => {
     const ptpDTOList = JSON.parse(JSON.stringify(controls));
     ptpDTOList.forEach((dto) => {
       dto.userUUID = "234";
+      dto.bankId = bankId;
     });
 
     postVendorListing(ptpDTOList).then((res) => {
@@ -176,8 +178,9 @@ const MerchantDetails = (props) => {
               <div className="col-3">
                 <select
                   className="form-control"
-                  name="vendorId"
-                  onChange={(e) => dtoChangeHandler(e, i)}
+                  name="bankId"
+                  value={bankId}
+                  onChange={(e) => setBankId(e.target.value)}
                 >
                   <option value="">Select Bank</option>
                   {bankOptions.map((option) => (

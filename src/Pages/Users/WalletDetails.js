@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import APIS from "../../utils/urls";
 import Request from "../../utils/Request";
+import { ModalWrapper } from "../../Components/UI/StyledConstants";
 
 function WalletDetails({
   userId,
@@ -35,14 +36,7 @@ function WalletDetails({
   }, []);
 
   return (
-    <div
-      className={`modal right fade show`}
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-      style={{ display: "block", paddingRight: "20px" }}
-    >
+    <ModalWrapper>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
@@ -107,7 +101,7 @@ function WalletDetails({
           </div>
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
 }
 export default WalletDetails;
