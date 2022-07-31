@@ -65,6 +65,13 @@ export default function AddBankEntityModal({setModal, modalData = null}) {
             <div className="modal-content">
               <div className="modal-header">
                 <h4>Add Bank Entity</h4>
+                <Button
+                  type="button"
+                  className="close"
+                  onClick={() => setModal({status: false, modalData: null})}
+                >
+                  <span aria-hidden="true">&times;</span>
+            </Button>
               </div>
               <div className="modal-body">
                 <AddBankEntityWrapper>
@@ -101,7 +108,7 @@ export default function AddBankEntityModal({setModal, modalData = null}) {
                     
                   </div>
                   <div className="flex item-center justify-center gap16">
-                    <Button className="btn-light" onClick={() => setModal(false)}>Close</Button>
+                    <Button className="btn-light" onClick={() => setModal({status: false, modalData: null})}>Close</Button>
                     <Button className="btn-success" onClick={onBankEntitySubmit}>Submit</Button>
                   </div>
                 </AddBankEntityWrapper>

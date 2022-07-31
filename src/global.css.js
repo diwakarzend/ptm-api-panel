@@ -375,7 +375,7 @@ export default createGlobalStyle`
     word-wrap: break-word;
     background-color: var(--ip-card-bg);
     background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0,0,0,.125);
     border-radius: 4px;
     box-shadow: 0 1px 2px rgb(56 65 74 / 15%);
     margin-bottom: 24px;
@@ -384,6 +384,32 @@ export default createGlobalStyle`
     border-radius: 4px 4px 0 0;
     padding: 16px;
     border-bottom: 1px solid var(--ip-border-color);
+    .tab-List {
+      margin: -16px -8px;
+      display: flex;
+      .tab-item {
+        padding: 16px;
+        font-weight: 500;
+        color: var(--ip-link-color);
+        position: relative;
+        &.active {
+          &:after {
+            transform: scale(1);
+          }
+        }
+        &:after {
+          content: "";
+          background: #405189;
+          height: 1px;
+          position: absolute;
+          width: 100%;
+          left: 0;
+          bottom: 0;
+          transition: all 250ms ease 0s;
+          transform: scale(0);
+        }
+      }
+    }
   }
   .row {
     display: flex;
@@ -427,5 +453,11 @@ export default createGlobalStyle`
   }
   .col-12 {
     flex: 0 0 calc(100% * 12 / 12);
+  }
+  .pb0{
+    padding-bottom: 0 !important;
+  }
+  .pt0{
+    padding-top: 0 !important;
   }
 `

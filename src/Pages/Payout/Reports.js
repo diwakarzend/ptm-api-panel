@@ -6,7 +6,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import TableHTML from "./TableHTML";
 import CSVExport from "../../Components/DataExport/CSVExport";
 import { Button } from "../../Components/UI/StyledConstants";
-
+import "./Reports.css";
 const Reports = memo((props) => {
   const [filterItems, updateItems] = useState({});
   const { dispatch, payout } = props;
@@ -115,63 +115,60 @@ const Reports = memo((props) => {
         </div>
         <div className="card-body p16">
           <div className="report-form">
-          <form onSubmit={handleSubmit}>
-                <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th scope="col">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Transaction Id"
-                          name="txnId"
-                          onChange={handleChange}
-                        />
-                      </th>
-                      <th scope="col">
-                        <input
-                          type="number"
-                          className="form-control"
-                          placeholder="Account number"
-                          name="accountNumber"
-                          onChange={handleChange}
-                        />
-                      </th>
-                      <th scope="col">
-                        <input
-                          type="date"
-                          className="form-control"
-                          name="date"
-                          onChange={handleChange}
-                        />
-                      </th>
-                      <th scope="col">
-                        <div className="col-md-12">
-                          <select
-                            className="form-control"
-                            id="exampleFormControlSelect1"
-                            name="status"
-                            onChange={handleChange}
-                          >
-                            <option value="">Status</option>
-                            <option value="DONE">DONE</option>
-                            <option value="INITIATED">INITIATED</option>
-                            <option value="REJECTED">REJECTED</option>
-                            <option value="PENDING">PENDING</option>
-                            <option value="FAIL">FAIL</option>
-                          </select>
-                        </div>
-                      </th>
-                      <th scope="col">
-                        <input
-                          type="submit"
-                          className="btn-common"
-                          value="Search"
-                        />
-                      </th>
-                    </tr>
-                  </thead>
-                </table>
+            <form onSubmit={handleSubmit}>
+                <div className="flex flex-wrap gap4">
+                  <div class="form-item">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Transaction Id"
+                      name="txnId"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="form-item">
+                    <input
+                      type="number"
+                      className="form-control"
+                      placeholder="Account number"
+                      name="accountNumber"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="form-item">
+                    <input
+                      type="date"
+                      className="form-control"
+                      name="date"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="form-item">
+                    <div className="col-md-12">
+                      <select
+                        className="form-control"
+                        id="exampleFormControlSelect1"
+                        name="status"
+                        onChange={handleChange}
+                      >
+                        <option value="">Status</option>
+                        <option value="DONE">DONE</option>
+                        <option value="INITIATED">INITIATED</option>
+                        <option value="REJECTED">REJECTED</option>
+                        <option value="PENDING">PENDING</option>
+                        <option value="FAIL">FAIL</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-action">
+                    <Button
+                      type="submit"
+                      className="btn-success"
+                    >
+                    Search
+                    </Button>
+                  </div>
+                </div>
               </form>
           </div>
           <TableHTML

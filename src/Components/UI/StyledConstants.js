@@ -124,6 +124,10 @@ export const Button = styled.button`
         display: inline-block;
         vertical-align: middle;
     }
+    &.close{
+        width: 10px;
+        font-size: 26px;
+    }
 `
 
 export const FilterFormWrapper = styled.div`

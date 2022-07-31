@@ -6,6 +6,7 @@ import {
   postVendorListing,
   getUserDetails,
   uploadMapqrRequest,
+  getBankEntitiesRequest,
 } from "../../utils/api";
 import imagePlaceholder from "../../assests/images/gallery.png";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
@@ -32,8 +33,15 @@ const MerchantDetails = (props) => {
   const [message, setMessage] = useState({ type: "", text: "" });
   const [user, setUser] = useState([]);
   const selectedVendor = useSelector((state) => state?.selectedVendor?.data);
+  const [bankOptions, SetBankOptions] = useState([]);
   const history = useHistory();
   console.log("selectedVendor", selectedVendor);
+
+  useEffect(() => {
+    getBankEntitiesRequest({ pageNo: 0, pageSize: 100, userUUID: '1ba336de-16e6-11ec-9621-0242ac130002' }).then((res) => {
+      SetBankOptions(res?.data?.data);
+    });
+  }, []);
 
   useEffect(() => {
     const params = { pageNo: 1, pageSize: 100 };
@@ -129,26 +137,26 @@ const MerchantDetails = (props) => {
         <div className="card-body p16">
           <div className="flex mercahnt-details pb16">
             <div className="col-3">
-              <div className="label-name">Name</div>
+              <div className="label">Name</div>
               <div className="value">
                 {selectedVendor?.firstName || "-"}{" "}
                 {selectedVendor?.lastName || ""}
               </div>
             </div>
             <div className="col-2">
-              <div className="label-name">Mobile No.</div>
+              <div className="label">Mobile No.</div>
               <div className="value">
                 {selectedVendor?.phoneNumber || "-"}
               </div>
             </div>
             <div className="col-3">
-              <div className="label-name">Email</div>
+              <div className="label">Email</div>
               <div className="value">
                 {selectedVendor?.email || "-"}
               </div>
             </div>
             <div className="col-4">
-              <div className="label-name">Address</div>
+              <div className="label">Address</div>
               <div className="value">
                 {selectedVendor?.address1 || "-"}{" "}
                 {selectedVendor?.address2 || ""}
@@ -163,7 +171,24 @@ const MerchantDetails = (props) => {
               {message?.text}
             </span>
           </div>
-
+          <div className="form-group bank-details pb16">
+            <div className="row">
+              <div className="col-3">
+                <select
+                  className="form-control"
+                  name="vendorId"
+                  onChange={(e) => dtoChangeHandler(e, i)}
+                >
+                  <option value="">Select Bank</option>
+                  {bankOptions.map((option) => (
+                    <option value={option?.id}>
+                      {option?.bankName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
           <FormWrapper onSubmit={handleSubmit} autoComplete="off">
             <div className="flex gap16 mapping-details-wrapper">
               {controls.map((dto, i) => (

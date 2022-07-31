@@ -1,6 +1,7 @@
 import React, { memo, useState } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
+import { Button } from "../UI/StyledConstants";
 
 const initialFormData = Object.freeze({
   currentPassword: "",
@@ -47,12 +48,13 @@ const ChangePassword = memo((props) => {
   };
 
   return (
-    <form className="form-group" onSubmit={submitFormHandler}>
+    <form className="change-password-form flex" onSubmit={submitFormHandler}>
       <div className={`${message.success ? "done" : "fail"}`}>
         {message.error || message.success}
       </div>
-      <div className="col-md-12">
-        <div className="form-group">
+      <div className="col-4">
+        <div className="mb16">
+          <label className="label">Current Password</label>
           <input
             type="password"
             className="form-control"
@@ -62,9 +64,8 @@ const ChangePassword = memo((props) => {
             required
           />
         </div>
-      </div>
-      <div className="col-md-12">
-        <div className="form-group">
+        <div className="mb16">
+          <label className="label">New Password</label>
           <input
             type="password"
             className="form-control"
@@ -74,9 +75,8 @@ const ChangePassword = memo((props) => {
             required
           />
         </div>
-      </div>
-      <div className="col-md-12">
-        <div className="form-group">
+        <div className="mb16">
+          <label className="label">Confirm New Password</label>
           <input
             type="password"
             className="form-control"
@@ -86,11 +86,11 @@ const ChangePassword = memo((props) => {
             required
           />
         </div>
+        <div className="">
+          <Button type="submit" className="btn-success">Update</Button>
+        </div>
       </div>
-
-      <button type="submit" className="btn btn-primary themebtn">
-        Update
-      </button>
+      
     </form>
   );
 });

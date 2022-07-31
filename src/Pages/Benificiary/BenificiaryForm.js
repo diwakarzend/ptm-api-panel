@@ -3,7 +3,7 @@ import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
 import "./Benificiary.css";
-import { ModalWrapper } from "../../Components/UI/StyledConstants";
+import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
 
 const initialFormData = Object.freeze({
   firstName: "",
@@ -118,7 +118,7 @@ const BenificiaryForm = memo(
               <h5 className="modal-title" id="exampleModalLabel">
                 Add Beneficiary
               </h5>
-              <button
+              <Button
                 type="button"
                 className="close"
                 data-dismiss="modal"
@@ -126,14 +126,13 @@ const BenificiaryForm = memo(
                 onClick={closePopUpHandler}
               >
                 <span aria-hidden="true">&times;</span>
-              </button>
+              </Button>
             </div>
             <form onSubmit={submitFormHandler}>
               <div className="modal-body">
-                <div className="row">
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">First Name</label>
+                      <label className="label" for="exampleInputEmail1">First Name</label>
                       <input
                         type="text"
                         value={formData.firstName}
@@ -146,9 +145,9 @@ const BenificiaryForm = memo(
                       />
                     </div>
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">Last Name</label>
+                      <label className="label" for="exampleInputEmail1">Last Name</label>
                       <input
                         type="text"
                         value={formData.lastName}
@@ -162,9 +161,9 @@ const BenificiaryForm = memo(
                     </div>
                   </div>
 
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">Mobile No</label>
+                      <label className="label" for="exampleInputEmail1">Mobile No</label>
                       <input
                         type="number"
                         value={formData.mobileNumber}
@@ -176,9 +175,9 @@ const BenificiaryForm = memo(
                       />
                     </div>
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">Bank Name</label>
+                      <label className="label" for="exampleInputEmail1">Bank Name</label>
                       <input
                         type="text"
                         value={formData.bankName}
@@ -190,9 +189,9 @@ const BenificiaryForm = memo(
                     </div>
                   </div>
 
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">Account Number</label>
+                      <label className="label" for="exampleInputEmail1">Account Number</label>
                       <input
                         type="number"
                         value={formData.accountNumber}
@@ -204,9 +203,9 @@ const BenificiaryForm = memo(
                     </div>
                   </div>
 
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">IFSC Code</label>
+                      <label className="label" for="exampleInputEmail1">IFSC Code</label>
                       <input
                         type="text"
                         value={formData.ifscCode}
@@ -219,18 +218,18 @@ const BenificiaryForm = memo(
                   </div>
                 </div>
 
-                <div className="modal-footer">
-                  <button
+                <div className="modal-footer gap16">
+                  <Button
                     type="button"
-                    className="btn btn-primary themebtn transparent"
+                    className="btn-light"
                     data-dismiss="modal"
                     onClick={closePopUpHandler}
                   >
                     Close
-                  </button>
-                  <button type="submit" className="btn btn-primary themebtn">
+                  </Button>
+                  <Button type="submit" className="btn-success">
                     Submit
-                  </button>
+                  </Button>
                   <div>
                     {errorHTML && errorStyles ? (
                       <ul style={errorStyles}>{errorHTML}</ul>
@@ -240,7 +239,6 @@ const BenificiaryForm = memo(
                       ""
                     )}
                   </div>
-                </div>
               </div>
             </form>
           </div>

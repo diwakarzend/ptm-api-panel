@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import SideBar from "../../Components/SideBar/SideBar";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import ChangePassword from "../../Components/ResetPassword/ChangePassword";
 import IPForm from "../Settings/IPForm";
@@ -8,6 +7,7 @@ import { connect } from "react-redux";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import "./Settings.css";
+import { Button, TableWrapper } from "../../Components/UI/StyledConstants";
 
 const Settings = (props) => {
   const [toggleApi1, setToggeleAPI1] = useState(false);
@@ -29,7 +29,7 @@ const Settings = (props) => {
       }
     };
 
-    const errorHandler = (error) => {};
+    const errorHandler = (error) => { };
 
     const request = new Request("", successHandler, errorHandler, false);
     return request.get(`${urls.login.BASE_URL}${urls.User.API_LIST}`);
@@ -68,6 +68,14 @@ const Settings = (props) => {
     tokenInput.current.value = result;
   };
 
+  const setTabItemClass = (tabName) => {
+    let cls = 'tab-item';
+    if (activeTab === tabName) {
+      cls += ' active';
+    }
+    return cls;
+  }
+
   console.log("ipdata", props);
 
   const userRole = login && login.userData && login.userData.role;
@@ -75,190 +83,124 @@ const Settings = (props) => {
   /*
    */
   return (
-    <div className="container_full">
-      {/* <SideBar {...props} /> */}
+    <>
+      <BreadCrumb heading="Settings" value="Settings" />
 
-      <div className="content_wrapper">
-        <div className="container-fluid">
-          <BreadCrumb heading="Settings" value="Settings" />
-          <section className="chart_section">
-            <div className="row">
-              <div className="col-xl-12">
-                <div className="card card-shadow mb-4">
-                  <div className="card-header">
-                    <div className="card-title">
-                      <ul
-                        className="nav nav-pills nav-pill-custom nav-pills-sm mobile-float-none"
-                        id="pills-tab"
-                        role="tablist"
-                      >
-                        <li
-                          className="nav-item"
-                          onClick={() => handleTabClick("password")}
-                        >
-                          <a
-                            className={`nav-link${
-                              activeTab == "password" ? " active" : ""
-                            }`}
-                            id="pills-week-tab"
-                            data-toggle="pill"
-                            href="#pills-week"
-                            role="tab"
-                            aria-controls="pills-week"
-                            aria-selected="false"
-                          >
-                            Change Password
-                          </a>
-                        </li>
-                        <li
-                          className="nav-item"
-                          onClick={() => handleTabClick("payoutapi")}
-                        >
-                          <a
-                            className={`nav-link${
-                              activeTab == "payoutapi" ? " active" : ""
-                            }`}
-                            id="pills-week-tab"
-                            data-toggle="pill"
-                            href="#pills-week"
-                            role="tab"
-                            aria-controls="pills-week"
-                            aria-selected="false"
-                          >
-                            PAYOUT API
-                          </a>
-                        </li>
-                        <li
-                          className="nav-item"
-                          onClick={() => handleTabClick("apikey")}
-                        >
-                          <a
-                            className={`nav-link${
-                              activeTab == "apikey" ? " active" : ""
-                            }`}
-                            id="pills-week-tab"
-                            data-toggle="pill"
-                            href="#pills-week"
-                            role="tab"
-                            aria-controls="pills-week"
-                            aria-selected="false"
-                          >
-                            API Key
-                          </a>
-                        </li>
-                        <li
-                          className="nav-item"
-                          onClick={() => handleTabClick("ip")}
-                        >
-                          <a
-                            className={`nav-link${
-                              activeTab == "ip" ? " active" : ""
-                            }`}
-                            id="pills-week-tab"
-                            data-toggle="pill"
-                            href="#pills-week"
-                            role="tab"
-                            aria-controls="pills-week"
-                            aria-selected="false"
-                          >
-                            IP
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <div className="tab-content" id="pills-tabContent">
-                      {activeTab == "password" && <ChangePassword />}
-                      {activeTab == "payoutapi" && (
-                        <API
-                          toggleApi1={toggleApi1}
-                          toggleApi2={toggleApi2}
-                          setToggeleAPI1={setToggeleAPI1}
-                          setToggeleAPI2={setToggeleAPI2}
-                        />
-                      )}
-                      {activeTab == "apikey" && (
-                        <div className="col-md-12">
-                          <button
-                            type="button"
-                            class="btn-common"
-                            data-toggle="modal"
-                            onClick={() => generateString(70)}
-                            style={{
-                              float: "right",
-                              marginBottom: "16px",
-                            }}
-                          >
-                            Generate Token
-                          </button>
+      <div className="card-wrapper flex-column mb-4">
+        <div className="card-header">
+          <ul
+            className="tab-List"
+          >
+            <li
+              className={setTabItemClass()}
+              onClick={() => handleTabClick("password")}
+            >
+              Change Password
+            </li>
+            <li
+              className={setTabItemClass()}
+              onClick={() => handleTabClick("payoutapi")}
+            >
+              PAYOUT API
+            </li>
+            <li
+              className={setTabItemClass()}
+              onClick={() => handleTabClick("apikey")}
+            >
+              API Key
+            </li>
+            <li
+              className={setTabItemClass()}
+              onClick={() => handleTabClick("ip")}
+            >
+              IP
+            </li>
+          </ul>
+        </div>
 
-                          <div className="form-group">
-                            <input
-                              className="form-control"
-                              value="BSX4MzMZKnb4g0JFYGEzk-pvPx4a7ZtQfduKmkfHhTsJJNsfLaNHlPufPSfA"
-                              ref={tokenInput}
-                            />
-                          </div>
-                        </div>
-                      )}
-                      {activeTab == "ip" && (
-                        <div>
-                          {ipPopup ? (
-                            <IPForm
-                              closePopUpHandler={closeIPPopUpHandler}
-                              fetchIPDetails={fetchIPDetails}
-                              setIpMessage={setIpMessage}
-                              userInfo={activeUserInfo}
-                            />
-                          ) : (
-                            ""
-                          )}
 
-                          <div className="done">{ipmessage}</div>
-
-                          <table className="table table-bordered">
-                            <tr>
-                              <th>UserId</th>
-                              <th>IP Address</th>
-                              <th>Last Modified</th>
-                              {userRole != "PTM_VENDOR" && <th>Action</th>}
-                            </tr>
-
-                            {ipdata &&
-                            ipdata.content &&
-                            Array.isArray(ipdata.content)
-                              ? ipdata.content.map((item) => {
-                                  return (
-                                    <tr>
-                                      <td>{item.username}</td>
-                                      <td>{item.ip && item.ip.join(", ")}</td>
-                                      <td>{item.lastUpdated}</td>
-                                      {userRole != "PTM_VENDOR" && (
-                                        <td onClick={() => handleIPForm(item)}>
-                                          <i
-                                            class="icon-pencil"
-                                            style={{ cursor: "pointer" }}
-                                            title="Edit IP"
-                                          ></i>
-                                        </td>
-                                      )}
-                                    </tr>
-                                  );
-                                })
-                              : ""}
-                          </table>
-                        </div>
-                      )}
-                    </div>
-                  </div>
+        <div className="card-body p16">
+          <div className="tab-content" id="pills-tabContent">
+            {activeTab == "password" && <ChangePassword />}
+            {activeTab == "payoutapi" && (
+              <API
+                toggleApi1={toggleApi1}
+                toggleApi2={toggleApi2}
+                setToggeleAPI1={setToggeleAPI1}
+                setToggeleAPI2={setToggeleAPI2}
+              />
+            )}
+            {activeTab == "apikey" && (
+              <>
+                <Button
+                  className="btn-success mb16"
+                  onClick={() => generateString(70)}
+                >
+                  Generate Token
+                </Button>
+                <div className="form-group">
+                  <input
+                    className="form-control"
+                    value="BSX4MzMZKnb4g0JFYGEzk-pvPx4a7ZtQfduKmkfHhTsJJNsfLaNHlPufPSfA"
+                    ref={tokenInput}
+                  />
                 </div>
+              </>
+            )}
+            {activeTab == "ip" && (
+              <div>
+                {ipPopup ? (
+                  <IPForm
+                    closePopUpHandler={closeIPPopUpHandler}
+                    fetchIPDetails={fetchIPDetails}
+                    setIpMessage={setIpMessage}
+                    userInfo={activeUserInfo}
+                  />
+                ) : (
+                  ""
+                )}
+
+                <div className="done">{ipmessage}</div>
+                <TableWrapper>
+                  <table className="table">
+                    <tr>
+                      <th>UserId</th>
+                      <th>IP Address</th>
+                      <th>Last Modified</th>
+                      {userRole != "PTM_VENDOR" && <th>Action</th>}
+                    </tr>
+
+                    {ipdata &&
+                      ipdata.content &&
+                      Array.isArray(ipdata.content)
+                      ? ipdata.content.map((item) => {
+                        return (
+                          <tr>
+                            <td>{item.username}</td>
+                            <td>{item.ip && item.ip.join(", ")}</td>
+                            <td>{item.lastUpdated}</td>
+                            {userRole != "PTM_VENDOR" && (
+                              <td onClick={() => handleIPForm(item)}>
+                                <i
+                                  class="icon-pencil"
+                                  style={{ cursor: "pointer" }}
+                                  title="Edit IP"
+                                ></i>
+                              </td>
+                            )}
+                          </tr>
+                        );
+                      })
+                      : ""}
+                  </table>
+                </TableWrapper>
               </div>
-            </div>
-          </section>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+
+    </>
   );
 };
 
@@ -270,145 +212,116 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps)(Settings);
 
-const API = ({ toggleApi1, toggleApi2, setToggeleAPI1, setToggeleAPI2 }) => {
+const API = () => {
   return (
-    <div
-      className="tab-pane fade active show"
-      id="pills-today"
-      role="tabpanel"
-      aria-labelledby="pills-today-tab"
-    >
-      <div className="team-listing faq-accordian-wrapper">
-        <div className="dental-service-wrapper">
-          <ul className="accordian-wrapper">
-            <li>
-              <h4 className="accordian-heading">
-                Send Payout Request
-                <span
-                  className={`icon plus${toggleApi1 ? " rotate-icon" : ""}`}
-                  onClick={() => {
-                    setToggeleAPI1(!toggleApi1);
-                  }}
-                >
-                  <span className="name"></span>
-                </span>
-              </h4>
-              {toggleApi1 && (
-                <div className="accordian-content">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="card-title">Request Parameter</div>
-                      <table className="table table-bordered">
-                        <tr>
-                          <th>Parameter</th>
-                          <th>Required</th>
-                          <th>Description</th>
-                        </tr>
-                        <tr>
-                          <td>accountNumber</td>
-                          <td>Mendatory</td>
-                          <td>Benefeciary account number</td>
-                        </tr>
-                        <tr>
-                          <td>beneficiaryName</td>
-                          <td>Mendatory</td>
-                          <td>Benefeciary Name</td>
-                        </tr>
-                        <tr>
-                          <td>ifscCode</td>
-                          <td>Mendatory</td>
-                          <td>Benefeciary Ifsc code</td>
-                        </tr>
-                        <tr>
-                          <td>mobileNumber</td>
-                          <td>Non Mendatory</td>
-                          <td>Benefeciary Mobile Number</td>
-                        </tr>
-                        <tr>
-                          <td>remittanceAmount</td>
-                          <td>Mendatory</td>
-                          <td>Amount need to send</td>
-                        </tr>
-                        <tr>
-                          <td>route</td>
-                          <td>Mendatory</td>
-                          <td>NEFT/IMPS/RTGS</td>
-                        </tr>
-                      </table>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="card-title">Response Json</div>
-                      <div className="api-code-block">
-                        <span className="pl-0"></span>
-                        <span className="pl-4">"success :true,"</span>
-                        <span className="pl-4">"code :INFO031",</span>
-                        <span className="pl-4">
-                          "msg :PayOut Initiated successfully!"
-                        </span>
+    <>
+      <div className="row">
+        <div className="col-6">
+          <div className="card-wrapper flex-column mb-4">
+            <div className="card-header flex item-center space-between">
+              <h4>Send Payout Request</h4>
+            </div>
+            <div className="card-body">
+              <h6 className="p16 text-right">Parameter Required</h6>
+              <TableWrapper className="pt0">
+                <table className="table table-bordered">
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>accountNumber</td>
+                    <td>Mendatory</td>
+                    <td>Benefeciary account number</td>
+                  </tr>
+                  <tr>
+                    <td>beneficiaryName</td>
+                    <td>Mendatory</td>
+                    <td>Benefeciary Name</td>
+                  </tr>
+                  <tr>
+                    <td>ifscCode</td>
+                    <td>Mendatory</td>
+                    <td>Benefeciary Ifsc code</td>
+                  </tr>
+                  <tr>
+                    <td>mobileNumber</td>
+                    <td>Non Mendatory</td>
+                    <td>Benefeciary Mobile Number</td>
+                  </tr>
+                  <tr>
+                    <td>remittanceAmount</td>
+                    <td>Mendatory</td>
+                    <td>Amount need to send</td>
+                  </tr>
+                  <tr>
+                    <td>route</td>
+                    <td>Mendatory</td>
+                    <td>NEFT/IMPS/RTGS</td>
+                  </tr>
+                </table>
+              </TableWrapper>
+              <div className="p16 pt0">
+                <h6 className="pb16">Response Json</h6>
+                <div className="api-code-block">
+                  <span className="pl-0"></span>
+                  <span className="pl-4">"success :true,"</span>
+                  <span className="pl-4">"code :INFO031",</span>
+                  <span className="pl-4">
+                    "msg :PayOut Initiated successfully!"
+                  </span>
 
-                        <span className="pl-0"></span>
-                      </div>
-                    </div>
-                  </div>
+                  <span className="pl-0"></span>
                 </div>
-              )}
-            </li>
-            <li>
-              <h4 className="accordian-heading">
-                Verify Payout OTP
-                <span
-                  className={`icon plus${toggleApi2 ? " rotate-icon" : ""}`}
-                  onClick={() => {
-                    setToggeleAPI2(!toggleApi2);
-                  }}
-                >
-                  <span className="name"></span>
-                </span>
-              </h4>
-              {toggleApi2 && (
-                <div className="accordian-content">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="card-title">Request Parameter</div>
-                      <table className="table table-bordered">
-                        <tr>
-                          <th>Parameter</th>
-                          <th>Required</th>
-                          <th>Description</th>
-                        </tr>
-                        <tr>
-                          <td>payOutOtp</td>
-                          <td>Mendatory</td>
-                          <td>Add recieved otp send to the vendor mobile</td>
-                        </tr>
-                        <tr>
-                          <td>txnId</td>
-                          <td>Mendatory</td>
-                          <td>Payout transaction id</td>
-                        </tr>
-                      </table>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="card-title">Response Json</div>
-                      <div className="api-code-block">
-                        <span className="pl-0"></span>
-                        <span className="pl-4">
-                          "txnId" : "payoutrequest txn id",
-                        </span>
-                        <span className="pl-4">
-                          "payOutOtp" : "received otp on vendor mobile"
-                        </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-6">
+          <div className="card-wrapper flex-column mb-4">
+            <div className="card-header flex item-center space-between">
+              <h4>Verify Payout OTP</h4>
+            </div>
+            <div className="card-body">
+              <h6 className="p16 text-right">Parameter Required</h6>
+              <TableWrapper className="pt0">
+                <table className="table">
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                  </tr>
+                  <tr>
+                    <td>payOutOtp</td>
+                    <td>Mendatory</td>
+                    <td>Add recieved otp send to the vendor mobile</td>
+                  </tr>
+                  <tr>
+                    <td>txnId</td>
+                    <td>Mendatory</td>
+                    <td>Payout transaction id</td>
+                  </tr>
+                </table>
+              </TableWrapper>
+              <div className="p16 pt0">
+                <h6 className="pb16">Response Json</h6>
+                <div className="api-code-block">
+                  <span className="pl-0"></span>
+                  <span className="pl-4">
+                    "txnId" : "payoutrequest txn id",
+                  </span>
+                  <span className="pl-4">
+                    "payOutOtp" : "received otp on vendor mobile"
+                  </span>
 
-                        <span className="pl-0"></span>
-                      </div>
-                    </div>
-                  </div>
+                  <span className="pl-0"></span>
                 </div>
-              )}
-            </li>
-          </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

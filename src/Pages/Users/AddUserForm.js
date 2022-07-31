@@ -127,7 +127,7 @@ const AddUserForm = (props) => {
             <h4 className="modal-title">Add User</h4>
             <Button
               type="button"
-              className="btn-soft-danger btn-sm"
+              className="close"
               onClick={closePopUpHandler}
             >
               <span aria-hidden="true">&times;</span>

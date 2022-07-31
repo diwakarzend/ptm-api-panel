@@ -2,7 +2,7 @@ import React, { useState, memo, useEffect, useRef } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
-import "./FundRequest.css";
+import { Button, TableWrapper, ModalWrapper } from "../../Components/UI/StyledConstants";
 
 const initialFormData = Object.freeze({
   fromBank: "",
@@ -87,21 +87,14 @@ const FundRequestForm = memo(
       };
     }
     return (
-      <div
-        className="modal right fade show"
-        id="exampleModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel2"
-        style={{ display: "block" }}
-      >
+      <ModalWrapper>
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
                 Fund Request
               </h5>
-              <button
+              <Button
                 type="button"
                 className="close"
                 data-dismiss="modal"
@@ -109,14 +102,13 @@ const FundRequestForm = memo(
                 onClick={closePopUpHandler}
               >
                 <span aria-hidden="true">&times;</span>
-              </button>
+              </Button>
             </div>
             <form onSubmit={submitFormHandler}>
               <div className="modal-body">
-                <div className="row">
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">From Bank</label>
+                      <label className="label" for="exampleInputEmail1">From Bank</label>
                       <input
                         type="text"
                         className="form-control"
@@ -129,9 +121,9 @@ const FundRequestForm = memo(
                       />
                     </div>
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">To Bank</label>
+                      <label className="label" for="exampleInputEmail1">To Bank</label>
                       <input
                         type="text"
                         className="form-control"
@@ -145,9 +137,9 @@ const FundRequestForm = memo(
                     </div>
                   </div>
 
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleFormControlSelect1">
+                      <label className="label" for="exampleFormControlSelect1">
                         Choose Payment Mode
                       </label>
                       <select
@@ -164,9 +156,9 @@ const FundRequestForm = memo(
                       </select>
                     </div>
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">Requested Amount</label>
+                      <label className="label" for="exampleInputEmail1">Requested Amount</label>
                       <input
                         type="number"
                         className="form-control"
@@ -179,9 +171,9 @@ const FundRequestForm = memo(
                       />
                     </div>
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">Reference No</label>
+                      <label className="label" for="exampleInputEmail1">Reference No</label>
                       <input
                         type="text"
                         className="form-control"
@@ -193,9 +185,9 @@ const FundRequestForm = memo(
                     </div>
                   </div>
 
-                  <div className="col-md-12">
+                  <div className="col-md-12 pb16">
                     <div className="form-group">
-                      <label for="exampleInputEmail1">Remarks</label>
+                      <label className="label" for="exampleInputEmail1">Remarks</label>
                       <input
                         type="text"
                         className="form-control"
@@ -208,18 +200,18 @@ const FundRequestForm = memo(
                   </div>
                 </div>
 
-                <div className="modal-footer">
-                  <button
+                <div className="modal-footer gap16">
+                  <Button
                     type="button"
-                    className="btn btn-primary themebtn transparent"
+                    className="btn-light"
                     data-dismiss="modal"
                     onClick={closePopUpHandler}
                   >
                     Close
-                  </button>
-                  <button type="submit" className="btn btn-primary themebtn">
+                  </Button>
+                  <Button type="submit" className="btn-success">
                     Submit
-                  </button>
+                  </Button>
                   <div>
                     {errorHTML && errorStyles ? (
                       <ul style={errorStyles}>{errorHTML}</ul>
@@ -229,12 +221,11 @@ const FundRequestForm = memo(
                       ""
                     )}
                   </div>
-                </div>
               </div>
             </form>
           </div>
         </div>
-      </div>
+      </ModalWrapper>
     );
   }
 );

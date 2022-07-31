@@ -57,9 +57,13 @@ const SideBar = () => {
   const shouldDisplayNavItem = (navData) => {
     if(navData.hasOwnProperty('default')) {
       return true;
-    } else if(navData?.applicableRoles.length > 0 
-      && roles.includes(navData?.applicableRoles[0])) {
-      return true
+    } else if(navData?.applicableRoles.length > 0) {
+      let rolesSet = new Set(roles);
+      let valid = false;
+      navData?.applicableRoles.forEach(role => {
+        valid = rolesSet.has(role);
+      });
+      return valid;
     } else {
       return false;
     }
