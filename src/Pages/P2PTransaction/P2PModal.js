@@ -1,33 +1,26 @@
 import React from "react";
-import { Wrapper } from "./style";
+import { ModalWrapper, Button } from "../../Components/UI/StyledConstants";
+import { DetailsWrapper } from "./style";
 export default function P2PModal({ modalData, closePopUpHandler }) {
   console.log("modalData = ", modalData);
   return (
-    <Wrapper
-      className="modal right fade show"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-      style={{ display: "block" }}
-    >
+    <ModalWrapper>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
+            <h4 className="modal-title">
               Transaction Details
-            </h5>
-            <button
+            </h4>
+            <Button
               type="button"
               className="close"
-              data-dismiss="modal"
-              aria-label="Close"
               onClick={closePopUpHandler}
             >
               <span aria-hidden="true">&times;</span>
-            </button>
+            </Button>
           </div>
           <div className="modal-body">
+            <DetailsWrapper>
             <div className="flex">
               <div className="label-name">Sender Name:</div>
               <div className="value">{modalData?.senderName}</div>
@@ -80,9 +73,10 @@ export default function P2PModal({ modalData, closePopUpHandler }) {
               <div className="label-name">User Id:</div>
               <div className="value">{modalData?.userId}</div>
             </div>
+            </DetailsWrapper>
           </div>
         </div>
       </div>
-    </Wrapper>
+    </ModalWrapper>
   );
 }

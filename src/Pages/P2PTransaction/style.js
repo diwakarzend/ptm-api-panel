@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const DetailsWrapper = styled.div`
   .flex {
     display: flex;
     gap: 20px;

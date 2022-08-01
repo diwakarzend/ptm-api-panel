@@ -288,6 +288,11 @@ export default createGlobalStyle`
       border-color:var(--ip-input-focus-border);
     }
   }
+  .form-textarea {
+    height: 100px;
+    padding: 14px;
+    resize: none;
+  }
   .primary-btn{
     border:none;
     width:100%;

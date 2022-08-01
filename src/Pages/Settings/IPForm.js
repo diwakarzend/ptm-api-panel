@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { ModalWrapper, Button, AlertWrapper } from "../../Components/UI/StyledConstants";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 
@@ -51,68 +52,54 @@ const IPForm = (props) => {
 
   console.log("formData", formData, userInfo);
   return (
-    <div
-      className={`modal right fade show`}
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-      style={{ display: "block", paddingRight: "15px" }}
-    >
+    <ModalWrapper>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
+            <h4 className="modal-title" id="exampleModalLabel">
               Add IP
-            </h5>
-            <button
+            </h4>
+            <Button
               type="button"
               className="close"
-              data-dismiss="modal"
-              aria-label="Close"
               onClick={closePopUpHandler}
             >
               <span aria-hidden="true">&times;</span>
-            </button>
+            </Button>
           </div>
 
           <div className="modal-body">
-            <div className={message.success ? "done" : "fail"}>
-              {message.success || message.error}
-            </div>
+            {(message.success || message.error) && <AlertWrapper className="alert alert-normal">{message.success || message.error}</AlertWrapper>}
             <form onSubmit={submitFormHandler}>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <textarea
-                      type="text"
-                      className="form-control"
-                      placeholder="Enter Comma Separted IPs"
-                      name="ipInput"
-                      value={formData && formData.ip}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
+
+              <div className="pb16">
+                <textarea
+                  type="text"
+                  className="form-control form-textarea"
+                  placeholder="Enter Comma Separted IPs"
+                  name="ipInput"
+                  value={formData && formData.ip}
+                  onChange={handleChange}
+                />
               </div>
-              <div className="modal-footer">
-                <button
+              <div className="flex item-center justify-end gap16">
+                <Button
                   type="button"
-                  className="btn btn-primary themebtn transparent"
+                  className="btn-light"
                   data-dismiss="modal"
                   onClick={closePopUpHandler}
                 >
                   Close
-                </button>
-                <button type="submit" className="btn btn-primary themebtn">
+                </Button>
+                <Button type="submit" className="btn-success">
                   Update IP
-                </button>
+                </Button>
               </div>
             </form>
           </div>
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
 };
 
