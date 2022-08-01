@@ -8,7 +8,7 @@ export const LoginFormWrapper = styled.div`
         right: 0;
         width: 100%;
         height: 380px;
-        &:before {
+        /* &:before {
             content: '';
             background: linear-gradient(to right,#364574,#405189);
             opacity: 0.9;
@@ -19,6 +19,11 @@ export const LoginFormWrapper = styled.div`
             bottom: 0;
             left: 0;
             top: 0;
+        } */
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
     .form-heading {

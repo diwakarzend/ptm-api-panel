@@ -69,7 +69,9 @@ class LoginForm extends React.Component {
     return (
       <LoginFormWrapper className="login-form-wrapper">
         <div className="">
-          <div className="login-bg"></div>
+          <div className="login-bg">
+            <img src={'/images/login-banner.png'} alt="" />
+          </div>
           <div className="login-form">
             <div className="form-heading text-center mb-28">
               <h4 className="fw-medium">Easy & fast payment with UPI</h4>
