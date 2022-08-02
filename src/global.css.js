@@ -475,4 +475,68 @@ export default createGlobalStyle`
   .pt0{
     padding-top: 0 !important;
   }
+  .sidebar-overlay {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    body.nav_small {
+      .sidebar-overlay {
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 98;
+        background-color: rgba(0,0,0,.7);
+      }
+      .sidebar {
+        transform: translateX(0);
+      }
+    }
+    .main-content {
+      margin-left: 0;
+      .header {
+        left: 0;
+        padding: 0;
+      }
+      .form-item {
+        flex: 0 0 100%;
+      }
+      .form-action {
+        width: 100%;
+      }
+      .filter-form {
+        button {
+          width: 100%;
+        }
+      }
+      .table {
+        th {
+          white-space: nowrap;
+        }
+      }
+      .card-header {
+        &.dir-col-in-mobile {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .filter-table {
+          margin-top: 10px;
+          overflow: auto;
+          width: 100%;
+        }
+      }
+      .card-body {
+        .row {
+          flex-direction: column;
+          gap: 16px;
+          > [class="col-"] {
+            width: 100%;
+            max-width: 100%;
+          }
+        }
+      }
+    }
+  }
 `

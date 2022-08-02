@@ -13,4 +13,21 @@ export const PageTitleWrapper = styled.div`
     .separator {
         margin: 0 5px;
     }
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start !important;
+        .breadcrumb {
+            margin-top: 5px;
+        }
+    }
+`
+
+export const BreadCrumbWrapper = styled.ol`
+    a {
+        color: var(--ip-link-color);
+        text-decoration: none;
+    }
+    li {
+        color: #878a99;
+    }
 `

@@ -45,6 +45,9 @@ export const SidebarWrapper = styled.nav`
             color: var(--ip-vertical-menu-item-active-color-dark);
         }
     }
+    @media screen and (max-width: 768px) {
+        transform: translateX(-250px);
+    }
 `
 
 export const NavItemWreapper = styled.li`

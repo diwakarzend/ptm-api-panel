@@ -103,7 +103,7 @@ export default function UpiCollections() {
   return (
     <UpiCollectionsStyle className="card-wrapper flex-column mb-4">
       
-      <div className="card-header flex item-center space-between">
+      <div className="card-header flex item-center space-between dir-col-in-mobile">
         <h4 className="card-title">UPI & QR Collections</h4>
         <form className="filter-table flex item-center">
           {

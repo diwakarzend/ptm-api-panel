@@ -1,6 +1,6 @@
 import React from "react";
 import AnchorLink from "../AnchorLink/AnchorLink";
-import { PageTitleWrapper } from "./style";
+import { BreadCrumbWrapper, PageTitleWrapper } from "./style";
 
 const BreadCrumb = ({ heading, value }) => {
   const refreshPage = () => {
@@ -9,20 +9,18 @@ const BreadCrumb = ({ heading, value }) => {
   return (
     <PageTitleWrapper className="flex item-center space-between">
       <h4>{heading}</h4>
-      <div className="breadcrumb_nav">
-        {heading !== "Dashboard" && (
-          <ol className="breadcrumb flex item-center">
-            <li>
-              <AnchorLink href="/dashboard" className="parent-item">
-                Home
-              </AnchorLink>
+      {heading !== "Dashboard" && (
+        <BreadCrumbWrapper className="breadcrumb flex item-center">
+          <li>
+            <AnchorLink href="/dashboard" className="parent-item">
+              Home
+            </AnchorLink>
 
-              <i className="fa fa-angle-right separator"></i>
-            </li>
-            <li className="active">{value}</li>
-          </ol>
-        )}
-      </div>
+            <i className="fa fa-angle-right separator"></i>
+          </li>
+          <li className="active">{value}</li>
+        </BreadCrumbWrapper>
+      )}
       {heading == "Dashboard" &&
         <span className="reload-page">
           <i

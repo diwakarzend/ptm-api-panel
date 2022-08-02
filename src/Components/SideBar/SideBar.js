@@ -61,12 +61,19 @@ const SideBar = () => {
       let rolesSet = new Set(roles);
       let valid = false;
       navData?.applicableRoles.forEach(role => {
-        valid = rolesSet.has(role);
+        if(rolesSet.has(role)) {
+          valid = rolesSet.has(role);
+        }
+        console.log("role = ", role, valid);
       });
       return valid;
     } else {
       return false;
     }
+  }
+
+  function onOverlayClick() {
+    document.body.classList.remove("nav_small");
   }
 
   useEffect(() => {
@@ -97,7 +104,12 @@ const SideBar = () => {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    onOverlayClick();
+  }, [location])
+
   return (
+    <>
     <SidebarWrapper className="sidebar">
       <Logo className="logo" type="white">
         <span className="icon">₹</span> INRPAY
@@ -122,6 +134,8 @@ const SideBar = () => {
         })}
       </ul>
     </SidebarWrapper>
+    <div className="sidebar-overlay" onClick={onOverlayClick}></div>
+    </>
   );
 };
 
