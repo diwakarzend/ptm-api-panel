@@ -11,7 +11,7 @@ const spin = keyframes`
 
 export const HeaderWrapper = styled.header`
     height: 70px;
-    background-color: var(--ip-white-bg);
+    background-color: var(--ip-header-bg);
     box-shadow: 0 1px 2px rgb(56 65 74 / 15%);
     padding: 0 24px 0 8px;
     position: fixed;

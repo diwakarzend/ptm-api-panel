@@ -56,7 +56,7 @@ export default function UpiCollections() {
           labels: ["Total Transactions", "Total Amount", "Total Synced", "Credited"],
           datasets: [
             {
-              backgroundColor: ["rgba(10,179,156)", "rgb(41,156,219)", "rgb(247,184,75)", "rgb(64,81,137)"],
+              backgroundColor: ["#3ac47d", "rgb(41,156,219)", "rgb(247,184,75)", "#d92550"],
               data: [val1, val2, val3, val4],
             },
           ],

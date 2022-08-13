@@ -287,7 +287,7 @@ const AddUserForm = (props) => {
               <div className="flex item-center justify-center gap16">
                 <Button
                   type="button"
-                  className="btn-danger"
+                  className="btn-light"
                   onClick={closePopUpHandler}
                 >
                   Close

@@ -38,7 +38,7 @@ export const UpiCollectionsStyle = styled.div`
         }
         &.first {
           &:before {
-            background-color: rgb(10, 179, 156);
+            background-color: #3ac47d;
           }
         }
         &.second {
@@ -53,7 +53,7 @@ export const UpiCollectionsStyle = styled.div`
         }
         &.fourth {
           &:before {
-            background-color: rgb(64, 81, 137);
+            background-color: #d92550;
           }
         }
       }
@@ -64,7 +64,7 @@ export const UpiCollectionsStyle = styled.div`
       color: #3C80E8;
       border-radius: 4px;
       &.first {
-        background-color: rgba(10, 179, 156, 0.18);
+        background-color: #d1f1e1;
       }
       &.second {
         background-color: rgb(41, 156, 219, 0.18);
@@ -73,7 +73,7 @@ export const UpiCollectionsStyle = styled.div`
         background-color: rgb(247, 184, 75, 0.18);
       }
       &.fourth {
-        background-color: rgb(64, 81, 137, 0.18);
+        background-color: #f9dde3;
       }
     }
   }

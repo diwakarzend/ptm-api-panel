@@ -6,6 +6,10 @@ export const Logo = styled.span`
     color: ${props => props?.type == 'white' ? '#fff' : 'rgb(64, 81, 137)'};
     display: flex;
     align-items: center;
+    img {
+        max-width: 100px;
+        margin-top: 5px;
+    }
     .icon{
         display: flex;
         align-items: center;
@@ -89,13 +93,13 @@ export const Button = styled.button`
     transition:  color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
     &.btn-success {
         color: #fff;
-        background-color: #0ab39c;
-        border-color: #0ab39c;
+        background-color: #0095f5;
+        border-color: #0095f5;
     }
     &.btn-soft-success {
-        color: #0ab39c;
-        background-color: rgba(10,179,156,.1);
-        border-color: rgba(10,179,156,.1);
+        color: #0095f5;
+        background-color: rgba(0,149,245,.1);
+        border-color: rgba(0,149,245,.1);
     }
     &.btn-soft-danger {
         color: #f06548;

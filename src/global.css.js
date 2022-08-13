@@ -4,7 +4,7 @@ export default createGlobalStyle`
   :root {
     --font: 'Poppins', sans-serif;
     --ip-body-font-size: 13px;
-    --ip-body-bg: #f3f3f9;
+    --ip-body-bg: #F8F9FA;
     --ip-white-bg:#fff;
     --ip-white-color:#fff;
     --ip-body-color: #212529;
@@ -17,7 +17,7 @@ export default createGlobalStyle`
     --ip-vertical-menu-sub-item-hover-color: #405189;
     --ip-vertical-menu-sub-item-active-color: #405189;
     --ip-vertical-menu-title-color: #919da9;
-    --ip-vertical-menu-bg-dark: #405189;
+    --ip-vertical-menu-bg-dark: #001e31;
     --ip-nav-link-color: #abb9e8;
     --ip-vertical-menu-item-hover-color-dark: #fff;
     --ip-vertical-menu-item-active-color-dark: #fff;
@@ -25,7 +25,7 @@ export default createGlobalStyle`
     --ip-vertical-menu-sub-item-hover-color-dark: #fff;
     --ip-vertical-menu-sub-item-active-color-dark: #fff;
     --ip-vertical-menu-title-color-dark: #838fb9;
-    --ip-header-bg: #fff;
+    --ip-header-bg: #FAFBFC;
     --ip-header-item-color: #e9ecef;
     --ip-header-bg-dark: #405189;
     --ip-header-item-color-dark: #b0c4d9;
@@ -80,8 +80,8 @@ export default createGlobalStyle`
     --ip-input-group-addon-bg: #eff2f7;
     --ip-input-check-border: var(--ip-input-border);
     --ip-primary-btn-color:#fff;
-    --ip-primary-btn-bg:#0ab39c;
-    --ip-primary-btn-hover-bg:#099885;
+    --ip-primary-btn-bg:#0095F5;
+    --ip-primary-btn-hover-bg:#0089e1;
     --ip-red: #f06548;
     --ip-green: #0ab39c;
     --text-grey:#878a99;
