@@ -110,7 +110,7 @@ module.exports = {
       {
         context: ["/api/**"],
         //  target:
-        target: "https://service-api.digitpay.pro",
+        target: "https://qpay-service.qpay.net.in:8443",
         secure: false,
         changeOrigin: true,
       },
