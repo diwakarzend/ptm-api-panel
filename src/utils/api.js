@@ -92,4 +92,11 @@ export const getBankEntitiesRequest = (params) => {
   );
 }
 
+export const bulkUploadTransactionsRequest = (params) => {
+  return apiRequest.post(
+    `${urls.login.BASE_URL + urls.ptp.BULK_UPLOAD_TRANSACTIONS_REQUEST}`,
+    params
+  );
+};
+
 

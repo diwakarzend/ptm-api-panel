@@ -12,6 +12,7 @@ import { CSVLink } from "react-csv";
 import moment from "moment";
 import { Button, FilterFormWrapper } from "../../Components/UI/StyledConstants";
 import { printPage } from "../../utils/common";
+import { UploadFile } from "../../Components/UploadFile";
 
 const P2PTransaction = ({ dispatch = () => { }, ...props }) => {
   const [reportsItems, setReportsItems] = useState([]);
@@ -98,6 +99,22 @@ const P2PTransaction = ({ dispatch = () => { }, ...props }) => {
     }
   }, [userData])
 
+  const [uploadMsg, setUploadMsg] = useState("");
+  const onUploadFile = (data) => {
+    if(data?.code == 200) {
+      setUploadMsg('File uploaded successfully');
+    }
+  };
+
+  useEffect(() => {
+    if(uploadMsg) {
+      setTimeout(() => {
+        getListing(pageNo);
+        setUploadMsg('');
+      }, 3000)
+    }
+  }, [uploadMsg])
+
   console.log("filter = ", filter);
 
   return (
@@ -109,7 +126,11 @@ const P2PTransaction = ({ dispatch = () => { }, ...props }) => {
       <div className="card-wrapper flex-column mb-4">
         <div className="card-header flex item-center space-between">
           <h4 className="card-title">P2P Transactions</h4>
-          <div className="flex gap4">
+          <div className="flex item-center gap4">
+          {uploadMsg && <div style={{color: 'green'}}>{uploadMsg}</div>}
+            {
+              userData?.role === "PTM_ADMIN" && <UploadFile onUploadFile={onUploadFile}/>
+            }
             <div className="download-csv">
               <Button className="btn-soft-success" onClick={onDownloadClick}>CSV</Button>
               <CSVLink
