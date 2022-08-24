@@ -110,7 +110,7 @@ module.exports = {
       {
         context: ["/api/**"],
         //  target:
-        target: "http://34.93.135.35:8080",
+        target: "https://service-api.digitpay.pro",
         secure: false,
         changeOrigin: true,
       },

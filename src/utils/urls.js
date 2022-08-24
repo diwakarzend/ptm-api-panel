@@ -80,6 +80,10 @@ export default {
     GET_MAPQR_LISTING: "/api/ptp/ptp-details",
     UPLOAD_MAPQR_REQUEST: "/api/ptp/uploadQRCode",
     GET_DASHBOARD_USER_TXN: "/api/merchant/usertxn/dashboard",
+    ADD_BANK_ENTITY: "/api/ptp/create-ptpbank",
+    UPDATE_BANK_ENTITY: "/api/ptp/update-bank-details",
+    GET_BANK_ENTITY: "/api/ptp/bank-details",
+    BULK_UPLOAD_TRANSACTIONS_REQUEST: '/api/merchant/bulkUploadTransactions'
   },
   user: {
     GET_USER_DETAILS: "/api/users/search",

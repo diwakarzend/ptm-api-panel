@@ -37,6 +37,14 @@ export const FilterWrapper = styled.div`
     margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 0;
+    &.download-upload-file {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .btn-common {
+        margin-left: 0;
+      }
+    }
   }
   .form-action {
     .btn-common {

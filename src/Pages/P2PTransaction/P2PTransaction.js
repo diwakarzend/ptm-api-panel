@@ -10,6 +10,8 @@ import Pagination from "../../Components/PaginationNew/PaginationNew/Pagination"
 import { FilterWrapper } from "./style";
 import { CSVLink } from "react-csv";
 import moment from "moment";
+import { UploadFile } from "../../Components/UploadFile";
+import { isEmpty } from "../../utils/common";
 
 const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
   const [reportsItems, setReportsItems] = useState([]);
@@ -109,6 +111,21 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
       setFilter({...filter, userId: userData.uuid});
     }
   }, [userData])
+
+  const [uploadMsg, setUploadMsg] = useState("");
+  const onUploadFile = (data) => {
+    if(data?.code == 200) {
+      setUploadMsg('File uploaded successfully');
+    }
+  };
+
+  useEffect(() => {
+    if(!isEmpty(uploadMsg)) {
+      setTimeout(() => {
+        setUploadMsg('');
+      }, 3000)
+    }
+  }, [uploadMsg])
 
   console.log("filter = ", filter);
 
@@ -215,15 +232,22 @@ const P2PTransaction = ({ dispatch = () => {}, ...props }) => {
                       value="Search"
                     />
                   </div>
-                  <div className="form-group csv-link-wrapper">
-                    <span className="csv-link" onClick={onDownloadClick}><i class="fa fa-download " aria-hidden="true"></i></span>
-                    <CSVLink 
-                      title="Download CSV" 
-                      className="csv-link-hide" 
-                      data={downloadData} 
-                      ref={downloadRef}
+                  <div className="form-group download-upload-file">
+                    <div className="csv-link-wrapper">
+                      <span className="csv-link" onClick={onDownloadClick}><i class="fa fa-download " aria-hidden="true"></i></span>
+                      <CSVLink 
+                        title="Download CSV" 
+                        className="csv-link-hide" 
+                        data={downloadData} 
+                        ref={downloadRef}
                       />
+                    </div>
+                    {
+                      userData?.role === "PTM_ADMIN" && <UploadFile onUploadFile={onUploadFile}/>
+                    }
+                    
                   </div>
+                  {!isEmpty(uploadMsg) && <div style={{color: 'green'}}>{uploadMsg}</div>}
                 </FilterWrapper>
                   
               </form>
