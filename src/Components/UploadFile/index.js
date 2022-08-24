@@ -17,7 +17,7 @@ export const UploadFile = ({onUploadFile = () => {}}) => {
     return (
         <UploadFileWrapper>
             <div className="uplaod-file-inner">
-            <input  className="form-file" type="file" onChange={onFileChange} />
+            <input  className="form-file" type="file" onChange={onFileChange} accept=".xls,.xlsx"/>
             <button className="btn-common">Upload Transactions File</button> 
             </div>
         </UploadFileWrapper>
