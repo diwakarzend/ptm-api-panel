@@ -92,4 +92,10 @@ export const getBankEntitiesRequest = (params) => {
   );
 }
 
+export const retryUtrRequest = (params) => {
+  return apiRequest.get(
+    `${urls.login.BASE_URL + urls.ptp.RETRY_UTR_REQUEST}/${params.utrNumber}/${params.merchantId}/${params.orderId}`, 
+  );
+}
+
 

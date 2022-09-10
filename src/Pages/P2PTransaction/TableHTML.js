@@ -3,8 +3,8 @@ import P2PModal from "./P2PModal";
 import { addOverlay, removeOverlay } from "../../utils/common";
 import Pagination from "../../Components/Pagination/Pagination";
 import { TableWrapper } from "../../Components/UI/StyledConstants";
-const TableHTML = memo(
-  ({ reportsItems, pagingData, dispatch }) => {
+
+const TableHTML = ({ reportsItems, pagingData, dispatch, retryAction }) => {
     const [modal, setModal] = useState({ status: false, data: null });
     const reportsDataAvailable =
       (reportsItems &&
@@ -59,11 +59,17 @@ const TableHTML = memo(
                       </td>
                       <td>
                         <span
-                          className="cursor-pointer"
+                          className="cursor-pointer mr12"
                           onClick={() => openPopupHandler(item)}
                         >
                           <i className="icon-eye" />
                         </span>
+                        {
+                          ['initiated', 'synced'].includes(item?.status?.toLowerCase()) &&
+                          <span className="cursor-pointer" onClick={() => retryAction({utrNumber: item?.utrNumber, merchantId: item?.userId, orderId: item?.orderId})}>
+                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                          </span>
+                        }
                       </td>
                     </tr>
                   );
@@ -90,6 +96,5 @@ const TableHTML = memo(
       </TableWrapper>
     );
   }
-);
 
 export default TableHTML;

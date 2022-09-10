@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { connect } from "react-redux";
-import { getP2pTxnListing } from "../../utils/api";
+import { getP2pTxnListing, retryUtrRequest } from "../../utils/api";
 import BreadCrumb from "../../Components/BreadCrumb/BreadCrumb";
 import SideBar from "../../Components/SideBar/SideBar";
 import TableHTML from "./TableHTML";
@@ -83,6 +83,15 @@ const P2PTransaction = ({ dispatch = () => { }, ...props }) => {
     }
   }
 
+  const retryAction = (params) => {
+    console.log("params = ", params);
+    retryUtrRequest(params).then(res => {
+      if(res?.data) {
+        getListing();
+      }
+    })
+  }
+
   useEffect(() => {
     if (Array.isArray(downloadData) && downloadData.length > 0) {
       console.log("downloadData inside = ", downloadData);
@@ -97,6 +106,7 @@ const P2PTransaction = ({ dispatch = () => { }, ...props }) => {
       setFilter({ ...filter, userId: userData.uuid });
     }
   }, [userData])
+  
 
   console.log("filter = ", filter);
 
@@ -222,7 +232,7 @@ const P2PTransaction = ({ dispatch = () => { }, ...props }) => {
             </form>
           </div>
           <div className="">
-            <TableHTML filterItems={{}} reportsItems={reportsItems} />
+            <TableHTML filterItems={{}} reportsItems={reportsItems} retryAction={retryAction} />
             {reportsItems && paging_data && (
               <Pagination
                 currentPage={
