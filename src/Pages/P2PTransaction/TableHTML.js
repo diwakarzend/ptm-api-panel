@@ -53,23 +53,29 @@ const TableHTML = ({ reportsItems, pagingData, dispatch, retryAction }) => {
                       <td>{item?.transactionRefId}</td>
                       <td>&#8377;{item?.amount}</td>
                       <td>{item?.receiverName}</td>
-                      <td>{item?.vendorCode == '3' ? "PAYTM" : item?.vendorCode == '2' ? 'PHONEPE' : '-'}</td>
+                      <td>{item?.orderId || '-'}</td>
+                      {/* <td>{item?.vendorCode == '3' ? "PAYTM" : item?.vendorCode == '2' ? 'PHONEPE' : '-'}</td> */}
                       <td className={item?.status?.toLowerCase()}>
                         {item?.status}
                       </td>
                       <td>
-                        <span
-                          className="cursor-pointer mr12"
-                          onClick={() => openPopupHandler(item)}
-                        >
-                          <i className="icon-eye" />
-                        </span>
-                        {
-                          ['initiated', 'synced'].includes(item?.status?.toLowerCase()) &&
-                          <span className="cursor-pointer" onClick={() => retryAction({utrNumber: item?.utrNumber, merchantId: item?.userId, orderId: item?.orderId})}>
-                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                        <div className="flex">
+                          <span
+                            className="cursor-pointer mr12"
+                            onClick={() => openPopupHandler(item)}
+                          >
+                            <i className="icon-eye" />
                           </span>
-                        }
+                          {
+                            ['initiated', 'synced'].includes(item?.status?.toLowerCase()) &&
+                            <>
+                              <span className="mr12">|</span>
+                              <span title="Retry Transaction" className="cursor-pointer" onClick={() => retryAction({utrNumber: item?.utrNumber, merchantId: item?.userId, orderId: item?.orderId})}>
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                              </span>
+                            </>
+                          }
+                        </div>
                       </td>
                     </tr>
                   );
