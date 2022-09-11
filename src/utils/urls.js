@@ -84,7 +84,7 @@ export default {
     ADD_BANK_ENTITY: "/api/ptp/create-ptpbank",
     UPDATE_BANK_ENTITY: "/api/ptp/update-bank-details",
     GET_BANK_ENTITY: "/api/ptp/bank-details",
-    RETRY_UTR_REQUEST: "/api/retryUTR"
+    RETRY_UTR_REQUEST: "/api/merchant/retryUTR"
   },
   user: {
     GET_USER_DETAILS: "/api/users/search",

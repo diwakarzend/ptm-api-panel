@@ -86,7 +86,7 @@ const P2PTransaction = ({ dispatch = () => { }, ...props }) => {
   const retryAction = (params) => {
     console.log("params = ", params);
     retryUtrRequest(params).then(res => {
-      if(res?.data) {
+      if(res?.data?.data?.verified) {
         getListing();
       }
     })

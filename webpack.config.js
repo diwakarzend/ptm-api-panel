@@ -110,7 +110,7 @@ module.exports = {
       {
         context: ["/api/**"],
         //  target:
-        target: "https://qpay-service.qpay.net.in:8443",
+        target: "https://vendor-apiservice.pay2mobiles.com:8443",
         secure: false,
         changeOrigin: true,
       },
