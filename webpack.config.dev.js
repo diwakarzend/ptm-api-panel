@@ -41,7 +41,7 @@ module.exports = {
       {
         context: ["/api/**"],
         //  target:
-        target: "http://34.93.135.35:8080",
+        target: "https://vendor-apiservice.pay2mobiles.com:8443",
         secure: false,
         changeOrigin: true,
       },

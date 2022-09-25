@@ -135,38 +135,37 @@ const Benificiary = memo((props) => {
                           {item.status}
                         </td>
                         <td>
-                          <i
-                            onClick={() =>
-                              openQuickPopupHandler(item.accountNumber)
-                            }
-                            className="fa fa-rupee"
-                            style={{
-                              fontSize: "22px",
-                              marginRight: "10px",
-                              cursor: "pointer",
-                            }}
-                            title="Quick Pay"
-                          />
-                          <i
-                            style={{
-                              margin: "-33px 0px -5px 25px",
-                              display: "block",
-                              fontSize: "18px",
-                            }}
-                          >
-                            |
-                          </i>
-                          <i
-                            class="icon-pencil"
-                            onClick={() => editPopupHandler(item)}
-                            title="Edit user"
-                            style={{
-                              fontSize: "17px",
-                              margin: "-24px -4px -2px 43px",
-                              cursor: "pointer",
-                              display: "block",
-                            }}
-                          />
+                          <div className="flex flex-center">
+                            <i
+                              onClick={() =>
+                                openQuickPopupHandler(item.accountNumber)
+                              }
+                              className="fa fa-rupee"
+                              style={{
+                                fontSize: "22px",
+                                marginRight: "10px",
+                                cursor: "pointer",
+                              }}
+                              title="Quick Pay"
+                            />
+                            <i
+                              style={{
+                                fontSize: "18px",
+                              }}
+                            >
+                              |
+                            </i>
+                            <i
+                              class="icon-pencil"
+                              onClick={() => editPopupHandler(item)}
+                              title="Edit user"
+                              style={{
+                                fontSize: "17px",
+                                marginLeft: "10px",
+                                cursor: "pointer",
+                              }}
+                            />
+                          </div>
                         </td>
                       </tr>
                     );

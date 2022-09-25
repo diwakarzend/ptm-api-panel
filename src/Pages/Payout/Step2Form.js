@@ -1,5 +1,6 @@
 import React, { useEffect, memo, useState } from "react";
 import { connect } from "react-redux";
+import { Button } from "../../Components/UI/StyledConstants";
 import { getCurrentDate } from "../../utils/common";
 import "./QuickPayment.css";
 
@@ -15,8 +16,8 @@ const Step2Form = memo(
     const userData = login && login.userData && login.userData;
 
     return (
-      <div className="modal-body">
-        <form onSubmit={step2SubmitHandler}>
+      <form onSubmit={step2SubmitHandler}>
+        <div className="modal-body">
           <div className="row">
             <div className="col-md-12">
               <div className="form-group merchent-detail-container">
@@ -151,21 +152,19 @@ const Step2Form = memo(
                 </div>
               </div> */}
           </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-primary themebtn transparent"
-              data-dismiss="modal"
-              onClick={closeQuickPopUpHandler}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="btn btn-primary themebtn">
-              Proceed To Pay
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div className="modal-footer gap16">
+          <Button
+            type="button"
+            className="btn-light"
+            data-dismiss="modal"
+            onClick={closeQuickPopUpHandler}
+          >
+            Close
+          </Button>
+          <Button type="submit" className="btn-success">Proceed To Pay</Button>
+        </div>
+      </form>
     );
   }
 );

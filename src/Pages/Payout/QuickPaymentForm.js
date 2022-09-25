@@ -4,6 +4,7 @@ import urls from "../../utils/urls";
 import Step2Form from "./Step2Form";
 import "./QuickPayment.css";
 import PayoutThanks from "./PayoutThanks";
+import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
 
 const initialFormData = Object.freeze({
   beneficiaryName: "",
@@ -184,21 +185,15 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
   console.log(statusMessage, msgClass);
 
   return (
-    <div
-      className="modal right fade show"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-      style={{ display: "block" }}
-    >
+    <ModalWrapper>
       <div className="modal-dialog" role="document">
+
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
               Quick Payment
             </h5>
-            <button
+            <Button
               type="button"
               className="close"
               data-dismiss="modal"
@@ -206,10 +201,10 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
               onClick={closeQuickPopUpHandler}
             >
               <span aria-hidden="true">&times;</span>
-            </button>
+            </Button>
           </div>
           {!otpStatus.success && (
-            <div style={{ textAlign: "center" }} className={msgClass}>
+            <div style={{ textAlign: "center", marginTop: "20px", fontWeight: "700", color: '#0ab39c' }} className={msgClass}>
               {statusMessage.success || statusMessage.error}
             </div>
           )}
@@ -237,7 +232,7 @@ const QuickPaymentForm = memo(({ closeQuickPopUpHandler, benificiaryData }) => {
           )}
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
 });
 
@@ -255,78 +250,82 @@ const Step1Form = ({
 }) => {
   return (
     <React.Fragment>
-      <form onSubmit={submitFormHandler}>
+      <form className="step-one-form" onSubmit={submitFormHandler}>
         <div className="modal-body">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="form-group beneficiary-selection">
-                <span className="bank-name"> {bankName} </span>
-                <span className="ifsc-name"> ({ifscCode}) </span>
-                <span className="beneficiary-name">
-                  {`${firstName} ${lastName}`} <br />
-                  {accountNumber}
-                </span>
+          <div className="col-md-12 pb16 bank-info">
+            <div className="form-group">
+              <div className="flex">
+                <label className="label">Bank Name: </label>
+                <span className="bank-name">{bankName}</span>
               </div>
-            </div>
-
-            <div className="col-md-12">
-              <div className="form-group">
-                <label for="exampleInputEmail1">Amount</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Amount"
-                  name="remittanceAmount"
-                  onChange={changeHandler}
-                  required
-                />
+              <div className="flex">
+                <label className="label">IFSC Code: </label>
+                <span className="ifsc-name">{ifscCode}</span>
               </div>
-            </div>
-
-            {/* <div className="col-md-12">
-                  <div className="form-group">
-                    <label for="exampleInputEmail1">Remarks</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Add for free"
-                      name="remark"
-                    />
-                  </div>
-                </div> */}
-
-            <div className="col-md-12">
-              <div className="form-group">
-                <label for="exampleFormControlSelect1">TRANSFER MODE</label>
-                <select
-                  className="form-control"
-                  id="exampleFormControlSelect1"
-                  name="route"
-                  required
-                  onChange={changeHandler}
-                >
-                  <option value=""> Choose Mode </option>
-                  <option value="NEFT"> NEFT </option>
-                  <option value="IMPS">IMPS</option>
-                  <option value="RTGS">RTGS</option>
-                  <option value="NB">Net Banking</option>
-                </select>
+              <div className="flex">
+                <label className="label">A/C Number: </label>
+                <span className="account-number">{accountNumber}</span>
+              </div>
+              <div className="flex">
+                <label className="label">Beneficiary Name: </label>
+                <span className="beneficiary-name">{`${firstName} ${lastName}`}</span>
               </div>
             </div>
           </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-primary themebtn transparent"
-              data-dismiss="modal"
-              onClick={closeQuickPopUpHandler}
-            >
-              Close
-            </button>
-            <button type="submit" className="btn btn-primary themebtn">
-              Next
-            </button>
+          <div className="col-md-12 pb16">
+            <div className="form-group">
+              <label className="label">Amount</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Amount"
+                name="remittanceAmount"
+                onChange={changeHandler}
+                required
+              />
+            </div>
           </div>
+
+          {/* <div className="col-md-12">
+                <div className="form-group">
+                  <label for="exampleInputEmail1">Remarks</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Add for free"
+                    name="remark"
+                  />
+                </div>
+              </div> */}
+
+          <div className="col-md-12">
+            <div className="form-group">
+              <label className="label">TRANSFER MODE</label>
+              <select
+                className="form-control"
+                name="route"
+                required
+                onChange={changeHandler}
+              >
+                <option value=""> Choose Mode </option>
+                <option value="NEFT"> NEFT </option>
+                <option value="IMPS">IMPS</option>
+                <option value="RTGS">RTGS</option>
+                <option value="NB">Net Banking</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="modal-footer gap16">
+          <Button
+            type="button"
+            className="btn-light"
+            data-dismiss="modal"
+            onClick={closeQuickPopUpHandler}
+          >
+            Close
+          </Button>
+          <Button type="submit" className="btn-success">Next</Button>
         </div>
       </form>
     </React.Fragment>
