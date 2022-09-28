@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
+import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
 const initialFormData = Object.freeze({
   commission: 0,
   commissionType: "",
@@ -74,21 +75,14 @@ const CommissionForm = (props) => {
   console.log("render", itemToUpdate, formData);
 
   return (
-    <div
-      className={`modal right fade show`}
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel2"
-      style={{ display: "block", paddingRight: "15px" }}
-    >
+    <ModalWrapper>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
+            <h5 className="modal-title">
               Update Commission
             </h5>
-            <button
+            <Button
               type="button"
               className="close"
               data-dismiss="modal"
@@ -96,128 +90,115 @@ const CommissionForm = (props) => {
               onClick={closePopUp}
             >
               <span aria-hidden="true">&times;</span>
-            </button>
+            </Button>
           </div>
+          <form onSubmit={submitFormHandler}>
+            <div className="modal-body">
+              <div className="col-md-12 pb16">
+                Range:
+                <strong>
+                  {` ${itemToUpdate.minAmount} - ${itemToUpdate.maxAmount}`}
+                </strong>
+              </div>
 
-          <div className="modal-body">
-            <form onSubmit={submitFormHandler}>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="form-group">
-                    <div
-                      style={{
-                        marginBottom: "10px",
-                        textAlign: "left",
-                        marginLeft: "17px",
-                      }}
+              <div className="col-md-12 pb16">
+                <div class="form-group">
+                  <select
+                    className="form-control"
+                    onChange={handleChange}
+                    name="merchantCode"
+                    required
+                  >
+                    <option value="">Select Merchant Code</option>
+                    <option
+                      value="NP"
+                      selected={
+                        itemToUpdate.merchantApiCode == "NP"
+                          ? "selected"
+                          : ""
+                      }
                     >
-                      Range:
-                      <strong>
-                        {` ${itemToUpdate.minAmount} - ${itemToUpdate.maxAmount}`}
-                      </strong>
-                    </div>
-
-                    <div className="col-md-12">
-                      <div class="form-group">
-                        <select
-                          className="form-control"
-                          onChange={handleChange}
-                          name="merchantCode"
-                          required
-                        >
-                          <option value="">Select Merchant Code</option>
-                          <option
-                            value="NP"
-                            selected={
-                              itemToUpdate.merchantApiCode == "NP"
-                                ? "selected"
-                                : ""
-                            }
-                          >
-                            Net Paisa
-                          </option>
-                          <option
-                            value="PTM"
-                            selected={
-                              itemToUpdate.merchantApiCode == "PTM"
-                                ? "selected"
-                                : ""
-                            }
-                          >
-                            Paytm
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="col-md-12">
-                      <div class="form-group">
-                        <select
-                          className="form-control"
-                          name="commissionType"
-                          onChange={handleChange}
-                          required
-                        >
-                          <option value="">Select Commission Type</option>
-                          <option
-                            value="FIX"
-                            selected={
-                              itemToUpdate.commissionType == "FIX"
-                                ? "selected"
-                                : ""
-                            }
-                          >
-                            Fix
-                          </option>
-                          <option
-                            value="PERCENTAGE"
-                            selected={
-                              itemToUpdate.commissionType == "PERCENTAGE"
-                                ? "selected"
-                                : ""
-                            }
-                          >
-                            Percentage
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="col-md-12">
-                      <div className="form-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          aria-describedby="requestedAmount"
-                          placeholder="Amount"
-                          name="commission"
-                          onChange={handleChange}
-                          value={formData.commission}
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
+                      Net Paisa
+                    </option>
+                    <option
+                      value="PTM"
+                      selected={
+                        itemToUpdate.merchantApiCode == "PTM"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Paytm
+                    </option>
+                  </select>
                 </div>
               </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-primary themebtn transparent"
-                  data-dismiss="modal"
-                  onClick={closePopUp}
-                >
-                  Close
-                </button>
-                <button type="submit" className="btn btn-primary themebtn">
-                  Update
-                </button>
+
+              <div className="col-md-12 pb16">
+                <div class="form-group">
+                  <select
+                    className="form-control"
+                    name="commissionType"
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Commission Type</option>
+                    <option
+                      value="FIX"
+                      selected={
+                        itemToUpdate.commissionType == "FIX"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Fix
+                    </option>
+                    <option
+                      value="PERCENTAGE"
+                      selected={
+                        itemToUpdate.commissionType == "PERCENTAGE"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Percentage
+                    </option>
+                  </select>
+                </div>
               </div>
-            </form>
+
+              <div className="col-md-12 pb16">
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    aria-describedby="requestedAmount"
+                    placeholder="Amount"
+                    name="commission"
+                    onChange={handleChange}
+                    value={formData.commission}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer gap16">
+              <Button
+                type="button"
+                className="btn-light"
+                data-dismiss="modal"
+                onClick={closePopUp}
+              >
+                Close
+              </Button>
+              <Button type="submit" className="btn-success">
+                Submit
+              </Button>
           </div>
+          </form>
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
 };
 

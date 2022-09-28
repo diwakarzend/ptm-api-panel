@@ -11,6 +11,7 @@ import {
 } from "../../utils/common";
 
 import { Button, TableWrapper } from "../../Components/UI/StyledConstants";
+import { CommissionWrapper } from "./style";
 
 const Commission = (props) => {
   const { dispatch, payout } = props;
@@ -63,8 +64,6 @@ const Commission = (props) => {
       finalData.push(objCopy);
     });
   }
-
-  console.log("commissionData", finalData);
   const rows = [];
 
   const prepareData = (commissionData) => {
@@ -97,7 +96,7 @@ const Commission = (props) => {
   }
 
   return (
-    <>
+    <CommissionWrapper>
       <BreadCrumb heading="Commission" value="Commission" />
       <div className="card-wrapper flex-column mb-4">
         <div className="card-header flex item-center space-between">
@@ -134,7 +133,7 @@ const Commission = (props) => {
           userId={itemInfo.vendor}
         />
       )}
-    </>
+    </CommissionWrapper>
   );
 };
 
@@ -154,9 +153,8 @@ const ProductRow = ({ itemKey, data, openPopup, vendor }) => {
   const edit = [];
   data[itemKey].forEach((item) => {
     range.push(
-      <div>
+      <div className="mb4 mt4">
         {`Rs.${item.minAmount} - Rs.${item.maxAmount}`}
-        <br />
       </div>
     );
     merchantCode.push(<div>{item.merchantApiCode || "NA"}</div>);
@@ -169,7 +167,7 @@ const ProductRow = ({ itemKey, data, openPopup, vendor }) => {
     }
 
     commission.push(<div>{commissionValue}</div>);
-    edit.push(<div onClick={() => openPopup(item, itemKey, vendor)}>Edit</div>);
+    edit.push(<div className="edit-link flex item-center mb4 mt4 cursor-pointer" title="Edit" onClick={() => openPopup(item, itemKey, vendor)}><i className="icon-pencil"></i></div>);
   });
   return (
     <tr>
