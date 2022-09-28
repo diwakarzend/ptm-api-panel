@@ -67,7 +67,90 @@ export const TableWrapper = styled.div`
         td, th {
             padding: 12px 10px;
             border-bottom: 1px solid var(--ip-border-color);
+            &:first-child {
+                    border-left: 1px solid transparent;
+                }
+                &:last-child {
+                    border-right: 1px solid transparent;
+                }
         }
+        tr.active-tr {
+            td, th {
+                border-top: 1px solid var(--ip-border-color);
+                border-bottom: none;
+                &:first-child {
+                    border-left: 1px solid var(--ip-border-color);
+                }
+                &:last-child {
+                    border-right: 1px solid var(--ip-border-color);
+                }
+            }
+            .toggle-icon:after {
+                transform: rotate(0deg);
+            }
+        }
+        tr.sub-tr {
+            td, th {
+                border-top: 1px solid var(--ip-border-color);
+                &:first-child {
+                    border-left: 1px solid var(--ip-border-color);
+                }
+                &:last-child {
+                    border-right: 1px solid var(--ip-border-color);
+                }
+            }
+        }
+        .toggle-icon {
+            display: inline-block;
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+            position: relative;
+            border: 1px solid var(--ip-body-color);
+            border-radius: 3px;
+            &::before, &:after {
+                content: '';
+                width: calc(100% - 8px);
+                height: 2px;
+                background-color: var(--ip-body-color);
+                border-radius: 1px;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                transition: transform 300ms ease-in-out;
+            }
+            &:after {
+                transform: rotate(90deg);
+            }
+        }
+    }
+    .sub-tr-card-wrapper {
+        gap: 16px;
+    }
+    .sub-tr-card {
+        flex: 1;
+        padding: 10px;
+        background: rgb(10 179 156 / 10%);
+    }
+
+    .sub-tr-card h4 {
+        padding-bottom: 10px;
+        font-size: 13px;
+        text-align: center;
+    }
+    .sub-tr-card li {
+        padding-bottom: 4px;
+        display: flex;
+        align-items: baseline;
+    }
+    .sub-tr-card strong {
+        font-size: 12px;
+        font-weight: 600;
+        padding-right: 5px;
+        white-space: nowrap;
     }
 `
 
