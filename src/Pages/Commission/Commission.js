@@ -103,7 +103,6 @@ const Commission = (props) => {
           <h4 className="card-title">Commission</h4>
           <div className="flex gap4">
             <Button className="btn-soft-success" onClick={printPage}>Print</Button>
-            <div className="done">{message}</div>
           </div>
         </div>
         <div className="card-body p16">
@@ -130,6 +129,7 @@ const Commission = (props) => {
           itemToUpdate={itemInfo.item}
           comissionRange={comissionRange}
           setMessage={setMessage}
+          message={message}
           userId={itemInfo.vendor}
         />
       )}

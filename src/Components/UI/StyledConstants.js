@@ -90,7 +90,8 @@ export const TableWrapper = styled.div`
             }
         }
         tr.sub-tr {
-            td, th {
+            td {
+                background: rgb(10 179 156 / 10%);
                 border-top: 1px solid var(--ip-border-color);
                 &:first-child {
                     border-left: 1px solid var(--ip-border-color);
@@ -108,6 +109,7 @@ export const TableWrapper = styled.div`
             position: relative;
             border: 1px solid var(--ip-body-color);
             border-radius: 3px;
+            cursor: pointer;
             &::before, &:after {
                 content: '';
                 width: calc(100% - 8px);
@@ -133,7 +135,9 @@ export const TableWrapper = styled.div`
     .sub-tr-card {
         flex: 1;
         padding: 10px;
-        background: rgb(10 179 156 / 10%);
+        & + .sub-tr-card {
+            border-left: 1px solid rgb(10 179 156 / 30%);
+        }
     }
 
     .sub-tr-card h4 {
@@ -303,6 +307,11 @@ export const AlertWrapper = styled.div`
             color: #2859b5;
             background-color: #e1ebfd;
             border-color: #c2d6fb;
+        }   
+        &.alert-success {
+            color: #0ab39c;
+            background-color: rgb(10 179 156 / 10%);
+            border-color: rgb(10 179 156 / 15%);
         }   
     }
     

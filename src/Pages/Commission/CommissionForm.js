@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
-import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
+import { AlertWrapper, Button, ModalWrapper } from "../../Components/UI/StyledConstants";
 const initialFormData = Object.freeze({
   commission: 0,
   commissionType: "",
@@ -14,7 +14,7 @@ const initialFormData = Object.freeze({
 });
 
 const CommissionForm = (props) => {
-  const { closePopUp, itemToUpdate, userId, comissionRange, setMessage } =
+  const { closePopUp, itemToUpdate, userId, comissionRange, setMessage, message } =
     props;
   const [formData, updateFormData] = useState(initialFormData);
 
@@ -61,7 +61,7 @@ const CommissionForm = (props) => {
       } else {
         setMessage("Commision Updated Successfully");
         comissionRange();
-        closePopUp();
+        // closePopUp();
       }
     };
 
@@ -94,7 +94,9 @@ const CommissionForm = (props) => {
           </div>
           <form onSubmit={submitFormHandler}>
             <div className="modal-body">
+              
               <div className="col-md-12 pb16">
+                {message && <AlertWrapper className="alert alert-normal">{message}</AlertWrapper>}
                 Range:
                 <strong>
                   {` ${itemToUpdate.minAmount} - ${itemToUpdate.maxAmount}`}
