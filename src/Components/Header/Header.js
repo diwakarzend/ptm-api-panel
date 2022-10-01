@@ -32,10 +32,20 @@ const Header = () => {
 
 
   function clickHambergerHandler() {
-    if (document.body.classList.value != "nav_small") {
-      document.body.classList.add("nav_small");
+    const sidebarElement = document.querySelector('.sidebar');
+    let bodyClass = 'nav_small';
+    let navClass = '';
+    if(screen.width > 1024) {
+      bodyClass = 'desktop_nav_small';
+      navClass = "collapsed"
+    }
+    if (document.body.classList.value != bodyClass) {
+      document.body.classList.add(bodyClass);
+      sidebarElement.classList.add(navClass);
+      
     } else {
-      document.body.classList.remove("nav_small");
+      document.body.classList.remove(bodyClass);
+      sidebarElement.classList.remove(navClass);
     }
   }
 

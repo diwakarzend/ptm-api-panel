@@ -111,9 +111,9 @@ const SideBar = () => {
   return (
     <>
     <SidebarWrapper className="sidebar">
-      <Logo className="logo" type="white">
-        <span className="icon">₹</span> INRPAY
-      </Logo>
+      <div className="logo">
+        <img src="/images/texta-white-logo.png" alt="" />
+      </div>
       <ul className="menu-wrapper">
         {!isEmpty(roles) && !isEmpty(inrpayNavigation) && inrpayNavigation.map((navData, i) => {
           let showNav = shouldDisplayNavItem(navData);

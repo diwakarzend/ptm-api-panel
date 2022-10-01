@@ -109,8 +109,7 @@ module.exports = {
     proxy: [
       {
         context: ["/api/**"],
-        //  target:
-        target: "https://service-api.digitpay.pro",
+        target: "https://api-service.texta.info:8443",
         secure: false,
         changeOrigin: true,
       },

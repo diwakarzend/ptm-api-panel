@@ -17,6 +17,7 @@ export const Logo = styled.span`
         color: ${props => props?.type == 'white' ? 'rgb(64, 81, 137)' :'#fff' };
         position: relative;
         margin-right: 16px;
+        transition: all .1s ease-in-out;
         &:after {
             content: '';
             width: 1px;
@@ -29,7 +30,10 @@ export const Logo = styled.span`
             margin: auto 0;
         }
     }
-    
+    .text {
+        transition: all .1s ease-in-out;
+        width: 87px;
+    }
 `
 export const IconRefresh = styled.i`
     display: inline-block;
@@ -312,6 +316,20 @@ export const AlertWrapper = styled.div`
             color: #0ab39c;
             background-color: rgb(10 179 156 / 10%);
             border-color: rgb(10 179 156 / 15%);
+        }   
+        &.alert-error {
+            color: rgb(211 50 65);
+            background-color: rgb(211 50 65 / 10%);
+            border-color: rgb(211 50 65 / 20%);
+        }
+        ul {
+            padding-left: 5px;
+            li {
+                list-style-type: disc;
+                & + li {
+                    margin-top: 5px;
+                }
+            }
         }   
     }
     

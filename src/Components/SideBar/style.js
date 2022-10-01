@@ -12,9 +12,43 @@ export const SidebarWrapper = styled.nav`
     box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
     padding: 0 0 calc(70px + 25px) 0;
     transition: all .1s ease-out;
+    @media (min-width: 768px) {
+        &.collapsed {
+            width: 50px;
+            overflow: hidden;
+            .logo {
+                padding: 0 8px;
+                .icon {
+                    &:after{
+                        display: none;
+                    }
+                    margin-right: 0;
+                    width: 33px;
+                    height: 33px;
+                }
+                .text {
+                    opacity: 0;
+                    width: 0;
+                }
+            }
+            .menu-wrapper > li > .nav-link {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .menu-wrapper > li > .nav-link .nav-title {
+                display: none;
+            }
+        }
+    }
+    
     .logo {
         height: 70px;
-        padding: 0 24px;
+        padding: 12px 24px 0;
+        transition: inherit;
+        margin-bottom: 30px;
+        img {
+            max-width: 130px;
+        }
     }
     .menu-wrapper {
         max-height: calc(100vh - 100px);
@@ -41,8 +75,12 @@ export const SidebarWrapper = styled.nav`
         line-height: 22.5px;
         text-decoration: none;
         cursor: pointer;
+        transition: all .1s ease-in-out;
         &.active {
             color: var(--ip-vertical-menu-item-active-color-dark);
+        }
+        .nav-title {
+            white-space: nowrap;
         }
     }
     @media screen and (max-width: 768px) {

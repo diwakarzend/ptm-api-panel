@@ -3,7 +3,8 @@ import Request from "../../utils/Request";
 import urls from "../../utils/urls";
 import { removeOverlay } from "../../utils/common";
 import "./Benificiary.css";
-import { Button, ModalWrapper } from "../../Components/UI/StyledConstants";
+import { AlertWrapper, Button, ModalWrapper } from "../../Components/UI/StyledConstants";
+import { AlertMessage } from "../../Components/UI/AlertMessage";
 
 const initialFormData = Object.freeze({
   firstName: "",
@@ -27,6 +28,7 @@ const BenificiaryForm = memo(
     const [formData, updateFormData] = useState(initialFormData);
     const [errors, setErrors] = useState([]);
     const [success, setSuccess] = useState("");
+    const [alertMessage, setAlertMessage] = useState({type: '', messageList: []});
 
     const handleChange = (event) => {
       updateFormData({
@@ -55,28 +57,26 @@ const BenificiaryForm = memo(
               errors.push(`${item.field}: ${item.message}`)
             );
           }
-          if (errors.length > 0) {
-            setErrors(errors);
-            window.scrollTo(100, 100);
-          }
         } else if (response && response.status == 401) {
-          setErrors([response.error]);
-          window.scrollTo(100, 100);
+          errors.push(response.error);
+        } else {
+          errors.push("Something went wrong!");
         }
+        setAlertMessage({
+          type: 'error',
+          messageList: errors,
+        })
       };
 
       const successHandler = (response) => {
-        if (!response.success) {
-          setErrors([response.msg]);
-        } else {
-          setErrors([]);
-          setSuccess(response.msg);
-          closePopUpHandler();
-          removeOverlay();
-          getBeneficiary(userRole);
-          setStatus("Beneficary added successfully");
-          //fetchUsersData();
-        }
+        setAlertMessage({
+          type: type === response.success ? 'success' : 'error',
+          messageList: [response.msg],
+        })
+        setStatus("Beneficary added successfully");
+        removeOverlay();
+        closePopUpHandler();
+        getBeneficiary(userRole);
       };
 
       let apiPath = urls.login.BASE_URL + urls.User.ADD_BENEFICIARY;
@@ -91,25 +91,7 @@ const BenificiaryForm = memo(
       return api.post(apiPath, formData);
     };
 
-    let errorHTML = "";
-    let errorStyles = "";
-    let successStyles = "";
-    if (errors.length > 0) {
-      errorHTML = errors.map((val) => <li key={val}>{val}</li>);
-      errorStyles = {
-        color: "red",
-        fontSize: "12px",
-        marginTop: "26px",
-        fontFamily: "monospace",
-      };
-    } else {
-      successStyles = {
-        color: "green",
-        fontSize: "14px",
-        marginTop: "26px",
-        fontFamily: "monospace",
-      };
-    }
+    console.log("alert message => ", alertMessage);
     return (
       <ModalWrapper>
         <div className="modal-dialog" role="document">
@@ -131,6 +113,7 @@ const BenificiaryForm = memo(
             <form onSubmit={submitFormHandler}>
               <div className="modal-body">
                   <div className="col-md-12 pb16">
+                    <AlertMessage alertMessage={alertMessage} />
                     <div className="form-group">
                       <label className="label" for="exampleInputEmail1">First Name</label>
                       <input
@@ -230,15 +213,6 @@ const BenificiaryForm = memo(
                   <Button type="submit" className="btn-success">
                     Submit
                   </Button>
-                  <div>
-                    {errorHTML && errorStyles ? (
-                      <ul style={errorStyles}>{errorHTML}</ul>
-                    ) : success && successStyles ? (
-                      <div style={successStyles}>{success}</div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
               </div>
             </form>
           </div>

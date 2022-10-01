@@ -107,6 +107,14 @@ export default createGlobalStyle`
     font-weight:400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    &.desktop_nav_small {
+      .main-content {
+        margin-left: 50px;
+        > header {
+          left: 50px;
+        }
+      }
+    }
   }
   input, 
   button {
@@ -383,6 +391,7 @@ export default createGlobalStyle`
     margin-left: 250px;
     padding: 70px 16px 60px;
     position: relative;
+    transition: all .1s ease-out;
   }
   .card-wrapper {
     position: relative;
