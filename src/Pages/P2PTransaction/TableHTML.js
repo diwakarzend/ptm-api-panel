@@ -34,7 +34,7 @@ const TableHTML = ({ reportsItems, pagingData, dispatch, retryAction }) => {
                 <th scope="col">Transaction Details</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Receiver Name</th>
-                <th scope="col">Vendor Name</th>
+                <th scope="col">Order Id</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
