@@ -11,13 +11,13 @@ export default createGlobalStyle`
     --ip-body-color-rgb: 33,37,41;
     --ip-vertical-menu-bg: #fff;
     --ip-vertical-menu-item-color: #6d7080;
-    --ip-vertical-menu-item-hover-color: #405189;
-    --ip-vertical-menu-item-active-color: #405189;
+    --ip-vertical-menu-item-hover-color: #032d28;
+    --ip-vertical-menu-item-active-color: #032d28;
     --ip-vertical-menu-sub-item-color: #7c7f90;
-    --ip-vertical-menu-sub-item-hover-color: #405189;
-    --ip-vertical-menu-sub-item-active-color: #405189;
+    --ip-vertical-menu-sub-item-hover-color: #032d28;
+    --ip-vertical-menu-sub-item-active-color: #032d28;
     --ip-vertical-menu-title-color: #919da9;
-    --ip-vertical-menu-bg-dark: #405189;
+    --ip-vertical-menu-bg-dark: #032d28;
     --ip-nav-link-color: #abb9e8;
     --ip-vertical-menu-item-hover-color-dark: #fff;
     --ip-vertical-menu-item-active-color-dark: #fff;
@@ -27,7 +27,7 @@ export default createGlobalStyle`
     --ip-vertical-menu-title-color-dark: #838fb9;
     --ip-header-bg: #fff;
     --ip-header-item-color: #e9ecef;
-    --ip-header-bg-dark: #405189;
+    --ip-header-bg-dark: #032d28;
     --ip-header-item-color-dark: #b0c4d9;
     --ip-topbar-search-bg: #f3f3f9;
     --ip-topbar-user-bg: #f3f3f9;
@@ -36,7 +36,7 @@ export default createGlobalStyle`
     --ip-footer-color: #98a6ad;
     --ip-topnav-bg: #fff;
     --ip-topnav-item-color: #6d7080;
-    --ip-topnav-item-color-active: #405189;
+    --ip-topnav-item-color-active: #032d28;
     --ip-twocolumn-menu-iconview-bg: #fff;
     --ip-twocolumn-menu-bg: #fff;
     --ip-twocolumn-menu-iconview-bg-dark: var(--ip-vertical-menu-bg-dark);
@@ -50,8 +50,8 @@ export default createGlobalStyle`
     --ip-light-rgb: 243,246,249;
     --ip-dark: #212529;
     --ip-dark-rgb: 33,37,41;
-    --ip-link-color: #405189;
-    --ip-link-hover-color: #405189;
+    --ip-link-color: #032d28;
+    --ip-link-hover-color: #032d28;
     --ip-border-color: #e9ebec;
     --ip-dropdown-bg: #fff;
     --ip-dropdown-link-color: #212529;
@@ -80,8 +80,8 @@ export default createGlobalStyle`
     --ip-input-group-addon-bg: #eff2f7;
     --ip-input-check-border: var(--ip-input-border);
     --ip-primary-btn-color:#fff;
-    --ip-primary-btn-bg:#0ab39c;
-    --ip-primary-btn-hover-bg:#099885;
+    --ip-primary-btn-bg:#065b51;
+    --ip-primary-btn-hover-bg:#065b51;
     --ip-red: #f06548;
     --ip-green: #0ab39c;
     --text-grey:#878a99;
@@ -92,6 +92,10 @@ export default createGlobalStyle`
     --h5: 16px;
     --h6: 14px;
     --p: 13px;
+    --ip-btn-success-color: #fff;
+    --ip-btn-success-bg: #065b51;
+    --ip-btn-soft-success-color: #065b51;
+    --ip-btn-soft-success-bg: #e6eeed;
 }
   * {
     margin: 0;
@@ -423,7 +427,7 @@ export default createGlobalStyle`
         }
         &:after {
           content: "";
-          background: #405189;
+          background: #032d28;
           height: 1px;
           position: absolute;
           width: 100%;

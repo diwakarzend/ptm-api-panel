@@ -17,7 +17,7 @@ export const SidebarWrapper = styled.nav`
             width: 50px;
             overflow: hidden;
             .logo {
-                padding: 0 8px;
+                padding: 12px 8px;
                 .icon {
                     &:after{
                         display: none;

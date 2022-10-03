@@ -179,14 +179,14 @@ export const Button = styled.button`
     border-radius: 4px;
     transition:  color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
     &.btn-success {
-        color: #fff;
-        background-color: #0ab39c;
-        border-color: #0ab39c;
+        color: var(--ip-btn-success-color);
+        background-color: var(--ip-btn-success-bg);
+        border-color: var(--ip-btn-success-bg);
     }
     &.btn-soft-success {
-        color: #0ab39c;
-        background-color: rgba(10,179,156,.1);
-        border-color: rgba(10,179,156,.1);
+        color: var(--ip-btn-soft-success-color);
+        background-color: var(--ip-btn-soft-success-bg);
+        border-color: var(--ip-btn-soft-success-bg);
     }
     &.btn-soft-danger {
         color: #f06548;
