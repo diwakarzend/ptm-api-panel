@@ -2,8 +2,8 @@ export default {
   login: {
     // BASE_URL: "https://service-api.digitpay.pro",
     // BASE_URL: "https://vendor-apiservice.pay2mobiles.com:8443",
-    //BASE_URL: "http://34.93.135.35:8080",
-    BASE_URL: "https://api-service.texta.info:8443",
+    BASE_URL: "https://qpay-service.qpay.net.in:8443",
+    // BASE_URL: "https://api-service.texta.info:8443",
     LOGIN_REQUEST: "/api/authenticate",
     OTP_VALIDATION: "/agent/otp/validation",
     LOGIN_OTP_RESEND: "/agent/otp/resend",

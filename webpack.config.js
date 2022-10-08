@@ -109,7 +109,8 @@ module.exports = {
     proxy: [
       {
         context: ["/api/**"],
-        target: "https://api-service.texta.info:8443",
+        // target: "https://api-service.texta.info:8443",
+        target: "https://qpay-service.qpay.net.in:8443",
         secure: false,
         changeOrigin: true,
       },
