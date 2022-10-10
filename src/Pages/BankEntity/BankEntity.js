@@ -23,11 +23,11 @@ const BankEntity = () => {
       <BreadCrumb heading="Merchant List" value="Merchant List" />
       <div className="card-wrapper flex-column mb-4">
         <div className="card-header flex item-center space-between">
-          <h4 className="card-title">Bank Entity</h4>
+          <h4 className="card-title">Manage Account</h4>
         </div>
         <div className="card-body p16">
             <div className="flex">
-                <Button className="btn-success" onClick={() => setModal({...modal, status: true})}>Add Bank Entity</Button>
+                <Button className="btn-success" onClick={() => setModal({...modal, status: true})}>Add Account</Button>
             </div>
             <EntityList listData={listData} onUpdateClick={onUpdateClick}/>
         </div>

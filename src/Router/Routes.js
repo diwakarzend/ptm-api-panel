@@ -56,7 +56,7 @@ const Routes = (props) => {
           exact
         />
         <PrivateRoute
-          path="/bank-entity"
+          path="/manage-account"
           component={BankEntityLoadable}
           exact
         />

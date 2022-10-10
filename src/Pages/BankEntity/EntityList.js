@@ -24,7 +24,7 @@ const EntityList = ({listData = [], onUpdateClick}) => {
                                 <td>{data?.phone}</td>
                                 <td>{data?.vpaId}</td>
                                 <td>{data?.isActive ? 'Active' : 'Inactive'}</td>
-                                <td><Button className="btn-soft-success" onClick={() => onUpdateClick(data)}>Update Entity</Button></td>
+                                <td><Button className="btn-soft-success" onClick={() => onUpdateClick(data)}>Update Account</Button></td>
                             </tr>
                         )}
                     </tbody>

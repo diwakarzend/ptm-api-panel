@@ -64,7 +64,7 @@ export default function AddBankEntityModal({setModal, modalData = null}) {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h4>Add Bank Entity</h4>
+                <h4>Add Account</h4>
                 <Button
                   type="button"
                   className="close"
@@ -84,10 +84,10 @@ export default function AddBankEntityModal({setModal, modalData = null}) {
                    
                   </div>
                   <div className='mb16'>
-                    <label className='label'>Bank Entity Name</label>
+                    <label className='label'>Account Name</label>
                     <input className='form-control' name="entityName" type='text' value={controls.entityName} placeholder='Entity Name'  onChange={changeHandler}/>
                     {submitted && isEmpty(controls.entityName) &&
-                      <div className='form-error'>Bank entity name field is required</div> 
+                      <div className='form-error'>Account name field is required</div> 
                     }
                   </div>
                   <div className='mb16'>

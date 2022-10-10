@@ -84,8 +84,8 @@ export const Navigation = [
         subNav: [],
     },
     {
-        title: 'Bank Entity',
-        link: '/bank-entity',
+        title: 'Manage Account',
+        link: '/manage-account',
         active: false,
         applicableRoles: ['PTM_ADMIN'],
         // subNav: [
