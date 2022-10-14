@@ -103,11 +103,11 @@ const ForGotPassword = memo(({ handleCancel, resetSuccess }) => {
       <div className="logo-wrapper text-center mb24">
         {/* <h5 className="fw-medium">Forgot Password?</h5> */}
         <img
-          src={'/images/inrpay-logo.png'}
+          src={'/images/prime-pay-logo.png'}
           alt="INRPAY"
           className="logo-icon"
         />
-        <p>Reset password with INRPAY</p>
+        <p>Reset password with Prime PAY</p>
       </div>
       <span className={cssClass}>
         {formData.successMsg || formData.errorMsg}

@@ -110,7 +110,7 @@ module.exports = {
       {
         context: ["/api/**"],
         //  target:
-        target: "https://api-service.qpay.net.in:8443",
+        target: "https://api-service.primepay.info:8443",
         secure: false,
         changeOrigin: true,
       },
