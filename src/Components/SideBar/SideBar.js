@@ -112,7 +112,7 @@ const SideBar = () => {
     <>
     <SidebarWrapper className="sidebar">
       <Logo className="logo" type="white">
-        <img src="/images/q-pqy-logo-white.png" alt="QPAY"/>
+        <img src="/images/prime-pay-logo-white.png" alt="Prime PAY"/>
       </Logo>
       <ul className="menu-wrapper">
         {!isEmpty(roles) && !isEmpty(inrpayNavigation) && inrpayNavigation.map((navData, i) => {

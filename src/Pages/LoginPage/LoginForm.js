@@ -88,11 +88,11 @@ class LoginForm extends React.Component {
                   <form className="form-group" onSubmit={this.onFormSubmit}>
                     <div className="logo-wrapper text-center mb24">
                       <img
-                        src={'/images/q-pay-logo.png'}
+                        src={'/images/prime-pay-logo.png'}
                         alt="INRPAY"
                         className="logo-icon"
                       />
-                      <p className="mt4">Sign in to continue to QPAY.</p>
+                      <p className="mt4">Sign in to continue to Prime PAY</p>
                     </div>
                     {
                       (successMsg || errorMsg) &&
