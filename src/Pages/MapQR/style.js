@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FormWrapper = styled.form`
-  
+  margin-top: 30px;
   .form-control-wrap {
     .input-group {
       max-width: 180px;

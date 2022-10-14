@@ -77,7 +77,7 @@ const MerchantDetails = (props) => {
     const ptpDTOList = JSON.parse(JSON.stringify(controls));
     ptpDTOList.forEach((dto) => {
       dto.userUUID = "234";
-      dto.bankId = bankId;
+    //   dto.bankId = bankId;
     });
 
     postVendorListing(ptpDTOList).then((res) => {
@@ -173,7 +173,7 @@ const MerchantDetails = (props) => {
               {message?.text}
             </span>
           </div>
-          <div className="form-group bank-details pb16">
+          {/* <div className="form-group bank-details pb16">
             <div className="row">
               <div className="col-3">
                 <select
@@ -191,7 +191,7 @@ const MerchantDetails = (props) => {
                 </select>
               </div>
             </div>
-          </div>
+          </div> */}
           <FormWrapper onSubmit={handleSubmit} autoComplete="off">
             <div className="flex gap16 mapping-details-wrapper">
               {controls.map((dto, i) => (
@@ -218,6 +218,21 @@ const MerchantDetails = (props) => {
                         />
                       </div>
                       <div className="controls-wrapper flex flex-column gap4 p16">
+                        <div className="form-group">
+                          <select
+                            className="form-control"
+                            name="bankId"
+                            value={bankId}
+                            onChange={(e) => dtoChangeHandler(e, i)}
+                          >
+                            <option value="">Select Account</option>
+                            {bankOptions.map((option) => (
+                              <option value={option?.id}>
+                                {option?.bankName}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
                         <div className="form-group">
                           <select
                             className="form-control"
